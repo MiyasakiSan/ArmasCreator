@@ -81,12 +81,13 @@ public class MovementAnim : NetworkBehaviour
     } 
     #endregion
     [ServerRpc]
-    public void LongSwordSetBoolServerRpc(string paramName,bool var)
+    public void MeleeSetBoolServerRpc(string paramName,bool var)
     {
-        List<string> LongSwordParams = new List<string> { "LongSword_hit1", "LongSword_hit2" };
+        //TODO : Create GameDataManager for not hard CODING !! BITCH
+        List<string> MeleeParams = new List<string> { "LongSwordNormal_hit1", "LongSwordNormal_hit2" };
         foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
         {
-            if (LongSwordParams.Contains(parameter.name))
+            if (MeleeParams.Contains(parameter.name))
             {
                 playerAnim.SetBool(parameter.name, false);
             }

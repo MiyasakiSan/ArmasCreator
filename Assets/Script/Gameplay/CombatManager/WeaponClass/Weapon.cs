@@ -8,6 +8,8 @@ public abstract class Weapon : NetworkBehaviour,WeaponData
     [SerializeField] protected float _weaponDamage;
     [SerializeField] protected float _weight;
     [SerializeField] protected int _sellPrice;
+    [SerializeField] protected string _comboParam;
+    [SerializeField] protected int _comboCount;
     public float weaponDamage
     {
         get { return _weaponDamage; }
@@ -30,6 +32,18 @@ public abstract class Weapon : NetworkBehaviour,WeaponData
     {
         get { return _sellPrice; }
         set { _sellPrice = value; }
+    }
+
+    public string comboParam
+    {
+        get { return _comboParam; }
+        set { _comboParam = value; }
+    }
+
+    public int comboCount
+    {
+        get { return _comboCount; }
+        set { _comboCount = value; }
     }
 
     public virtual void Attack(AttackTarget target, float damage)
