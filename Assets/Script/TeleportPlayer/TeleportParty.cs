@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 public class TeleportParty : NetworkBehaviour
 {
     int AmountPlayerInWarpPoint = 0;
-    public Button StartButton;
-    public Vector3 SpawnAt;
-    public string TeleportPath;
+    [SerializeField]
+    private Button StartButton;
+    private Vector3 spawnAt;
+    private string teleportPath;
 
     // Update is called once per frame
     void Update()
@@ -33,9 +34,9 @@ public class TeleportParty : NetworkBehaviour
     }
     public void TeleportTo()
     {
-        OnloadSceneServerRpc(TeleportPath);
+        OnloadSceneServerRpc(teleportPath);
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        SceneManager.LoadSceneAsync(TeleportPath, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(teleportPath, LoadSceneMode.Additive);
     }
 
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -44,7 +45,7 @@ public class TeleportParty : NetworkBehaviour
         GameObject[] Player = GameObject.FindGameObjectsWithTag("Player");
         for (int PlayerAmountCount = 0; PlayerAmountCount < Player.Length; PlayerAmountCount++)
         {
-            Player[PlayerAmountCount].transform.position = SpawnAt;
+            Player[PlayerAmountCount].transform.position = spawnAt;
             SceneManager.MoveGameObjectToScene(Player[PlayerAmountCount], arg0);
         }
         SceneManager.SetActiveScene(arg0);
@@ -77,5 +78,11 @@ public class TeleportParty : NetworkBehaviour
         {
             AmountPlayerInWarpPoint--;
         }
+    }
+
+    public void GetSpawnToPosition(Vector3 pos,string teleportPathNew)
+    {
+        spawnAt = pos;
+        teleportPath = teleportPathNew;
     }
 }

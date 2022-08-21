@@ -5,10 +5,14 @@ using Unity.Netcode;
 
 public class SpawnTeleport : MonoBehaviour
 {
-    public GameObject PrefabTeleport;
-    public Vector3 SpawnPrefabAt;
-    public Vector3 SpawnPlayerAt;
-    public string TeleportPath;
+    [SerializeField]
+    private GameObject prefabTeleport;
+    [SerializeField]
+    private Vector3 spawnPrefabAt;
+    [SerializeField]
+    private Vector3 spawnPlayerAt;
+    [SerializeField]
+    private string teleportPath;
     GameObject Teleport;
     GameObject TeleportClient;
     // Start is called before the first frame update
@@ -23,17 +27,15 @@ public class SpawnTeleport : MonoBehaviour
         if (Teleport != null) return;
         if (NetworkManager.Singleton.IsServer)
         {
-            Teleport = Instantiate(PrefabTeleport, SpawnPrefabAt, Quaternion.identity);
-            Teleport.GetComponent<TeleportParty>().SpawnAt = SpawnPlayerAt;
-            Teleport.GetComponent<TeleportParty>().TeleportPath = TeleportPath;
+            Teleport = Instantiate(prefabTeleport, spawnPrefabAt, Quaternion.identity);
+            Teleport.GetComponent<TeleportParty>().GetSpawnToPosition(spawnPlayerAt, teleportPath);
             Teleport.GetComponent<NetworkObject>().Spawn();
         }
         if (TeleportClient != null) return;
         if (!NetworkManager.Singleton.IsServer)
         {
             TeleportClient = GameObject.Find("Teleport(Clone)");
-            TeleportClient.GetComponent<TeleportParty>().SpawnAt = SpawnPlayerAt;
-            TeleportClient.GetComponent<TeleportParty>().TeleportPath = TeleportPath;
+            TeleportClient.GetComponent<TeleportParty>().GetSpawnToPosition(spawnPlayerAt, teleportPath);
         }
     }
 }
