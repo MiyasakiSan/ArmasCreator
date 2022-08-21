@@ -78,34 +78,35 @@ public class CombatRpgManager : NetworkBehaviour
         switch (currentWeapon)
         {
             case LongSword:
-                LongSwordCombo();
+                MeleeCombo();
                 break;
         }
     }
-    #region LongSword Combat
-    public void LongSwordCombo()
+
+    #region Melee Combat
+    public void MeleeCombo()
     {
-        LongSword_CurrentAnimOutOfTime();
-        LongSword_IsComboOutOfTime();
+        Melee_CurrentAnimOutOfTime();
+        Melee_IsComboOutOfTime();
         if (Input.GetMouseButtonDown(0))
         {
-            LongSwordCombo_OnClick();
+            MeleeCombo_OnClick();
         }
     }
-    public void LongSword_CurrentAnimOutOfTime()
+    public void Melee_CurrentAnimOutOfTime()
     {
         if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
-        if (animController.currentAnimatorStateInfoIsName("SwordAttack1"))
+        if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
-            animController.LongSwordSetBoolServerRpc("LongSword_hit1", false);
+            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", false);
         }
-        if (animController.currentAnimatorStateInfoIsName("SwordAttack2"))
+        if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
-            animController.LongSwordSetBoolServerRpc("LongSword_hit2", false);
+            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
             noOfClicks = 0;
         }
     }
-    public void LongSword_IsComboOutOfTime()
+    public void Melee_IsComboOutOfTime()
     {
         if (Time.time - lastClickedTime > maxComboDelay)
         {
@@ -113,23 +114,25 @@ public class CombatRpgManager : NetworkBehaviour
         }
         if (Time.time <= nextFireTime) { return; }
     }
-    public void LongSwordCombo_OnClick()
+    public void MeleeCombo_OnClick()
     {
         lastClickedTime = Time.time;
         noOfClicks++;
-        noOfClicks = Mathf.Clamp(noOfClicks, 0, 2);
+        noOfClicks = Mathf.Clamp(noOfClicks, 0, heldWeapon.comboCount);
         setComboBoolDependOn(noOfClicks);
     }
     public void setComboBoolDependOn(int num)
     {
-        if (num == 1 )
+        if (num == 1)
         {
-            animController.LongSwordSetBoolServerRpc("LongSword_hit1", true);
+            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
         }
+
         if (animController.currentAnimatorStateInfoTime <= 0.7f) { return; }
-        if (num == 2 && animController.currentAnimatorStateInfoIsName("SwordAttack1"))
+
+        if (num == 2 )
         {
-            animController.LongSwordSetBoolServerRpc("LongSword_hit2", true);
+            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
         }
     } 
     public void dieState()

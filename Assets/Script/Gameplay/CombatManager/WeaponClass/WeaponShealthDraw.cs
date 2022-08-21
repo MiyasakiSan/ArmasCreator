@@ -8,7 +8,7 @@ public class WeaponShealthDraw : NetworkBehaviour
     [SerializeField] CombatRpgManager combatManager;
     [SerializeField] GameObject WeaponHolder;
     [SerializeField] GameObject WeaponShealth;
-    [SerializeField] GameObject WeaponHeld;
+    [SerializeField] GameObject WeaponHeld = null;
 
     public GameObject currentWeaponInHand;
     public GameObject currentWeaponInShealth;
@@ -21,6 +21,7 @@ public class WeaponShealthDraw : NetworkBehaviour
     [ServerRpc(Delivery =RpcDelivery.Reliable)]
     public void SpawnWeaponHeldServerRpc()
     {
+        if (WeaponHeld != null) { return; }
         SpawnWeaponHeldClientRpc();
     }
     [ClientRpc]
