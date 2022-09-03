@@ -8,20 +8,24 @@ using Netcode.Transports.PhotonRealtime;
 
 public class ChatScript : NetworkBehaviour
 {
-    public TMP_InputField TextInput;
-    public RectTransform Content;
-    public TMP_Text PrefabText;
-    public Scrollbar scrollbar;
+    [SerializeField]
+    private TMP_InputField textInput;
+    [SerializeField]
+    private RectTransform content;
+    [SerializeField]
+    private TMP_Text prefabText;
+    [SerializeField]
+    private Scrollbar scrollbar;
     MessageText messageText = new MessageText();
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
             string Nickname = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>().NickName;
-            messageText.SetMassage(Nickname, TextInput.text);
+            messageText.SetMassage(Nickname, textInput.text);
             SendTextServerRpc(messageText);
             scrollbar.value = 0;
-            TextInput.text = "";
+            textInput.text = "";
         }
     }
     [ServerRpc(RequireOwnership = false)]
@@ -32,9 +36,9 @@ public class ChatScript : NetworkBehaviour
     [ClientRpc]
     public void SendTextClientRpc(MessageText messageText)
     {
-        Content.sizeDelta += new Vector2(0, 50);
-        PrefabText.text = messageText.PlayerName + " : " + messageText.Message;
-        Instantiate(PrefabText, Content);
+        content.sizeDelta += new Vector2(0, 50);
+        prefabText.text = messageText.PlayerName + " : " + messageText.Message;
+        Instantiate(prefabText, content);
         
     }
 

@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: lambert2
-  m_Shader: {fileID: 4800000, guid: 37ff43039bd8df843bdc1c5fae81114a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 9b7ca2825398b5c49acd74f8c04a89d2,
+    type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -94,9 +95,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Active_Engine: 0
     - _AdditionalLightIgnoreCelShade: 0.9
     - _AlphaClip: 0
     - _Blend: 0
+    - _BulgeAmount: 1
+    - _BulgePower: 0.2
+    - _BulgeWidth: 6
     - _BumpScale: 1
     - _CelShadeMidPoint: -0.5
     - _CelShadeSoftness: 0.05
@@ -104,37 +109,48 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DepthSensitivity: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DirectLightMultiplier: 1
     - _DstBlend: 0
     - _EmissionMulByBaseColor: 0
     - _EnvironmentReflections: 1
+    - _FalloffAmount: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _IndirectLightMultiplier: 1
     - _IsFace: 0
+    - _LightingCutoff: 0
     - _MainLightIgnoreCelShade: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NormalsSensitivity: 1
     - _OcclusionRemapEnd: 1
     - _OcclusionRemapStart: 0
     - _OcclusionStrength: 1
+    - _OutlineThickness: 0
     - _OutlineWidth: 1.55
     - _OutlineZOffset: 0.0001
     - _OutlineZOffsetMaskRemapEnd: 1
     - _OutlineZOffsetMaskRemapStart: 0
     - _Parallax: 0.02
+    - _Pull_Push: 0
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadowMappingAmount: 0.65
     - _ReceiveShadowMappingPosOffset: 0
     - _ReceiveShadows: 1
+    - _ShadowStrength: 4
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Step: 0.16
     - _Surface: 0
+    - _TransParentFX: 0
+    - _TubeSpeed: 0
     - _UVSec: 0
     - _UseAlphaClipping: 0
     - _UseEmission: 0
@@ -144,11 +160,13 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _DiffuseColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
     - _IndirectLightMinColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
     - _OcclusionMapChannelMask: {r: 1, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
     - _ShadowMapColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    - _SmoothStep: {r: 0.79, g: 0.48, b: 1.01, a: 0.88}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
