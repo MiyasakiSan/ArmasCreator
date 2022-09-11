@@ -14,11 +14,22 @@ public class CombatRpgManager : NetworkBehaviour
     private MovementAnim animController;
 
     [Header("Melee Combo")]
-    public float cooldownTime = 2f;
+
+    [SerializeField]
+    private float cooldownTime = 2f;
+
+    [SerializeField]
     private float nextFireTime = 0f;
-    public static int noOfClicks = 0;
-    float lastClickedTime = 0;
-    float maxComboDelay = 1;
+
+    [SerializeField]
+    private int noOfClicks = 0;
+
+    [SerializeField]
+    private float lastClickedTime = 0;
+
+    [SerializeField]
+    private float maxComboDelay = 0.75f;
+
     public enum gameState
     {
         neutral,combat
@@ -96,10 +107,12 @@ public class CombatRpgManager : NetworkBehaviour
     public void Melee_CurrentAnimOutOfTime()
     {
         if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
+
         if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
             animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", false);
         }
+
         if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
             animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
