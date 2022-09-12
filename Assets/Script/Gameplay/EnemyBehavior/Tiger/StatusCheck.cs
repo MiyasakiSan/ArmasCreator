@@ -12,6 +12,30 @@ public class StatusCheck : ActionNode
     }
 
     protected override State OnUpdate() {
-        return State.Success;
+        if (CheckCurrentStatus())
+        {
+            return State.Failure;
+        }
+        else
+        {
+            return State.Running;
+        }
+    }
+
+    private bool CheckCurrentStatus()
+    {
+        var enemyStat = context.gameObject.GetComponent<EnemyStat>();
+
+        if(enemyStat == null) { return false; }
+
+        float maxHealth = enemyStat.MaxHealth;
+        float currentHealth = enemyStat.CurrentHealth;
+        float healthRatio = currentHealth / maxHealth;
+
+        blackboard.HpPercentage = healthRatio;
+
+        // TODO : need to implement check is Stun and is Enrage
+
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ArmasCreator.Behavior;
 
 namespace TheKiwiCoder {
 
@@ -20,6 +21,9 @@ namespace TheKiwiCoder {
         public bool IsEnrage;
         public float HpPercentage; // Max : 1  ||  Min : 0
         public bool IsMapAttackAvaliable;
+
+        [Header("Attack Pattenr")]
+        public AttackPattern CurrentAttackPattern;
 
     }
 }

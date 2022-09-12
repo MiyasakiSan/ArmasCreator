@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public interface IDamagable<T>
 {
-    float currentHealth { get; }
+    float CurrentHealth { get; }
 }
 public interface IStaminaUsable<T>
 {
