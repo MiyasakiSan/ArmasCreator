@@ -8,6 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using ArmasCreator.Utilities;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 namespace ArmasCreator.GameData
@@ -20,6 +22,10 @@ namespace ArmasCreator.GameData
         private bool isInitialize;
         public bool IsIniialize => isInitialize;
 
+        private float targetValue;
+        private float currentValue;
+        [SerializeField]
+        private Slider loadingSlider; 
         private void Awake()
         {
             StartInitialize();
@@ -40,6 +46,29 @@ namespace ArmasCreator.GameData
             DontDestroyOnLoad(this);
             SharedContext.Instance.Add(this);
             LoadLocalGameConfig();
+            StartCoroutine(LoadScene());
+            
+        }
+
+        IEnumerator LoadScene()
+        {
+            yield return null;
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Mainmenu");
+            asyncOperation.allowSceneActivation = false;
+
+            while (!asyncOperation.isDone)
+            {
+                targetValue = asyncOperation.progress / 0.9f;
+                currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.25f * Time.deltaTime);
+                loadingSlider.value = currentValue;
+
+                if (Mathf.Approximately(currentValue, 1))
+                {
+                        asyncOperation.allowSceneActivation = true;
+                }
+
+                yield return null;
+            }
         }
 
         private void LoadLocalGameConfig()
