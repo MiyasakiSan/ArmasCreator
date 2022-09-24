@@ -17,17 +17,34 @@ public class TestAnalytics : MonoBehaviour
             // Something went wrong when checking the GeoIP, check the e.Reason and handle appropriately.
         }
 
-        testSendCustomEvent();
+        for(int i = 0; i< 10; i++)
+        {
+            //testSendCustomEvent(i);
+            testSendCustomMapEvent(i);
+        }
     }
 
-    private void testSendCustomEvent()
+    private void testSendCustomEvent(int i)
     {
         var customParams = new Dictionary<string, object>();
-        customParams.Add("mapId", "testMapId");
-        customParams.Add("score", 10000);
+        customParams.Add("mapId", $"testMap{i}");
+        customParams.Add("score", Random.Range(5000,10000));
         customParams.Add("time", Time.time);
 
         AnalyticsService.Instance.CustomData("ChallengeModeEnd", customParams);
+
+        AnalyticsService.Instance.Flush();
+        Debug.Log("Do");
+    }
+
+    private void testSendCustomMapEvent(int i)
+    {
+        var customParams = new Dictionary<string, object>();
+        float time = 600 - (i * Random.Range(6,10));
+        customParams.Add("Clear", i);
+        customParams.Add("ClearTime", time);
+
+        AnalyticsService.Instance.CustomData("Map1", customParams);
 
         AnalyticsService.Instance.Flush();
         Debug.Log("Do");
