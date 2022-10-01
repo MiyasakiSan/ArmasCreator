@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using ArmasCreator.Behavior;
 public class EnemyCombatManager : NetworkBehaviour
 {
     // Start is called before the first frame update
@@ -9,6 +10,8 @@ public class EnemyCombatManager : NetworkBehaviour
     [SerializeField] enemyAnimController enemyAnim;
     [SerializeField]
     private List<EnemyBoxCollider> enemyBoxColliderList;
+
+    public List<AttackPattern> AllAttackPattern;
 
     void Start()
     {
@@ -37,6 +40,27 @@ public class EnemyCombatManager : NetworkBehaviour
         foreach(EnemyBoxCollider enemyBoxCollider in enemyBoxColliderList)
         {
             enemyBoxCollider.onTriggerEnter.AddListener(OnHurtBoxTriggerEnter);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach (var attackPattern in AllAttackPattern)
+        {
+            if(attackPattern.ActiveDistance >= 30)
+            {
+                Gizmos.color = Color.red;
+            }
+            else if(attackPattern.ActiveDistance >= 15)
+            {
+                Gizmos.color = Color.yellow;
+            }
+            else
+            {
+                Gizmos.color = Color.green;
+            }
+
+            GizmosExtensions.DrawWireArc(transform.position, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
         }
     }
 
