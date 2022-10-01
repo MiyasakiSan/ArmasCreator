@@ -28,7 +28,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [SerializeField]
     private PlayerRpgMovement playerMovement;
 
-    public float currentHealth
+    public float CurrentHealth
     {
         get { return NetworkcurrentHealth.Value; }
         set { NetworkcurrentHealth.Value = value; }
@@ -41,7 +41,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [ServerRpc(RequireOwnership = false)]
     public void currentHealthServerRpc(float value)
     {
-        currentHealth = value;
+        CurrentHealth = value;
     }
     [ServerRpc(RequireOwnership = false)]
     public void currentStaminaServerRpc(float value)
@@ -90,8 +90,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     {
         if (!IsLocalPlayer) { return; }
         if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
-        currentHealthServerRpc(currentHealth - damage);
-        if (currentHealth <= 0) { playerMovement.playerDie(); return; }
+        currentHealthServerRpc(CurrentHealth - damage);
+        if (CurrentHealth <= 0) { playerMovement.playerDie(); return; }
     }
     public IEnumerator RegenStamina()
     {

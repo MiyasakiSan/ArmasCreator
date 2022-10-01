@@ -5,12 +5,15 @@ using Unity.Netcode;
 using UnityEngine.Events;
 public class EnemyStat : AttackTarget, IDamagable<float>
 {
-    public float maxHealth;
+    [SerializeField]
+    private float maxHealth;
+    public float MaxHealth => maxHealth;
+
     [SerializeField]
     NetworkVariable<float> NetworkcurrentHealth = new NetworkVariable<float>();
     public UnityAction<float> onHealthUpDate;
 
-    public float currentHealth
+    public float CurrentHealth
     {
         get { return NetworkcurrentHealth.Value; }
         set { NetworkcurrentHealth.Value = value; }
@@ -18,7 +21,7 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     [ServerRpc]
     public void currentHealthServerRpc(float value)
     {
-        currentHealth = value;
+        CurrentHealth = value;
     }
     public override void receiveAttack(float damage)
     {
@@ -27,7 +30,7 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     [ServerRpc(RequireOwnership = false)]
     public void receiveAttackServerRpc(float damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
     }
 
     // Start is called before the first frame update
