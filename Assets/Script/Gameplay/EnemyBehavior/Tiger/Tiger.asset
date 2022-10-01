@@ -1,474 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8754077107127582826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb5496e8cd973748a10b3e3ef436ebd, type: 3}
-  m_Name: Repeat
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 1
-  guid: e37bfc8a2b7af334cafeb1a6108bc586
-  position: {x: -92.66699, y: -162.64731}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 1
-  child: {fileID: 7715388984302556164}
-  restartOnSuccess: 1
-  restartOnFailure: 0
-  DetectedRanged: 10
---- !u!114 &-7177307692335961664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3550d16e28f3b44e8dcceceee043c40, type: 3}
-  m_Name: MoveToTarget
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 21f55a6eb0fe9f14589046868f5d392a
-  position: {x: 324, y: 647.3333}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  speed: 5
-  stoppingDistance: 1
-  updateRotation: 1
-  acceleration: 40
-  tolerance: 3
---- !u!114 &-6890886302022449354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 460be9e34c566ea45b9e282b1adcb028, type: 3}
-  m_Name: Selector
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 706748445d1a6b249a95bf863f84e69b
-  position: {x: 205.66669, y: 387.33334}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  children:
-  - {fileID: -394483671788860848}
-  - {fileID: -5004536039135403986}
---- !u!114 &-6348284889108791880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1dd37a287caf0a4e801eae7a7aa5b3a, type: 3}
-  m_Name: InitBoss
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 7adddc5de02c51d4e8770cc04a98f050
-  position: {x: -211.3335, y: 256.6667}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
---- !u!114 &-6089415708835833004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21445812398479748b6f6d9b2fed4ad8, type: 3}
-  m_Name: IsDead
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 1
-  guid: 66c3028893a0c5f4a8bfce2650417978
-  position: {x: -18.666666, y: 256.46338}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
---- !u!114 &-5660333016957678146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 74a286b60eaf8ea45b9bd84db9ce177b
-  position: {x: -300.00012, y: 127.21666}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 1
-  children:
-  - {fileID: -1638033616731075293}
-  - {fileID: -6348284889108791880}
---- !u!114 &-5004536039135403986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 2ea9e6459e7d32b4784ef2201fccd3f2
-  position: {x: 324, y: 520}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  children:
-  - {fileID: 5938039713378908395}
-  - {fileID: -7177307692335961664}
-  - {fileID: 7306043908840946751}
-  - {fileID: 5848332037563239010}
---- !u!114 &-4755641854017797634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: d654e6bf449ef0a4e9d4228651cef97e
-  position: {x: -130.66664, y: -483.72327}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 1
-  duration: 5
---- !u!114 &-2247863421084346560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4489e3e257543504c8fc9f891246af6c, type: 3}
-  m_Name: MoveToPosition
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 6bc6981b00778a744bc6d4097134e636
-  position: {x: -300.66663, y: -483.72327}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  speed: 5
-  stoppingDistance: 0.1
-  updateRotation: 1
-  acceleration: 40
-  tolerance: 1
-  DetectedRanged: 8
---- !u!114 &-1912556349053875319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6c264bd2fdaf5499bf25e378f08eba, type: 3}
-  m_Name: StatusCheck
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 2dcfe7f189d9c4447a7d1b7f23621bda
-  position: {x: 445.97702, y: 387.3333}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
---- !u!114 &-1638033616731075293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a9430f121600344b10526753ba50ad, type: 3}
-  m_Name: IsPlayerEnterStage
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 1f17499495214004481235aab71312cb
-  position: {x: -481.05664, y: 256.6667}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
---- !u!114 &-1021683054488247756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5035bfe0564a8bf4599bfbeebbe74af9, type: 3}
-  m_Name: IsTargetNearby
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 8c31e9a7b4f82284eb93c720cc4225e2
-  position: {x: -655.9999, y: -473.7232}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  DetectedRanged: 10
---- !u!114 &-394483671788860848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b19e7b9aafe3224c84bb7a45a6a1b0c, type: 3}
-  m_Name: MapAttackPatternController
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 30bd3bd8fc722314daecc66a827385ac
-  position: {x: -61.333344, y: 520.00006}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
-  m_Name: Tiger
-  m_EditorClassIdentifier: 
-  rootNode: {fileID: 4300890025194573056}
-  treeState: 0
-  nodes:
-  - {fileID: 4300890025194573056}
-  - {fileID: -8754077107127582826}
-  - {fileID: -5660333016957678146}
-  - {fileID: -4755641854017797634}
-  - {fileID: 6402316061889451186}
-  - {fileID: -2247863421084346560}
-  - {fileID: -1021683054488247756}
-  - {fileID: 7715388984302556164}
-  - {fileID: -6089415708835833004}
-  - {fileID: -7177307692335961664}
-  - {fileID: 7306043908840946751}
-  - {fileID: 5848332037563239010}
-  - {fileID: -6890886302022449354}
-  - {fileID: 3780558914899381627}
-  - {fileID: 2482433925638418370}
-  - {fileID: -1912556349053875319}
-  - {fileID: 5938039713378908395}
-  - {fileID: -394483671788860848}
-  - {fileID: -1638033616731075293}
-  - {fileID: -6348284889108791880}
-  - {fileID: -5004536039135403986}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
---- !u!114 &2482433925638418370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2932073b8a6c3b34391576c45d359457, type: 3}
-  m_Name: Parallel
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: aeb2f7842c3392544b34497fcbea007a
-  position: {x: 307.6667, y: 256.6667}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  children:
-  - {fileID: -6890886302022449354}
-  - {fileID: -1912556349053875319}
---- !u!114 &3780558914899381627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: b9a4156944960de40a9d26c77b925405
-  position: {x: 101.333374, y: 127.33331}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 0
-  children:
-  - {fileID: -6089415708835833004}
-  - {fileID: 2482433925638418370}
---- !u!114 &4300890025194573056
+--- !u!114 &-5197628570080384083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -482,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 1
-  guid: ca00e6aa7ca72c144ae99d826e0d13e4
-  position: {x: -92.66699, y: -287.31396}
+  guid: fe64268d0cf3eaa438262f660c245693
+  position: {x: 0, y: 0}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -492,10 +24,11 @@ MonoBehaviour:
     IsEnrage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
-  child: {fileID: -8754077107127582826}
---- !u!114 &5848332037563239010
+  child: {fileID: 3964595408751014720}
+--- !u!114 &-3282221169115235948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -504,13 +37,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
-  m_Name: Wait
+  m_Script: {fileID: 11500000, guid: 21445812398479748b6f6d9b2fed4ad8, type: 3}
+  m_Name: IsDead
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
-  guid: 6e9981dcd3b769e4699bbf2a0df3b3b8
-  position: {x: 729.23346, y: 647.3334}
+  guid: 6feb00b77513f784691d710a9cebd8e8
+  position: {x: 131.33333, y: 649.3333}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -519,10 +52,10 @@ MonoBehaviour:
     IsEnrage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
-  duration: 3
---- !u!114 &5938039713378908395
+--- !u!114 &-843320043716869159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -531,13 +64,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbcce382e36a02c4190919fc02e0c414, type: 3}
-  m_Name: AttackPatternController
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
-  guid: e3e72a41665794241a22c30a6615ad6b
-  position: {x: 89, y: 647.3333}
+  guid: 2066ca469c62b0b4f868c7aa3f62be51
+  position: {x: -205.19902, y: 484.66672}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -546,10 +79,13 @@ MonoBehaviour:
     IsEnrage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
-  sameAttack: 0
---- !u!114 &6402316061889451186
+  children:
+  - {fileID: 6516967406905786214}
+  - {fileID: 760807915532348710}
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -558,13 +94,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a055ff4bd9e6642b3f0dff32a86e1d, type: 3}
-  m_Name: RandomPosition
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: Tiger
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: e8b7b3236babb5b45a8c128a30261cab
-  position: {x: -472.66666, y: -463.05658}
+  rootNode: {fileID: -5197628570080384083}
+  treeState: 0
+  nodes:
+  - {fileID: -5197628570080384083}
+  - {fileID: 3964595408751014720}
+  - {fileID: 6886120431543504417}
+  - {fileID: 6138442160220864189}
+  - {fileID: -843320043716869159}
+  - {fileID: 4922759796844413321}
+  - {fileID: 3399324270424228788}
+  - {fileID: 6516967406905786214}
+  - {fileID: 760807915532348710}
+  - {fileID: -3282221169115235948}
+  - {fileID: 2709389679094520898}
+  - {fileID: 8739090318124431842}
+  - {fileID: 6549167335751347871}
+  - {fileID: 4872307726482557741}
+  - {fileID: 8995882645581040522}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -573,11 +123,8 @@ MonoBehaviour:
     IsEnrage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
-  description: 
-  drawGizmos: 1
-  min: {x: 120, y: 135}
-  max: {x: 200, y: 210}
---- !u!114 &7306043908840946751
+    CurrentAttackPattern: {fileID: 0}
+--- !u!114 &760807915532348710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,13 +133,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c031f62c8c3e7747b32c260e36410b2, type: 3}
-  m_Name: EnemyAttackTarget
+  m_Script: {fileID: 11500000, guid: f1dd37a287caf0a4e801eae7a7aa5b3a, type: 3}
+  m_Name: InitBoss
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
-  guid: 3e7c35e85aed256489372b959fc175ad
-  position: {x: 521, y: 647.3333}
+  guid: 1f5571df036854c4faad1f9a08d52d26
+  position: {x: -100.959595, y: 649.33325}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -601,9 +148,37 @@ MonoBehaviour:
     IsEnrage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
---- !u!114 &7715388984302556164
+--- !u!114 &2709389679094520898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6c264bd2fdaf5499bf25e378f08eba, type: 3}
+  m_Name: StatusCheck
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: f53fff150b2e3e74d9414c5ba9104831
+  position: {x: 668.4361, y: 616.6666}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &3399324270424228788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -617,8 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 1
-  guid: 72829819ffe1dff4392a2e8268e58cc5
-  position: {x: -92.75291, y: -10.164678}
+  guid: c398b2e6a6d03b6459e774ac7be4346a
+  position: {x: 223.66682, y: 494.6666}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -627,8 +202,271 @@ MonoBehaviour:
     IsEnrage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
-  - {fileID: -5660333016957678146}
-  - {fileID: 3780558914899381627}
+  - {fileID: -3282221169115235948}
+  - {fileID: 6138442160220864189}
+--- !u!114 &3964595408751014720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb5496e8cd973748a10b3e3ef436ebd, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: cb17d545f20fbe2408724673ac05ea93
+  position: {x: -0.0000019073486, y: 155.50595}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 6886120431543504417}
+  restartOnSuccess: 1
+  restartOnFailure: 0
+  DetectedRanged: 0
+--- !u!114 &4872307726482557741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ee00f293048904c98ab72c086a4ab4, type: 3}
+  m_Name: AttackTargetPattern
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 6548d191d7e591f43a03318b5cc76f41
+  position: {x: 640.6667, y: 985.99994}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &4922759796844413321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2932073b8a6c3b34391576c45d359457, type: 3}
+  m_Name: Parallel
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 4af6a7ac215e6a0498da40b4bcbcb9fc
+  position: {x: 479.99997, y: 604.6667}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  children: []
+--- !u!114 &6138442160220864189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 2c75eff799e09f241a6682fc90392dae
+  position: {x: 490.70508, y: 806.1646}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: 8739090318124431842}
+  - {fileID: 6549167335751347871}
+  - {fileID: 4872307726482557741}
+  - {fileID: 8995882645581040522}
+--- !u!114 &6516967406905786214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a9430f121600344b10526753ba50ad, type: 3}
+  m_Name: IsPlayerEnterStage
+  m_EditorClassIdentifier: 
+  state: 2
+  started: 0
+  guid: 4a2ed8e8ff9f90240ab7199219da42ff
+  position: {x: -303.16116, y: 649.41364}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &6549167335751347871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c724142d90b42a040b0076eca868e053, type: 3}
+  m_Name: MoveToAttackPos
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: a47fecaa09d406448b39651cde6ff49a
+  position: {x: 435.59332, y: 985.99994}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  speed: 5
+  updateRotation: 1
+  acceleration: 40
+  tolerance: 3
+--- !u!114 &6886120431543504417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: ba2ee866208302d49a804250eef00bfc
+  position: {x: -0.0000038146973, y: 321.0903}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: -843320043716869159}
+  - {fileID: 3399324270424228788}
+--- !u!114 &8739090318124431842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbcce382e36a02c4190919fc02e0c414, type: 3}
+  m_Name: AttackPatternController
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 76020d38bbb385841a95565bdf085751
+  position: {x: 197.99995, y: 985.70013}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  allAttackPattern: []
+--- !u!114 &8995882645581040522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 13a67095000d7984dab8b8566f41992e
+  position: {x: 847.7235, y: 985.99994}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  duration: 1

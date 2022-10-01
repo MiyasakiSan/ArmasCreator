@@ -5,29 +5,36 @@ using UnityEngine.Animations;
 
 namespace ArmasCreator.Behavior
 {
-    public struct AttackPattern
+    [CreateAssetMenu(fileName = "New Attack Pattern", menuName = "AttackPattern")]
+    public class AttackPattern : ScriptableObject
     {
         [SerializeField]
-        private int activeCount;
-        public int ActiveCount => activeCount;
+        private int maxActiveCount;
+        public int MaxActiveCount => maxActiveCount;
 
         [SerializeField]
         private float activeDistance;
         public float ActiveDistance => activeDistance;
 
         [SerializeField]
+        private float attackDistance;
+        public float AttackDistance => attackDistance;
+
+        [SerializeField]
         private Vector3 activeDirection;
         public Vector3 ActiveDirection => activeDirection;
 
         [SerializeField]
+        private float activeAngleoffset;
+        public float ActiveAngleOffset => activeAngleoffset;
+
+        [SerializeField]
+        private float damage;
+        public float Damage => damage;
+
+        [SerializeField]
         private AnimationClip attackAnimaiton;
         public AnimationClip AttackAnimaiton => attackAnimaiton;
-
-        public void ResetActiveCount()
-        {
-            activeCount = 0;
-        }
-
     }
 }
 

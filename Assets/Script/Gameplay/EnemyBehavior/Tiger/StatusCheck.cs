@@ -12,7 +12,7 @@ public class StatusCheck : ActionNode
     }
 
     protected override State OnUpdate() {
-        if (CheckCurrentStatus())
+        if (!CheckCurrentStatus())
         {
             return State.Failure;
         }
@@ -24,6 +24,7 @@ public class StatusCheck : ActionNode
 
     private bool CheckCurrentStatus()
     {
+        Debug.Log(context.gameObject);
         var enemyStat = context.gameObject.GetComponent<EnemyStat>();
 
         if(enemyStat == null) { return false; }

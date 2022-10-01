@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine.Events;
 public class EnemyStat : AttackTarget, IDamagable<float>
 {
+    [SerializeField]
     private float maxHealth;
     public float MaxHealth => maxHealth;
 
