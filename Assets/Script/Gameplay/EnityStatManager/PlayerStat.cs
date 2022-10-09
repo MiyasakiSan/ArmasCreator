@@ -6,6 +6,8 @@ using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ArmasCreator.GameMode;
+using ArmasCreator.Utilities;
 
 public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
@@ -129,6 +131,11 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     }
     private void setupVariable()
     {
+        if(Canvas == null)
+        {
+            return;
+        }
+
         currentHealthServerRpc(maxHealth);
         currentStaminaServerRpc(maxStamina);
         NetworkcurrentStamina.OnValueChanged += StaminaChange;
@@ -148,6 +155,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         setupVariable();
         IsReduceStaminaRunning = false;
         setParam = true;
+
+        if (isSinglePlayer)
+        {
+            return;
+        }
+
         if (!IsLocalPlayer && Canvas == null)
         {
             setupClientCanvas();
@@ -184,11 +197,23 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
         }
     }
-   
 
+    private GameModeController gameModeController;
+
+    private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
+
+    private void Awake()
+    {
+        gameModeController = SharedContext.Instance.Get<GameModeController>();
+    }
 
     private void Update()
     {
+        if (isSinglePlayer)
+        {
+            return;
+        }
+
         if (!IsLocalPlayer && Canvas == null)
         {
             NetworkcurrentStamina.OnValueChanged += StaminaChange;

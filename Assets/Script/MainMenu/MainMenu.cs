@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public void OnClickEnter()
     {
         PlayerPrefs.SetString("PName", Name.text);
-        SceneManager.LoadScene("Mainmenu2", LoadSceneMode.Single);
+        SceneManager.LoadScene("Town", LoadSceneMode.Single);
     }
     public void OnClickEncyclopedia()
     {
