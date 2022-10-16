@@ -9,6 +9,9 @@ using ExitGames.Client.Photon;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Netcode.Transports.PhotonRealtime;
+using ArmasCreator.Utilities;
+using ArmasCreator.GameMode;
+
 public class CreateRoom : MonoBehaviour
 {
     public string roomName = "Test";
@@ -18,25 +21,37 @@ public class CreateRoom : MonoBehaviour
     public TMP_Text[] RoomPW;
     PhotonRealtimeTransport transport;
     GameObject[] NetworkManagers;
+
+    private GameModeController gameModeController;
     // Happen on server
+    private void Awake()
+    {
+        gameModeController = SharedContext.Instance.Get<GameModeController>();
+    }
+
     public void Start()
     {
         nickName = PlayerPrefs.GetString("PName");
         NetworkManagers = GameObject.FindGameObjectsWithTag("NetworkManager");
+
         if (NetworkManagers.Length > 1)
         {
             Destroy(NetworkManagers[1]);
         }
     }
+
     public void Host()
     {
         
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().RoomName = RoomID[0].text;
         GameObject.Find("NetworkManager").GetComponent<PhotonRealtimeTransport>().NickName = nickName;
+
         NetworkManager.Singleton.NetworkConfig.PlayerPrefab.name = "PlayerInfoBase(Clone)";
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.StartHost();
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+
+        gameModeController.SelectMode(GameModeController.GameModes.MultiPlayer);
     }
 
     // Happen on server
@@ -46,6 +61,7 @@ public class CreateRoom : MonoBehaviour
         bool approve = System.Text.Encoding.ASCII.GetString(connectionData) == RoomPW[0].text;
         callback(true, null, approve, GetRandomSpawn(), Quaternion.identity);
     }
+
     public void Join()
     {
         transport = NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>();
@@ -53,6 +69,8 @@ public class CreateRoom : MonoBehaviour
         transport.NickName = nickName;
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes(RoomPW[1].text);
         NetworkManager.Singleton.StartClient();
+
+        gameModeController.SelectMode(GameModeController.GameModes.MultiPlayer);
     }
     Vector3 GetRandomSpawn()
     {

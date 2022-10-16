@@ -16,10 +16,10 @@ public class PlayerSound : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsLocalPlayer && audioSource == null)
-        {
-            audioSource = GameObject.Find("Audio Source").GetComponent<AudioSource>();
-        }
+        //if(IsLocalPlayer && audioSource == null)
+        //{
+        //    audioSource = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+        //}
     }
 
     public void PlaySound(int Sound)

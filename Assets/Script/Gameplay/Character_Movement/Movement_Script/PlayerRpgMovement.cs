@@ -184,18 +184,21 @@ public class PlayerRpgMovement : NetworkBehaviour
     private movementState CheckMovementState(Vector3 direction)
     {
         bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge");
+
         if (direction.magnitude < 0.1f) { return movementState.idle; }
+
         if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge)
         {
             StartCoroutine(Dodge());
         }
+
         if (Input.GetKey(KeyCode.LeftShift)) { return movementState.run; }
         else { return movementState.walk; }
     }
     private bool haveStamina(float dodgeStaminaUse)
     {
         PlayerStat playerStat = GetComponent<PlayerStat>();
-        return playerStat.currentStamina - dodgeStaminaUse >= 0;
+        return playerStat.CurrentStamina - dodgeStaminaUse >= 0;
     }
     IEnumerator Dodge()
     {
@@ -270,12 +273,13 @@ public class PlayerRpgMovement : NetworkBehaviour
             rb.useGravity = false;
         }
     }
-    public void playerDie()
+    public void PlayerDie()
     {
         if (animController.currentAnimatorStateBaseIsName("Die")) { return; }
         canMove = false;
         StartCoroutine(dieThenRespawn());
     }
+
     private IEnumerator dieThenRespawn()
     {
         this.gameObject.GetComponent<CombatRpgManager>().dieState();

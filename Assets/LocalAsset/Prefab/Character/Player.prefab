@@ -4536,12 +4536,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   maxStamina: 100
+  currentHealth: 0
+  currentStamina: 0
   NetworkcurrentHealth:
     m_InternalValue: 0
   NetworkcurrentStamina:
     m_InternalValue: 0
-  UIstat: {fileID: 0}
-  Canvas: {fileID: 0}
   IsReduceStaminaRunning: 0
   playerMovement: {fileID: -6259460489414657412}
 --- !u!114 &-6259460489414657412
@@ -4688,7 +4688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954bf4abf3f66f0449f553674ac51171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
 --- !u!136 &2148099740911995076
 CapsuleCollider:
   m_ObjectHideFlags: 0

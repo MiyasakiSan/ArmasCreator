@@ -18,22 +18,22 @@ public class CoinCollector : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (IsLocalPlayer)
-        {
-            coinText = GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>();
-            coins.OnValueChanged += CoinTextChange;
-        }
+        //if (IsLocalPlayer)
+        //{
+        //    coinText = GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>();
+        //    coins.OnValueChanged += CoinTextChange;
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (IsLocalPlayer && coinText == null)
-        {
-            coinText = GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>();
-            coins.OnValueChanged += CoinTextChange;
-        }
+        //if (IsLocalPlayer && coinText == null)
+        //{
+        //    coinText = GameObject.Find("CoinText").GetComponent<TextMeshProUGUI>();
+        //    coins.OnValueChanged += CoinTextChange;
+        //}
 
     }
     private void CoinTextChange(int previousValue, int newValue)

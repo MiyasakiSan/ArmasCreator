@@ -44,6 +44,8 @@ namespace ArmasCreator.Gameplay
 
         private GameModeController gameModeController;
 
+        private QuestInfo currentQuestInfo;
+
         private void Awake()
         {
             SharedContext.Instance.Add(this);
@@ -64,10 +66,17 @@ namespace ArmasCreator.Gameplay
 
         }
 
+        private void OnEnterChallengeStage(QuestInfo questInfo)
+        {
+            CurrentGameplays = Gameplays.Challenge;
+
+            currentQuestInfo = questInfo;
+        }
+
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
-
+            currentQuestInfo = null;
             Destroy(this);
         }
 
