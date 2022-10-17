@@ -20,7 +20,7 @@ public class TestAnalytics : MonoBehaviour
         for(int i = 0; i< 10; i++)
         {
             //testSendCustomEvent(i);
-            testSendCustomMapEvent(i);
+            //testSendCustomMapEvent(i);
         }
     }
 

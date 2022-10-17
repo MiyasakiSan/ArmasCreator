@@ -9,10 +9,12 @@ public class BarAdjustment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Player == null)
-        {
-            DestroyServerRpc();
-        }
+        //TODO : Adjust this
+
+        //if(Player == null)
+        //{
+        //    DestroyServerRpc();
+        //}
     }
     [ServerRpc]
     public void DestroyServerRpc()

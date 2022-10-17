@@ -17,10 +17,13 @@ public class PlayEmote : NetworkBehaviour
     {
         if (IsLocalPlayer)
         {
-            if(audioSource == null)
-            {
-                audioSource = GameObject.Find("Audio Source").GetComponent<AudioSource>();
-            }
+            //TODO : implement Audio manager
+
+            //if(audioSource == null)
+            //{
+            //    audioSource = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+            //}
+
             if (Input.GetKeyDown(KeyCode.B))
             {
                 EmoteBar.SetActive(!EmoteBar.activeSelf);

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Cinemachine;
+using ArmasCreator.GameMode;
+using ArmasCreator.Utilities;
 
 public class PlayerRpgMovement : NetworkBehaviour
 {
@@ -58,11 +60,35 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         idle,walk,run
     }
+
     public movementState currentMovementState;
+
+    private GameModeController gameModeController;
+
+    private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
+
+    private void Awake()
+    {
+        gameModeController = SharedContext.Instance.Get<GameModeController>();
+    }
+
     void Start()
     {
+        if(isSinglePlayer) 
+        {
+            rb = this.GetComponent<Rigidbody>();
+            animController = this.GetComponent<MovementAnim>();
 
-        if (IsLocalPlayer) {
+            currentMovementState = movementState.idle;
+
+            Keyframe dodge_LastFrame = dodgeCurve[dodgeCurve.length - 1];
+            dodgeTimer = dodge_LastFrame.time;
+
+            return;
+        }
+
+        if (IsLocalPlayer && gameModeController.IsMultiPlayerMode) 
+        {
             rb = this.GetComponent<Rigidbody>();
             animController = this.GetComponent<MovementAnim>();
 
@@ -83,7 +109,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     }
     void Update()
     {
-        if (IsLocalPlayer)
+        if (IsLocalPlayer || isSinglePlayer)
         {
             floatCollider();
             if (!canMove) return;
@@ -114,37 +140,77 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             case movementState.walk:
                 walkToDirection(direction);
-                animController.AnimationStateServerRpc(currentMovementState.ToString());
+
+                if (isSinglePlayer)
+                {
+                    animController.AnimationState(currentMovementState.ToString());
+                }
+                else
+                {
+                    animController.AnimationStateServerRpc(currentMovementState.ToString());
+                }
+
                 break;
+
             case movementState.run:
                 runToDirection(direction);
                 ReduceStaminaOnRun();
-                animController.AnimationStateServerRpc(currentMovementState.ToString());
+
+                if (isSinglePlayer)
+                {
+                    animController.AnimationState(currentMovementState.ToString());
+                }
+                else
+                {
+                    animController.AnimationStateServerRpc(currentMovementState.ToString());
+                }
+
                 break;
+
             case movementState.idle:
-                animController.AnimationStateServerRpc(currentMovementState.ToString());
+                
+                if (isSinglePlayer)
+                {
+                    animController.AnimationState(currentMovementState.ToString());
+                }
+                else
+                {
+                    animController.AnimationStateServerRpc(currentMovementState.ToString());
+                }
+
                 break;
         }
     }
     private movementState CheckMovementState(Vector3 direction)
     {
         bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge");
+
         if (direction.magnitude < 0.1f) { return movementState.idle; }
+
         if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge)
         {
             StartCoroutine(Dodge());
         }
+
         if (Input.GetKey(KeyCode.LeftShift)) { return movementState.run; }
         else { return movementState.walk; }
     }
     private bool haveStamina(float dodgeStaminaUse)
     {
         PlayerStat playerStat = GetComponent<PlayerStat>();
-        return playerStat.currentStamina - dodgeStaminaUse >= 0;
+        return playerStat.CurrentStamina - dodgeStaminaUse >= 0;
     }
     IEnumerator Dodge()
     {
-        animController.DodgeServerRpc();
+        if (isSinglePlayer)
+        {
+            animController.Dodge();
+        }
+        else
+        {
+            animController.DodgeServerRpc();
+        }
+
         isDodging = true;
         float timer = 0;
         reduceStaminaOnDodge(10f);
@@ -207,17 +273,27 @@ public class PlayerRpgMovement : NetworkBehaviour
             rb.useGravity = false;
         }
     }
-    public void playerDie()
+    public void PlayerDie()
     {
         if (animController.currentAnimatorStateBaseIsName("Die")) { return; }
         canMove = false;
         StartCoroutine(dieThenRespawn());
     }
+
     private IEnumerator dieThenRespawn()
     {
         this.gameObject.GetComponent<CombatRpgManager>().dieState();
         deadCam.SetActive(true);
-        animController.dieAnimaitonServerRpc();
+
+        if (isSinglePlayer)
+        {
+            animController.dieAnimaiton();
+        }
+        else
+        {
+            animController.dieAnimaitonServerRpc();
+        }
+
         yield return new WaitForSeconds(6f);
         Respawn();
     }

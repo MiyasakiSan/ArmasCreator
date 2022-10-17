@@ -10,7 +10,7 @@ public interface IDamagable<T>
 public interface IStaminaUsable<T>
 {
 
-    float currentStamina { get; }
+    float CurrentStamina { get; }
     void reduceStamina(T amount);
     IEnumerator RegenStamina();
     IEnumerator ReduceStaminaOverTime(T amount);

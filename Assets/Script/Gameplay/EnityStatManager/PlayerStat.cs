@@ -6,18 +6,28 @@ using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ArmasCreator.GameMode;
+using ArmasCreator.Utilities;
+using ArmasCreator.Gameplay.UI;
 
 public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
     public float maxHealth;
     public float maxStamina;
+
+    //TODO : change public to private
+    public float currentHealth;
+    public float currentStamina;
+
     [SerializeField]
     NetworkVariable<float> NetworkcurrentHealth = new NetworkVariable<float>();
+
     [SerializeField]
     NetworkVariable<float> NetworkcurrentStamina = new NetworkVariable<float>();
-    [SerializeField]
-    public UIStatControl UIstat;
-    public GameObject Canvas;
+
+    private UIStatControl uiStat;
+    private UIPlayerController uiPlayerController;
+    private GameObject otherPlayerCanvas;
 
     private  Coroutine staminaRegen;
     private  Coroutine staminaReduceOverTime;
@@ -28,41 +38,99 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [SerializeField]
     private PlayerRpgMovement playerMovement;
 
+    private GameModeController gameModeController;
+
+    private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
+
     public float CurrentHealth
     {
-        get { return NetworkcurrentHealth.Value; }
-        set { NetworkcurrentHealth.Value = value; }
+        get 
+        {
+            if (isSinglePlayer)
+            {
+                return currentHealth;
+            }
+            else
+            {
+                return NetworkcurrentHealth.Value;
+            }
+        }
+        set 
+        {
+            if (isSinglePlayer)
+            {
+                currentHealth = value;
+            }
+            else
+            {
+                NetworkcurrentHealth.Value = value;
+            }
+        }
     }
-    public float currentStamina
+    public float CurrentStamina
     {
-        get { return NetworkcurrentStamina.Value; }
-        set { NetworkcurrentStamina.Value = value; }
+        get
+        {
+            if (isSinglePlayer)
+            {
+                return currentStamina;
+            }
+            else
+            {
+                return NetworkcurrentStamina.Value;
+            }
+        }
+        set
+        {
+            if (isSinglePlayer)
+            {
+                currentStamina = value;
+            }
+            else
+            {
+                NetworkcurrentStamina.Value = value;
+            }
+        }
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void currentHealthServerRpc(float value)
     {
         CurrentHealth = value;
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void currentStaminaServerRpc(float value)
     {
-        currentStamina = value;
+        CurrentStamina = value;
     }
+
     public void reduceStamina(float amount)
     {
-        currentStaminaServerRpc(currentStamina - amount);
+        if (isSinglePlayer)
+        {
+            currentStamina -= amount;
+            uiStat.UpdateStaminaUI(currentStamina);
+        }
+        else
+        {
+            currentStaminaServerRpc(CurrentStamina - amount);
+        }
+
         if(staminaRegen != null)
         {
             StopCoroutine(staminaRegen);
         }
         staminaRegen = StartCoroutine(RegenStamina());
     }
+
     public void reduceStaminaAmountOverTime(float amount)
     {
         if (!IsReduceStaminaRunning)
         {
             staminaReduceOverTime = StartCoroutine(ReduceStaminaOverTime(amount));
         }
+
         if (staminaRegen != null)
         {
             StopCoroutine(staminaRegen);
@@ -70,93 +138,148 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         }
 
     }
+
     public void stopReduceStamina()
     {
-        if(currentStamina >= 0)
+        if(CurrentStamina >= 0)
         {
             StopCoroutine(staminaReduceOverTime);
         }
+
         staminaReduceOverTime = null;
         IsReduceStaminaRunning = false;
+
         if (staminaRegen != null)
         {
             StopCoroutine(staminaRegen);
         }
+
         staminaRegen = StartCoroutine(RegenStamina());
-        Debug.Log("Stop Run");
     }
   
     public override void receiveAttack(float damage)
     {
-        if (!IsLocalPlayer) { return; }
-        if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
-        currentHealthServerRpc(CurrentHealth - damage);
-        if (CurrentHealth <= 0) { playerMovement.playerDie(); return; }
+        if (isSinglePlayer)
+        {
+            if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
+
+            currentHealth -= damage;
+            uiStat.UpdateHealthUI(currentHealth);
+
+            if (CurrentHealth <= 0) { playerMovement.PlayerDie(); return; }
+        }
+        else
+        {
+            if (!IsLocalPlayer) { return; }
+
+            if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
+
+            currentHealthServerRpc(CurrentHealth - damage);
+            if (CurrentHealth <= 0) { playerMovement.PlayerDie(); return; }
+        }
     }
+
     public IEnumerator RegenStamina()
     {
         yield return new WaitForSeconds(2f);
-        while(currentStamina < maxStamina)
+        while(CurrentStamina < maxStamina)
         {
-            currentStaminaServerRpc(currentStamina + maxStamina / 150);
+            if (isSinglePlayer)
+            {
+                currentStamina += maxStamina / 150;
+                uiStat.UpdateStaminaUI(currentStamina);
+            }
+            else
+            {
+                currentStaminaServerRpc(CurrentStamina + maxStamina / 150);
+            }
+
             yield return new WaitForSeconds(0.1f);
         }
         staminaRegen = null;
     }
+
     public IEnumerator ReduceStaminaOverTime(float amount)
     {
         IsReduceStaminaRunning = true;
-        while (currentStamina >= 0)
+        while (CurrentStamina >= 0)
         {
-            currentStaminaServerRpc(currentStamina - (maxStamina / 100)*amount);
+            if (isSinglePlayer)
+            {
+                currentStamina -= (maxStamina / 100) * amount;
+                uiStat.UpdateStaminaUI(currentStamina);
+            }
+            else
+            {
+                currentStaminaServerRpc(CurrentStamina - (maxStamina / 100) * amount);
+            }
+
             yield return new WaitForSeconds(0.1f);
         }
         IsReduceStaminaRunning = false;
     }
+
     public void respawnResetHealth()
     {
-        UIstat.SetHealthUI(maxHealth);
-        currentHealthServerRpc(maxHealth);
+        uiStat.SetHealthUI(maxHealth);
+
+        if (isSinglePlayer)
+        {
+            CurrentHealth = maxHealth;
+            uiStat.SetHealthUI(maxHealth);
+        }
+        else
+        {
+            currentHealthServerRpc(maxHealth);
+        }
     }
+
     private void HealthChange(float previousValue, float newValue)
     {
-        UIstat.UpdateHealthUI(newValue);
+        uiStat.UpdateHealthUI(newValue);
     }
 
     private void StaminaChange(float previousValue, float newValue)
     {
-        UIstat.UpdateStaminaUI(newValue);
+        uiStat.UpdateStaminaUI(newValue);
     }
-    private void setupVariable()
+
+    public void SetupVariable()
     {
-        currentHealthServerRpc(maxHealth);
-        currentStaminaServerRpc(maxStamina);
-        NetworkcurrentStamina.OnValueChanged += StaminaChange;
-        NetworkcurrentHealth.OnValueChanged += HealthChange;
-        UIstat.SetHealthUI(maxHealth);
-        UIstat.SetStaminaUI(maxStamina);
-    }
-    private void setupClientCanvas()
-    {
-        Canvas = GameObject.FindGameObjectWithTag("OtherBar");
-        UIstat.transform.SetParent(Canvas.transform);
-        UIstat.tag = "OtherPlayerBar";
-        UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
-    }
-    void Start()
-    {
-        setupVariable();
+        uiPlayerController = SharedContext.Instance.Get<UIPlayerController>();
+
+        otherPlayerCanvas = uiPlayerController.OtherPlayerCanvas;
+        uiStat = uiPlayerController.PlayerStatUI;
+
+        if (isSinglePlayer)
+        {
+            CurrentHealth = maxHealth;
+            CurrentStamina = maxStamina;
+
+            uiStat.SetHealthUI(maxHealth);
+            uiStat.SetStaminaUI(maxStamina);
+        }
+        else
+        {
+            currentHealthServerRpc(maxHealth);
+            currentStaminaServerRpc(maxStamina);
+            NetworkcurrentStamina.OnValueChanged += StaminaChange;
+            NetworkcurrentHealth.OnValueChanged += HealthChange;
+            uiStat.SetHealthUI(maxHealth);
+            uiStat.SetStaminaUI(maxStamina);
+        }
+
         IsReduceStaminaRunning = false;
         setParam = true;
-        if (!IsLocalPlayer && Canvas == null)
-        {
-            setupClientCanvas();
-        }
     }
 
-
-
-
+    private void setupClientCanvas()
+    {
+        otherPlayerCanvas = GameObject.FindGameObjectWithTag("OtherBar");
+        uiStat.transform.SetParent(otherPlayerCanvas.transform);
+        uiStat.tag = "OtherPlayerBar";
+        uiStat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+    }
 
     private void SceneManager_sceneUnloaded(Scene arg0)
     {
@@ -174,33 +297,65 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         //}
         NetworkcurrentStamina.OnValueChanged += StaminaChange;
         NetworkcurrentHealth.OnValueChanged += HealthChange;
-        UIstat.SetHealthUI(maxHealth);
-        UIstat.SetStaminaUI(maxStamina);
+        uiStat.SetHealthUI(maxHealth);
+        uiStat.SetStaminaUI(maxStamina);
+
         if (!IsLocalPlayer)
         {
             GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
-            UIstat.transform.SetParent(Canvas.transform);
-            UIstat.tag = "OtherPlayerBar";
-            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+            uiStat.transform.SetParent(Canvas.transform);
+            uiStat.tag = "OtherPlayerBar";
+            uiStat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
         }
     }
-   
 
+    private void Awake()
+    {
+        gameModeController = SharedContext.Instance.Get<GameModeController>();
+    }
+
+    void Start()
+    {
+        if (isSinglePlayer)
+        {
+            SetupVariable();
+        }
+
+        Debug.LogError(isSinglePlayer);
+
+        if (isSinglePlayer)
+        {
+            return;
+        }
+
+        if (!IsLocalPlayer && otherPlayerCanvas == null)
+        {
+            setupClientCanvas();
+        }
+    }
 
     private void Update()
     {
-        if (!IsLocalPlayer && Canvas == null)
+        if (isSinglePlayer)
+        {
+            return;
+        }
+
+        if (!IsLocalPlayer && otherPlayerCanvas == null)
         {
             NetworkcurrentStamina.OnValueChanged += StaminaChange;
             NetworkcurrentHealth.OnValueChanged += HealthChange;
-            UIstat.SetHealthUI(maxHealth);
-            UIstat.SetStaminaUI(maxStamina);
-            Canvas = GameObject.FindGameObjectWithTag("OtherBar");
-            UIstat.transform.SetParent(Canvas.transform);
-            UIstat.tag = "OtherPlayerBar";
-            UIstat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
+            uiStat.SetHealthUI(maxHealth);
+            uiStat.SetStaminaUI(maxStamina);
+            otherPlayerCanvas = GameObject.FindGameObjectWithTag("OtherBar");
+            uiStat.transform.SetParent(otherPlayerCanvas.transform);
+            uiStat.tag = "OtherPlayerBar";
+            uiStat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
         }
     }
 
-  
+    private void OnDestroy()
+    {
+
+    }
 }

@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ArmasCreator.Utilities;
 using Unity.Netcode;
 
 public class UIStatControl : MonoBehaviour
 {
     public Slider healthSlider;
     public Slider staminaSlider;
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         

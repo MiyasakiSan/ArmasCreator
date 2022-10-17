@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using ArmasCreator.GameMode;
+using ArmasCreator.Utilities;
 
 public class CombatRpgManager : NetworkBehaviour 
 {
@@ -34,22 +36,33 @@ public class CombatRpgManager : NetworkBehaviour
     {
         neutral,combat
     }
+
+    private GameModeController gameModeController;
+
+    private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
+
+    private void Awake()
+    {
+        gameModeController = SharedContext.Instance.Get<GameModeController>();
+    }
+
     void Start()
     {
-        if (IsLocalPlayer)
+        if (IsLocalPlayer || isSinglePlayer)
         {
             changeGameState(gameState.neutral);
         }
     }
     void Update()
     {
-        if (IsLocalPlayer)
+        if (IsLocalPlayer || isSinglePlayer)
         {
             if (!canBattle) { return; }
+
             gameStateCheck();
             if(currentGameState != gameState.combat) { return; }
-            CombatDependOnHeldWeapon(heldWeapon);
 
+            CombatDependOnHeldWeapon(heldWeapon);
         }
     }
     public void changeGameState(gameState value)
@@ -77,10 +90,28 @@ public class CombatRpgManager : NetworkBehaviour
         switch (current_gameState)
         {
             case gameState.neutral:
-                animController.changeCombatLayerWeightServerRpc(0f);
+
+                if (isSinglePlayer)
+                {
+                    animController.changeCombatLayerWeight(0f);
+                }
+                else
+                {
+                    animController.changeCombatLayerWeightServerRpc(0f);
+                }
+
                 break;
             case gameState.combat:
-                animController.changeCombatLayerWeightServerRpc(1f);
+
+                if (isSinglePlayer)
+                {
+                    animController.changeCombatLayerWeight(1f);
+                }
+                else
+                {
+                    animController.changeCombatLayerWeightServerRpc(1f);
+                }
+
                 break;
         }
     }
@@ -110,12 +141,27 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
-            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", false);
+            if (isSinglePlayer)
+            {
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", false);
+            }
+            else
+            {
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", false);
+            }
         }
 
         if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
-            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
+            if (isSinglePlayer)
+            {
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", false);
+            }
+            else
+            {
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
+            }
+
             noOfClicks = 0;
         }
     }
@@ -138,14 +184,28 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (num == 1)
         {
-            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
+            if (isSinglePlayer)
+            {
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit{num}", true);
+            }
+            else
+            {
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
+            }
         }
 
         if (animController.currentAnimatorStateInfoTime <= 0.7f) { return; }
 
         if (num == 2 )
         {
-            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
+            if (isSinglePlayer)
+            {
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit{num}", true);
+            }
+            else
+            {
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
+            }
         }
     } 
     public void dieState()
