@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ArmasCreator.Gameplay.UI;
 
 namespace ArmasCreator.Gameplay
 {
@@ -12,6 +13,13 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private GameObject multiplayerVcam;
 
+        [SerializeField]
+        private GameObject playerCanvas;
+
+        [SerializeField]
+        private LobbyPanelController lobbyPanelController;
+
+
         void Start()
         {
             multiplayerVcam.SetActive(false);
@@ -19,27 +27,29 @@ namespace ArmasCreator.Gameplay
 
         public void ShowMulitplayerPanel()
         {
+            playerCanvas.SetActive(false);
+
             multiplayerVcam.SetActive(true);
 
-            mulitplayerPanel.SetActive(true);
-
             //TODO : Wait some shit
+
+            lobbyPanelController.Anim_Show();
         }
 
         public void HideMultiplayerPanel()
-        {
+        { 
             multiplayerVcam.SetActive(false);
 
-            mulitplayerPanel.SetActive(false);
-
             //TODO : Wait some shit
+
+            lobbyPanelController.Anim_Hide();
+
+            playerCanvas.SetActive(true);
         }
 
         private void OnTriggerStay(Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) { return; }
-
-            if(mulitplayerPanel.activeSelf) { return; }
 
             if (Input.GetKeyDown(KeyCode.T))
             {
