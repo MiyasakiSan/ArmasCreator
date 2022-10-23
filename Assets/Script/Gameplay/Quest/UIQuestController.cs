@@ -16,7 +16,15 @@ namespace ArmasCreator.Gameplay
 
         private GameplayController gameplayController;
         private UserDataManager userDataManager;
+
         private string currentMapId;
+        private Dictionary<string, PresetInfo> presetInfos = new Dictionary<string, PresetInfo>();
+
+        [SerializeField]
+        private GameObject questCanvas;
+
+        [SerializeField]
+        private GameObject questVcam;
 
         private void Awake()
         {
@@ -29,7 +37,12 @@ namespace ArmasCreator.Gameplay
 
         }
 
-        public void LoadPresets(string MapId)
+        public void NewPreset(string MapId)
+        {
+
+        }
+
+        public void LoadPresets()
         {
 
         }
@@ -66,7 +79,31 @@ namespace ArmasCreator.Gameplay
             //TODO : do something
         }
 
+        public void ShowQuestCanvas()
+        {
+            questVcam.SetActive(true);
 
+            questCanvas.SetActive(true);
+
+            //TODO : Wait some shit
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            if (questCanvas.activeSelf) { return; }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                ShowQuestCanvas();
+            }
+        }
+    }
+
+    public class PresetInfo
+    {
+        public List<QuestInfo> SavePresets;
     }
 }
     
