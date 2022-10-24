@@ -4,13 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TrueAxion.TrashGame.GameData
+namespace ArmasCreator.GameData
 {
     [Serializable]
     public class ChallengeModeModel 
     {
         [JsonProperty("map_id")]
         public string MapID;
+
+        [JsonProperty("scene_name")]
+        public string SceneName;
 
         [JsonProperty("default_hp")]
         public float DefaultHp;

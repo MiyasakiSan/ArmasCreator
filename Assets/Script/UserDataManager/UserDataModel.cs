@@ -43,9 +43,6 @@ namespace ArmasCreator.UserData
             userDataQuestPreset = new UserDataQuestPresetModel();
             userDataQuestPreset.Init(this);
 
-            //TODO : remove when it works
-            //TestSaveUserData();
-
             LoadUserDataFromLocalData();
         }
 
@@ -73,7 +70,7 @@ namespace ArmasCreator.UserData
             saveModel.Coins = 1000;
             saveModel.AllSavePresets = testPreset;
 
-            SaveUserDecisionToLocalData();
+            SaveUserDataToLocal();
         }
 
         private void LoadUserDataFromLocalData()
@@ -107,10 +104,13 @@ namespace ArmasCreator.UserData
         {
             Debug.Log("Setup UserData");
 
+            userID = saveModel.UserId;
+            PlayerPrefs.SetString("PName", userID);
+
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
         }
 
-        public void SaveUserDecisionToLocalData()
+        public void SaveUserDataToLocal()
         {
             try
             {
@@ -122,6 +122,16 @@ namespace ArmasCreator.UserData
             {
                 Debug.LogError("UserDataModel: fail to LoadUserDataFromLocalData(), exception: " + ex.Message);
             }
+        }
+
+        public void SetUserID(string name)
+        {
+            userID = name;
+            saveModel = new UserSaveDataModel();
+            saveModel.UserId = name;
+            saveModel.AllSavePresets = new List<UserSavePresetModel>();
+
+            PlayerPrefs.SetString("PName", name);
         }
     }
 }

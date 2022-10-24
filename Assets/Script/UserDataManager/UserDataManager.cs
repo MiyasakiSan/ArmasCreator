@@ -32,6 +32,11 @@ namespace ArmasCreator.UserData
         {
             //userData.Dispose();
         }
+
+        private void OnApplicationQuit()
+        {
+            userData.SaveUserDataToLocal();
+        }
     }
 }
    

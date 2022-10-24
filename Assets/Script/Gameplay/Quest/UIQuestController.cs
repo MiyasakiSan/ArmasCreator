@@ -26,10 +26,13 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private GameObject questVcam;
 
+        private GameDataManager gameDataManager;
+
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
+            gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         }
 
         void Start()
@@ -74,7 +77,21 @@ namespace ArmasCreator.Gameplay
 
         public void StartChallengeQuest()
         {
-            QuestInfo startQuestInfo = new QuestInfo(currentMapId, atkMultiplier, speedMultiplier, hpMultiplier, 1800);
+            bool exist = gameDataManager.TryGetChallengeModeInfo(currentMapId, out ChallengeModeModel challengeModeInfo);
+
+            if (!exist)
+            {
+                Debug.LogError("Doesn't have challenge info for map ID :" + currentMapId);
+                return;
+            }
+
+            var initATK = challengeModeInfo.DefaultAtk * atkMultiplier;
+            var initHP = challengeModeInfo.DefaultHp * hpMultiplier;
+            var initSPD = challengeModeInfo.DefaultSpeed * speedMultiplier;
+
+            QuestInfo startQuestInfo = new QuestInfo(currentMapId, challengeModeInfo.SceneName, initATK, initSPD, initHP, challengeModeInfo.Duration);
+
+            gameplayController.EnterChallengeStage(startQuestInfo);
 
             //TODO : do something
         }

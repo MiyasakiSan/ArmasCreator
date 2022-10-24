@@ -13,7 +13,7 @@ namespace ArmasCreator.UserData
 
         public int Coins;
 
-        public List<UserSavePresetModel> AllSavePresets;
+        public List<UserSavePresetModel> AllSavePresets = new List<UserSavePresetModel>();
     }
 
     public class UserSavePresetModel

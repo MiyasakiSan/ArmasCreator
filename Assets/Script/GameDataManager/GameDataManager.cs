@@ -25,7 +25,18 @@ namespace ArmasCreator.GameData
         private float targetValue;
         private float currentValue;
         [SerializeField]
-        private Slider loadingSlider; 
+        private Slider loadingSlider;
+
+        #region General Data
+
+        [GameData("challenges_mode_config")]
+        private Dictionary<string, ChallengeModeModel> challengesModeConfig;
+
+        [GameData("game_info")]
+        private GameInfoModel gameInfo;
+
+        #endregion
+
         private void Awake()
         {
             StartInitialize();
@@ -105,6 +116,23 @@ namespace ArmasCreator.GameData
             }
 
             Debug.Log("================  Load GameData From Json Complete  =================");
+
+            Debug.Log(challengesModeConfig);
+        }
+
+        public bool TryGetChallengeModeInfo(string mapId, out ChallengeModeModel challengeModeInfo)
+        {
+            bool exist = challengesModeConfig.TryGetValue(mapId, out challengeModeInfo);
+
+            if (!exist)
+            {
+                challengeModeInfo = null;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
