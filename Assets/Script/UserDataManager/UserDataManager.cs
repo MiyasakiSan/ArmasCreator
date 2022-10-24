@@ -9,8 +9,8 @@ namespace ArmasCreator.UserData
     {
         //TODO : Implement UserData for save game progression and inventory
 
-        //private UserDataModel userData;
-        //public UserDataModel UserData => userData;
+        private UserDataModel userData;
+        public UserDataModel UserData => userData;
 
         void Awake()
         {
@@ -22,16 +22,15 @@ namespace ArmasCreator.UserData
 
         private void LoadData()
         {
-            //userData = new UserDataModel();
-            //userData.Init(this);
+            userData = new UserDataModel();
+            userData.Init(this);
 
-            Debug.LogError("Need to implement user data");
+            //Debug.LogError("Need to implement user data");
         }
 
         private void OnDestroy()
         {
             //userData.Dispose();
-            //userShop.Dispose();
         }
     }
 }
