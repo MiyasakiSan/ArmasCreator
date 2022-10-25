@@ -5,6 +5,7 @@ using ArmasCreator.UserData;
 using ArmasCreator.Utilities;
 using UnityEngine;
 using ArmasCreator.GameMode;
+using UnityEngine.SceneManagement;
 
 namespace ArmasCreator.Gameplay
 {
@@ -43,6 +44,7 @@ namespace ArmasCreator.Gameplay
         //public UserDataManager UserDataManager { get; private set; }
 
         private GameModeController gameModeController;
+        private GameDataManager gameDataManager;
 
         private QuestInfo currentQuestInfo;
 
@@ -54,6 +56,7 @@ namespace ArmasCreator.Gameplay
             PlayerGroupController = new PlayerGroupController();
 
             gameModeController = SharedContext.Instance.Get<GameModeController>();
+            gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         }
 
         void Start()
@@ -66,11 +69,13 @@ namespace ArmasCreator.Gameplay
 
         }
 
-        private void OnEnterChallengeStage(QuestInfo questInfo)
+        public void EnterChallengeStage(QuestInfo questInfo)
         {
             CurrentGameplays = Gameplays.Challenge;
 
             currentQuestInfo = questInfo;
+
+            SceneManager.LoadScene(questInfo.SceneName, LoadSceneMode.Single);
         }
 
         private void Dispose()

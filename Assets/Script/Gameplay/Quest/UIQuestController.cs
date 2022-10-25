@@ -16,12 +16,23 @@ namespace ArmasCreator.Gameplay
 
         private GameplayController gameplayController;
         private UserDataManager userDataManager;
+
         private string currentMapId;
+        private Dictionary<string, PresetInfo> presetInfos = new Dictionary<string, PresetInfo>();
+
+        [SerializeField]
+        private GameObject questCanvas;
+
+        [SerializeField]
+        private GameObject questVcam;
+
+        private GameDataManager gameDataManager;
 
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
+            gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         }
 
         void Start()
@@ -29,7 +40,12 @@ namespace ArmasCreator.Gameplay
 
         }
 
-        public void LoadPresets(string MapId)
+        public void NewPreset(string MapId)
+        {
+
+        }
+
+        public void LoadPresets()
         {
 
         }
@@ -61,12 +77,50 @@ namespace ArmasCreator.Gameplay
 
         public void StartChallengeQuest()
         {
-            QuestInfo startQuestInfo = new QuestInfo(currentMapId, atkMultiplier, speedMultiplier, hpMultiplier, 1800);
+            bool exist = gameDataManager.TryGetChallengeModeInfo(currentMapId, out ChallengeModeModel challengeModeInfo);
+
+            if (!exist)
+            {
+                Debug.LogError("Doesn't have challenge info for map ID :" + currentMapId);
+                return;
+            }
+
+            var initATK = challengeModeInfo.DefaultAtk * atkMultiplier;
+            var initHP = challengeModeInfo.DefaultHp * hpMultiplier;
+            var initSPD = challengeModeInfo.DefaultSpeed * speedMultiplier;
+
+            QuestInfo startQuestInfo = new QuestInfo(currentMapId, challengeModeInfo.SceneName, initATK, initSPD, initHP, challengeModeInfo.Duration);
+
+            gameplayController.EnterChallengeStage(startQuestInfo);
 
             //TODO : do something
         }
 
+        public void ShowQuestCanvas()
+        {
+            questVcam.SetActive(true);
 
+            questCanvas.SetActive(true);
+
+            //TODO : Wait some shit
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            if (questCanvas.activeSelf) { return; }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                ShowQuestCanvas();
+            }
+        }
+    }
+
+    public class PresetInfo
+    {
+        public List<QuestInfo> SavePresets;
     }
 }
     
