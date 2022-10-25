@@ -19,7 +19,6 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private LobbyPanelController lobbyPanelController;
 
-
         void Start()
         {
             multiplayerVcam.SetActive(false);
