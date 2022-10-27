@@ -24,6 +24,9 @@ namespace ArmasCreator.Gameplay
         private GameObject questCanvas;
 
         [SerializeField]
+        private GameObject playerCanvas;
+
+        [SerializeField]
         private GameObject questVcam;
 
         private GameDataManager gameDataManager;
@@ -77,7 +80,7 @@ namespace ArmasCreator.Gameplay
 
         public void StartChallengeQuest()
         {
-            bool exist = gameDataManager.TryGetChallengeModeInfo(currentMapId, out ChallengeModeModel challengeModeInfo);
+            bool exist = gameDataManager.TryGetSelectedChallengeModeInfo(currentMapId, out ChallengeModeModel challengeModeInfo);
 
             if (!exist)
             {
@@ -101,8 +104,17 @@ namespace ArmasCreator.Gameplay
             questVcam.SetActive(true);
 
             questCanvas.SetActive(true);
+            playerCanvas.SetActive(false);
 
             //TODO : Wait some shit
+        }
+
+        public void HideQuestCanvas()
+        {
+            questVcam.SetActive(false);
+
+            questCanvas.SetActive(false);
+            playerCanvas.SetActive(true);
         }
 
         private void OnTriggerStay(Collider other)
@@ -114,6 +126,10 @@ namespace ArmasCreator.Gameplay
             if (Input.GetKeyDown(KeyCode.T))
             {
                 ShowQuestCanvas();
+            }
+            else if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                HideQuestCanvas();
             }
         }
     }

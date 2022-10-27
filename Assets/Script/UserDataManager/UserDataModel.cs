@@ -52,9 +52,9 @@ namespace ArmasCreator.UserData
             var testPreset = new List<UserSavePresetModel>();
             var testQuestInfo = new List<QuestInfo>();
 
-            var firstSlot = new QuestInfo("Challenge1", 1.5f, 1.0f, 0.5f, 3000);
-            var secondSlot = new QuestInfo("Challenge2", 0.5f, 1.0f, 1.0f, 3000);
-            var thirdSlot = new QuestInfo("Challenge3", 1.0f, 1.5f, 0.5f, 3000);
+            var firstSlot = new QuestInfo("Challenge1", "testMap", 1.5f, 1.0f, 0.5f, 3000);
+            var secondSlot = new QuestInfo("Challenge2", "testMap", 0.5f, 1.0f, 1.0f, 3000);
+            var thirdSlot = new QuestInfo("Challenge3", "testMap", 1.0f, 1.5f, 0.5f, 3000);
 
             testQuestInfo.Add(firstSlot);
             testQuestInfo.Add(secondSlot);
@@ -132,6 +132,37 @@ namespace ArmasCreator.UserData
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
 
             PlayerPrefs.SetString("PName", name);
+        }
+
+        public void UpdateSavePreset(string mapId, QuestInfo questInfo)
+        {
+            if(saveModel.AllSavePresets.Exists(x =>x.MapId == mapId))
+            {
+                var preset = saveModel.AllSavePresets.Find(x => x.MapId == mapId);
+
+                if(preset.Presets.Exists(x =>x.PresetId == questInfo.PresetId))
+                {
+                    var questIndex = preset.Presets.FindIndex(x => x.PresetId == questInfo.PresetId);
+                    preset.Presets[questIndex] = questInfo;
+                }
+                else
+                {
+                    preset.Presets.Add(questInfo);
+                }
+            }
+            else
+            {
+                var questInfoList = new List<QuestInfo>();
+                questInfoList.Add(questInfo);
+
+                saveModel.AllSavePresets.Add(new UserSavePresetModel
+                {
+                    MapId = mapId,
+                    Presets = questInfoList
+                });
+            }
+
+            SaveUserDataToLocal();
         }
     }
 }

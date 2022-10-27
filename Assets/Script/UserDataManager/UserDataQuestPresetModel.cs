@@ -41,6 +41,19 @@ namespace ArmasCreator.UserData
                 SavePresetsDict.Add(savePreset.MapId, presets);
             }
         }
+
+        public void GetAllSavePresetFromMapId(string mapId,out List<QuestInfo> questInfoList)
+        {
+            bool exist = SavePresetsDict.TryGetValue(mapId, out PresetModel presets);
+
+            if (!exist) 
+            {
+                questInfoList = new List<QuestInfo>();
+                return;
+            }
+
+            questInfoList = presets.QuestInfoList;
+        }
     }
 }
     

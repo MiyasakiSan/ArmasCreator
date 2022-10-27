@@ -120,9 +120,34 @@ namespace ArmasCreator.GameData
             Debug.Log(challengesModeConfig);
         }
 
-        public bool TryGetChallengeModeInfo(string mapId, out ChallengeModeModel challengeModeInfo)
+        public void GetAllChallengeMapId(out List<string> mapId )
         {
-            bool exist = challengesModeConfig.TryGetValue(mapId, out challengeModeInfo);
+            mapId = new List<string>();
+
+            foreach(KeyValuePair<string,ChallengeModeModel> challengeInfo in challengesModeConfig)
+            {
+                if(mapId.Contains(challengeInfo.Value.MapID)) { continue; }
+
+                mapId.Add(challengeInfo.Value.MapID);
+            }
+        }
+
+        public void GetAllChallengeInfoFromMapId(string mapId, out List<ChallengeModeModel> challengeInfoList)
+        {
+            challengeInfoList = new List<ChallengeModeModel>();
+
+            foreach (KeyValuePair<string, ChallengeModeModel> challengeInfo in challengesModeConfig)
+            {
+                if (challengeInfo.Value.MapID == mapId)
+                {
+                    challengeInfoList.Add(challengeInfo.Value);
+                }
+            }
+        }
+
+        public bool TryGetSelectedChallengeModeInfo(string challengeId, out ChallengeModeModel challengeModeInfo)
+        {
+            bool exist = challengesModeConfig.TryGetValue(challengeId, out challengeModeInfo);
 
             if (!exist)
             {
