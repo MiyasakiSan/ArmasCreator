@@ -16,7 +16,8 @@ namespace ArmasCreator.Gameplay
             none,
             Town,
             Story,
-            Challenge
+            Challenge,
+            Result
         }
 
         public Gameplays CurrentGameplays;
@@ -48,6 +49,9 @@ namespace ArmasCreator.Gameplay
 
         private QuestInfo currentQuestInfo;
 
+        [SerializeField]
+        private GameObject mockupResultCanvas;
+
         private void Awake()
         {
             SharedContext.Instance.Add(this);
@@ -66,7 +70,10 @@ namespace ArmasCreator.Gameplay
 
         void Update()
         {
-
+            if(Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
+            {
+                EnterGameplayResult();
+            }
         }
 
         public void EnterChallengeStage(QuestInfo questInfo)
@@ -78,11 +85,31 @@ namespace ArmasCreator.Gameplay
             SceneManager.LoadScene(questInfo.SceneName, LoadSceneMode.Single);
         }
 
+        public void EnterGameplayResult()
+        {
+            //TODO : Add something to player
+            CurrentGameplays = Gameplays.Result;
+            Debug.Log("Show Result");
+
+            StartCoroutine(ShowGameResultCoroutine());
+        }
+
+        private IEnumerator ShowGameResultCoroutine()
+        {
+            mockupResultCanvas.SetActive(true);
+
+            yield return new WaitForSeconds(3f);
+
+            mockupResultCanvas.SetActive(false);
+            Dispose();
+            SceneManager.LoadScene("Town", LoadSceneMode.Single);
+        }
+
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
             currentQuestInfo = null;
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
 

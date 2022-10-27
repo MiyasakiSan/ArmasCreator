@@ -44,9 +44,9 @@ namespace ArmasCreator.Gameplay.UI
         private const string constructionSiteId = "cs-cm";
         private const string parkId = "pk-cm";
 
-        private float atkMultiplier;
-        private float speedMultiplier;
-        private float hpMultiplier;
+        private float atkMultiplier = 1.0f;
+        private float speedMultiplier = 1.0f;
+        private float hpMultiplier = 1.0f;
 
         private PresetSlot selectedPresetSlot;
         private string selectedMapId;
@@ -181,6 +181,7 @@ namespace ArmasCreator.Gameplay.UI
 
         private void SetPresetFromMapId(string mapId)
         {
+            selectedMapId = mapId;
             gameDataManager.GetAllChallengeInfoFromMapId(mapId, out List<ChallengeModeModel> challengeInfoList);
             userDataManager.UserData.UserDataQuestPreset.GetAllSavePresetFromMapId(mapId, out List<QuestInfo> questInfoList);
 
@@ -201,7 +202,7 @@ namespace ArmasCreator.Gameplay.UI
                 }
                 else
                 {
-                    if(questInfoList.Count > 0)
+                    if(questInfoList.Count > 0 && localPrestIndex < questInfoList.Count)
                     {
                         var questInfo = questInfoList[localPrestIndex];
                         presetSlot[i].questInfo = questInfo;
@@ -212,15 +213,23 @@ namespace ArmasCreator.Gameplay.UI
                         var questInfo = new QuestInfo(presetId, challengeInfoList[0].SceneName, 1.0f, 1.0f, 1.0f, 1800);
                         presetSlot[i].questInfo = questInfo;
                     }
+
+                    localPrestIndex++;
                 }
 
                 presetSlot[i].PresetInfo += SetCurrentPreset;
+            }
+
+            if(selectedPresetSlot != null)
+            {
+                selectedPresetSlot.PresetButton.onClick?.Invoke();
             }
         }
 
         private void SetCurrentPreset(PresetSlot preset)
         {
             selectedPresetSlot = preset;
+
 
             var questInfo = preset.questInfo;
 
@@ -250,20 +259,18 @@ namespace ArmasCreator.Gameplay.UI
 
         public void SavePresets()
         {
-            bool exist = gameDataManager.TryGetSelectedChallengeModeInfo(selectedPresetSlot.questInfo.PresetId, out ChallengeModeModel challengeInfo);
+            if (selectedPresetSlot == null) { return; }
 
-            if (!exist) 
-            {
-                Debug.LogError("GameData doesn't contain " + selectedPresetSlot.questInfo.PresetId);
-                return; 
-            }
+            if (selectedPresetSlot.Type == PresetSlot.PresetType.Challenge) { return; }
 
             var selectedQuestInfo = selectedPresetSlot.questInfo;
 
 
-            var questInfo = new QuestInfo(selectedQuestInfo.PresetId, challengeInfo.SceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
+            var questInfo = new QuestInfo(selectedQuestInfo.PresetId, selectedQuestInfo.SceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
 
-            userDataManager.UserData.UpdateSavePreset(selectedMapId, questInfo);
+            selectedPresetSlot.questInfo = questInfo;
+
+            userDataManager.UserData.UserDataQuestPreset.SavePreset(selectedMapId, questInfo);
         }
 
         public void StartChallengeQuest()
@@ -272,9 +279,11 @@ namespace ArmasCreator.Gameplay.UI
 
             string sceneName = selectedQuestInfo.SceneName;
 
-            QuestInfo startQuestInfo = new QuestInfo(selectedMapId, sceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
+            QuestInfo startQuestInfo = new QuestInfo(selectedQuestInfo.PresetId, sceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
 
             gameplayController.EnterChallengeStage(startQuestInfo);
+
+            Debug.Log($"=======================  START CHALLENGE : {selectedQuestInfo.PresetId}  =======================");
 
             //TODO : do something
         }

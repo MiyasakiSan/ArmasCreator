@@ -54,6 +54,58 @@ namespace ArmasCreator.UserData
 
             questInfoList = presets.QuestInfoList;
         }
+
+        public void SavePreset(string mapId, QuestInfo questInfo)
+        {
+            bool exist = SavePresetsDict.TryGetValue(mapId, out PresetModel presetModel);
+
+            if (exist)
+            {
+                if(SavePresetsDict[mapId].QuestInfoList.Exists(x => x.PresetId == questInfo.PresetId))
+                {
+                    var questIndex = SavePresetsDict[mapId].QuestInfoList.FindIndex(x => x.PresetId == questInfo.PresetId);
+                    SavePresetsDict[mapId].QuestInfoList[questIndex] = questInfo;
+                }
+                else
+                {
+                    SavePresetsDict[mapId].QuestInfoList.Add(questInfo);
+                }
+            }
+            else
+            {
+                var questInfoList = new List<QuestInfo>();
+                var preset = new PresetModel();
+
+                questInfoList.Add(questInfo);
+
+                preset.QuestInfoList = questInfoList;
+
+                SavePresetsDict.Add(mapId, preset);
+            }
+
+            SavePresetsDict[mapId].QuestInfoList.Sort(SortByPresetId);
+
+            userData.UpdateSavePreset(mapId, questInfo);
+        }
+
+        public int GetIntFromPresetId(string presetId)
+        {
+            foreach(char i in presetId)
+            {
+                if(!int.TryParse(i.ToString(),out int result)) { continue; }
+
+                if( result == 0) { continue; }
+
+                return result;
+            }
+
+            return 0;
+        }
+
+        public int SortByPresetId(QuestInfo q1, QuestInfo q2)
+        {
+            return GetIntFromPresetId(q1.PresetId).CompareTo(GetIntFromPresetId(q2.PresetId));
+        }
     }
 }
     

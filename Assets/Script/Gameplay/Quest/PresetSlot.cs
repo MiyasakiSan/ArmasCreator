@@ -10,8 +10,11 @@ namespace ArmasCreator.Gameplay.UI
     {
         [SerializeField]
         private CanvasGroup presetSlotCanvasGroup;
+
         [SerializeField]
         private Button presetButton;
+        public Button PresetButton => presetButton;
+
         [SerializeField]
         private QuestPanelController questPanelController;
 

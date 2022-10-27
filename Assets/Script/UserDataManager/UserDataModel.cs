@@ -73,7 +73,7 @@ namespace ArmasCreator.UserData
             SaveUserDataToLocal();
         }
 
-        private void LoadUserDataFromLocalData()
+        public void LoadUserDataFromLocalData()
         {
             var jsonString = LocalFileManager.LoadFromPersistentDataPath(UserSaveDataLocal);
 
@@ -161,6 +161,9 @@ namespace ArmasCreator.UserData
                     Presets = questInfoList
                 });
             }
+
+            var savePreset = saveModel.AllSavePresets.Find(x => x.MapId == mapId);
+            savePreset.Presets.Sort(userDataQuestPreset.SortByPresetId);
 
             SaveUserDataToLocal();
         }

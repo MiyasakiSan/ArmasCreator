@@ -121,8 +121,6 @@ namespace ArmasCreator.Gameplay
         {
             if (!other.gameObject.CompareTag("Player")) { return; }
 
-            if (questCanvas.activeSelf) { return; }
-
             if (Input.GetKeyDown(KeyCode.T))
             {
                 ShowQuestCanvas();
