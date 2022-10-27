@@ -12,7 +12,7 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private GameObject presetBar;
 
-        private bool isShowBar = false;
+        private bool isShowBar = true;
 
         private void Awake()
         {

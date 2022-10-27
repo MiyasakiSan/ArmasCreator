@@ -34,6 +34,7 @@ namespace ArmasCreator.Gameplay.UI
         {
             presetButton.onClick.AddListener(() =>
             {
+                questPanelController.OnClickPreset(PresetSlot.PresetType.LocalPreset);
                 OnSelectedPresetSlot();
                 questPanelController.OnClickPreset(presetType);
             });
@@ -41,6 +42,7 @@ namespace ArmasCreator.Gameplay.UI
 
         public void OnSelectedPresetSlot()
         {
+            questPanelController.DeselectAllPresetSlot();
             presetSlotCanvasGroup.alpha = 1;
             PresetInfo?.Invoke(this);
         }

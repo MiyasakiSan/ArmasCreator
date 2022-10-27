@@ -108,13 +108,11 @@ namespace ArmasCreator.Gameplay.UI
             {
                 SetAllAdjustSlotIsCanEdit(true);
             }
-
-            DeselectAllPresetSlot(presetSlot);
         }
 
-        public void DeselectAllPresetSlot(List<PresetSlot> listPresetSlot)
+        public void DeselectAllPresetSlot()
         {
-            foreach (PresetSlot presetSlot in listPresetSlot)
+            foreach (PresetSlot presetSlot in presetSlot)
             {
                 presetSlot.OnDeselectedAdjustSlot();
             }
