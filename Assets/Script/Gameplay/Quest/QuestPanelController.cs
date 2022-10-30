@@ -288,6 +288,11 @@ namespace ArmasCreator.Gameplay.UI
             //TODO : do something
         }
 
+        public void OnDisableQuestPanel()
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 }
 
