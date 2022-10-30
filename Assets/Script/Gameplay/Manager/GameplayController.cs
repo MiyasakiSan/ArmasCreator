@@ -49,9 +49,6 @@ namespace ArmasCreator.Gameplay
 
         private QuestInfo currentQuestInfo;
 
-        [SerializeField]
-        private GameObject mockupResultCanvas;
-
         private void Awake()
         {
             SharedContext.Instance.Add(this);
@@ -96,11 +93,9 @@ namespace ArmasCreator.Gameplay
 
         private IEnumerator ShowGameResultCoroutine()
         {
-            mockupResultCanvas.SetActive(true);
 
             yield return new WaitForSeconds(3f);
 
-            mockupResultCanvas.SetActive(false);
             Dispose();
             SceneManager.LoadScene("Town", LoadSceneMode.Single);
         }
