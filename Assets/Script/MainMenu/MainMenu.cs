@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using ArmasCreator.Utilities;
 using ArmasCreator.UserData;
 using TMPro;
+using ArmasCreator.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public class MainMenu : MonoBehaviour
     public GameObject EnterNameUI;
 
     private UserDataManager userDataManager;
+    private LoadingPopup loadingPopup;
 
     private void Awake()
     {
         userDataManager = SharedContext.Instance.Get<UserDataManager>();
+        loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
     }
 
     public void ExitEnterName()
@@ -28,7 +31,7 @@ public class MainMenu : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(userDataManager.UserData.UserID))
         {
-            SceneManager.LoadScene("Town", LoadSceneMode.Single);
+            loadingPopup.LoadSceneAsync("Town");
             return;
         }
 
@@ -38,7 +41,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetString("PName", Name.text);
         userDataManager.UserData.SetUserID(Name.text);
-        SceneManager.LoadScene("Town", LoadSceneMode.Single);
+        loadingPopup.LoadSceneAsync("Town");
     }
     public void OnClickEncyclopedia()
     {

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using ArmasCreator.Utilities;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using ArmasCreator.UI;
 
 namespace ArmasCreator.GameData
 {
@@ -22,11 +22,6 @@ namespace ArmasCreator.GameData
         private bool isInitialize;
         public bool IsIniialize => isInitialize;
 
-        private float targetValue;
-        private float currentValue;
-        [SerializeField]
-        private Slider loadingSlider;
-
         #region General Data
 
         [GameData("challenges_mode_config")]
@@ -34,6 +29,8 @@ namespace ArmasCreator.GameData
 
         [GameData("game_info")]
         private GameInfoModel gameInfo;
+
+        private LoadingPopup loadingPopup;
 
         #endregion
 
@@ -44,12 +41,8 @@ namespace ArmasCreator.GameData
 
         void Start()
         {
-
-        }
-
-        void Update()
-        {
-
+            loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
+            loadingPopup?.LoadSceneAsync("Mainmenu");
         }
 
         private void StartInitialize()
@@ -57,29 +50,6 @@ namespace ArmasCreator.GameData
             DontDestroyOnLoad(this);
             SharedContext.Instance.Add(this);
             LoadLocalGameConfig();
-            StartCoroutine(LoadScene());
-            
-        }
-
-        IEnumerator LoadScene()
-        {
-            yield return null;
-            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Mainmenu");
-            asyncOperation.allowSceneActivation = false;
-
-            while (!asyncOperation.isDone)
-            {
-                targetValue = asyncOperation.progress / 0.9f;
-                currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.25f * Time.deltaTime);
-                loadingSlider.value = currentValue;
-
-                if (Mathf.Approximately(currentValue, 1))
-                {
-                        asyncOperation.allowSceneActivation = true;
-                }
-
-                yield return null;
-            }
         }
 
         private void LoadLocalGameConfig()
