@@ -29,6 +29,8 @@ namespace ArmasCreator.UserData
         private UserDataQuestPresetModel userDataQuestPreset;
         public UserDataQuestPresetModel UserDataQuestPreset => userDataQuestPreset;
 
+        private UserDataInventoryModel userDataInventory;
+        public UserDataInventoryModel UserDataInventory => userDataInventory;
 
         public const string UserSaveDataLocal = "UserSaveDataLocal";
 
@@ -38,7 +40,8 @@ namespace ArmasCreator.UserData
             //userDataGameProgression = new UserDataGameProgressionModel();
             //userDataGameProgression.Init(userDataManager);
 
-            //userDataInventory = new userDataInventoryModel();  
+            userDataInventory = new UserDataInventoryModel();
+            userDataInventory.Init(this);
 
             userDataQuestPreset = new UserDataQuestPresetModel();
             userDataQuestPreset.Init(this);
@@ -108,6 +111,7 @@ namespace ArmasCreator.UserData
             PlayerPrefs.SetString("PName", userID);
 
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
+            userDataInventory.SetupUserInventory(saveModel);
         }
 
         public void SaveUserDataToLocal()
@@ -130,6 +134,8 @@ namespace ArmasCreator.UserData
             saveModel = new UserSaveDataModel();
             saveModel.UserId = name;
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
+            saveModel.ConsumableItems = new Dictionary<string, int>();
+            saveModel.EquipableItems = new Dictionary<string, bool>();
 
             PlayerPrefs.SetString("PName", name);
         }
