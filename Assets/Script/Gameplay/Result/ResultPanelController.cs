@@ -19,6 +19,12 @@ namespace ArmasCreator.Gameplay.UI
         private TMP_Text bannerText;
         [SerializeField]
         private TMP_Text challengeText;
+        [SerializeField]
+        private TMP_Text damageDealtText;
+        [SerializeField]
+        private TMP_Text damageTakenText;
+        [SerializeField]
+        private TMP_Text itemUsedText;
 
         [Header("RankText")]
         [SerializeField]
@@ -38,24 +44,44 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private TMP_Text rewardText;
 
+        [Header("Button")]
+        [SerializeField]
+        private Button endMissionButton;
+
         private int hour;
         private int minute;
         private int second;
 
         private int rewardAmount;
 
-        public bool IsUseSimulateTime = true;
-        public bool IsSecondSimulateRun = true;
-        public bool IsMinuteSimulateRun = true;
-        public bool IsHourSimulateRun = true;
+        private int damageDealtAmount;
+        private int damagetakenAmount;
+        private int itemUsedAmount;
 
-        public bool IsUseSimulateReward = true;
+
+        private bool IsUseSimulateTime = true;
+        private bool IsSecondSimulateRun = true;
+        private bool IsMinuteSimulateRun = true;
+        private bool IsHourSimulateRun = true;
+        private bool IsUseSimulateReward = true;
+        private bool IsUseSimulateDamageDealt = true;
+        private bool IsUseSimulateDamageTaken = true;
+        private bool IsUseSimulateItemUsed = true;
 
         // Start is called before the first frame update
         void Start()
         {
+            endMissionButton.onClick.AddListener(() =>
+            {
+                OnEndMission();
+            });
+
+            //Test
             SetCompletionTime(10, 30, 20);
-            StartCoroutine(StopSecondSimulate());
+            StopSimulateTime();
+            SetRewardAmount(2500);
+            SetResultData(5000, 3000, 10);
+            //Test
         }
 
         // Update is called once per frame
@@ -85,11 +111,44 @@ namespace ArmasCreator.Gameplay.UI
             {
                 rewardText.text = (Mathf.CeilToInt(Time.time * 20000) % 9999).ToString().PadLeft(4, '0') + "s";
             }
+            else
+            {
+                rewardText.text = rewardAmount.ToString();
+            }
+
+            if(IsUseSimulateDamageDealt)
+            {
+                damageDealtText.text = (Mathf.CeilToInt(Time.time * 20000) % 9999).ToString().PadLeft(4, '0');
+            }
+            else
+            {
+                damageDealtText.text = damageDealtAmount.ToString();
+            }
+
+            if (IsUseSimulateDamageTaken)
+            {
+                damageTakenText.text = (Mathf.CeilToInt(Time.time * 20000) % 9999).ToString().PadLeft(4, '0');
+            }
+            else
+            {
+                damageTakenText.text = damagetakenAmount.ToString();
+            }
+
+            if(IsUseSimulateItemUsed)
+            {
+                itemUsedText.text = (Mathf.CeilToInt(Time.time * 200) % 99).ToString().PadLeft(2, '0');
+            }
+            else
+            {
+                itemUsedText.text = itemUsedAmount.ToString();
+            }
         }
+
+        #region Enumerator Stop Time
 
         IEnumerator StopSecondSimulate()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
             IsSecondSimulateRun = false;
             StartCoroutine(StopMinuteSimulate());
         }
@@ -108,6 +167,37 @@ namespace ArmasCreator.Gameplay.UI
             IsUseSimulateTime = false;
         }
 
+        #endregion
+
+        #region Stop Function
+
+        public void StopSimulateTime()
+        {
+            StartCoroutine(StopSecondSimulate());
+        }
+
+        public void StopSimulateReward()
+        {
+            IsUseSimulateReward = false;
+        }
+
+        public void StopSimulateDamageDealt()
+        {
+            IsUseSimulateDamageDealt = false;
+        }
+
+        public void StopSimulateDamageTaken()
+        {
+            IsUseSimulateDamageTaken = false;
+        }
+
+        public void StopSimulateItemUsed()
+        {
+            IsUseSimulateItemUsed = false;
+        }
+
+        #endregion
+
         public void SetBossImage(Sprite newBossImage, Sprite newBannerImage)
         {
             bannerImage.sprite = newBannerImage;
@@ -117,6 +207,11 @@ namespace ArmasCreator.Gameplay.UI
         public void SetChallengeText(string challengeName)
         {
             challengeText.text = challengeName;
+        }
+
+        public void SetBannerText(string bannerName)
+        {
+            bannerText.text = bannerName;
         }
 
         public void SetRank(string newDealtRankText, string newTakenRankText, string newItemRankText, string newFinalRankText)
@@ -137,6 +232,18 @@ namespace ArmasCreator.Gameplay.UI
         public void SetRewardAmount(int newReward)
         {
             rewardAmount = newReward;
+        }
+
+        public void SetResultData(int newDamageDealt, int newDamageTaken, int newItemUsed)
+        {
+            damageDealtAmount = newDamageDealt;
+            damagetakenAmount = newDamageTaken;
+            itemUsedAmount = newItemUsed;
+        }
+
+        public void OnEndMission()
+        {
+
         }
     }
 }

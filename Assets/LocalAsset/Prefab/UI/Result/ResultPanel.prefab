@@ -2916,18 +2916,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bannerImage: {fileID: 2738980237999305430}
-  bossImage: {fileID: 0}
+  bossImage: {fileID: 2738980238520601131}
   bannerText: {fileID: 2738980238219647358}
   challengeText: {fileID: 2738980237334000042}
+  damageDealtText: {fileID: 2738980238183491375}
+  damageTakenText: {fileID: 2738980238567716828}
+  itemUsedText: {fileID: 2738980236942678325}
   dealtRankText: {fileID: 2738980237776320840}
   takenRankText: {fileID: 2738980237874639299}
   itemRankText: {fileID: 2738980237592991945}
   finalRankText: {fileID: 2738980237521768630}
   completionTimeText: {fileID: 2738980238667868241}
   rewardText: {fileID: 2738980238531144475}
-  isSecondSimulateRun: 1
-  isMinuteSimulateRun: 1
-  isHourSimulateRun: 1
+  endMissionButton: {fileID: 2738980236891102935}
 --- !u!1 &2738980238454106301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,7 +3153,7 @@ GameObject:
   - component: {fileID: 2738980238520601130}
   - component: {fileID: 2738980238520601131}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BossImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -568,9 +568,9 @@ Canvas:
   m_GameObject: {fileID: 395061786}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1456617154}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -670,8 +670,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410313782}
-  m_LocalRotation: {x: 0.116545536, y: -0.000000017615065, z: 0.0000000020670432,
-    w: 0.99318534}
+  m_LocalRotation: {x: 0.116545536, y: 0.00000001761507, z: -0.0000000020670439, w: 0.99318534}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1038,7 +1037,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456617152}
-  m_LocalRotation: {x: 0.13454418, y: 0.00000001906294, z: -0.0000000025881266, w: 0.9909076}
+  m_LocalRotation: {x: 0.13454418, y: 0.000000019062949, z: -0.0000000025881928, w: 0.9909076}
   m_LocalPosition: {x: 2.99, y: 1.32, z: -4.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1746,6 +1745,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1580324032630434326, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1456617154}
+    - target: {fileID: 1580324032630434326, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1580324032630434326, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1580324033263377691, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1949,11 +1963,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2738980238520601129, guid: f4ad43c64334c95448271e362f696600,
-        type: 3}
-      propertyPath: m_Name
-      value: BossImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ad43c64334c95448271e362f696600, type: 3}
