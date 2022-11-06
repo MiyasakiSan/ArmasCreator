@@ -51,6 +51,9 @@ namespace ArmasCreator.Gameplay.UI
         private PresetSlot selectedPresetSlot;
         private string selectedMapId;
 
+        [SerializeField]
+        private GameObject questCanvas;
+
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -282,6 +285,8 @@ namespace ArmasCreator.Gameplay.UI
             QuestInfo startQuestInfo = new QuestInfo(selectedQuestInfo.PresetId, sceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
 
             gameplayController.EnterChallengeStage(startQuestInfo);
+
+            //questCanvas.SetActive(false);
 
             Debug.Log($"=======================  START CHALLENGE : {selectedQuestInfo.PresetId}  =======================");
 

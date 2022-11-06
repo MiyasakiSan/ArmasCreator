@@ -6,6 +6,7 @@ using ArmasCreator.Utilities;
 using UnityEngine;
 using ArmasCreator.GameMode;
 using UnityEngine.SceneManagement;
+using ArmasCreator.UI;
 
 namespace ArmasCreator.Gameplay
 {
@@ -46,11 +47,9 @@ namespace ArmasCreator.Gameplay
 
         private GameModeController gameModeController;
         private GameDataManager gameDataManager;
+        private LoadingPopup loadingPopup;
 
         private QuestInfo currentQuestInfo;
-
-        [SerializeField]
-        private GameObject mockupResultCanvas;
 
         private void Awake()
         {
@@ -61,6 +60,7 @@ namespace ArmasCreator.Gameplay
 
             gameModeController = SharedContext.Instance.Get<GameModeController>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+            loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
         }
 
         void Start()
@@ -82,7 +82,7 @@ namespace ArmasCreator.Gameplay
 
             currentQuestInfo = questInfo;
 
-            SceneManager.LoadScene(questInfo.SceneName, LoadSceneMode.Single);
+            loadingPopup.LoadSceneAsync(questInfo.SceneName);
         }
 
         public void EnterGameplayResult()
@@ -96,13 +96,10 @@ namespace ArmasCreator.Gameplay
 
         private IEnumerator ShowGameResultCoroutine()
         {
-            mockupResultCanvas.SetActive(true);
-
             yield return new WaitForSeconds(3f);
 
-            mockupResultCanvas.SetActive(false);
             Dispose();
-            SceneManager.LoadScene("Town", LoadSceneMode.Single);
+            loadingPopup.LoadSceneAsync("Town");
         }
 
         private void Dispose()
