@@ -9,6 +9,9 @@ namespace ArmasCreator.GameData
     [Serializable]
     public class ChallengeModeModel 
     {
+        [JsonProperty("challenge_id")]
+        public string ChallengeID;
+
         [JsonProperty("map_id")]
         public string MapID;
 

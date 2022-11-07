@@ -54,6 +54,10 @@ namespace ArmasCreator.Gameplay
             {
                 ShowMulitplayerPanel();
             }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                HideMultiplayerPanel();
+            }
         }
     }
 }

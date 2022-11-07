@@ -10,12 +10,17 @@ namespace ArmasCreator.Gameplay.UI
     {
         [SerializeField]
         private CanvasGroup presetSlotCanvasGroup;
+
         [SerializeField]
         private Button presetButton;
+        public Button PresetButton => presetButton;
+
         [SerializeField]
         private QuestPanelController questPanelController;
 
-        public Action PresetId;
+        public Action<PresetSlot> PresetInfo;
+
+        public QuestInfo questInfo;
 
         public enum PresetType
         {
@@ -26,19 +31,23 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private PresetType presetType;
 
+        public PresetType Type => presetType;
+
         private void Awake()
         {
             presetButton.onClick.AddListener(() =>
             {
-                questPanelController.OnClickPreset(presetType);
+                questPanelController.OnClickPreset(PresetSlot.PresetType.LocalPreset);
                 OnSelectedPresetSlot();
+                questPanelController.OnClickPreset(presetType);
             });
         }
 
         public void OnSelectedPresetSlot()
         {
+            questPanelController.DeselectAllPresetSlot();
             presetSlotCanvasGroup.alpha = 1;
-            PresetId?.Invoke();
+            PresetInfo?.Invoke(this);
         }
 
         public void OnDeselectedAdjustSlot()

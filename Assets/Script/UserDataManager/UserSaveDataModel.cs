@@ -14,6 +14,10 @@ namespace ArmasCreator.UserData
         public int Coins;
 
         public List<UserSavePresetModel> AllSavePresets = new List<UserSavePresetModel>();
+
+        public Dictionary<string, int> ConsumableItems = new Dictionary<string, int>();
+
+        public Dictionary<string, bool> EquipableItems = new Dictionary<string, bool>();
     }
 
     public class UserSavePresetModel

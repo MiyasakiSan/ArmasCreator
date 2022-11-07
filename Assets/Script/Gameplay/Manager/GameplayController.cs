@@ -6,6 +6,7 @@ using ArmasCreator.Utilities;
 using UnityEngine;
 using ArmasCreator.GameMode;
 using UnityEngine.SceneManagement;
+using ArmasCreator.UI;
 
 namespace ArmasCreator.Gameplay
 {
@@ -16,7 +17,8 @@ namespace ArmasCreator.Gameplay
             none,
             Town,
             Story,
-            Challenge
+            Challenge,
+            Result
         }
 
         public Gameplays CurrentGameplays;
@@ -45,6 +47,7 @@ namespace ArmasCreator.Gameplay
 
         private GameModeController gameModeController;
         private GameDataManager gameDataManager;
+        private LoadingPopup loadingPopup;
 
         private QuestInfo currentQuestInfo;
 
@@ -57,6 +60,7 @@ namespace ArmasCreator.Gameplay
 
             gameModeController = SharedContext.Instance.Get<GameModeController>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+            loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
         }
 
         void Start()
@@ -66,7 +70,10 @@ namespace ArmasCreator.Gameplay
 
         void Update()
         {
-
+            if(Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
+            {
+                EnterGameplayResult();
+            }
         }
 
         public void EnterChallengeStage(QuestInfo questInfo)
@@ -75,14 +82,31 @@ namespace ArmasCreator.Gameplay
 
             currentQuestInfo = questInfo;
 
-            SceneManager.LoadScene(questInfo.SceneName, LoadSceneMode.Single);
+            loadingPopup.LoadSceneAsync(questInfo.SceneName);
+        }
+
+        public void EnterGameplayResult()
+        {
+            //TODO : Add something to player
+            CurrentGameplays = Gameplays.Result;
+            Debug.Log("Show Result");
+
+            StartCoroutine(ShowGameResultCoroutine());
+        }
+
+        private IEnumerator ShowGameResultCoroutine()
+        {
+            yield return new WaitForSeconds(3f);
+
+            Dispose();
+            loadingPopup.LoadSceneAsync("Town");
         }
 
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
             currentQuestInfo = null;
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
 

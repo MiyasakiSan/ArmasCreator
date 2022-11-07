@@ -141,7 +141,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     public void stopReduceStamina()
     {
-        if(CurrentStamina >= 0)
+        if(CurrentStamina >= 0 && staminaReduceOverTime != null)
         {
             StopCoroutine(staminaReduceOverTime);
         }
@@ -320,8 +320,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             SetupVariable();
         }
-
-        Debug.LogError(isSinglePlayer);
 
         if (isSinglePlayer)
         {

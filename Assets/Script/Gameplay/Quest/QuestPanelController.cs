@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ArmasCreator.Gameplay;
+using ArmasCreator.GameData;
+using ArmasCreator.UserData;
+using ArmasCreator.Utilities;
+using ArmasCreator.GameMode;
 using System;
 
 namespace ArmasCreator.Gameplay.UI
@@ -25,19 +30,54 @@ namespace ArmasCreator.Gameplay.UI
         [Header("PresetSlot")]
         [SerializeField]
         private List<PresetSlot> presetSlot;
+
+        [SerializeField]
+        private OnTriggerEvent questBoardCollider;
+
+        private GameDataManager gameDataManager;
+
+        private UserDataManager userDataManager;
+
+        private GameplayController gameplayController;
+
+        private List<string> mapIds;
+        private const string constructionSiteId = "cs-cm";
+        private const string parkId = "pk-cm";
+
+        private float atkMultiplier = 1.0f;
+        private float speedMultiplier = 1.0f;
+        private float hpMultiplier = 1.0f;
+
+        private PresetSlot selectedPresetSlot;
+        private string selectedMapId;
+
+        [SerializeField]
+        private GameObject questCanvas;
+
+        private void Awake()
+        {
+            gameplayController = SharedContext.Instance.Get<GameplayController>();
+            userDataManager = SharedContext.Instance.Get<UserDataManager>();
+            gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             DeselectAllBanner();
 
+            LoadChallengeModeConfig();
             //TODO: Load Json data
-            SetMapId("JsonData");
         }
 
-        // Update is called once per frame
-        void Update()
+        private void LoadChallengeModeConfig()
         {
+            gameDataManager.GetAllChallengeMapId(out List<string> mapIds);
 
+            this.mapIds = mapIds;
+
+            SetBannerMapId(mapIds);
+            SetupDifficultySlot();
         }
 
         public void OnClickBanner()
@@ -71,13 +111,11 @@ namespace ArmasCreator.Gameplay.UI
             {
                 SetAllAdjustSlotIsCanEdit(true);
             }
-
-            DeselectAllPresetSlot(presetSlot);
         }
 
-        public void DeselectAllPresetSlot(List<PresetSlot> listPresetSlot)
+        public void DeselectAllPresetSlot()
         {
-            foreach (PresetSlot presetSlot in listPresetSlot)
+            foreach (PresetSlot presetSlot in presetSlot)
             {
                 presetSlot.OnDeselectedAdjustSlot();
             }
@@ -117,13 +155,149 @@ namespace ArmasCreator.Gameplay.UI
             }
         }
 
-        public void SetMapId(string mapId)
+        private void SetBannerMapId(List<string> mapIds)
         {
-            foreach (BannerSlot bannerSlot in bannerList)
+            for(int i = 0; i < bannerList.Count; i++)
             {
-                bannerSlot.SetMapId(mapId);
+                bannerList[i].SetMapId(mapIds[i]);
+                bannerList[i].BannerMapId += SetPresetFromMapId;
             }
         }
+
+        private void SetupDifficultySlot()
+        {
+            foreach(var slot in attackDifficultySlot)
+            {
+                slot.DifficultyLevel += SetCurrentATKMultiplier;
+            }
+
+            foreach (var slot in healthDifficultySlot)
+            {
+                slot.DifficultyLevel += SetCurrentHpMultiplier;
+            }
+
+            foreach (var slot in speedDifficultySlot)
+            {
+                slot.DifficultyLevel += SetCurrentSpeedMultiplier;
+            }
+        }
+
+        private void SetPresetFromMapId(string mapId)
+        {
+            selectedMapId = mapId;
+            gameDataManager.GetAllChallengeInfoFromMapId(mapId, out List<ChallengeModeModel> challengeInfoList);
+            userDataManager.UserData.UserDataQuestPreset.GetAllSavePresetFromMapId(mapId, out List<QuestInfo> questInfoList);
+
+            int localPrestIndex = 0;
+
+            for(int i =0; i< presetSlot.Count; i++)
+            {
+                if(presetSlot[i].Type == PresetSlot.PresetType.Challenge)
+                {
+                    var challengeInfo = challengeInfoList[i];
+                    var questInfo = new QuestInfo(challengeInfo.ChallengeID,
+                                                  challengeInfo.SceneName,
+                                                  challengeInfo.DefaultAtk,
+                                                  challengeInfo.DefaultSpeed,
+                                                  challengeInfo.DefaultHp,
+                                                  challengeInfo.Duration);
+                    presetSlot[i].questInfo = questInfo;
+                }
+                else
+                {
+                    if(questInfoList.Count > 0 && localPrestIndex < questInfoList.Count)
+                    {
+                        var questInfo = questInfoList[localPrestIndex];
+                        presetSlot[i].questInfo = questInfo;
+                    }
+                    else
+                    {
+                        string presetId = $"{mapId}-lp-0{localPrestIndex + 1}";
+                        var questInfo = new QuestInfo(presetId, challengeInfoList[0].SceneName, 1.0f, 1.0f, 1.0f, 1800);
+                        presetSlot[i].questInfo = questInfo;
+                    }
+
+                    localPrestIndex++;
+                }
+
+                presetSlot[i].PresetInfo += SetCurrentPreset;
+            }
+
+            if(selectedPresetSlot != null)
+            {
+                selectedPresetSlot.PresetButton.onClick?.Invoke();
+            }
+        }
+
+        private void SetCurrentPreset(PresetSlot preset)
+        {
+            selectedPresetSlot = preset;
+
+
+            var questInfo = preset.questInfo;
+
+            var atkSlot = attackDifficultySlot.Find(x => x.Multiplier == questInfo.InitATK);
+            var hpSlot = healthDifficultySlot.Find(x => x.Multiplier == questInfo.InitHp);
+            var spdSlot = speedDifficultySlot.Find(x => x.Multiplier == questInfo.InitSpeed);
+
+            atkSlot.AdjustButton.onClick?.Invoke();
+            hpSlot.AdjustButton.onClick?.Invoke();
+            spdSlot.AdjustButton.onClick?.Invoke();
+        }
+
+        private void SetCurrentATKMultiplier(float multiplier)
+        {
+            atkMultiplier = multiplier;
+        }
+
+        private void SetCurrentHpMultiplier(float multiplier)
+        {
+            hpMultiplier = multiplier;
+        }
+
+        private void SetCurrentSpeedMultiplier(float multiplier)
+        {
+            speedMultiplier = multiplier;
+        }
+
+        public void SavePresets()
+        {
+            if (selectedPresetSlot == null) { return; }
+
+            if (selectedPresetSlot.Type == PresetSlot.PresetType.Challenge) { return; }
+
+            var selectedQuestInfo = selectedPresetSlot.questInfo;
+
+
+            var questInfo = new QuestInfo(selectedQuestInfo.PresetId, selectedQuestInfo.SceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
+
+            selectedPresetSlot.questInfo = questInfo;
+
+            userDataManager.UserData.UserDataQuestPreset.SavePreset(selectedMapId, questInfo);
+        }
+
+        public void StartChallengeQuest()
+        {
+            var selectedQuestInfo = selectedPresetSlot.questInfo;
+
+            string sceneName = selectedQuestInfo.SceneName;
+
+            QuestInfo startQuestInfo = new QuestInfo(selectedQuestInfo.PresetId, sceneName, atkMultiplier, speedMultiplier, hpMultiplier, selectedQuestInfo.Duration);
+
+            gameplayController.EnterChallengeStage(startQuestInfo);
+
+            //questCanvas.SetActive(false);
+
+            Debug.Log($"=======================  START CHALLENGE : {selectedQuestInfo.PresetId}  =======================");
+
+            //TODO : do something
+        }
+
+        public void OnDisableQuestPanel()
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 }
 

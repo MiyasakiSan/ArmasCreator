@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using ArmasCreator.Utilities;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using ArmasCreator.UI;
 
 namespace ArmasCreator.GameData
 {
@@ -22,18 +22,21 @@ namespace ArmasCreator.GameData
         private bool isInitialize;
         public bool IsIniialize => isInitialize;
 
-        private float targetValue;
-        private float currentValue;
-        [SerializeField]
-        private Slider loadingSlider;
-
         #region General Data
 
         [GameData("challenges_mode_config")]
         private Dictionary<string, ChallengeModeModel> challengesModeConfig;
 
+        [GameData("consumable_items")]
+        private Dictionary<string, ConsumeableItemModel> consumeableitemInfos;
+
+        [GameData("equipable_items")]
+        private Dictionary<string, EquipableItemModel> equipableitemInfos;
+
         [GameData("game_info")]
         private GameInfoModel gameInfo;
+
+        private LoadingPopup loadingPopup;
 
         #endregion
 
@@ -44,12 +47,8 @@ namespace ArmasCreator.GameData
 
         void Start()
         {
-
-        }
-
-        void Update()
-        {
-
+            loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
+            loadingPopup?.LoadSceneAsync("Mainmenu");
         }
 
         private void StartInitialize()
@@ -57,29 +56,6 @@ namespace ArmasCreator.GameData
             DontDestroyOnLoad(this);
             SharedContext.Instance.Add(this);
             LoadLocalGameConfig();
-            StartCoroutine(LoadScene());
-            
-        }
-
-        IEnumerator LoadScene()
-        {
-            yield return null;
-            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Mainmenu");
-            asyncOperation.allowSceneActivation = false;
-
-            while (!asyncOperation.isDone)
-            {
-                targetValue = asyncOperation.progress / 0.9f;
-                currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.25f * Time.deltaTime);
-                loadingSlider.value = currentValue;
-
-                if (Mathf.Approximately(currentValue, 1))
-                {
-                        asyncOperation.allowSceneActivation = true;
-                }
-
-                yield return null;
-            }
         }
 
         private void LoadLocalGameConfig()
@@ -120,9 +96,34 @@ namespace ArmasCreator.GameData
             Debug.Log(challengesModeConfig);
         }
 
-        public bool TryGetChallengeModeInfo(string mapId, out ChallengeModeModel challengeModeInfo)
+        public void GetAllChallengeMapId(out List<string> mapId )
         {
-            bool exist = challengesModeConfig.TryGetValue(mapId, out challengeModeInfo);
+            mapId = new List<string>();
+
+            foreach(KeyValuePair<string,ChallengeModeModel> challengeInfo in challengesModeConfig)
+            {
+                if(mapId.Contains(challengeInfo.Value.MapID)) { continue; }
+
+                mapId.Add(challengeInfo.Value.MapID);
+            }
+        }
+
+        public void GetAllChallengeInfoFromMapId(string mapId, out List<ChallengeModeModel> challengeInfoList)
+        {
+            challengeInfoList = new List<ChallengeModeModel>();
+
+            foreach (KeyValuePair<string, ChallengeModeModel> challengeInfo in challengesModeConfig)
+            {
+                if (challengeInfo.Value.MapID == mapId)
+                {
+                    challengeInfoList.Add(challengeInfo.Value);
+                }
+            }
+        }
+
+        public bool TryGetSelectedChallengeModeInfo(string challengeId, out ChallengeModeModel challengeModeInfo)
+        {
+            bool exist = challengesModeConfig.TryGetValue(challengeId, out challengeModeInfo);
 
             if (!exist)
             {

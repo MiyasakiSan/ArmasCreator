@@ -29,6 +29,8 @@ namespace ArmasCreator.UserData
         private UserDataQuestPresetModel userDataQuestPreset;
         public UserDataQuestPresetModel UserDataQuestPreset => userDataQuestPreset;
 
+        private UserDataInventoryModel userDataInventory;
+        public UserDataInventoryModel UserDataInventory => userDataInventory;
 
         public const string UserSaveDataLocal = "UserSaveDataLocal";
 
@@ -38,7 +40,8 @@ namespace ArmasCreator.UserData
             //userDataGameProgression = new UserDataGameProgressionModel();
             //userDataGameProgression.Init(userDataManager);
 
-            //userDataInventory = new userDataInventoryModel();  
+            userDataInventory = new UserDataInventoryModel();
+            userDataInventory.Init(this);
 
             userDataQuestPreset = new UserDataQuestPresetModel();
             userDataQuestPreset.Init(this);
@@ -52,9 +55,9 @@ namespace ArmasCreator.UserData
             var testPreset = new List<UserSavePresetModel>();
             var testQuestInfo = new List<QuestInfo>();
 
-            var firstSlot = new QuestInfo("Challenge1", 1.5f, 1.0f, 0.5f, 3000);
-            var secondSlot = new QuestInfo("Challenge2", 0.5f, 1.0f, 1.0f, 3000);
-            var thirdSlot = new QuestInfo("Challenge3", 1.0f, 1.5f, 0.5f, 3000);
+            var firstSlot = new QuestInfo("Challenge1", "testMap", 1.5f, 1.0f, 0.5f, 3000);
+            var secondSlot = new QuestInfo("Challenge2", "testMap", 0.5f, 1.0f, 1.0f, 3000);
+            var thirdSlot = new QuestInfo("Challenge3", "testMap", 1.0f, 1.5f, 0.5f, 3000);
 
             testQuestInfo.Add(firstSlot);
             testQuestInfo.Add(secondSlot);
@@ -73,7 +76,7 @@ namespace ArmasCreator.UserData
             SaveUserDataToLocal();
         }
 
-        private void LoadUserDataFromLocalData()
+        public void LoadUserDataFromLocalData()
         {
             var jsonString = LocalFileManager.LoadFromPersistentDataPath(UserSaveDataLocal);
 
@@ -108,6 +111,7 @@ namespace ArmasCreator.UserData
             PlayerPrefs.SetString("PName", userID);
 
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
+            userDataInventory.SetupUserInventory(saveModel);
         }
 
         public void SaveUserDataToLocal()
@@ -130,8 +134,44 @@ namespace ArmasCreator.UserData
             saveModel = new UserSaveDataModel();
             saveModel.UserId = name;
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
+            saveModel.ConsumableItems = new Dictionary<string, int>();
+            saveModel.EquipableItems = new Dictionary<string, bool>();
 
             PlayerPrefs.SetString("PName", name);
+        }
+
+        public void UpdateSavePreset(string mapId, QuestInfo questInfo)
+        {
+            if(saveModel.AllSavePresets.Exists(x =>x.MapId == mapId))
+            {
+                var preset = saveModel.AllSavePresets.Find(x => x.MapId == mapId);
+
+                if(preset.Presets.Exists(x =>x.PresetId == questInfo.PresetId))
+                {
+                    var questIndex = preset.Presets.FindIndex(x => x.PresetId == questInfo.PresetId);
+                    preset.Presets[questIndex] = questInfo;
+                }
+                else
+                {
+                    preset.Presets.Add(questInfo);
+                }
+            }
+            else
+            {
+                var questInfoList = new List<QuestInfo>();
+                questInfoList.Add(questInfo);
+
+                saveModel.AllSavePresets.Add(new UserSavePresetModel
+                {
+                    MapId = mapId,
+                    Presets = questInfoList
+                });
+            }
+
+            var savePreset = saveModel.AllSavePresets.Find(x => x.MapId == mapId);
+            savePreset.Presets.Sort(userDataQuestPreset.SortByPresetId);
+
+            SaveUserDataToLocal();
         }
     }
 }

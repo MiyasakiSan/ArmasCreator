@@ -12,12 +12,15 @@ namespace ArmasCreator.Gameplay.UI
         private GameObject selectedBGGameObject;
         [SerializeField]
         private CanvasGroup adjustSlotCanvasGroup;
+
         [SerializeField]
         private Button adjustButton;
+        public Button AdjustButton => adjustButton;
+
         [SerializeField]
         private QuestPanelController questPanelController;
 
-        public Action<int> DifficultyLevel;
+        public Action<float> DifficultyLevel;
         
         public enum SlotType
         {
@@ -30,7 +33,8 @@ namespace ArmasCreator.Gameplay.UI
 
         [SerializeField]
         private SlotType slotType;
-        // Start is called before the first frame update
+
+        public float Multiplier;
 
         private void Awake()
         {
@@ -47,7 +51,7 @@ namespace ArmasCreator.Gameplay.UI
             {
                 selectedBGGameObject.SetActive(true);
                 adjustSlotCanvasGroup.alpha = 1;
-                DifficultyLevel?.Invoke(1);
+                DifficultyLevel?.Invoke(Multiplier);
             }
         }
 
