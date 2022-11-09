@@ -70,7 +70,7 @@ namespace ArmasCreator.Gameplay
 
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
+            if(Input.GetKeyUp(KeyCode.LeftShift) && Input.GetKeyUp(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
             {
                 EnterGameplayResult();
             }
@@ -89,6 +89,7 @@ namespace ArmasCreator.Gameplay
         {
             //TODO : Add something to player
             CurrentGameplays = Gameplays.Result;
+            OnStateResult?.Invoke();
             Debug.Log("Show Result");
 
             StartCoroutine(ShowGameResultCoroutine());

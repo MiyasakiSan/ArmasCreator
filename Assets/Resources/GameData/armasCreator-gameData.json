@@ -74,5 +74,173 @@
             "B" : 300,
             "C" : 500
         }
+    },
+    "consumable_items" :
+    {
+        "bandage": 
+        {
+            "id": "bandage",
+            "item_type": "Consumable",
+            "sub_type": "Health",
+            "sell_price": 75,
+            "buy_value": 150,
+            "asset": "bandage",
+            "icon": "bandage_icon",
+            "atlas_icon": "AtlasConsumableItemIcons",
+            "consume_percent": 30.0
+        },
+        "medicine": 
+        {
+            "id": "medicine",
+            "item_type": "Consumable",
+            "sub_type": "Health",
+            "sell_price": 150,
+            "buy_value": 300,
+            "asset": "medicine",
+            "icon": "medicine_icon",
+            "atlas_icon": "AtlasConsumableItemIcons",
+            "consume_percent": 60.0
+        },
+        "first_aid": 
+        {
+            "id": "first_aid",
+            "item_type": "Consumable",
+            "sub_type": "Health",
+            "sell_price": 350,
+            "buy_value": 700,
+            "asset": "first_aid",
+            "icon": "first_aid_icon",
+            "atlas_icon": "AtlasConsumableItemIcons",
+            "consume_percent": 100.0
+        },
+        "cola_drink": 
+        {
+            "id": "cola_drink",
+            "item_type": "Consumable",
+            "sub_type": "Stamina",
+            "sell_price": 100,
+            "buy_value": 200,
+            "asset": "cola_drink",
+            "icon": "cola_drink_icon",
+            "atlas_icon": "AtlasConsumableItemIcons",
+            "consume_percent": 30.0
+        },
+        "energy_drink": 
+        {
+            "id": "energy_drink",
+            "item_type": "Consumable",
+            "sub_type": "Stamina",
+            "sell_price": 200,
+            "buy_value": 400,
+            "asset": "energy_drink",
+            "icon": "energy_drink_icon",
+            "atlas_icon": "AtlasConsumableItemIcons",
+            "consume_percent": 60.0
+        },
+        "adrenaline": 
+        {
+            "id": "adrenaline",
+            "item_type": "Consumable",
+            "sub_type": "Stamina",
+            "sell_price": 400,
+            "buy_value": 800,
+            "asset": "adrenaline",
+            "icon": "adrenaline_icon",
+            "atlas_icon": "AtlasConsumableItemIcons",
+            "consume_percent": 100.0
+        }
+    },
+    "equipable_items" :
+    {
+        "init_helmet": 
+        {
+            "id": "init_helmet",
+            "item_type": "Equipable",
+            "sub_type": "Helmet",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_helmet",
+            "icon": "init_helmet_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "init_shirt": 
+        {
+            "id": "init_shirt",
+            "item_type": "Equipable",
+            "sub_type": "Shirt",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_shirt",
+            "icon": "init_shirt_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 10.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "init_glove": 
+        {
+            "id": "init_glove",
+            "item_type": "Equipable",
+            "sub_type": "Glove",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_glove",
+            "icon": "init_glove_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 10.0,
+            "def": 2.0,
+            "vit": 20.0,
+            "crit": 5.0
+        },
+        "init_pant": 
+        {
+            "id": "init_pant",
+            "item_type": "Equipable",
+            "sub_type": "Pant",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_pant",
+            "icon": "init_pant_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "init_shoes": 
+        {
+            "id": "init_shoes",
+            "item_type": "Equipable",
+            "sub_type": "Shoes",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_shoes",
+            "icon": "init_shoes_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "init_gunblade": 
+        {
+            "id": "init_gunblade",
+            "item_type": "Equipable",
+            "sub_type": "Weapon",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_gunblade",
+            "icon": "init_gunblade_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 0,
+            "vit": 0,
+            "crit": 10.0
+        }
     }
 }

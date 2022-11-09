@@ -27,6 +27,12 @@ namespace ArmasCreator.GameData
         [GameData("challenges_mode_config")]
         private Dictionary<string, ChallengeModeModel> challengesModeConfig;
 
+        [GameData("consumable_items")]
+        private Dictionary<string, ConsumeableItemModel> consumeableitemInfos;
+
+        [GameData("equipable_items")]
+        private Dictionary<string, EquipableItemModel> equipableitemInfos;
+
         [GameData("game_info")]
         private GameInfoModel gameInfo;
 
