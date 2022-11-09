@@ -48,9 +48,9 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private Button endMissionButton;
 
-        private int hour;
         private int minute;
         private int second;
+        private int milliSecond;
 
         private int rewardAmount;
 
@@ -58,15 +58,6 @@ namespace ArmasCreator.Gameplay.UI
         private int damagetakenAmount;
         private int itemUsedAmount;
 
-
-        private bool IsUseSimulateTime = true;
-        private bool IsSecondSimulateRun = true;
-        private bool IsMinuteSimulateRun = true;
-        private bool IsHourSimulateRun = true;
-        private bool IsUseSimulateReward = true;
-        private bool IsUseSimulateDamageDealt = true;
-        private bool IsUseSimulateDamageTaken = true;
-        private bool IsUseSimulateItemUsed = true;
 
         // Start is called before the first frame update
         void Start()
@@ -77,127 +68,128 @@ namespace ArmasCreator.Gameplay.UI
             });
 
             //Test
-            SetCompletionTime(10, 30, 20);
-            StopSimulateTime();
+            SetCompletionTime(10, 30, 99);
             SetRewardAmount(2500);
             SetResultData(5000, 3000, 10);
             //Test
+            
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (IsUseSimulateTime)
+            if(Input.GetKeyDown(KeyCode.A))
             {
-                if (IsSecondSimulateRun)
-                {
-                    completionTimeText.text = (Mathf.CeilToInt(Time.time * 30) % 99).ToString().PadLeft(2, '0') + ":" + (Mathf.CeilToInt(Time.time * 30) % 60).ToString().PadLeft(2, '0') + ":" + (Mathf.CeilToInt(Time.time * 30) % 60).ToString().PadLeft(2, '0') + "'";
-                }
-                else if (IsMinuteSimulateRun)
-                {
-                    completionTimeText.text = (Mathf.CeilToInt(Time.time * 30) % 99).ToString().PadLeft(2, '0') + ":" + (Mathf.CeilToInt(Time.time * 30) % 60).ToString().PadLeft(2, '0') + ":" + second + "'";
-                }
-                else if (IsHourSimulateRun)
-                {
-                    completionTimeText.text = (Mathf.CeilToInt(Time.time * 30) % 99).ToString().PadLeft(2, '0') + ":" + minute + ":" + second + "'";
-                }
-                else
-                {
-                    completionTimeText.text = hour + ":" + minute + ":" + second + "'";
-                }
+                StartCoroutine(CountDamageDealt());
             }
-
-            if(IsUseSimulateReward)
+            if(Input.GetKeyDown(KeyCode.S))
             {
-                rewardText.text = (Mathf.CeilToInt(Time.time * 20000) % 9999).ToString().PadLeft(4, '0') + "s";
+                StartCoroutine(CountDamageTaken());
             }
-            else
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                rewardText.text = rewardAmount.ToString();
+                StartCoroutine(CountItemUsed());
             }
-
-            if(IsUseSimulateDamageDealt)
+            if(Input.GetKeyDown(KeyCode.Z))
             {
-                damageDealtText.text = (Mathf.CeilToInt(Time.time * 20000) % 9999).ToString().PadLeft(4, '0');
-            }
-            else
-            {
-                damageDealtText.text = damageDealtAmount.ToString();
-            }
-
-            if (IsUseSimulateDamageTaken)
-            {
-                damageTakenText.text = (Mathf.CeilToInt(Time.time * 20000) % 9999).ToString().PadLeft(4, '0');
-            }
-            else
-            {
-                damageTakenText.text = damagetakenAmount.ToString();
-            }
-
-            if(IsUseSimulateItemUsed)
-            {
-                itemUsedText.text = (Mathf.CeilToInt(Time.time * 200) % 99).ToString().PadLeft(2, '0');
-            }
-            else
-            {
-                itemUsedText.text = itemUsedAmount.ToString();
+                StartCoroutine(CountReward());
             }
         }
-
-        #region Enumerator Stop Time
-
-        IEnumerator StopSecondSimulate()
+        
+        IEnumerator CountMilliSecondTime()
         {
-            yield return new WaitForSeconds(1);
-            IsSecondSimulateRun = false;
-            StartCoroutine(StopMinuteSimulate());
+            completionTimeText.text = "00" + ":" + "00" + ":" + "00" + "'";
+            int countMilliSecondTime = 0;
+            while (milliSecond > countMilliSecondTime)
+            {
+                countMilliSecondTime += 1;
+                completionTimeText.text = "00" + ":" + "00" + ":" + countMilliSecondTime.ToString().PadRight(2,'0') + "'";
+                yield return new WaitForSeconds(0.01f);
+            }
+            completionTimeText.text = "00" + ":" + "00" + ":" + milliSecond.ToString().PadLeft(2,'0') + "'";
         }
 
-        IEnumerator StopMinuteSimulate()
+        IEnumerator CountSecondTime()
         {
-            yield return new WaitForSeconds(1);
-            IsMinuteSimulateRun = false;
-            StartCoroutine(StopHourSimulate());
+            completionTimeText.text = "00" + ":" + "00" + ":" + milliSecond + "'";
+            int countSecondTime = 0;
+            while (second > countSecondTime)
+            {
+                countSecondTime += 1;
+                completionTimeText.text = "00" + ":" + countSecondTime.ToString().PadRight(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
+                yield return new WaitForSeconds(0.01f);
+            }
+            completionTimeText.text = "00" + ":" + second.ToString().PadLeft(2,'0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
         }
 
-        IEnumerator StopHourSimulate()
+        IEnumerator CountMinuteTime()
         {
-            yield return new WaitForSeconds(1);
-            IsHourSimulateRun = false;
-            IsUseSimulateTime = false;
+            completionTimeText.text = "00" + ":" + second + ":" + milliSecond + "'";
+            int countMinuteTime = 0;
+            while (minute > countMinuteTime)
+            {
+                countMinuteTime += 1;
+                completionTimeText.text = countMinuteTime.ToString().PadLeft(2,'0') + ":" + second.ToString().PadRight(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
+                yield return new WaitForSeconds(0.01f);
+            }
+            completionTimeText.text = minute.ToString().PadLeft(2, '0') + ":" + second.ToString().PadLeft(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
         }
 
-        #endregion
-
-        #region Stop Function
-
-        public void StopSimulateTime()
+        IEnumerator CountReward()
         {
-            StartCoroutine(StopSecondSimulate());
+            rewardText.text = "0 s";
+            int countReward = 0;
+            int increaseAmount = Mathf.CeilToInt(Mathf.Pow(10, Mathf.CeilToInt(Mathf.Log10(rewardAmount/25))));
+            while (rewardAmount > countReward)
+            {
+                countReward += increaseAmount;
+                rewardText.text = countReward.ToString() + " s";
+                yield return new WaitForSeconds(0.01f);
+            }
+            rewardText.text = rewardAmount.ToString() + " s";
         }
 
-        public void StopSimulateReward()
+        IEnumerator CountDamageDealt()
         {
-            IsUseSimulateReward = false;
+            damageDealtText.text = "0";
+            int countDamageDealt = 0;
+            int increaseAmount = Mathf.CeilToInt(Mathf.Pow(10, Mathf.CeilToInt(Mathf.Log10(damageDealtAmount / 50))));
+            while (damageDealtAmount > countDamageDealt)
+            {
+                countDamageDealt += increaseAmount;
+                damageDealtText.text = countDamageDealt.ToString();
+                yield return new WaitForSeconds(0.01f);
+            }
+            damageDealtText.text = damageDealtAmount.ToString();
         }
 
-        public void StopSimulateDamageDealt()
+        IEnumerator CountDamageTaken()
         {
-            IsUseSimulateDamageDealt = false;
+            damageTakenText.text = "0";
+            int countDamageTaken = 0;
+            int increaseAmount = Mathf.CeilToInt(Mathf.Pow(10, Mathf.CeilToInt(Mathf.Log10(damagetakenAmount / 50))));
+            while (damagetakenAmount > countDamageTaken)
+            {
+                countDamageTaken += increaseAmount;
+                damageTakenText.text = countDamageTaken.ToString();
+                yield return new WaitForSeconds(0.01f);
+            }
+            damageTakenText.text = damagetakenAmount.ToString();
         }
 
-        public void StopSimulateDamageTaken()
+        IEnumerator CountItemUsed()
         {
-            IsUseSimulateDamageTaken = false;
+            itemUsedText.text = "0";
+            int countItemUsed = 0;
+            int increaseAmount = 1;
+            while (itemUsedAmount > countItemUsed)
+            {
+                countItemUsed += increaseAmount;
+                itemUsedText.text = countItemUsed.ToString();
+                yield return new WaitForSeconds(0.01f);
+            }
+            damageTakenText.text = damagetakenAmount.ToString();
         }
-
-        public void StopSimulateItemUsed()
-        {
-            IsUseSimulateItemUsed = false;
-        }
-
-        #endregion
-
         public void SetBossImage(Sprite newBossImage, Sprite newBannerImage)
         {
             bannerImage.sprite = newBannerImage;
@@ -222,11 +214,11 @@ namespace ArmasCreator.Gameplay.UI
             finalRankText.text = newFinalRankText;
         }
 
-        public void SetCompletionTime(int newHour,int newMinute,int newSecond)
+        public void SetCompletionTime(int newMinute,int newSecond,int newMilliSecond)
         {
-            hour = newHour;
             minute = newMinute;
             second = newSecond;
+            milliSecond = newMilliSecond;
         }
 
         public void SetRewardAmount(int newReward)
