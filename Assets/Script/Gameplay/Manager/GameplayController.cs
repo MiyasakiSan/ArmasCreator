@@ -7,6 +7,7 @@ using UnityEngine;
 using ArmasCreator.GameMode;
 using UnityEngine.SceneManagement;
 using ArmasCreator.UI;
+using ArmasCreator.Gameplay.UI;
 
 namespace ArmasCreator.Gameplay
 {
@@ -89,7 +90,6 @@ namespace ArmasCreator.Gameplay
         {
             //TODO : Add something to player
             CurrentGameplays = Gameplays.Result;
-            OnStateResult?.Invoke();
             Debug.Log("Show Result");
 
             StartCoroutine(ShowGameResultCoroutine());
@@ -97,7 +97,8 @@ namespace ArmasCreator.Gameplay
 
         private IEnumerator ShowGameResultCoroutine()
         {
-            yield return new WaitForSeconds(3f);
+            OnStateResult?.Invoke();
+            yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
 
             Dispose();
             loadingPopup.LoadSceneAsync("Town");
