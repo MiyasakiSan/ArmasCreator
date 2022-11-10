@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 415186852}
-  m_IndirectSpecularColor: {r: 1.2470685, g: 0.65634036, b: 0.60741645, a: 1}
+  m_IndirectSpecularColor: {r: 1.2455747, g: 0.65605146, b: 0.607362, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13804,12 +13804,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 875589806}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 875589809}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9db5a2078a767a54693c314c59072f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &875589809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 961200767663928530, guid: 9551eb55c6583844e94ba70a371289ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 875589806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &893372684
 GameObject:
   m_ObjectHideFlags: 0
@@ -15118,7 +15124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a423be79dca35e04197570528bd46505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questCanvas: {fileID: 1708258648}
+  questCanvas: {fileID: 875589809}
   playerCanvas: {fileID: 1580324032349526792}
   questVcam: {fileID: 1734472473}
 --- !u!1 &1197384748
