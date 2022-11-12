@@ -19,11 +19,11 @@ namespace ArmasCreator.UserData
 
     public class UserDataQuestPresetModel 
     {
-        private UserDataModel userData;
+        private UserDataManager userData;
 
         public Dictionary<string,PresetModel> SavePresetsDict;
 
-        public void Init(UserDataModel userData)
+        public void Init(UserDataManager userData)
         {
             this.userData = userData;
         }
@@ -85,7 +85,7 @@ namespace ArmasCreator.UserData
 
             SavePresetsDict[mapId].QuestInfoList.Sort(SortByPresetId);
 
-            userData.UpdateSavePreset(mapId, questInfo);
+            userData.UserData.UpdateSavePreset(mapId, questInfo);
         }
 
         public int GetIntFromPresetId(string presetId)

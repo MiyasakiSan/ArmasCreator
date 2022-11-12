@@ -10,16 +10,15 @@ using ArmasCreator.Gameplay;
 
 namespace ArmasCreator.UserData
 {
-    [Serializable]
     public class UserDataInventoryModel 
     {
-        private UserDataModel userData;
+        private UserDataManager userData;
 
         public Dictionary<string, int> ConsumableItems = new Dictionary<string, int>();
 
         public Dictionary<string, bool> EquipableItems = new Dictionary<string, bool>();
 
-        public void Init(UserDataModel userData)
+        public void Init(UserDataManager userData)
         {
             this.userData = userData;
         }
@@ -33,6 +32,5 @@ namespace ArmasCreator.UserData
             EquipableItems = saveModel.EquipableItems;
         }
     }
-
 }
 

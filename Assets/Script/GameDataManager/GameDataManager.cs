@@ -33,11 +33,20 @@ namespace ArmasCreator.GameData
         [GameData("equipable_items")]
         private Dictionary<string, EquipableItemModel> equipableitemInfos;
 
+        [GameData("monster_parts")]
+        private Dictionary<string, ItemInfoModel> monsterPartInfos;
+
+        [GameData("recipes")]
+        private Dictionary<string, RecipeModel> recipeInfos;
+
         [GameData("init_equip_items")]
         private string[] initEquipItems;
 
         [GameData("init_consume_items")]
         private string[] initConsumeItems;
+
+        [GameData("achievement_config")]
+        private Dictionary<string, AchievementModel> achievementConfig;
 
         [GameData("game_info")]
         private GameInfoModel gameInfo;
@@ -164,6 +173,18 @@ namespace ArmasCreator.GameData
             }
 
             return initItemDict;
+        }
+
+        public Dictionary<string, int> GetAllInitAchievements()
+        {
+            var initAchievement = new Dictionary<string, int>();
+
+            foreach(KeyValuePair<string,AchievementModel> achievement in achievementConfig)
+            {
+                initAchievement.Add(achievement.Key, 0);
+            }
+
+            return initAchievement;
         }
     }
 }

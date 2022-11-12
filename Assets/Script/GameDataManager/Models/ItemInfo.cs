@@ -10,6 +10,8 @@ namespace ArmasCreator.GameData
     {
         Consumable,
         Equipable,
+        Craftable,
+        recipe
     }
 
     public enum subType
@@ -22,7 +24,9 @@ namespace ArmasCreator.GameData
         Pant,
         Shoes,
         Stamina,
-        Health
+        Health,
+        Lion,
+        Shrimp
     }
 
     [Serializable]
@@ -74,6 +78,13 @@ namespace ArmasCreator.GameData
 
         [JsonProperty("crit")]
         public float CRT;
+    }
+
+    [Serializable]
+    public class RecipeModel 
+    {
+        [JsonProperty("recipe")]
+        public Dictionary<string, int> Recipe;
     }
 
 }

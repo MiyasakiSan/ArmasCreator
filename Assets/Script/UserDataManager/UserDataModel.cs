@@ -22,11 +22,8 @@ namespace ArmasCreator.UserData
         //private UserDataGameSettingModel userDataGameSetting;
         //public UserDataGameSettingModel UserDataGameSetting => userDataGameSetting;
 
-        //private UserDataGameProgressionModel userDataGameProgression;
-        //public UserDataGameProgressionModel UserDataGameProgression => userDataGameProgression;
-
-        //private UserDataInventoryModel userDataInventory;
-        //public UserDataInventoryModel UserDataInventory => userDataInventory;
+        private UserDataProgressionModel userDataProgression;
+        public UserDataProgressionModel UserDataProgression => userDataProgression;
 
         private UserDataQuestPresetModel userDataQuestPreset;
         public UserDataQuestPresetModel UserDataQuestPreset => userDataQuestPreset;
@@ -39,14 +36,14 @@ namespace ArmasCreator.UserData
         public void Init(UserDataManager userDataManager)
         {
             //userDataGameSetting = new UserDataGameSettingModel();
-            //userDataGameProgression = new UserDataGameProgressionModel();
-            //userDataGameProgression.Init(userDataManager);
+            userDataProgression = new UserDataProgressionModel();
+            userDataProgression.Init(userDataManager);
 
             userDataInventory = new UserDataInventoryModel();
-            userDataInventory.Init(this);
+            userDataInventory.Init(userDataManager);
 
             userDataQuestPreset = new UserDataQuestPresetModel();
-            userDataQuestPreset.Init(this);
+            userDataQuestPreset.Init(userDataManager);
 
             LoadUserDataFromLocalData();
         }
@@ -140,6 +137,8 @@ namespace ArmasCreator.UserData
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
             saveModel.ConsumableItems = gameDataManager.GetAllInitConsumeItems();
             saveModel.EquipableItems = gameDataManager.GetAllInitEquipItems();
+            saveModel.Achievements = gameDataManager.GetAllInitAchievements();
+            userDataQuestPreset.SetupUserQuestPrest(saveModel);
 
             PlayerPrefs.SetString("PName", name);
         }

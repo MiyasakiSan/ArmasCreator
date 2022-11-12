@@ -54,6 +54,39 @@
             "duration" : 1800
         }
     },
+    "achievement_config" :
+    {
+        "am_01" : 
+        {
+            "id" : "am_01",
+            "header" : "Complete Ciladae roca in normal 8 times",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet" : 1
+            }
+        },
+        "am_02" : 
+        {
+            "id" : "am_02",
+            "header" : "Complete Ciladae roca in challenge I 8 times",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet" : 1
+            }
+        },
+        "am_03" : 
+        {
+            "id" : "am_03",
+            "header" : "Complete Ciladae roca in challenge II 8 times",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet" : 1
+            }
+        }
+    },
     "game_info" :
     {
         "result_time_rating" :
@@ -241,6 +274,27 @@
             "def": 0,
             "vit": 0,
             "crit": 10.0
+        }
+    },
+    "monster_parts" :
+    {
+        "spike_horn": 
+        {
+            "id": "spike_horn",
+            "item_type": "Craftable",
+            "sub_type": "Lion",
+            "sell_price": 75,
+            "buy_value": 100,
+            "asset": "spike_horn",
+            "icon": "spike_horn_icon",
+            "atlas_icon": "AtlasCraftableItemIcons"
+        }
+    },
+    "recipes" :
+    {
+        "ciladae_helmet": 
+        {
+            "spike_horn": 5
         }
     },
     "init_equip_items" : 
