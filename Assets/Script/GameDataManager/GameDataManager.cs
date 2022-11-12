@@ -33,6 +33,12 @@ namespace ArmasCreator.GameData
         [GameData("equipable_items")]
         private Dictionary<string, EquipableItemModel> equipableitemInfos;
 
+        [GameData("init_equip_items")]
+        private string[] initEquipItems;
+
+        [GameData("init_consume_items")]
+        private string[] initConsumeItems;
+
         [GameData("game_info")]
         private GameInfoModel gameInfo;
 
@@ -134,6 +140,30 @@ namespace ArmasCreator.GameData
             {
                 return true;
             }
+        }
+
+        public Dictionary<string, bool> GetAllInitEquipItems()
+        {
+            var initItemDict = new Dictionary<string, bool>();
+
+            foreach(string itemId in initEquipItems)
+            {
+                initItemDict.Add(itemId, true);
+            }
+
+            return initItemDict;
+        }
+
+        public Dictionary<string, int> GetAllInitConsumeItems()
+        {
+            var initItemDict = new Dictionary<string, int>();
+
+            foreach (string itemId in initConsumeItems)
+            {
+                initItemDict.Add(itemId, 5);
+            }
+
+            return initItemDict;
         }
     }
 }

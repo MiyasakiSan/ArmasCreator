@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using ArmasCreator.Utilities;
 
 namespace ArmasCreator.Gameplay.UI
 {
@@ -48,6 +49,9 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private Button endMissionButton;
 
+        [SerializeField]
+        private GameObject content;
+
         private int minute;
         private int second;
         private int milliSecond;
@@ -58,8 +62,26 @@ namespace ArmasCreator.Gameplay.UI
         private int damagetakenAmount;
         private int itemUsedAmount;
 
+        public static bool IsResultSequenceFinished { get; private set; }
 
-        // Start is called before the first frame update
+        private bool IsMilliSequenceFinished;
+        private bool IsSecSequenceFinished;
+        private bool IsMinuteSequenceFinished;
+        private bool IsDamageDeltSequenceFinished;
+        private bool IsDamageTakenSequenceFinished;
+        private bool IsItemUsedSequenceFinished;
+        private bool IsRewardSequenceFinished;
+
+        private GameplayController gameplayController;
+
+        private const float runTime = 0.025f;
+
+
+        private void Awake()
+        {
+            gameplayController = SharedContext.Instance.Get<GameplayController>();
+        }
+
         void Start()
         {
             endMissionButton.onClick.AddListener(() =>
@@ -67,33 +89,65 @@ namespace ArmasCreator.Gameplay.UI
                 OnEndMission();
             });
 
-            //Test
-            SetCompletionTime(10, 30, 99);
-            SetRewardAmount(2500);
-            SetResultData(5000, 3000, 10);
-            //Test
-            
+            gameplayController.OnStateResult += StartResultSequence;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.A))
-            {
-                StartCoroutine(CountDamageDealt());
-            }
-            if(Input.GetKeyDown(KeyCode.S))
-            {
-                StartCoroutine(CountDamageTaken());
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                StartCoroutine(CountItemUsed());
-            }
-            if(Input.GetKeyDown(KeyCode.Z))
-            {
-                StartCoroutine(CountReward());
-            }
+           
+        }
+
+        public void StartResultSequence()
+        {
+            IsResultSequenceFinished = false;
+            IsMilliSequenceFinished = false;
+            IsSecSequenceFinished = false;
+            IsDamageDeltSequenceFinished = false;
+            IsDamageTakenSequenceFinished = false;
+            IsItemUsedSequenceFinished = false;
+            IsRewardSequenceFinished = false;
+
+            SetCompletionTime(10, 30, 99);
+            SetRewardAmount(2500);
+            SetResultData(5000, 3000, 10);
+
+            StartCoroutine(ResultSequence());
+        }
+
+        IEnumerator ResultSequence()
+        {
+            content.SetActive(true);
+
+            StartCoroutine(CountMilliSecondTime());
+
+            yield return new WaitUntil(() => IsMilliSequenceFinished);
+
+            StartCoroutine(CountSecondTime());
+
+            yield return new WaitUntil(() => IsSecSequenceFinished);
+
+            StartCoroutine(CountMinuteTime());
+
+            yield return new WaitUntil(() => IsMinuteSequenceFinished);
+
+            StartCoroutine(CountReward());
+
+            yield return new WaitUntil(() => IsRewardSequenceFinished);
+
+            StartCoroutine(CountDamageDealt());
+
+            yield return new WaitUntil(() => IsDamageDeltSequenceFinished);
+
+            StartCoroutine(CountDamageTaken());
+
+            yield return new WaitUntil(() => IsDamageTakenSequenceFinished);
+
+            StartCoroutine(CountItemUsed());
+
+            yield return new WaitUntil(() => IsItemUsedSequenceFinished);
+
+            IsResultSequenceFinished = true;
         }
         
         IEnumerator CountMilliSecondTime()
@@ -104,9 +158,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countMilliSecondTime += 1;
                 completionTimeText.text = "00" + ":" + "00" + ":" + countMilliSecondTime.ToString().PadRight(2,'0') + "'";
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             completionTimeText.text = "00" + ":" + "00" + ":" + milliSecond.ToString().PadLeft(2,'0') + "'";
+            IsMilliSequenceFinished = true;
         }
 
         IEnumerator CountSecondTime()
@@ -117,9 +172,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countSecondTime += 1;
                 completionTimeText.text = "00" + ":" + countSecondTime.ToString().PadRight(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             completionTimeText.text = "00" + ":" + second.ToString().PadLeft(2,'0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
+            IsSecSequenceFinished = true;
         }
 
         IEnumerator CountMinuteTime()
@@ -130,9 +186,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countMinuteTime += 1;
                 completionTimeText.text = countMinuteTime.ToString().PadLeft(2,'0') + ":" + second.ToString().PadRight(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             completionTimeText.text = minute.ToString().PadLeft(2, '0') + ":" + second.ToString().PadLeft(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
+            IsMinuteSequenceFinished = true;
         }
 
         IEnumerator CountReward()
@@ -144,9 +201,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countReward += increaseAmount;
                 rewardText.text = countReward.ToString() + " s";
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             rewardText.text = rewardAmount.ToString() + " s";
+            IsRewardSequenceFinished = true;
         }
 
         IEnumerator CountDamageDealt()
@@ -158,9 +216,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countDamageDealt += increaseAmount;
                 damageDealtText.text = countDamageDealt.ToString();
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             damageDealtText.text = damageDealtAmount.ToString();
+            IsDamageDeltSequenceFinished = true;
         }
 
         IEnumerator CountDamageTaken()
@@ -172,9 +231,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countDamageTaken += increaseAmount;
                 damageTakenText.text = countDamageTaken.ToString();
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             damageTakenText.text = damagetakenAmount.ToString();
+            IsDamageTakenSequenceFinished = true;
         }
 
         IEnumerator CountItemUsed()
@@ -186,9 +246,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countItemUsed += increaseAmount;
                 itemUsedText.text = countItemUsed.ToString();
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(runTime);
             }
             damageTakenText.text = damagetakenAmount.ToString();
+            IsItemUsedSequenceFinished = true;
         }
         public void SetBossImage(Sprite newBossImage, Sprite newBannerImage)
         {
@@ -235,7 +296,15 @@ namespace ArmasCreator.Gameplay.UI
 
         public void OnEndMission()
         {
+            IsResultSequenceFinished = true;
+        }
 
+        private void OnDestroy()
+        {
+            if(gameplayController != null)
+            {
+                gameplayController.OnStateResult -= StartResultSequence;
+            }
         }
     }
 }

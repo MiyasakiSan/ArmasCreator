@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using ArmasCreator.LocalFile;
 using UnityEngine;
 using ArmasCreator.Gameplay;
+using ArmasCreator.GameData;
+using ArmasCreator.Utilities;
 
 namespace ArmasCreator.UserData
 {
@@ -130,12 +132,14 @@ namespace ArmasCreator.UserData
 
         public void SetUserID(string name)
         {
+            GameDataManager gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+
             userID = name;
             saveModel = new UserSaveDataModel();
             saveModel.UserId = name;
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
-            saveModel.ConsumableItems = new Dictionary<string, int>();
-            saveModel.EquipableItems = new Dictionary<string, bool>();
+            saveModel.ConsumableItems = gameDataManager.GetAllInitConsumeItems();
+            saveModel.EquipableItems = gameDataManager.GetAllInitEquipItems();
 
             PlayerPrefs.SetString("PName", name);
         }
