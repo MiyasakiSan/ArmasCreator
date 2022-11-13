@@ -10,7 +10,7 @@ Material:
   m_Name: Shader Graphs_Slash
   m_Shader: {fileID: -6465566751694194690, guid: b0702a9006b926f4e825c849b6785d36,
     type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _ALPHATEST_ON _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _ALPHATEST_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -37,21 +37,21 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
-    - _Blend: 1
+    - _Blend: 3
     - _CastShadows: 1
     - _Cull: 0
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _Float: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SrcBlend: 1
+    - _SrcBlend: 2
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.6126392, g: 4.0722485, b: 5.657903, a: 0}
-    - _Speed: {r: -1, g: -1, b: 0, a: 0}
+    - _Color: {r: 0, g: 2.0705884, b: 3.0117648, a: 0}
+    - _Speed: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4150726932604838218
 MonoBehaviour:

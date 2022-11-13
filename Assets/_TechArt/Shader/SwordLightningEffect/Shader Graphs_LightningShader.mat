@@ -10,13 +10,15 @@ Material:
   m_Name: Shader Graphs_LightningShader
   m_Shader: {fileID: -6465566751694194690, guid: 44e6a4bcc6548a6438b251fc210fae1e,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _ALPHATEST_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -38,12 +40,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_1b1d3556b2284060aa0ed4acbb72521b: -1
+    - Vector1_1b1d3556b2284060aa0ed4acbb72521b: 1
     - Vector1_be57d28242c94ed5ad6b891d4d3670cf: 0.4
+    - _AlphaClip: 1
+    - _Blend: 3
+    - _CastShadows: 1
+    - _Cull: 0
+    - _DstBlend: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 2
+    - _Surface: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
-    - Color_231f6aaa18ea45ccb2f419a64ef5f515: {r: 0, g: 8.438206, b: 134.3081, a: 0}
+    - Color_231f6aaa18ea45ccb2f419a64ef5f515: {r: 0.55849713, g: 1.960372, b: 9.250117,
+        a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &985519200196048399
 MonoBehaviour:
