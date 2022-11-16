@@ -45,6 +45,9 @@ namespace ArmasCreator.UserData
             userDataQuestPreset = new UserDataQuestPresetModel();
             userDataQuestPreset.Init(userDataManager);
 
+            userDataProgression = new UserDataProgressionModel();
+            userDataProgression.Init(userDataManager);
+
             LoadUserDataFromLocalData();
         }
 
@@ -137,7 +140,9 @@ namespace ArmasCreator.UserData
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
             saveModel.ConsumableItems = gameDataManager.GetAllInitConsumeItems();
             saveModel.EquipableItems = gameDataManager.GetAllInitEquipItems();
+            saveModel.CraftableItems = new Dictionary<string, int>();
             saveModel.Achievements = gameDataManager.GetAllInitAchievements();
+            saveModel.recipes = new List<string>();
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
 
             PlayerPrefs.SetString("PName", name);
@@ -173,6 +178,26 @@ namespace ArmasCreator.UserData
 
             var savePreset = saveModel.AllSavePresets.Find(x => x.MapId == mapId);
             savePreset.Presets.Sort(userDataQuestPreset.SortByPresetId);
+
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateSaveInventory(Dictionary<string, int> consumableDict, 
+                                        Dictionary<string, bool> equipableDict, 
+                                        List<string> recipes, 
+                                        Dictionary<string, int> craftableDict)
+        {
+            saveModel.ConsumableItems = consumableDict;
+            saveModel.EquipableItems = equipableDict;
+            saveModel.recipes = recipes;
+            saveModel.CraftableItems = craftableDict;
+
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateSaveAchievement(string achievementId, int progress)
+        {
+            saveModel.Achievements[achievementId] = progress;
 
             SaveUserDataToLocal();
         }

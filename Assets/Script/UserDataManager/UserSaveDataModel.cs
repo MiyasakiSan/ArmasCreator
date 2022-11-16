@@ -20,6 +20,10 @@ namespace ArmasCreator.UserData
         public Dictionary<string, int> ConsumableItems = new Dictionary<string, int>();
 
         public Dictionary<string, bool> EquipableItems = new Dictionary<string, bool>();
+
+        public Dictionary<string, int> CraftableItems = new Dictionary<string, int>();
+
+        public List<string> recipes = new List<string>();
     }
 
     public class UserSavePresetModel

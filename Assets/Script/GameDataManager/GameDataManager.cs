@@ -151,11 +151,12 @@ namespace ArmasCreator.GameData
             }
         }
 
+        #region Item info
         public Dictionary<string, bool> GetAllInitEquipItems()
         {
             var initItemDict = new Dictionary<string, bool>();
 
-            foreach(string itemId in initEquipItems)
+            foreach (string itemId in initEquipItems)
             {
                 initItemDict.Add(itemId, true);
             }
@@ -173,19 +174,163 @@ namespace ArmasCreator.GameData
             }
 
             return initItemDict;
+        } 
+
+        public bool TryGetEquipItemInfoWithSubType(string id, SubType itemType, out EquipableItemModel equipItemInfo)
+        {
+            bool exist = equipableitemInfos.TryGetValue(id, out EquipableItemModel itemInfo);
+
+            if (!exist) 
+            {
+                Debug.LogError($"{id} doesn't exist in equipable items");
+
+                equipItemInfo = new EquipableItemModel();
+
+                return false; 
+            }
+
+            if (itemInfo.SubType != SubType.Weapon)
+            {
+                equipItemInfo = new EquipableItemModel();
+
+                return false;
+            }
+
+            equipItemInfo = itemInfo;
+            return true;
         }
 
+        public bool TryGetEquipItemInfoById(string id, out EquipableItemModel equipItemInfo)
+        {
+            bool exist = equipableitemInfos.TryGetValue(id, out EquipableItemModel itemInfo);
+
+            if (!exist)
+            {
+                Debug.LogError($"{id} doesn't exist in equipable items");
+
+                equipItemInfo = new EquipableItemModel();
+
+                return false;
+            }
+
+            equipItemInfo = itemInfo;
+            return true;
+        }
+
+        public ItemType GetItemType(string id)
+        {
+            bool exist = consumeableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return ItemType.Consumable;
+            }
+
+            exist = equipableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return ItemType.Equipable;
+            }
+
+            exist = monsterPartInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return ItemType.Craftable;
+            }
+
+            return ItemType.Recipe;
+        }
+
+        public bool TryGetItemInfoWithType(string id,ItemType type, out ItemInfoModel itemInfo)
+        {
+            switch (type)
+            {
+                case ItemType.Consumable:
+                    {
+                        if (!consumeableitemInfos.ContainsKey(id)) 
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = consumeableitemInfos[id];
+                        return true;
+                    }
+                case ItemType.Equipable:
+                    {
+                        if (!equipableitemInfos.ContainsKey(id))
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = equipableitemInfos[id];
+                        return true;
+                    }
+                case ItemType.Craftable:
+                    {
+                        if (!monsterPartInfos.ContainsKey(id))
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = monsterPartInfos[id];
+                        return true;
+                    }
+                case ItemType.Recipe:
+                    {
+                        if (!recipeInfos.ContainsKey(id))
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = recipeInfos[id];
+                        return true;
+                    }
+                default:
+                    {
+                        itemInfo = new ItemInfoModel();
+                        return false;
+                    }
+            }
+        }
+
+
+
+        #endregion
+
+        #region Achievement
         public Dictionary<string, int> GetAllInitAchievements()
         {
             var initAchievement = new Dictionary<string, int>();
 
-            foreach(KeyValuePair<string,AchievementModel> achievement in achievementConfig)
+            foreach (KeyValuePair<string, AchievementModel> achievement in achievementConfig)
             {
                 initAchievement.Add(achievement.Key, 0);
             }
 
             return initAchievement;
+        } 
+
+        public bool TryGetAchievementInfo(string achievementId, out AchievementModel achievementInfo)
+        {
+            bool exist = achievementConfig.TryGetValue(achievementId, out AchievementModel achievement);
+
+            if (!exist) 
+            { 
+                achievementInfo = new AchievementModel();
+                return false; 
+            }
+
+            achievementInfo = achievement;
+            return true;
         }
+
+        #endregion
     }
 }
 
