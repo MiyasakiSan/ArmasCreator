@@ -35,6 +35,9 @@ namespace ArmasCreator.GameData
         [JsonProperty("id")]
         public string ID;
 
+        [JsonProperty("name")]
+        public string Name;
+
         [JsonProperty("item_type")]
         public ItemType Type;
 
