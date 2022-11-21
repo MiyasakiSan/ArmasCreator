@@ -114,6 +114,7 @@ namespace ArmasCreator.UserData
 
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
             userDataInventory.SetupUserInventory(saveModel);
+            userDataProgression.SetupUserProgression(saveModel);
         }
 
         public void SaveUserDataToLocal()
