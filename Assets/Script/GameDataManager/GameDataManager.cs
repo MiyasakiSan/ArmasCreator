@@ -48,6 +48,15 @@ namespace ArmasCreator.GameData
         [GameData("achievement_config")]
         private Dictionary<string, AchievementModel> achievementConfig;
 
+        [GameData("dialogue_config")]
+        private Dictionary<string, DialogueModel> dialogueConfig;
+
+        [GameData("quest_config")]
+        private Dictionary<string, QuestModel> questConfig;
+
+        [GameData("character_config")]
+        private Dictionary<string, CharacterModel> characterConfig;
+
         [GameData("game_info")]
         private GameInfoModel gameInfo;
 
@@ -331,6 +340,23 @@ namespace ArmasCreator.GameData
         }
 
         #endregion
+
+        public bool TryGetDialogueInfo(string dialogueId, out DialogueModel dialogueInfo)
+        {
+            bool exist = dialogueConfig.TryGetValue(dialogueId, out DialogueModel dialogue);
+
+            if (!exist)
+            {
+                Debug.LogError($"{dialogueId} doesn't exist in dialogue config");
+
+                dialogueInfo = new DialogueModel();
+
+                return false;
+            }
+
+            dialogueInfo = dialogue;
+            return true;
+        }
     }
 }
 
