@@ -59,31 +59,32 @@
         "am_01" : 
         {
             "id" : "am_01",
-            "header" : "Complete Ciladae roca in normal 8 times",
+            "header" : "Complete Ciladae Roca in Normal ",
             "progress" : 8,
             "rewards" : 
             {
-                "ciladae_helmet" : 1
+                "ciladae_helmet_recipe" : 1,
+		"ciladae_shirt_recipe" : 1
             }
         },
         "am_02" : 
         {
             "id" : "am_02",
-            "header" : "Complete Ciladae roca in challenge I 8 times",
+            "header" : "Complete Ciladae Roca in Challenge I ",
             "progress" : 8,
             "rewards" : 
             {
-                "ciladae_helmet" : 1
+                "ciladae_helmet_recipe" : 1
             }
         },
         "am_03" : 
         {
             "id" : "am_03",
-            "header" : "Complete Ciladae roca in challenge II 8 times",
+            "header" : "Complete Ciladae Roca in Challenge II ",
             "progress" : 8,
             "rewards" : 
             {
-                "ciladae_helmet" : 1
+                "ciladae_helmet_recipe" : 1
             }
         }
     },
@@ -286,6 +287,22 @@
             "def": 0,
             "vit": 0,
             "crit": 10.0
+        },
+	"boss1_gunblade": 
+        {
+            "id": "boss1_gunblade",
+            "name" : "Ciladea Gunblade",
+            "item_type": "Equipable",
+            "sub_type": "Weapon",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_gunblade",
+            "icon": "init_gunblade_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 0,
+            "vit": 0,
+            "crit": 10.0
         }
     },
     "monster_parts" :
@@ -308,13 +325,29 @@
         "ciladae_helmet_recipe": 
         {
             "id": "ciladae_helmet_recipe",
-            "name" : "Cliadae Helmet recipe",
+            "name" : "Cliadae Helmet Recipe",
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
             "buy_value": 0,
             "asset": "ciladae_helmet_recipe",
             "icon": "ciladae_helmet_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            }
+        },
+	"ciladae_shirt_recipe": 
+        {
+            "id": "ciladae_shirt_recipe",
+            "name" : "Cliadae Shirt Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "ciladae_shirt_recipe",
+            "icon": "ciladae_shirt_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {

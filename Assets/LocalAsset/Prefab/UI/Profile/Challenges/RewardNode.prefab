@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1153299966286195399}
   - component: {fileID: 2411164246562917570}
+  - component: {fileID: 2405088306976446038}
   m_Layer: 5
   m_Name: RewardNode
   m_TagString: Untagged
@@ -47,6 +48,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341098448475664447}
   m_CullTransparentMesh: 1
+--- !u!114 &2405088306976446038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341098448475664447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af66a3ce763079a4d8747a6d61aea0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardImage: {fileID: 1138591070462856278}
+  rewardText: {fileID: 5497931683634250825}
 --- !u!1 &7015327802503892681
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 753f9bd2abcc4f24aa282a64f1a9b552, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43c16811033eeef4882be06e7b47201e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

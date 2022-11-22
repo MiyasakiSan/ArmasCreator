@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArmasCreator.Gameplay.UI
+namespace ArmasCreator.UI
 {
     public class OptionPanelController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField]
+        private GameObject mainContent;
+        
+        public void ShowOptionPanel()
         {
-
+            mainContent.SetActive(true);
         }
 
-        // Update is called once per frame
-        void Update()
+        public void DeactivateOptionPanel()
         {
-
+            mainContent.SetActive(false);
         }
     }
 }

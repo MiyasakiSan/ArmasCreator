@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4830642915455111684}
   - component: {fileID: 4830642915455111685}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4830642915571243163}
   - component: {fileID: 4830642915571243160}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Header
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,8 +188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4830642915571243163
 CanvasRenderer:
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -299,7 +299,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4830642915762419247}
   - component: {fileID: 4830642915762419233}
-  - component: {fileID: 4830642915762419246}
+  - component: {fileID: 6677266405299194523}
+  - component: {fileID: 1712135559843351193}
   m_Layer: 5
   m_Name: ChallengeNode
   m_TagString: Untagged
@@ -339,7 +340,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4830642915762419244}
   m_CullTransparentMesh: 1
---- !u!114 &4830642915762419246
+--- !u!114 &6677266405299194523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830642915762419244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac8bd2c6c3790548a410bde583b6544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: {fileID: 4830642915571243160}
+  imageBG: {fileID: 4830642915455111685}
+  checkPass: {fileID: 4830642915830909171}
+  selectedSprite: {fileID: 21300000, guid: 65dcad7cb97a1f348b339bb86d4f1a7e, type: 3}
+  deSelectedSprite: {fileID: 21300000, guid: 502679c8ebb8d7c4c8a1a2ef9e7c165c, type: 3}
+  challengeDetailPanelController: {fileID: 0}
+  btn_ChallengeNode: {fileID: 1712135559843351193}
+--- !u!114 &1712135559843351193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4830642915830909170
 RectTransform:
   m_ObjectHideFlags: 0

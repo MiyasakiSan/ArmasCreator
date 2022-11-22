@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArmasCreator.Gameplay.UI
+namespace ArmasCreator.UI
 {
     public class ProfileQuestPanelController : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject mainContent;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,6 +18,16 @@ namespace ArmasCreator.Gameplay.UI
         void Update()
         {
 
+        }
+
+        public void SetUpQuestPanel()
+        {
+            mainContent.SetActive(true);
+        }
+
+        public void DeactivateQuestPanel()
+        {
+            mainContent.SetActive(false);
         }
 
         public void PopulateSideQuestNode()

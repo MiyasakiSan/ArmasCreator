@@ -374,6 +374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8412280776798019710}
+  - component: {fileID: 5149140466455258465}
   m_Layer: 5
   m_Name: ChalllengesDetailPanel
   m_TagString: Untagged
@@ -407,6 +408,23 @@ RectTransform:
   m_AnchoredPosition: {x: 1025, y: -250}
   m_SizeDelta: {x: 850, y: 700}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5149140466455258465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8412280776798019711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d583bcf355a165a4d84e9d6659bf0e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: {fileID: 8412280776960764915}
+  ProgressText: {fileID: 8412280777160778535}
+  rewardNode: {fileID: 2405088306976446038, guid: b93c7df93c4e4ca4cbec0d013e2d7a18,
+    type: 3}
+  rewardContent: {fileID: 8412280776037956921}
 --- !u!1 &8412280776960764913
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +819,12 @@ PrefabInstance:
 --- !u!224 &8412280775554915755 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2346694899499379763, guid: 49452a21a3105844c94140a6c815c875,
+    type: 3}
+  m_PrefabInstance: {fileID: 6066153364988490136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8412280776037956921 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2346694899211635873, guid: 49452a21a3105844c94140a6c815c875,
     type: 3}
   m_PrefabInstance: {fileID: 6066153364988490136}
   m_PrefabAsset: {fileID: 0}
