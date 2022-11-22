@@ -13,6 +13,9 @@ namespace ArmasCreator.UI
         private Image displayImage;
 
         [SerializeField]
+        private GameObject displayImageBG;
+
+        [SerializeField]
         private TextMeshProUGUI headerText;
 
         [SerializeField]
@@ -29,9 +32,15 @@ namespace ArmasCreator.UI
         [SerializeField]
         private GameObject dialoguePopup;
 
+        [SerializeField]
+        private GameObject dialogueBG;
+
+        private Animator anim;
+
         private void Awake()
         {
             defaultSprite = displayImage.sprite;
+            anim = dialoguePopup.GetComponent<Animator>();
         }
 
         public void Reset()
@@ -44,11 +53,34 @@ namespace ArmasCreator.UI
         public void Show()
         {
             dialoguePopup.SetActive(true);
+            ShowImage();
+            anim.SetTrigger("show");
         }
 
         public void Hide()
         {
-            dialoguePopup.SetActive(false);
+            anim.SetTrigger("hide");
+            StartCoroutine(HidePopup());
+        }
+
+        public void ShowSentence()
+        {
+            dialogueBG.SetActive(true);
+        }
+
+        public void HideSentence()
+        {
+            dialogueBG.SetActive(false);
+        }
+
+        public void ShowImage()
+        {
+            displayImageBG.SetActive(true);
+        }
+
+        public void HideImage()
+        {
+            displayImageBG.SetActive(false);
         }
 
         public void SetDisplayImage(Sprite sprite)
@@ -64,6 +96,14 @@ namespace ArmasCreator.UI
         public void SetDisplayText(string text)
         {
             StartCoroutine(ShowText(text));
+        }
+
+        private IEnumerator HidePopup()
+        {
+            yield return new WaitForSeconds(1f);
+
+            HideImage();
+            dialoguePopup.SetActive(false);
         }
 
         IEnumerator ShowText(string text)

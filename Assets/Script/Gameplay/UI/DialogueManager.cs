@@ -43,6 +43,9 @@ namespace ArmasCreator.UI
 
         protected Coroutine loadingSpriteCoroutine;
 
+        [SerializeField]
+        private string testDialogueId;
+
         private void Awake()
         {
             SharedContext.Instance.Add(this);
@@ -70,7 +73,7 @@ namespace ArmasCreator.UI
         {
             if (Input.GetKeyUp(KeyCode.RightShift) && Input.GetKeyUp(KeyCode.U))
             {
-                SetDialogueSequence("test_start");
+                SetDialogueSequence(testDialogueId);
             }
         }
 
@@ -118,7 +121,9 @@ namespace ArmasCreator.UI
                 Debug.LogError("Can't show dialogue");
                 return; 
             }
-            
+
+            playerPanel.Reset();
+            npcPanel.Reset();
             dialogueInfo = dialogue;
             isShowingDialogue = true;
             sequenceIndex = 0;
@@ -129,7 +134,12 @@ namespace ArmasCreator.UI
 
         private IEnumerator InitDialogue()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
+
+            playerPanel.Show();
+            npcPanel.Show();
+
+            yield return new WaitForSeconds(0.5f);
 
             ShowDialogue();
         }
@@ -149,12 +159,15 @@ namespace ArmasCreator.UI
 
         private void ShowDialogue()
         {
+            if (dialogueInfo == null)
+            {
+                return;
+            }
+
             if (sequenceIndex >= dialogueInfo.DialogSequences.Count)
             {
-                npcPanel.Reset();
                 npcPanel.Hide();
 
-                playerPanel.Reset();
                 playerPanel.Hide();
 
                 dialogueInfo = null;
@@ -173,23 +186,33 @@ namespace ArmasCreator.UI
 
             if(sequence.CharacterName == "main")
             {
-                npcPanel.Reset();
-                npcPanel.Hide();
+                npcPanel.HideSentence();
+
+                if(sequenceIndex == 0)
+                {
+                    npcPanel.HideImage();
+                }
 
                 playerPanel.SetDisplayImage(handle.Result.GetSprite(sequence.CharacterId));
                 playerPanel.SetDisplayText(string.Format(sequence.Sentence, PlayerPrefs.GetString("PName")));
                 playerPanel.SetHeaderText(PlayerPrefs.GetString("PName"));
-                playerPanel.Show();
+                playerPanel.ShowSentence();
+                playerPanel.ShowImage();
             }
             else
             {
-                playerPanel.Reset();
-                playerPanel.Hide();
+                playerPanel.HideSentence();
+
+                if (sequenceIndex == 0)
+                {
+                    playerPanel.HideImage();
+                }
 
                 npcPanel.SetDisplayImage(handle.Result.GetSprite(sequence.CharacterId));
                 npcPanel.SetDisplayText(sequence.Sentence);
                 npcPanel.SetHeaderText(sequence.CharacterName);
-                npcPanel.Show();
+                npcPanel.ShowSentence();
+                npcPanel.ShowImage();
             }
 
             sequenceIndex++;

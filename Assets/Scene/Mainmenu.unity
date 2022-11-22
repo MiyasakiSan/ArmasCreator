@@ -367,6 +367,7 @@ MonoBehaviour:
   npcPanel: {fileID: 546577047}
   playerPanel: {fileID: 2090485878}
   dialogueBG: {fileID: 1617475834}
+  testDialogueId: test_start
 --- !u!4 &657476541
 Transform:
   m_ObjectHideFlags: 0
@@ -843,7 +844,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4672428025259231374}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4672428025259231375}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 377dcb4310de3a34fabf11068000d4a3, type: 3}
@@ -1006,6 +1007,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9656d815f58808c4bbf67724d69e0902, type: 3}
+--- !u!1 &4672428025259231375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4672428026946011386, guid: 9656d815f58808c4bbf67724d69e0902,
+    type: 3}
+  m_PrefabInstance: {fileID: 4672428025259231374}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4672428025259231376
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672428025259231375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e0a21f4fbdf09c48b8c4dc93ddf458e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8283694727272460152
 PrefabInstance:
   m_ObjectHideFlags: 0
