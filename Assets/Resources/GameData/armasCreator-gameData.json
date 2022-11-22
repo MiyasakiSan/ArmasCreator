@@ -54,6 +54,39 @@
             "duration" : 1800
         }
     },
+    "achievement_config" :
+    {
+        "am_01" : 
+        {
+            "id" : "am_01",
+            "header" : "Complete Ciladae roca in normal 8 times",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet" : 1
+            }
+        },
+        "am_02" : 
+        {
+            "id" : "am_02",
+            "header" : "Complete Ciladae roca in challenge I 8 times",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet" : 1
+            }
+        },
+        "am_03" : 
+        {
+            "id" : "am_03",
+            "header" : "Complete Ciladae roca in challenge II 8 times",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet" : 1
+            }
+        }
+    },
     "game_info" :
     {
         "result_time_rating" :
@@ -80,6 +113,7 @@
         "bandage": 
         {
             "id": "bandage",
+            "name" : "Bandage",
             "item_type": "Consumable",
             "sub_type": "Health",
             "sell_price": 75,
@@ -92,6 +126,7 @@
         "medicine": 
         {
             "id": "medicine",
+            "name" : "Medicine",
             "item_type": "Consumable",
             "sub_type": "Health",
             "sell_price": 150,
@@ -104,6 +139,7 @@
         "first_aid": 
         {
             "id": "first_aid",
+            "name" : "First Aid",
             "item_type": "Consumable",
             "sub_type": "Health",
             "sell_price": 350,
@@ -116,6 +152,7 @@
         "cola_drink": 
         {
             "id": "cola_drink",
+            "name" : "Cola Drink",
             "item_type": "Consumable",
             "sub_type": "Stamina",
             "sell_price": 100,
@@ -128,6 +165,7 @@
         "energy_drink": 
         {
             "id": "energy_drink",
+            "name" : "Energy Drink",
             "item_type": "Consumable",
             "sub_type": "Stamina",
             "sell_price": 200,
@@ -140,6 +178,7 @@
         "adrenaline": 
         {
             "id": "adrenaline",
+            "name" : "Adrenaline",
             "item_type": "Consumable",
             "sub_type": "Stamina",
             "sell_price": 400,
@@ -155,6 +194,7 @@
         "init_helmet": 
         {
             "id": "init_helmet",
+            "name" : "Gas Mask",
             "item_type": "Equipable",
             "sub_type": "Helmet",
             "sell_price": 0,
@@ -170,6 +210,7 @@
         "init_shirt": 
         {
             "id": "init_shirt",
+            "name" : "Cotton Shirt",
             "item_type": "Equipable",
             "sub_type": "Shirt",
             "sell_price": 0,
@@ -185,6 +226,7 @@
         "init_glove": 
         {
             "id": "init_glove",
+            "name" : "Leather Gloves",
             "item_type": "Equipable",
             "sub_type": "Glove",
             "sell_price": 0,
@@ -200,6 +242,7 @@
         "init_pant": 
         {
             "id": "init_pant",
+            "name" : "Leather Pant",
             "item_type": "Equipable",
             "sub_type": "Pant",
             "sell_price": 0,
@@ -215,6 +258,7 @@
         "init_shoes": 
         {
             "id": "init_shoes",
+            "name" : "Hide Boots",
             "item_type": "Equipable",
             "sub_type": "Shoes",
             "sell_price": 0,
@@ -230,6 +274,7 @@
         "init_gunblade": 
         {
             "id": "init_gunblade",
+            "name" : "Steel Gunblade",
             "item_type": "Equipable",
             "sub_type": "Weapon",
             "sell_price": 0,
@@ -243,6 +288,40 @@
             "crit": 10.0
         }
     },
+    "monster_parts" :
+    {
+        "spike_horn": 
+        {
+            "id": "spike_horn",
+            "name" : "Spike Horn",
+            "item_type": "Craftable",
+            "sub_type": "Lion",
+            "sell_price": 75,
+            "buy_value": 100,
+            "asset": "spike_horn",
+            "icon": "spike_horn_icon",
+            "atlas_icon": "AtlasCraftableItemIcons"
+        }
+    },
+    "recipes" :
+    {
+        "ciladae_helmet_recipe": 
+        {
+            "id": "ciladae_helmet_recipe",
+            "name" : "Cliadae Helmet recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "ciladae_helmet_recipe",
+            "icon": "ciladae_helmet_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            }
+        }
+    },
     "init_equip_items" : 
     [
         "init_helmet","init_shirt","init_glove","init_pant","init_shoes","init_gunblade"
@@ -250,5 +329,67 @@
     "init_consume_items" :
     [
         "bandage","cola_drink"
-    ]
+    ],
+    "character_config" :
+    {
+        "main":
+        {
+            "id" : "main",
+            "name" : "",
+            "asset" : "main",
+            "icon" : "main",
+            "atlas_icon" : "AtlasCharacterIcon"
+        },
+        "kotaro":
+        {
+            "id" : "kotaro",
+            "name" : "kotaro",
+            "asset" : "kotaro",
+            "icon" : "kotaro",
+            "atlas_icon" : "AtlasCharacterIcon"
+        }
+    },
+    "dialogue_config":
+    {
+        "test_start" :
+        {
+            "id" : "test_start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : "hell oo . oooo  My name is Kotaroo oo "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "how are youuu  today   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "hello Kotaro my name is {0}"
+                }
+            ]
+        }
+    },
+    "quest_config" :
+    {
+        "test":
+        {
+            "id" : "test",
+            "name" : "test",
+            "type" : "main",
+            "sub_type" : "Destination",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "next_quest_id": "",
+            "start_dialogue_id" : "test_start",
+            "end_dialogue_id" : "test_end"
+        }
+    }
 }

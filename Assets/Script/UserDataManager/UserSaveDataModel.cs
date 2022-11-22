@@ -15,9 +15,15 @@ namespace ArmasCreator.UserData
 
         public List<UserSavePresetModel> AllSavePresets = new List<UserSavePresetModel>();
 
+        public Dictionary<string, int> Achievements = new Dictionary<string, int>();
+
         public Dictionary<string, int> ConsumableItems = new Dictionary<string, int>();
 
         public Dictionary<string, bool> EquipableItems = new Dictionary<string, bool>();
+
+        public Dictionary<string, int> CraftableItems = new Dictionary<string, int>();
+
+        public List<string> recipes = new List<string>();
     }
 
     public class UserSavePresetModel
