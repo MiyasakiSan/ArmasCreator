@@ -184,7 +184,7 @@ namespace ArmasCreator.UserData
         }
 
         public void UpdateSaveInventory(Dictionary<string, int> consumableDict, 
-                                        Dictionary<string, bool> equipableDict, 
+                                        Dictionary<SubType, EquipmentModel> equipableDict, 
                                         List<string> recipes, 
                                         Dictionary<string, int> craftableDict)
         {

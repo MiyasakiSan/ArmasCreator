@@ -67,7 +67,9 @@ namespace ArmasCreator.UserData
 
             foreach(var reward in achievementInfo.Rewards)
             {
-                userDataManager.UserData.UserDataInventory.AddItem(reward.Key, reward.Value);
+                var subType = gameDataManager.GetItemSubType(reward.Key);
+
+                userDataManager.UserData.UserDataInventory.AddItem(reward.Key, subType, reward.Value);
             }
         }
     }

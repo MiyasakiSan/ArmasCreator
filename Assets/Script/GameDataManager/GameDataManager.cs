@@ -11,6 +11,7 @@ using ArmasCreator.Utilities;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ArmasCreator.UI;
+using ArmasCreator.UserData;
 
 namespace ArmasCreator.GameData
 {
@@ -161,13 +162,18 @@ namespace ArmasCreator.GameData
         }
 
         #region Item info
-        public Dictionary<string, bool> GetAllInitEquipItems()
+        public Dictionary<SubType, EquipmentModel> GetAllInitEquipItems()
         {
-            var initItemDict = new Dictionary<string, bool>();
+            var initItemDict = new Dictionary<SubType, EquipmentModel>();
 
             foreach (string itemId in initEquipItems)
             {
-                initItemDict.Add(itemId, true);
+                var subType = equipableitemInfos[itemId].SubType;
+                initItemDict.Add(subType, new EquipmentModel 
+                { 
+                    EquippedId = itemId,
+                    UnlockIds = new List<string>() { itemId }
+                });
             }
 
             return initItemDict;
@@ -250,6 +256,32 @@ namespace ArmasCreator.GameData
             }
 
             return ItemType.Recipe;
+        }
+
+        public SubType GetItemSubType(string id)
+        {
+            bool exist = consumeableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return consumeableitemInfos[id].SubType;
+            }
+
+            exist = equipableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return equipableitemInfos[id].SubType;
+            }
+
+            exist = monsterPartInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return monsterPartInfos[id].SubType;
+            }
+
+            return SubType.None;
         }
 
         public bool TryGetItemInfoWithType(string id,ItemType type, out ItemInfoModel itemInfo)
