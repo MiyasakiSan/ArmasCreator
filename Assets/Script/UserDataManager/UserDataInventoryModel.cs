@@ -12,7 +12,7 @@ namespace ArmasCreator.UserData
 
         public Dictionary<string, int> ConsumableItems = new Dictionary<string, int>();
 
-        public Dictionary<string, bool> EquipableItems = new Dictionary<string, bool>();
+        public Dictionary<SubType, EquipmentModel> EquipableItems = new Dictionary<SubType, EquipmentModel>();
 
         public Dictionary<string, int> CraftableItems = new Dictionary<string, int>();
 
@@ -26,7 +26,7 @@ namespace ArmasCreator.UserData
         public void SetupUserInventory(UserSaveDataModel saveModel)
         {
             ConsumableItems = new Dictionary<string, int>();
-            EquipableItems = new Dictionary<string, bool>();
+            EquipableItems = new Dictionary<SubType, EquipmentModel>();
             CraftableItems = new Dictionary<string, int>();
             Recipes = new List<string>();
 
@@ -36,7 +36,7 @@ namespace ArmasCreator.UserData
             Recipes = saveModel.recipes;
         }
 
-        public void AddItem(string itemId, int amount)
+        public void AddItem(string itemId, SubType subType = SubType.None, int amount = 0)
         {
             var gameDataManager = SharedContext.Instance.Get<GameDataManager>();
 
@@ -51,7 +51,7 @@ namespace ArmasCreator.UserData
                     }
                 case ItemType.Equipable:
                     {
-                        AddEquipItem(itemId);
+                        AddEquipItem(itemId, subType);
                         break;
                     }
                 case ItemType.Craftable:
@@ -107,25 +107,29 @@ namespace ArmasCreator.UserData
             userData.UserData.UpdateSaveInventory(ConsumableItems, EquipableItems, Recipes, CraftableItems);
         }
 
-        public void AddEquipItem(string itemId)
+        public void AddEquipItem(string itemId, SubType subType)
         {
-            if (EquipableItems.ContainsKey(itemId))
+            if (EquipableItems.ContainsKey(subType))
             {
-                EquipableItems[itemId] = false;
+                EquipableItems[subType].UnlockIds.Add(itemId);
             }
             else
             {
-                EquipableItems.Add(itemId, false);
+                EquipableItems.Add(subType, new EquipmentModel 
+                { 
+                    EquippedId = itemId,
+                    UnlockIds = new List<string>() { itemId }
+                });
             }
 
             userData.UserData.UpdateSaveInventory(ConsumableItems, EquipableItems, Recipes, CraftableItems);
         }
 
-        public void RemoveEquipItem(string itemId)
+        public void RemoveEquipItem(string itemId, SubType subType)
         {
-            if (EquipableItems.ContainsKey(itemId))
+            if (EquipableItems.ContainsKey(subType))
             {
-                EquipableItems.Remove(itemId);
+                EquipableItems[subType].UnlockIds.Remove(itemId);
             }
             else
             {
@@ -184,9 +188,9 @@ namespace ArmasCreator.UserData
             userData.UserData.UpdateSaveInventory(ConsumableItems, EquipableItems, Recipes, CraftableItems);
         }
 
-        public void SetEquipItem(string itemId)
+        public void SetEquipItem(string itemId, SubType subType)
         {
-            bool exist = EquipableItems.TryGetValue(itemId,out bool isEquipped);
+            bool exist = EquipableItems.TryGetValue(subType, out var equipmentInfo);
 
             if(!exist) 
             { 
@@ -194,7 +198,7 @@ namespace ArmasCreator.UserData
                 return;
             }
 
-            EquipableItems[itemId] = true;
+            EquipableItems[subType].EquippedId = itemId;
 
             userData.UserData.UpdateSaveInventory(ConsumableItems, EquipableItems, Recipes, CraftableItems);
         }
@@ -203,11 +207,9 @@ namespace ArmasCreator.UserData
         {
             List<string> equipItemList = new List<string>();
 
-            foreach(KeyValuePair<string, bool> item in EquipableItems)
+            foreach(KeyValuePair<SubType, EquipmentModel> item in EquipableItems)
             {
-                if (!item.Value) { continue; }
-
-                equipItemList.Add(item.Key);
+                equipItemList.Add(item.Value.EquippedId);
             }
 
             return equipItemList;

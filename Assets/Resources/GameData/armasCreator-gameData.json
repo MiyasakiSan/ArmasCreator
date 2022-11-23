@@ -362,5 +362,67 @@
     "init_consume_items" :
     [
         "bandage","cola_drink"
-    ]
+    ],
+    "character_config" :
+    {
+        "main":
+        {
+            "id" : "main",
+            "name" : "",
+            "asset" : "main",
+            "icon" : "main",
+            "atlas_icon" : "AtlasCharacterIcon"
+        },
+        "kotaro":
+        {
+            "id" : "kotaro",
+            "name" : "kotaro",
+            "asset" : "kotaro",
+            "icon" : "kotaro",
+            "atlas_icon" : "AtlasCharacterIcon"
+        }
+    },
+    "dialogue_config":
+    {
+        "test_start" :
+        {
+            "id" : "test_start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : "hell oo . oooo  My name is Kotaroo oo "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "how are youuu  today   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "hello Kotaro my name is {0}"
+                }
+            ]
+        }
+    },
+    "quest_config" :
+    {
+        "test":
+        {
+            "id" : "test",
+            "name" : "test",
+            "type" : "main",
+            "sub_type" : "Destination",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "next_quest_id": "",
+            "start_dialogue_id" : "test_start",
+            "end_dialogue_id" : "test_end"
+        }
+    }
 }
