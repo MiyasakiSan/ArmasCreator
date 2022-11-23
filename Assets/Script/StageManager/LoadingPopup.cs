@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using ArmasCreator.Utilities;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
 
 namespace ArmasCreator.UI
 {
@@ -52,6 +53,11 @@ namespace ArmasCreator.UI
             currentValue = 0;
 
             loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+            var cameraData = Camera.main.GetUniversalAdditionalCameraData();
+            if (cameraData.cameraStack.Count > 0)
+            {
+                cameraData.cameraStack[0].gameObject.SetActive(false);
+            }
 
             var bgIndex = UnityEngine.Random.Range(0, bgList.Count - 1);
             bgImage.sprite = bgList[bgIndex];

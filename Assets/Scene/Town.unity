@@ -6483,8 +6483,9 @@ GameObject:
   m_Component:
   - component: {fileID: 162468119}
   - component: {fileID: 162468120}
+  - component: {fileID: 162468121}
   m_Layer: 5
-  m_Name: Setting (1)
+  m_Name: ReturnToTiltleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6525,6 +6526,50 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &162468121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162468118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 3
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &181225640
 GameObject:
   m_ObjectHideFlags: 0
@@ -7668,6 +7713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainContent: {fileID: 1170417483}
+  btn_ToTitle: {fileID: 162468121}
 --- !u!224 &312536548 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4437796810902140038, guid: 2f9ac771f1c1723479ec139f879592c3,
@@ -8218,6 +8264,8 @@ MonoBehaviour:
   top_btn_Quest: {fileID: 972879961}
   top_btn_Challenges: {fileID: 738447776}
   top_btn_Option: {fileID: 1911556787}
+  backButton: {fileID: 810622423}
+  profileContent: {fileID: 1142744367}
 --- !u!1 &399915033
 GameObject:
   m_ObjectHideFlags: 0
@@ -9330,6 +9378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0580952abd2eab4abcd6cfaac81c000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  profilePanelController: {fileID: 395794448}
+  optionPanelController: {fileID: 298728333}
   CurrentGameplays: 0
 --- !u!4 &630982746
 Transform:
@@ -9342,7 +9392,8 @@ Transform:
   m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2117697244}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18412,7 +18463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1142744368
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20055,7 +20106,6 @@ Transform:
   - {fileID: 281538834}
   - {fileID: 1101022271}
   - {fileID: 1708258649}
-  - {fileID: 2117697244}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34724,8 +34774,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 395794447}
-  m_Father: {fileID: 1518734395}
-  m_RootOrder: 3
+  m_Father: {fileID: 630982746}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

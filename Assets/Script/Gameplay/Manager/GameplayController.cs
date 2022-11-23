@@ -21,6 +21,10 @@ namespace ArmasCreator.Gameplay
             Challenge,
             Result
         }
+        [SerializeField]
+        private ProfilePanelController profilePanelController;
+        [SerializeField]
+        private OptionPanelController optionPanelController;
 
         public Gameplays CurrentGameplays;
 
@@ -75,6 +79,10 @@ namespace ArmasCreator.Gameplay
             {
                 EnterGameplayResult();
             }
+            if(Input.GetKeyUp(KeyCode.Escape))
+            {
+                profilePanelController.OpenProfilePanel();
+            }
         }
 
         public void EnterChallengeStage(QuestInfo questInfo)
@@ -104,10 +112,17 @@ namespace ArmasCreator.Gameplay
             loadingPopup.LoadSceneAsync("Town");
         }
 
+        public void ReturnToMainmenu()
+        {
+            Dispose();
+            loadingPopup.LoadSceneAsync("Mainmenu");
+        }
+
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
             currentQuestInfo = null;
+            optionPanelController.RemoveListener();
             Destroy(this.gameObject);
         }
 

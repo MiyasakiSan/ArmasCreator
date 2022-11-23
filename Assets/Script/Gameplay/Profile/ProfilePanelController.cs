@@ -43,9 +43,19 @@ namespace ArmasCreator.UI
         private TopPanelButton top_btn_Challenges;
         [SerializeField]
         private TopPanelButton top_btn_Option;
+        [SerializeField]
+        private Button backButton;
+
+        [Header("ProfileContent")]
+        [SerializeField]
+        private GameObject profileContent;
 
         private void Awake()
         {
+            backButton.onClick.AddListener(() =>
+            {
+                CloseProfilePanel();
+            });
             btn_Item.onClick.AddListener(() =>
             {
                 DeActivateAllContent();
@@ -85,12 +95,14 @@ namespace ArmasCreator.UI
         public void OpenProfilePanel()
         {
             DeActivateAllContent();
+            profileContent.SetActive(true);
             optionPanelController.ShowOptionPanel();
             top_btn_Option.OnSelected();
         }
 
         public void CloseProfilePanel()
         {
+            profileContent.SetActive(false);
             DeActivateAllContent();
         }
 
