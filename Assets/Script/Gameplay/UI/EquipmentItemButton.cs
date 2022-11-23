@@ -39,6 +39,8 @@ namespace ArmasCreator.UI
 
         private string thisItemID;
 
+        private SubType thisItemSubType;
+
         protected override void Awake()
         {
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
@@ -92,7 +94,7 @@ namespace ArmasCreator.UI
             }
 
             displayItemImage.gameObject.SetActive(true);
-            displayItemDetail.gameObject.SetActive(false);
+            displayItemDetail.gameObject.SetActive(true);
 
             SetItemInfo(itemInfo);
         }
@@ -110,11 +112,16 @@ namespace ArmasCreator.UI
         {
             thisItemID = newItemID;
         }
+        public void SetThisItemSubType(SubType newSubType)
+        {
+            thisItemSubType = newSubType;
+        }
 
         public void UpdateUserData()
         {
-            userDataManager.UserData.UserDataInventory.SetEquipItem(thisItemID);
-            userDataManager.UserData.UserDataInventory.RemoveEquipItem(thisItemID);
+            var allInitEquip = gameDataManager.GetAllInitEquipItems();
+
+            userDataManager.UserData.UserDataInventory.SetEquipItem(thisItemID,thisItemSubType);
         }
 
         private IEnumerator LoadingSpriteRoutine()
@@ -130,7 +137,7 @@ namespace ArmasCreator.UI
             var sprite = atlas.GetSprite(itemInfo.IconName);
 
             displayItemImage.sprite = sprite;
-            displayItemDetail.gameObject.SetActive(userDataManager.UserData.UserDataInventory.EquipableItems[itemInfo.ID]);
+            displayItemDetail.gameObject.SetActive(userDataManager.UserData.UserDataInventory.EquipableItems[thisItemSubType].EquippedId == itemInfo.ID);
 
             // Set other information here
 

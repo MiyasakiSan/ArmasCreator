@@ -32,50 +32,47 @@ namespace ArmasCreator.UI
         public void SetAllEquipmentData()
         {
             var equipmentItemData = userDataManager.UserData.UserDataInventory.EquipableItems;
-            foreach (string equipmentID in equipmentItemData.Keys)
+            foreach (SubType equipmentType in equipmentItemData.Keys)
             {
-                var exist = gameDataManager.TryGetItemInfoWithType(equipmentID, ItemType.Equipable, out var itemInfo);
+                var exist = gameDataManager.TryGetItemInfoWithType(equipmentItemData[equipmentType].EquippedId, ItemType.Equipable, out var itemInfo);
 
                 if (!exist)
                 {
-                    Debug.LogError("Fail to find info for a itemId: " + equipmentID);
+                    Debug.LogError("Fail to find info for a SubType: " + equipmentType);
                     return;
                 }
-                if (equipmentItemData[equipmentID])
+                switch (itemInfo.SubType)
                 {
-                    switch (itemInfo.SubType)
-                    {
-                        case SubType.Weapon:
-                            {
-                                SetWeaponEquipment(equipmentID);
-                                break;
-                            }
-                        case SubType.Helmet:
-                            {
-                                SetHelmetEquipment(equipmentID);
-                                break;
-                            }
-                        case SubType.Shirt:
-                            {
-                                SetShirtEquipment(equipmentID);
-                                break;
-                            }
-                        case SubType.Glove:
-                            {
-                                SetGloveEquipment(equipmentID);
-                                break;
-                            }
-                        case SubType.Pant:
-                            {
-                                SetPantEquipment(equipmentID);
-                                break;
-                            }
-                        case SubType.Shoes:
-                            {
-                                SetShoesEquipment(equipmentID);
-                                break;
-                            }
-                    }
+                    case SubType.Weapon:
+                        {
+                            SetWeaponEquipment(equipmentItemData[equipmentType].EquippedId);
+                            break;
+                        }
+                    case SubType.Helmet:
+                        {
+                            SetHelmetEquipment(equipmentItemData[equipmentType].EquippedId);
+                            break;
+                        }
+                    case SubType.Shirt:
+                        {
+                            SetShirtEquipment(equipmentItemData[equipmentType].EquippedId);
+                            break;
+                        }
+                    case SubType.Glove:
+                        {
+                            SetGloveEquipment(equipmentItemData[equipmentType].EquippedId);
+                            break;
+                        }
+                    case SubType.Pant:
+                        {
+                            SetPantEquipment(equipmentItemData[equipmentType].EquippedId);
+                            break;
+                        }
+                    case SubType.Shoes:
+                        {
+                            SetShoesEquipment(equipmentItemData[equipmentType].EquippedId);
+                            break;
+                        }
                 }
             }
         }

@@ -109,11 +109,7 @@ namespace ArmasCreator.UI
             var sprite = atlas.GetSprite(itemInfo.IconName);
 
             displayItemImage.sprite = sprite;
-            if (itemInfo.Type == ItemType.Equipable)
-            {
-                displayItemDetail.gameObject.SetActive(userDataManager.UserData.UserDataInventory.EquipableItems["test01"]);
-            }
-            else if(itemInfo.Type == ItemType.Consumable)
+            if(itemInfo.Type == ItemType.Consumable)
             {
                 displayItemDetail.text = userDataManager.UserData.UserDataInventory.ConsumableItems["test01"].ToString();
             }

@@ -64,45 +64,16 @@ namespace ArmasCreator.UI
         public void PopulateInventoryNode()
         {
             var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-            
-            foreach (string itemId in EquipmentItems.Keys)
+            foreach (SubType EquipmentType in EquipmentItems.Keys)
             {
-                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
-                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
-                ins_equipmentItem.SetDisplayItem(itemId);
-                ins_equipmentItem.SetThisItemID(itemId);
-                ins_equipmentItem.onClick.AddListener(() =>
-                {
-                    ins_equipmentItem.UpdateUserData();
-                    equipmentBoxController.SetAllEquipmentData();
-                });
-                listEquipment.Add(ins_equipmentItem.gameObject);
-            }
-            for (int BlankNode = 0; BlankNode < 48 - EquipmentItems.Keys.Count; BlankNode++)
-            {
-                listEquipment.Add(Instantiate(blankItemNodePrefab, inventoryBoxContentTransform));
-            }
-        }
-
-        public void PopulateWeaponNode()
-        {
-            var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-
-            foreach (string itemId in EquipmentItems.Keys)
-            {
-                var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
-
-                if (!exist)
-                {
-                    Debug.LogError("Fail to find info for a itemId: " + itemId);
-                    return;
-                }
-                if (itemInfo.SubType == SubType.Weapon)
+                List<string> equipmentIDList = EquipmentItems[EquipmentType].UnlockIds;
+                foreach (string itemId in equipmentIDList)
                 {
                     GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                     EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
                     ins_equipmentItem.SetDisplayItem(itemId);
                     ins_equipmentItem.SetThisItemID(itemId);
+                    ins_equipmentItem.SetThisItemSubType(EquipmentType);
                     ins_equipmentItem.onClick.AddListener(() =>
                     {
                         ins_equipmentItem.UpdateUserData();
@@ -112,6 +83,34 @@ namespace ArmasCreator.UI
                     });
                     listEquipment.Add(ins_equipmentItem.gameObject);
                 }
+            }
+            int listEquipmentAmount = listEquipment.Count;
+            for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
+            {
+                listEquipment.Add(Instantiate(blankItemNodePrefab, inventoryBoxContentTransform));
+            }
+        }
+
+        public void PopulateWeaponNode()
+        {
+            var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
+
+            List<string> equipmentIDList = EquipmentItems[SubType.Weapon].UnlockIds;
+            foreach (string itemId in equipmentIDList)
+            {
+                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
+                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetDisplayItem(itemId);
+                ins_equipmentItem.SetThisItemID(itemId);
+                ins_equipmentItem.SetThisItemSubType(SubType.Weapon);
+                ins_equipmentItem.onClick.AddListener(() =>
+                {
+                    ins_equipmentItem.UpdateUserData();
+                    equipmentBoxController.SetAllEquipmentData();
+                    ClearAllNode();
+                    PopulateInventoryNode();
+                });
+                listEquipment.Add(ins_equipmentItem.gameObject);
             }
             int listEquipmentAmount = listEquipment.Count;
             for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
@@ -123,31 +122,23 @@ namespace ArmasCreator.UI
         public void PopulateHelmetNode()
         {
             var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-            
-            foreach (string itemId in EquipmentItems.Keys)
-            {
-                var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
 
-                if (!exist)
+            List<string> equipmentIDList = EquipmentItems[SubType.Helmet].UnlockIds;
+            foreach (string itemId in equipmentIDList)
+            {
+                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
+                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetDisplayItem(itemId);
+                ins_equipmentItem.SetThisItemID(itemId);
+                ins_equipmentItem.SetThisItemSubType(SubType.Helmet);
+                ins_equipmentItem.onClick.AddListener(() =>
                 {
-                    Debug.LogError("Fail to find info for a itemId: " + itemId);
-                    return;
-                }
-                if (itemInfo.SubType == SubType.Helmet)
-                {
-                    GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
-                    EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
-                    ins_equipmentItem.SetDisplayItem(itemId);
-                    ins_equipmentItem.SetThisItemID(itemId);
-                    ins_equipmentItem.onClick.AddListener(() =>
-                    {
-                        ins_equipmentItem.UpdateUserData();
-                        equipmentBoxController.SetAllEquipmentData();
-                        ClearAllNode();
-                        PopulateInventoryNode();
-                    });
-                    listEquipment.Add(ins_equipmentItem.gameObject);
-                }
+                    ins_equipmentItem.UpdateUserData();
+                    equipmentBoxController.SetAllEquipmentData();
+                    ClearAllNode();
+                    PopulateInventoryNode();
+                });
+                listEquipment.Add(ins_equipmentItem.gameObject);
             }
             int listEquipmentAmount = listEquipment.Count;
             for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
@@ -159,31 +150,23 @@ namespace ArmasCreator.UI
         public void PopulateShirtNode()
         {
             var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-            
-            foreach (string itemId in EquipmentItems.Keys)
-            {
-                var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
 
-                if (!exist)
+            List<string> equipmentIDList = EquipmentItems[SubType.Shirt].UnlockIds;
+            foreach (string itemId in equipmentIDList)
+            {
+                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
+                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetDisplayItem(itemId);
+                ins_equipmentItem.SetThisItemID(itemId);
+                ins_equipmentItem.SetThisItemSubType(SubType.Shirt);
+                ins_equipmentItem.onClick.AddListener(() =>
                 {
-                    Debug.LogError("Fail to find info for a itemId: " + itemId);
-                    return;
-                }
-                if (itemInfo.SubType == SubType.Shirt)
-                {
-                    GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
-                    EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
-                    ins_equipmentItem.SetDisplayItem(itemId);
-                    ins_equipmentItem.SetThisItemID(itemId);
-                    ins_equipmentItem.onClick.AddListener(() =>
-                    {
-                        ins_equipmentItem.UpdateUserData();
-                        equipmentBoxController.SetAllEquipmentData();
-                        ClearAllNode();
-                        PopulateInventoryNode();
-                    });
-                    listEquipment.Add(ins_equipmentItem.gameObject);
-                }
+                    ins_equipmentItem.UpdateUserData();
+                    equipmentBoxController.SetAllEquipmentData();
+                    ClearAllNode();
+                    PopulateInventoryNode();
+                });
+                listEquipment.Add(ins_equipmentItem.gameObject);
             }
             int listEquipmentAmount = listEquipment.Count;
             for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
@@ -195,31 +178,23 @@ namespace ArmasCreator.UI
         public void PopulateGloveNode()
         {
             var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-            
-            foreach (string itemId in EquipmentItems.Keys)
-            {
-                var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
 
-                if (!exist)
+            List<string> equipmentIDList = EquipmentItems[SubType.Glove].UnlockIds;
+            foreach (string itemId in equipmentIDList)
+            {
+                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
+                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetDisplayItem(itemId);
+                ins_equipmentItem.SetThisItemID(itemId);
+                ins_equipmentItem.SetThisItemSubType(SubType.Glove);
+                ins_equipmentItem.onClick.AddListener(() =>
                 {
-                    Debug.LogError("Fail to find info for a itemId: " + itemId);
-                    return;
-                }
-                if (itemInfo.SubType == SubType.Glove)
-                {
-                    GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
-                    EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
-                    ins_equipmentItem.SetDisplayItem(itemId);
-                    ins_equipmentItem.SetThisItemID(itemId);
-                    ins_equipmentItem.onClick.AddListener(() =>
-                    {
-                        ins_equipmentItem.UpdateUserData();
-                        equipmentBoxController.SetAllEquipmentData();
-                        ClearAllNode();
-                        PopulateInventoryNode();
-                    });
-                    listEquipment.Add(ins_equipmentItem.gameObject);
-                }
+                    ins_equipmentItem.UpdateUserData();
+                    equipmentBoxController.SetAllEquipmentData();
+                    ClearAllNode();
+                    PopulateInventoryNode();
+                });
+                listEquipment.Add(ins_equipmentItem.gameObject);
             }
             int listEquipmentAmount = listEquipment.Count;
             for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
@@ -231,31 +206,23 @@ namespace ArmasCreator.UI
         public void PopulatePantNode()
         {
             var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-            
-            foreach (string itemId in EquipmentItems.Keys)
-            {
-                var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
 
-                if (!exist)
+            List<string> equipmentIDList = EquipmentItems[SubType.Pant].UnlockIds;
+            foreach (string itemId in equipmentIDList)
+            {
+                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
+                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetDisplayItem(itemId);
+                ins_equipmentItem.SetThisItemID(itemId);
+                ins_equipmentItem.SetThisItemSubType(SubType.Pant);
+                ins_equipmentItem.onClick.AddListener(() =>
                 {
-                    Debug.LogError("Fail to find info for a itemId: " + itemId);
-                    return;
-                }
-                if (itemInfo.SubType == SubType.Pant)
-                {
-                    GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
-                    EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
-                    ins_equipmentItem.SetDisplayItem(itemId);
-                    ins_equipmentItem.SetThisItemID(itemId);
-                    ins_equipmentItem.onClick.AddListener(() =>
-                    {
-                        ins_equipmentItem.UpdateUserData();
-                        equipmentBoxController.SetAllEquipmentData();
-                        ClearAllNode();
-                        PopulateInventoryNode();
-                    });
-                    listEquipment.Add(ins_equipmentItem.gameObject);
-                }
+                    ins_equipmentItem.UpdateUserData();
+                    equipmentBoxController.SetAllEquipmentData();
+                    ClearAllNode();
+                    PopulateInventoryNode();
+                });
+                listEquipment.Add(ins_equipmentItem.gameObject);
             }
             int listEquipmentAmount = listEquipment.Count;
             for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
@@ -267,31 +234,23 @@ namespace ArmasCreator.UI
         public void PopulateShoesNode()
         {
             var EquipmentItems = userDataManager.UserData.UserDataInventory.EquipableItems;
-            
-            foreach (string itemId in EquipmentItems.Keys)
-            {
-                var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
 
-                if (!exist)
+            List<string> equipmentIDList = EquipmentItems[SubType.Shoes].UnlockIds;
+            foreach (string itemId in equipmentIDList)
+            {
+                GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
+                EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetDisplayItem(itemId);
+                ins_equipmentItem.SetThisItemID(itemId);
+                ins_equipmentItem.SetThisItemSubType(SubType.Shoes);
+                ins_equipmentItem.onClick.AddListener(() =>
                 {
-                    Debug.LogError("Fail to find info for a itemId: " + itemId);
-                    return;
-                }
-                if (itemInfo.SubType == SubType.Shoes)
-                {
-                    GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
-                    EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
-                    ins_equipmentItem.SetDisplayItem(itemId);
-                    ins_equipmentItem.SetThisItemID(itemId);
-                    ins_equipmentItem.onClick.AddListener(() =>
-                    {
-                        ins_equipmentItem.UpdateUserData();
-                        equipmentBoxController.SetAllEquipmentData();
-                        ClearAllNode();
-                        PopulateInventoryNode();
-                    });
-                    listEquipment.Add(ins_equipmentItem.gameObject);
-                }
+                    ins_equipmentItem.UpdateUserData();
+                    equipmentBoxController.SetAllEquipmentData();
+                    ClearAllNode();
+                    PopulateInventoryNode();
+                });
+                listEquipment.Add(ins_equipmentItem.gameObject);
             }
             int listEquipmentAmount = listEquipment.Count;
             for (int BlankNode = 0; BlankNode < 48 - listEquipmentAmount; BlankNode++)
