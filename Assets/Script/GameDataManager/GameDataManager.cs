@@ -11,6 +11,7 @@ using ArmasCreator.Utilities;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ArmasCreator.UI;
+using ArmasCreator.UserData;
 
 namespace ArmasCreator.GameData
 {
@@ -33,11 +34,29 @@ namespace ArmasCreator.GameData
         [GameData("equipable_items")]
         private Dictionary<string, EquipableItemModel> equipableitemInfos;
 
+        [GameData("monster_parts")]
+        private Dictionary<string, ItemInfoModel> monsterPartInfos;
+
+        [GameData("recipes")]
+        private Dictionary<string, RecipeModel> recipeInfos;
+
         [GameData("init_equip_items")]
         private string[] initEquipItems;
 
         [GameData("init_consume_items")]
         private string[] initConsumeItems;
+
+        [GameData("achievement_config")]
+        private Dictionary<string, AchievementModel> achievementConfig;
+
+        [GameData("dialogue_config")]
+        private Dictionary<string, DialogueModel> dialogueConfig;
+
+        [GameData("quest_config")]
+        private Dictionary<string, QuestModel> questConfig;
+
+        [GameData("character_config")]
+        private Dictionary<string, CharacterModel> characterConfig;
 
         [GameData("game_info")]
         private GameInfoModel gameInfo;
@@ -142,13 +161,19 @@ namespace ArmasCreator.GameData
             }
         }
 
-        public Dictionary<string, bool> GetAllInitEquipItems()
+        #region Item info
+        public Dictionary<SubType, EquipmentModel> GetAllInitEquipItems()
         {
-            var initItemDict = new Dictionary<string, bool>();
+            var initItemDict = new Dictionary<SubType, EquipmentModel>();
 
-            foreach(string itemId in initEquipItems)
+            foreach (string itemId in initEquipItems)
             {
-                initItemDict.Add(itemId, true);
+                var subType = equipableitemInfos[itemId].SubType;
+                initItemDict.Add(subType, new EquipmentModel 
+                { 
+                    EquippedId = itemId,
+                    UnlockIds = new List<string>() { itemId }
+                });
             }
 
             return initItemDict;
@@ -164,6 +189,205 @@ namespace ArmasCreator.GameData
             }
 
             return initItemDict;
+        } 
+
+        public bool TryGetEquipItemInfoWithSubType(string id, SubType itemType, out EquipableItemModel equipItemInfo)
+        {
+            bool exist = equipableitemInfos.TryGetValue(id, out EquipableItemModel itemInfo);
+
+            if (!exist) 
+            {
+                Debug.LogError($"{id} doesn't exist in equipable items");
+
+                equipItemInfo = new EquipableItemModel();
+
+                return false; 
+            }
+
+            if (itemInfo.SubType != SubType.Weapon)
+            {
+                equipItemInfo = new EquipableItemModel();
+
+                return false;
+            }
+
+            equipItemInfo = itemInfo;
+            return true;
+        }
+
+        public bool TryGetEquipItemInfoById(string id, out EquipableItemModel equipItemInfo)
+        {
+            bool exist = equipableitemInfos.TryGetValue(id, out EquipableItemModel itemInfo);
+
+            if (!exist)
+            {
+                Debug.LogError($"{id} doesn't exist in equipable items");
+
+                equipItemInfo = new EquipableItemModel();
+
+                return false;
+            }
+
+            equipItemInfo = itemInfo;
+            return true;
+        }
+
+        public ItemType GetItemType(string id)
+        {
+            bool exist = consumeableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return ItemType.Consumable;
+            }
+
+            exist = equipableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return ItemType.Equipable;
+            }
+
+            exist = monsterPartInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return ItemType.Craftable;
+            }
+
+            return ItemType.Recipe;
+        }
+
+        public SubType GetItemSubType(string id)
+        {
+            bool exist = consumeableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return consumeableitemInfos[id].SubType;
+            }
+
+            exist = equipableitemInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return equipableitemInfos[id].SubType;
+            }
+
+            exist = monsterPartInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return monsterPartInfos[id].SubType;
+            }
+
+            return SubType.None;
+        }
+
+        public bool TryGetItemInfoWithType(string id,ItemType type, out ItemInfoModel itemInfo)
+        {
+            switch (type)
+            {
+                case ItemType.Consumable:
+                    {
+                        if (!consumeableitemInfos.ContainsKey(id)) 
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = consumeableitemInfos[id];
+                        return true;
+                    }
+                case ItemType.Equipable:
+                    {
+                        if (!equipableitemInfos.ContainsKey(id))
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = equipableitemInfos[id];
+                        return true;
+                    }
+                case ItemType.Craftable:
+                    {
+                        if (!monsterPartInfos.ContainsKey(id))
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = monsterPartInfos[id];
+                        return true;
+                    }
+                case ItemType.Recipe:
+                    {
+                        if (!recipeInfos.ContainsKey(id))
+                        {
+                            itemInfo = new ItemInfoModel();
+                            return false;
+                        }
+
+                        itemInfo = recipeInfos[id];
+                        return true;
+                    }
+                default:
+                    {
+                        itemInfo = new ItemInfoModel();
+                        return false;
+                    }
+            }
+        }
+
+
+
+        #endregion
+
+        #region Achievement
+        public Dictionary<string, int> GetAllInitAchievements()
+        {
+            var initAchievement = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, AchievementModel> achievement in achievementConfig)
+            {
+                initAchievement.Add(achievement.Key, 0);
+            }
+
+            return initAchievement;
+        } 
+
+        public bool TryGetAchievementInfo(string achievementId, out AchievementModel achievementInfo)
+        {
+            bool exist = achievementConfig.TryGetValue(achievementId, out AchievementModel achievement);
+
+            if (!exist) 
+            { 
+                achievementInfo = new AchievementModel();
+                return false; 
+            }
+
+            achievementInfo = achievement;
+            return true;
+        }
+
+        #endregion
+
+        public bool TryGetDialogueInfo(string dialogueId, out DialogueModel dialogueInfo)
+        {
+            bool exist = dialogueConfig.TryGetValue(dialogueId, out DialogueModel dialogue);
+
+            if (!exist)
+            {
+                Debug.LogError($"{dialogueId} doesn't exist in dialogue config");
+
+                dialogueInfo = new DialogueModel();
+
+                return false;
+            }
+
+            dialogueInfo = dialogue;
+            return true;
         }
     }
 }
