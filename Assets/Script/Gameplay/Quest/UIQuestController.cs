@@ -29,6 +29,9 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private GameObject questVcam;
 
+        [SerializeField]
+        private Animator anim;
+
         private GameDataManager gameDataManager;
 
         private void Awake()
@@ -38,96 +41,55 @@ namespace ArmasCreator.Gameplay
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         }
 
-        void Start()
-        {
-
-        }
-
-        public void NewPreset(string MapId)
-        {
-
-        }
-
-        public void LoadPresets()
-        {
-
-        }
-
-        public void SavePresets(string MapId)
-        {
-
-        }
-
-        public void SetSelectedMap(string mapId)
-        {
-            currentMapId = mapId;
-        }
-
-        public void SetATKMultiplier(float value)
-        {
-            atkMultiplier = value;
-        }
-
-        public void SetSpeedMultiplier(float value)
-        {
-            speedMultiplier = value;
-        }
-
-        public void SetHpMultiplier(float value)
-        {
-            hpMultiplier = value;
-        }
-
-        public void StartChallengeQuest()
-        {
-            bool exist = gameDataManager.TryGetSelectedChallengeModeInfo(currentMapId, out ChallengeModeModel challengeModeInfo);
-
-            if (!exist)
-            {
-                Debug.LogError("Doesn't have challenge info for map ID :" + currentMapId);
-                return;
-            }
-
-            var initATK = challengeModeInfo.DefaultAtk * atkMultiplier;
-            var initHP = challengeModeInfo.DefaultHp * hpMultiplier;
-            var initSPD = challengeModeInfo.DefaultSpeed * speedMultiplier;
-
-            QuestInfo startQuestInfo = new QuestInfo(currentMapId, challengeModeInfo.SceneName, initATK, initSPD, initHP, challengeModeInfo.Duration);
-
-            gameplayController.EnterChallengeStage(startQuestInfo);
-
-            //TODO : do something
-        }
-
         public void ShowQuestCanvas()
         {
             questVcam.SetActive(true);
-
             questCanvas.SetActive(true);
-            playerCanvas.SetActive(false);
+            anim.SetTrigger("show");
 
-            //TODO : Wait some shit
+            StartCoroutine(ShowUIQuest());
         }
 
         public void HideQuestCanvas()
         {
             questVcam.SetActive(false);
+            anim.SetTrigger("hide");
 
-            questCanvas.SetActive(false);
+            StartCoroutine(HideUIQuest());
+        }
+
+        IEnumerator ShowUIQuest()
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            playerCanvas.SetActive(false);
+
+            gameplayController.Interacable = false;
+        }
+
+        IEnumerator HideUIQuest()
+        {
+            yield return new WaitForSeconds(1.5f);
+
             playerCanvas.SetActive(true);
+            questCanvas.SetActive(false);
+
+            gameplayController.Interacable = true;
         }
 
         private void OnTriggerStay(Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) { return; }
 
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.T) && !questVcam.activeSelf)
             {
                 ShowQuestCanvas();
+                other.GetComponent<PlayerRpgMovement>().canMove = false;
             }
-            else if(Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.Escape) && questVcam.activeSelf)
             {
                 HideQuestCanvas();
+                other.GetComponent<PlayerRpgMovement>().canMove = true;
             }
         }
     }

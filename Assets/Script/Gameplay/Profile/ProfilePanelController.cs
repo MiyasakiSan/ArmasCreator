@@ -50,6 +50,8 @@ namespace ArmasCreator.UI
         [SerializeField]
         private GameObject profileContent;
 
+        public GameObject Profile => profileContent;
+
         private void Awake()
         {
             backButton.onClick.AddListener(() =>
