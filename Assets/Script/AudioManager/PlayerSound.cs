@@ -24,7 +24,7 @@ public class PlayerSound : NetworkBehaviour
 
     public void PlaySound(int Sound)
     {
-        audioSource.clip = PlayerSounds[Sound];
-        audioSource.Play();
+        //audioSource.clip = PlayerSounds[Sound];
+        //audioSource.Play();
     }
 }

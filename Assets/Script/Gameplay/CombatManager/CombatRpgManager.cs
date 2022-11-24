@@ -139,6 +139,11 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
 
+        if (animController.currentAnimatorStateInfoIsName("idle"))
+        {
+            ResetAnimBoolean();
+        }
+
         if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
             if (isSinglePlayer)
@@ -165,6 +170,19 @@ public class CombatRpgManager : NetworkBehaviour
             noOfClicks = 0;
         }
     }
+
+    private void ResetAnimBoolean()
+    {
+        if (isSinglePlayer)
+        {
+            animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", false);
+        }
+        else
+        {
+            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
+        }
+    }
+
     public void Melee_IsComboOutOfTime()
     {
         if (Time.time - lastClickedTime > maxComboDelay)
