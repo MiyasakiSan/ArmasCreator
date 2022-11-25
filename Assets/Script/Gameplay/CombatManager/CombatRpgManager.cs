@@ -7,6 +7,9 @@ using ArmasCreator.Utilities;
 
 public class CombatRpgManager : NetworkBehaviour 
 {
+    [SerializeField]
+    private PlayerRpgMovement playerMovement;
+
     public bool canBattle;
     public Weapon heldWeapon;
     public gameState currentGameState;
@@ -30,7 +33,7 @@ public class CombatRpgManager : NetworkBehaviour
     private float lastClickedTime = 0;
 
     [SerializeField]
-    private float maxComboDelay = 0.75f;
+    private float maxComboDelay = 0.5f;
 
     public enum gameState
     {
@@ -137,14 +140,14 @@ public class CombatRpgManager : NetworkBehaviour
     }
     public void Melee_CurrentAnimOutOfTime()
     {
-        if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
-
-        if (animController.currentAnimatorStateInfoIsName("idle"))
+        if (animController.currentAnimatorStateInfoIsName("Idle") && animController.currentAnimatorStateInfoTime <= 0.2f)
         {
             ResetAnimBoolean();
         }
 
-        if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
+        if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
+
+        else if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
             if (isSinglePlayer)
             {
@@ -155,8 +158,7 @@ public class CombatRpgManager : NetworkBehaviour
                 animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", false);
             }
         }
-
-        if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
+        else if(animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
             if (isSinglePlayer)
             {
@@ -166,6 +168,17 @@ public class CombatRpgManager : NetworkBehaviour
             {
                 animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
             }
+        }
+        else if(animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack3"))
+        {
+            if (isSinglePlayer)
+            {
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", false);
+            }
+            else
+            {
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit3", false);
+            }
 
             noOfClicks = 0;
         }
@@ -173,13 +186,24 @@ public class CombatRpgManager : NetworkBehaviour
 
     private void ResetAnimBoolean()
     {
+        playerMovement.ResetSpeedMultiplier();
+        playerMovement.ResetRotateMultiplier();
+
         if (isSinglePlayer)
         {
-            animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", false);
+            noOfClicks = 0;
+
+            if (animController.IsOverideCompleted()) { return; }
+
+            animController.CombatOveride(0);
         }
         else
         {
-            animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
+            noOfClicks = 0;
+
+            if (animController.IsOverideCompleted()) { return; }
+
+            animController.CombatOverideServerRpc(0);
         }
     }
 
@@ -197,32 +221,63 @@ public class CombatRpgManager : NetworkBehaviour
         noOfClicks++;
         noOfClicks = Mathf.Clamp(noOfClicks, 0, heldWeapon.comboCount);
         setComboBoolDependOn(noOfClicks);
+        SetCombatOveride();
+
+        playerMovement.SetSpeedMultiplierOnCombat();
+        playerMovement.SetRotateMultiplierOnCombat();
     }
+
+    private void SetCombatOveride()
+    {
+        if (isSinglePlayer)
+        {
+            animController.CombatOveride(1);
+        }
+        else
+        {
+            animController.CombatOverideServerRpc(1);
+        }
+    }
+
     public void setComboBoolDependOn(int num)
     {
         if (num == 1)
         {
             if (isSinglePlayer)
             {
-                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit{num}", true);
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", true);
             }
             else
             {
-                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", true);
             }
         }
 
-        if (animController.currentAnimatorStateInfoTime <= 0.7f) { return; }
+        if (animController.currentAnimatorStateInfoTime <= 0.3f) { return; }
 
-        if (num == 2 )
+        if (num > 1  && animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
             if (isSinglePlayer)
             {
-                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit{num}", true);
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", true);
             }
             else
             {
-                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit{num}", true);
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", true);
+            }
+        }
+
+        if (animController.currentAnimatorStateInfoTime <= 0.5f) { return; }
+
+        if (num > 2 && animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
+        {
+            if (isSinglePlayer)
+            {
+                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", true);
+            }
+            else
+            {
+                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit3", true);
             }
         }
     } 
