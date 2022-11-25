@@ -24,6 +24,12 @@ namespace ArmasCreator.Gameplay
 
         public Gameplays CurrentGameplays;
 
+        [SerializeField]
+        private ProfilePanelController profilePanelController;
+
+        [SerializeField]
+        private OptionPanelController optionPanelController;
+
         public delegate void OnLoadProgressionChangeCallback(float currentProgress);
         public OnLoadProgressionChangeCallback OnLoadProgressionChange;
 
@@ -52,6 +58,10 @@ namespace ArmasCreator.Gameplay
 
         private QuestInfo currentQuestInfo;
 
+        //TODO : implement player interaction
+
+        public bool Interacable;
+
         private void Awake()
         {
             SharedContext.Instance.Add(this);
@@ -62,6 +72,7 @@ namespace ArmasCreator.Gameplay
             gameModeController = SharedContext.Instance.Get<GameModeController>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
             loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
+            Interacable = true;
         }
 
         void Start()
@@ -71,9 +82,25 @@ namespace ArmasCreator.Gameplay
 
         void Update()
         {
-            if(Input.GetKeyUp(KeyCode.LeftShift) && Input.GetKeyUp(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
+            if (Input.GetKeyUp(KeyCode.LeftShift) && Input.GetKeyUp(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
             {
                 EnterGameplayResult();
+            }
+
+            if (!Interacable) { return; }
+
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                if (profilePanelController.Profile.activeSelf)
+                {
+                    profilePanelController.CloseProfilePanel();
+                    Time.timeScale = 1f;
+                }
+                else if (!profilePanelController.Profile.activeSelf)
+                {
+                    profilePanelController.OpenProfilePanel();
+                    Time.timeScale = 0f;
+                }
             }
         }
 
@@ -104,14 +131,20 @@ namespace ArmasCreator.Gameplay
             loadingPopup.LoadSceneAsync("Town");
         }
 
+        public void ReturnToMainmenu()
+        {
+            Dispose();
+            loadingPopup.LoadSceneAsync("Mainmenu");
+        }
+
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
             currentQuestInfo = null;
+            optionPanelController.RemoveListener();
+            Interacable = true;
             Destroy(this.gameObject);
         }
-
-
     }
 }
     

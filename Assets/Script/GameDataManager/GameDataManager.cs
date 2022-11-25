@@ -121,13 +121,14 @@ namespace ArmasCreator.GameData
             Debug.Log(challengesModeConfig);
         }
 
-        public void GetAllChallengeMapId(out List<string> mapId )
+        #region Challenge Info
+        public void GetAllChallengeMapId(out List<string> mapId)
         {
             mapId = new List<string>();
 
-            foreach(KeyValuePair<string,ChallengeModeModel> challengeInfo in challengesModeConfig)
+            foreach (KeyValuePair<string, ChallengeModeModel> challengeInfo in challengesModeConfig)
             {
-                if(mapId.Contains(challengeInfo.Value.MapID)) { continue; }
+                if (mapId.Contains(challengeInfo.Value.MapID)) { continue; }
 
                 mapId.Add(challengeInfo.Value.MapID);
             }
@@ -159,7 +160,8 @@ namespace ArmasCreator.GameData
             {
                 return true;
             }
-        }
+        } 
+        #endregion
 
         #region Item info
         public Dictionary<SubType, EquipmentModel> GetAllInitEquipItems()

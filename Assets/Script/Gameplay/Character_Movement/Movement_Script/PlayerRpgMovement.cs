@@ -46,8 +46,10 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     [SerializeField]
     private CinemachineFreeLook Vcam;
+
     [SerializeField]
     private Transform mainCam;
+
     public bool canMove;
     private Rigidbody rb;
 

@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ArmasCreator.UI
 {
@@ -15,6 +16,9 @@ namespace ArmasCreator.UI
     {
         [SerializeField]
         protected Image displayItemImage;
+
+        [SerializeField]
+        protected TMP_Text displayItemDetail;
 
         protected Sprite defaultSprite;
 
@@ -72,11 +76,13 @@ namespace ArmasCreator.UI
             if (/*!exist*/ false)
             {
                 Debug.LogError("Fail to find info for a itemId: " + itemId);
-                gameObject.SetActive(false);
+                displayItemImage.gameObject.SetActive(false);
+                displayItemDetail.gameObject.SetActive(false);
                 return;
             }
 
             displayItemImage.gameObject.SetActive(true);
+            displayItemDetail.gameObject.SetActive(false);
 
             SetItemInfo(itemInfo);
         }
@@ -103,6 +109,14 @@ namespace ArmasCreator.UI
             var sprite = atlas.GetSprite(itemInfo.IconName);
 
             displayItemImage.sprite = sprite;
+            if(itemInfo.Type == ItemType.Consumable)
+            {
+                displayItemDetail.text = userDataManager.UserData.UserDataInventory.ConsumableItems["test01"].ToString();
+            }
+            else if (itemInfo.Type == ItemType.Craftable)
+            {
+                displayItemDetail.text = userDataManager.UserData.UserDataInventory.CraftableItems["test01"].ToString();
+            }
 
             // Set other information here
 
