@@ -62,10 +62,10 @@ namespace ArmasCreator.UI
             var bgIndex = UnityEngine.Random.Range(0, bgList.Count - 1);
             bgImage.sprite = bgList[bgIndex];
 
-            while (!asyncOperation.isDone)
+            while (asyncOperation.isDone)
             {
-                targetValue = asyncOperation.progress / 0.9f;
-                currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.25f * Time.deltaTime);
+                //targetValue = asyncOperation.progress / 0.9f;
+                //currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.25f * Time.deltaTime);
                 loadingSlider.value = currentValue;
 
                 if (Mathf.Approximately(currentValue, 1))
