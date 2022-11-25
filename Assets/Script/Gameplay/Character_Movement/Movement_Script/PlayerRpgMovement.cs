@@ -18,8 +18,10 @@ public class PlayerRpgMovement : NetworkBehaviour
     [Header("Walk State Setting")]
     [Range(0f, 10f)]
     public float movementSpeed;
-    [Range(100f, 1000f)]
+    [Range(1f, 1000f)]
     public float speedMultiplier;
+
+    private float defaultSpeedMultiplier;
 
     [Header("Run State Setting")]
     [Range(0f, 10f)]
@@ -58,6 +60,8 @@ public class PlayerRpgMovement : NetworkBehaviour
     private LayerMask groundLayer;
     public float distanceToGround;
 
+    public bool CanRotate;
+
     public enum movementState
     {
         idle,walk,run
@@ -76,7 +80,9 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     void Start()
     {
-        if(isSinglePlayer) 
+        defaultSpeedMultiplier = speedMultiplier;
+
+        if (isSinglePlayer) 
         {
             rb = this.GetComponent<Rigidbody>();
             animController = this.GetComponent<MovementAnim>();
@@ -126,6 +132,27 @@ public class PlayerRpgMovement : NetworkBehaviour
             }
         }
     }
+
+    public void SetSpeedMultiplierOnCombat()
+    {
+        speedMultiplier = 1f;
+    }
+
+    public void ResetSpeedMultiplier()
+    {
+        speedMultiplier = defaultSpeedMultiplier;
+    }
+
+    public void SetRotateMultiplierOnCombat()
+    {
+        CanRotate = false;
+    }
+
+    public void ResetRotateMultiplier()
+    {
+        CanRotate = true;
+    }
+
     private void Movement()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -219,7 +246,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         while(timer < dodgeTimer)
         {
             float speed = dodgeCurve.Evaluate(timer);
-            Vector3 dir = (transform.forward * speed) + (Vector3.up * speed/3);
+            Vector3 dir = (transform.forward * speed); /*+ (Vector3.up * speed/3);*/
             rb.AddForce(dir *dodgeForce* Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
@@ -235,7 +262,11 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (CanRotate)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
@@ -245,7 +276,11 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (CanRotate)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         rb.AddForce(moveDir.normalized * movementSpeed_Run * speedMultiplier * Time.deltaTime);
