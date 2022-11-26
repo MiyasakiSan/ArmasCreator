@@ -187,7 +187,7 @@ public class CombatRpgManager : NetworkBehaviour
     private void ResetAnimBoolean()
     {
         playerMovement.ResetSpeedMultiplier();
-        playerMovement.ResetRotateMultiplier();
+        //playerMovement.ResetRotateMultiplier();
 
         if (isSinglePlayer)
         {
@@ -224,7 +224,7 @@ public class CombatRpgManager : NetworkBehaviour
         SetCombatOveride();
 
         playerMovement.SetSpeedMultiplierOnCombat();
-        playerMovement.SetRotateMultiplierOnCombat();
+        //playerMovement.SetRotateMultiplierOnCombat();
     }
 
     private void SetCombatOveride()
