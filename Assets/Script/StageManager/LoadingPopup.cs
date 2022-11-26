@@ -29,6 +29,9 @@ namespace ArmasCreator.UI
         private List<Sprite> bgList = new List<Sprite>();
 
         [SerializeField]
+        private LoadingPopupBackGround LPBG;
+
+        [SerializeField]
         private Image bgImage;
 
         private void Awake()
@@ -42,9 +45,16 @@ namespace ArmasCreator.UI
             StartCoroutine(LoadScene(sceneName));
         }
 
+        public void ChangeBG()
+        {
+            var bgIndex = UnityEngine.Random.Range(0, bgList.Count - 1);
+            bgImage.sprite = bgList[bgIndex];
+        }
+
         IEnumerator LoadScene(string sceneName)
         {
             yield return null;
+            LPBG.Reset();
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
             asyncOperation.allowSceneActivation = false;
             loadingCanvas.SetActive(true);
@@ -62,6 +72,8 @@ namespace ArmasCreator.UI
             var bgIndex = UnityEngine.Random.Range(0, bgList.Count - 1);
             bgImage.sprite = bgList[bgIndex];
 
+            LPBG.Fade();
+
             while (!asyncOperation.isDone)
             {
                 targetValue = asyncOperation.progress / 0.9f;
@@ -76,6 +88,7 @@ namespace ArmasCreator.UI
                 yield return null;
             }
 
+            LPBG.Reset();
             loadingCanvas.SetActive(false);
         }
     }

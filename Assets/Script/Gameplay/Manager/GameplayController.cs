@@ -135,6 +135,7 @@ namespace ArmasCreator.Gameplay
         {
             Dispose();
             loadingPopup.LoadSceneAsync("Mainmenu");
+            Time.timeScale = 1f;
         }
 
         private void Dispose()
