@@ -106,6 +106,7 @@ namespace ArmasCreator.UI
         {
             profileContent.SetActive(false);
             DeActivateAllContent();
+            Time.timeScale = 1f;
         }
 
         public void DeActivateAllContent()
