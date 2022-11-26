@@ -60,7 +60,8 @@ public class EnemyCombatManager : NetworkBehaviour
                 Gizmos.color = Color.green;
             }
 
-            GizmosExtensions.DrawWireArc(transform.position, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
+            var pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+            GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
         }
     }
 

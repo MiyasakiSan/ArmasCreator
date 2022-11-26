@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &87917125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1080310096639599333, guid: e766d72fe3ef62d4689474e850768b54,
+    type: 3}
+  m_PrefabInstance: {fileID: 6812654018128121989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &299403673
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +367,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 782b9e40314f7d44695ca59d902b2b7f, type: 3}
   - {fileID: 21300000, guid: bc76f5b4020a2f94aa4a8b4160ed4abf, type: 3}
   - {fileID: 21300000, guid: 988a8db95832e8f44b0d06832ea94896, type: 3}
+  LPBG: {fileID: 1256321133}
   bgImage: {fileID: 1256321130}
 --- !u!4 &887532257
 Transform:
@@ -514,12 +521,32 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6812654018128121989}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 87917125}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1256321133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87917125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428c6aa94cac56747979eb686092a28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LP: {fileID: 887532256}
+  anim: {fileID: 1256321134}
+--- !u!95 &1256321134 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1546021437498705928, guid: e766d72fe3ef62d4689474e850768b54,
+    type: 3}
+  m_PrefabInstance: {fileID: 6812654018128121989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1419171674
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +873,11 @@ PrefabInstance:
     - target: {fileID: 1080310096606315036, guid: e766d72fe3ef62d4689474e850768b54,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080310096639599334, guid: e766d72fe3ef62d4689474e850768b54,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
