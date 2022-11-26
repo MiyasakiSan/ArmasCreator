@@ -19,7 +19,7 @@ public class MoveToAttackPos : ActionNode
         }
 
         context.agent.speed = speed;
-        //context.agent.destination = blackboard.Target.transform.position;
+        context.agent.destination = blackboard.Target.transform.position;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
     }
@@ -31,24 +31,24 @@ public class MoveToAttackPos : ActionNode
     {
         return State.Success;
 
-        //if (context.agent.pathPending)
-        //{
-        //    context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
-        //    return State.Running;
-        //}
+        if (context.agent.pathPending)
+        {
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
+            return State.Running;
+        }
 
-        //if (context.agent.remainingDistance < tolerance)
-        //{
-        //    context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
-        //    return State.Success;
-        //}
+        if (context.agent.remainingDistance < tolerance)
+        {
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            return State.Success;
+        }
 
-        //if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
-        //{
-        //    context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
-        //    return State.Failure;
-        //}
+        if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
+        {
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            return State.Failure;
+        }
 
-        //return State.Running;
+        return State.Running;
     }
 }
