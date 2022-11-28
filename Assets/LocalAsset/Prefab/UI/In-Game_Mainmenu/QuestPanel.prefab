@@ -551,7 +551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -45}
+  m_AnchoredPosition: {x: 290, y: -45}
   m_SizeDelta: {x: 300, y: 600}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &961200766055625867
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200766364914722}
   questPanelController: {fileID: 961200767663928556}
   slotType: 0
-  Multiplier: 0
+  Multiplier: 1.5
 --- !u!114 &961200766364914722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200766468660354}
   questPanelController: {fileID: 961200767663928556}
   slotType: 0
-  Multiplier: 0
+  Multiplier: 0.5
 --- !u!114 &961200766468660354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,6 +1607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 961200766495483585}
+  - component: {fileID: 6660257759461583864}
   m_Layer: 5
   m_Name: ToggleGroup
   m_TagString: Untagged
@@ -1634,9 +1635,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -160}
+  m_AnchoredPosition: {x: 2230, y: -160}
   m_SizeDelta: {x: 129, y: 55}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &6660257759461583864
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200766495483590}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200766506108481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,7 +2070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -55}
+  m_AnchoredPosition: {x: -665, y: -55}
   m_SizeDelta: {x: 665, y: 90}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200766620069766
@@ -2629,7 +2642,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200766675474155}
   questPanelController: {fileID: 961200767663928556}
   slotType: 1
-  Multiplier: 0
+  Multiplier: 1
 --- !u!114 &961200766675474155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2787,7 +2800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -280, y: 25}
+  m_AnchoredPosition: {x: 235, y: 25}
   m_SizeDelta: {x: 235, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &961200766705551558
@@ -2871,7 +2884,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961200766705551559}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 961200767663928556}
+        m_TargetAssemblyTypeName: ArmasCreator.Gameplay.UI.QuestPanelController,
+          Assembly-CSharp
+        m_MethodName: SavePresets
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &961200766717835295
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3175,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200766762063522}
   questPanelController: {fileID: 961200767663928556}
   slotType: 0
-  Multiplier: 0
+  Multiplier: 1
 --- !u!114 &961200766762063522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3415,6 +3441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 961200766792165419}
+  - component: {fileID: 3494929582874606655}
   m_Layer: 5
   m_Name: ToggleGroup
   m_TagString: Untagged
@@ -3442,9 +3469,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -500}
+  m_AnchoredPosition: {x: 2230, y: -500}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &3494929582874606655
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200766792165416}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200766808342954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,6 +3631,7 @@ GameObject:
   - component: {fileID: 961200766815318546}
   - component: {fileID: 961200766815318572}
   - component: {fileID: 961200766815318573}
+  - component: {fileID: 8298539116250838629}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -3618,7 +3658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -330}
+  m_AnchoredPosition: {x: 2230, y: -330}
   m_SizeDelta: {x: 129, y: 55}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200766815318572
@@ -3659,6 +3699,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &8298539116250838629
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200766815318547}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200766872132911
 GameObject:
   m_ObjectHideFlags: 0
@@ -3958,6 +4010,7 @@ GameObject:
   - component: {fileID: 961200766979698859}
   - component: {fileID: 961200766979698853}
   - component: {fileID: 961200766979698858}
+  - component: {fileID: 5371965128432646838}
   m_Layer: 5
   m_Name: Attack
   m_TagString: Untagged
@@ -3984,7 +4037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -160}
+  m_AnchoredPosition: {x: 2230, y: -160}
   m_SizeDelta: {x: 129, y: 55}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200766979698853
@@ -4025,6 +4078,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &5371965128432646838
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200766979698856}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200767001514294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,6 +4099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 961200767001514289}
+  - component: {fileID: 5770171139747364128}
   m_Layer: 5
   m_Name: ToggleGroup
   m_TagString: Untagged
@@ -4061,9 +4127,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -330}
+  m_AnchoredPosition: {x: 2230, y: -330}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &5770171139747364128
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200767001514294}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200767018507981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,7 +4588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4637,7 +4715,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200767039668062}
   questPanelController: {fileID: 961200767663928556}
   slotType: 1
-  Multiplier: 0
+  Multiplier: 1.5
 --- !u!114 &961200767039668062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4795,7 +4873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -25, y: 25}
+  m_AnchoredPosition: {x: 235, y: 25}
   m_SizeDelta: {x: 235, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &961200767080305373
@@ -4879,7 +4957,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961200767080305346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 961200767663928556}
+        m_TargetAssemblyTypeName: ArmasCreator.Gameplay.UI.QuestPanelController,
+          Assembly-CSharp
+        m_MethodName: StartChallengeQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &961200767099210184
 GameObject:
   m_ObjectHideFlags: 0
@@ -5398,7 +5489,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200767123635038}
   questPanelController: {fileID: 961200767663928556}
   slotType: 2
-  Multiplier: 0
+  Multiplier: 1.5
 --- !u!114 &961200767123635038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5553,7 +5644,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200767159364720}
   questPanelController: {fileID: 961200767663928556}
   slotType: 1
-  Multiplier: 0
+  Multiplier: 0.5
 --- !u!114 &961200767159364720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5925,7 +6016,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -175}
+  m_AnchoredPosition: {x: -665, y: -175}
   m_SizeDelta: {x: 665, y: 90}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200767196355074
@@ -6559,7 +6650,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200767423837607}
   questPanelController: {fileID: 961200767663928556}
   slotType: 2
-  Multiplier: 0
+  Multiplier: 0.5
 --- !u!114 &961200767423837607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6766,6 +6857,7 @@ GameObject:
   - component: {fileID: 961200767471073169}
   - component: {fileID: 961200767471073171}
   - component: {fileID: 961200767471073168}
+  - component: {fileID: 1711406788577718159}
   m_Layer: 5
   m_Name: Speed
   m_TagString: Untagged
@@ -6792,7 +6884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -500}
+  m_AnchoredPosition: {x: 2230, y: -500}
   m_SizeDelta: {x: 129, y: 55}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200767471073171
@@ -6833,6 +6925,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &1711406788577718159
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200767471073174}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200767500974919
 GameObject:
   m_ObjectHideFlags: 0
@@ -7459,7 +7563,7 @@ MonoBehaviour:
   adjustButton: {fileID: 961200767644394675}
   questPanelController: {fileID: 961200767663928556}
   slotType: 2
-  Multiplier: 0
+  Multiplier: 1
 --- !u!114 &961200767644394675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7790,7 +7894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 370}
   m_SizeDelta: {x: 210, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &961200767740782113
@@ -8039,7 +8143,7 @@ GameObject:
   - component: {fileID: 961200767833432315}
   - component: {fileID: 961200767833432312}
   m_Layer: 5
-  m_Name: BG
+  m_Name: BGBlack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8062,7 +8166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1920, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &961200767833432315
@@ -8114,6 +8218,7 @@ GameObject:
   - component: {fileID: 961200767872401473}
   - component: {fileID: 961200767872401475}
   - component: {fileID: 961200767872401472}
+  - component: {fileID: 875589811}
   m_Layer: 5
   m_Name: AdjustDifficulty
   m_TagString: Untagged
@@ -8139,7 +8244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 830, y: -55}
+  m_AnchoredPosition: {x: 1890, y: -55}
   m_SizeDelta: {x: 338, y: 87}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200767872401475
@@ -8180,6 +8285,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &875589811
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961200767872401478}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &961200767877612018
 GameObject:
   m_ObjectHideFlags: 0
@@ -8215,7 +8332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -200, y: 410}
+  m_AnchoredPosition: {x: -200, y: 1270}
   m_SizeDelta: {x: 43, y: 864}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &961200767877612047
@@ -8443,7 +8560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 100, y: 65}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &961200768019685944
@@ -8698,7 +8815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3479554854725453070
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8718,7 +8835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1593, y: 5}
+  m_AnchoredPosition: {x: 1930, y: 5}
   m_SizeDelta: {x: 308, y: 105}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &4489552651027110781
@@ -8765,10 +8882,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 961200767663928556}
-        m_TargetAssemblyTypeName: ArmasCreator.Gameplay.UI.QuestPanelController,
-          Assembly-CSharp
-        m_MethodName: OnDisableQuestPanel
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ArmasCreator.Gameplay.UIQuestController, Assembly-CSharp
+        m_MethodName: HideQuestCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8828,7 +8944,7 @@ GameObject:
   - component: {fileID: 6099590008452772234}
   - component: {fileID: 4899595656730785053}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BGImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8851,7 +8967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1920, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6099590008452772234
@@ -8875,7 +8991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

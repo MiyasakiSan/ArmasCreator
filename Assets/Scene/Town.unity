@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 415186852}
-  m_IndirectSpecularColor: {r: 1.2455747, g: 0.65605146, b: 0.607362, a: 1}
+  m_IndirectSpecularColor: {r: 1.2470685, g: 0.65634036, b: 0.60741645, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12717,7 +12717,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -13477,136 +13477,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1708258649}
     m_Modifications:
-    - target: {fileID: 961200766364914723, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766468660355, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766675474152, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 875589808}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SavePresets
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ArmasCreator.Gameplay.UI.QuestPanelController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766705551553, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200766762063523, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767039668063, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 875589808}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartChallengeQuest
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ArmasCreator.Gameplay.UI.QuestPanelController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767080305372, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767123635039, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767159364721, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767423837604, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767644394672, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: Multiplier
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 961200767663928530, guid: 9551eb55c6583844e94ba70a371289ab,
         type: 3}
       propertyPath: m_Name
       value: QuestPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 961200767663928530, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 961200767663928556, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: questVcam
-      value: 
-      objectReference: {fileID: 1178846343}
     - target: {fileID: 961200767663928556, guid: 9551eb55c6583844e94ba70a371289ab,
         type: 3}
       propertyPath: questCanvas
@@ -13722,16 +13597,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1178846346}
-    - target: {fileID: 4489552651027110781, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HideQuestCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4489552651027110781, guid: 9551eb55c6583844e94ba70a371289ab,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ArmasCreator.Gameplay.UIQuestController, Assembly-CSharp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9551eb55c6583844e94ba70a371289ab, type: 3}
 --- !u!224 &875589807 stripped
@@ -13740,18 +13605,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 875589806}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &875589808 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 961200767663928556, guid: 9551eb55c6583844e94ba70a371289ab,
-    type: 3}
-  m_PrefabInstance: {fileID: 875589806}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875589809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db5a2078a767a54693c314c59072f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &875589809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 961200767663928530, guid: 9551eb55c6583844e94ba70a371289ab,
