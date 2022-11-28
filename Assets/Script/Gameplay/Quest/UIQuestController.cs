@@ -63,7 +63,6 @@ namespace ArmasCreator.Gameplay
             anim.SetTrigger("hide");
 
 
-
             StartCoroutine(HideUIQuest());
         }
 

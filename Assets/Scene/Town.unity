@@ -13632,6 +13632,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1178846346}
+    - target: {fileID: 5742294214116694607, guid: 9551eb55c6583844e94ba70a371289ab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6189252431517784492, guid: 9551eb55c6583844e94ba70a371289ab,
         type: 3}
       propertyPath: m_IsActive
@@ -13645,6 +13650,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 875589806}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &875589808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 961200767663928556, guid: 9551eb55c6583844e94ba70a371289ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 875589806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875589809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db5a2078a767a54693c314c59072f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &875589809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 961200767663928530, guid: 9551eb55c6583844e94ba70a371289ab,
@@ -14969,6 +14986,7 @@ MonoBehaviour:
   playerCanvas: {fileID: 1580324032349526792}
   questVcam: {fileID: 1734472473}
   anim: {fileID: 875589810}
+  questPanelController: {fileID: 875589808}
 --- !u!1 &1197384748
 GameObject:
   m_ObjectHideFlags: 0
