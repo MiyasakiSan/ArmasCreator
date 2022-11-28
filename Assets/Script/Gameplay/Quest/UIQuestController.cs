@@ -5,6 +5,7 @@ using ArmasCreator.UserData;
 using ArmasCreator.Utilities;
 using UnityEngine;
 using ArmasCreator.GameMode;
+using ArmasCreator.Gameplay.UI;
 
 namespace ArmasCreator.Gameplay
 {
@@ -32,6 +33,9 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private Animator anim;
 
+        [SerializeField]
+        private QuestPanelController questPanelController;
+
         private GameDataManager gameDataManager;
 
         private void Awake()
@@ -53,6 +57,7 @@ namespace ArmasCreator.Gameplay
         public void HideQuestCanvas()
         {
             questVcam.SetActive(false);
+            questPanelController.DeselectAllBanner();
             anim.SetTrigger("hidePreset");
             anim.SetTrigger("hideAdjust");
             anim.SetTrigger("hide");
@@ -73,7 +78,7 @@ namespace ArmasCreator.Gameplay
 
         IEnumerator HideUIQuest()
         {
-            yield return new WaitForSeconds(3.2f);
+            yield return new WaitForSeconds(2.7f);
 
             playerCanvas.SetActive(true);
             questCanvas.SetActive(false);
