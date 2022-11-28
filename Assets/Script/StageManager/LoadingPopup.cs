@@ -62,11 +62,14 @@ namespace ArmasCreator.UI
             targetValue = 0;
             currentValue = 0;
 
-            loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
             var cameraData = Camera.main.GetUniversalAdditionalCameraData();
             if (cameraData.cameraStack.Count > 0)
             {
-                cameraData.cameraStack[0].gameObject.SetActive(false);
+                loadingCanvas.GetComponent<Canvas>().worldCamera = cameraData.cameraStack[0];
+            }
+            else
+            {
+                loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
             }
 
             var bgIndex = UnityEngine.Random.Range(0, bgList.Count - 1);
