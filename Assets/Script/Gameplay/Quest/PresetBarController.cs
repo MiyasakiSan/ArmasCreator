@@ -16,7 +16,7 @@ namespace ArmasCreator.Gameplay.UI
 
         private void Awake()
         {
-            presetBarButton.onClick.AddListener(() => IsShowBar());
+            
         }
 
         public void IsShowBar()

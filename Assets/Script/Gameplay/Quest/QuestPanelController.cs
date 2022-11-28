@@ -54,6 +54,12 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private GameObject questCanvas;
 
+        [SerializeField]
+        private Button presetBarButton;
+
+        [SerializeField]
+        private Animator questPanelAnimator;
+
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -64,10 +70,29 @@ namespace ArmasCreator.Gameplay.UI
         // Start is called before the first frame update
         void Start()
         {
+            presetBarButton.onClick.AddListener(() => ShowPresetBar());
+
             DeselectAllBanner();
 
             LoadChallengeModeConfig();
             //TODO: Load Json data
+        }
+
+        private void OnDestroy()
+        {
+            presetBarButton.onClick.RemoveAllListeners();
+        }
+
+        private void ShowPresetBar()
+        {
+            if (questPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("showAdjust"))
+            {
+                questPanelAnimator.SetTrigger("showPreset");
+            }
+            else if(questPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("presetShow"))
+            {
+                questPanelAnimator.SetTrigger("hidePreset");
+            }
         }
 
         private void LoadChallengeModeConfig()
@@ -83,6 +108,10 @@ namespace ArmasCreator.Gameplay.UI
         public void OnClickBanner()
         {
             DeselectAllBanner();
+            if(questPanelAnimator.GetCurrentAnimatorStateInfo(0).IsName("show"))
+            {
+                questPanelAnimator.SetTrigger("showAdjust");
+            }
         }
 
         public void OnClickAdjustSlot(AdjustDifficultySlot.SlotType slotType)

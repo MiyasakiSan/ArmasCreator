@@ -53,7 +53,11 @@ namespace ArmasCreator.Gameplay
         public void HideQuestCanvas()
         {
             questVcam.SetActive(false);
+            anim.SetTrigger("hidePreset");
+            anim.SetTrigger("hideAdjust");
             anim.SetTrigger("hide");
+
+
 
             StartCoroutine(HideUIQuest());
         }
@@ -69,7 +73,7 @@ namespace ArmasCreator.Gameplay
 
         IEnumerator HideUIQuest()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(3.2f);
 
             playerCanvas.SetActive(true);
             questCanvas.SetActive(false);
