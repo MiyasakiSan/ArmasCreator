@@ -53,6 +53,9 @@ public class PlayerRpgMovement : NetworkBehaviour
     public bool canMove;
     private Rigidbody rb;
 
+    private bool isMovingForward;
+    private Coroutine MoveForwardCoroutine;
+
     [Header("Float Collider")]
     [SerializeField]
     private LayerMask groundLayer;
@@ -154,7 +157,30 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     public void MoveForward(float speed)
     {
-        rb.AddForce(transform.forward * speed * speedMultiplier * Time.deltaTime, ForceMode.Force);
+        isMovingForward = true;
+
+        if(MoveForwardCoroutine != null)
+        {
+            StopMoveForward();
+        }
+
+        MoveForwardCoroutine = StartCoroutine(MovingForwardCoroutine(speed));
+    }
+
+    IEnumerator MovingForwardCoroutine(float speed)
+    {
+        while (isMovingForward)
+        {
+            rb.AddForce(transform.forward * speed * speedMultiplier * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    public void StopMoveForward()
+    {
+        StopCoroutine(MoveForwardCoroutine);
+
+        MoveForwardCoroutine = null;
     }
 
     private void Movement()
