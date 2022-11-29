@@ -1,26 +1,11 @@
 fileFormatVersion: 2
-guid: f09358d63986f3543bf1615549cc56f6
+guid: f5525d578dc64c44eb3455d673ea22b0
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: pick_gunBlade_anim
-  - first:
-      74: -998496362607748373
-    second: idle_gunblade_anim
-  - first:
-      74: 3060872287085348379
-    second: attack01_gunBlade_anim
-  - first:
-      74: -5405653242291790180
-    second: attack02_gunBlade_anim
-  - first:
-      74: 426075915104437754
-    second: attack03_gunBlade_anim
-  - first:
-      74: 6641085478485924818
-    second: spAttack_gunBlade_anim
+    second: run_armasMale_anim
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -37,9 +22,9 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
       rotation in copied configuration does not match rotation in animation file:\n\t'pelvis_bJnt'
-      : rotation error = 4.789539 deg\n\t'spine02_bJnt' : rotation error = 4.789539
-      deg\n\t'spine05_bJnt' : rotation error = 4.789539 deg\n\t'spine06_bJnt' : rotation
-      error = 4.789539 deg\n\t'neck02_bJnt' : rotation error = 25.282742 deg\n"
+      : rotation error = 8.600516 deg\n\t'spine02_bJnt' : rotation error = 8.600516
+      deg\n\t'spine05_bJnt' : rotation error = 8.600516 deg\n\t'spine06_bJnt' : rotation
+      error = 8.600516 deg\n\t'neck02_bJnt' : rotation error = 29.170013 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -48,11 +33,7 @@ ModelImporter:
       humanoid transforms and has rotation animation that will be discarded.\n\t'spine05_bJnt'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'spine06_bJnt'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'neck02_bJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'armLowerLFT_bJnt'
-      has translation animation that will be discarded.\n\t'armHandLFT_bJnt' has
-      translation animation that will be discarded.\n\t'armLowerRGT_bJnt' has translation
-      animation that will be discarded.\n\t'armHandRGT_bJnt' has translation animation
-      that will be discarded.\n"
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -66,40 +47,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: pick_gunBlade_anim
+      name: run_armasMale_anim
       takeName: Take 001
       internalID: 0
-      firstFrame: 60
-      lastFrame: 89
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 60
-    - serializedVersion: 16
-      name: idle_gunblade_anim
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 90
-      lastFrame: 149
+      firstFrame: 0
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -113,35 +65,6 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 60
-    - serializedVersion: 16
-      name: attack01_gunBlade_anim
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 150
-      lastFrame: 180
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
@@ -151,94 +74,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 60
-    - serializedVersion: 16
-      name: attack02_gunBlade_anim
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 181
-      lastFrame: 200
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 60
-    - serializedVersion: 16
-      name: attack03_gunBlade_anim
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 201
-      lastFrame: 240
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 60
-    - serializedVersion: 16
-      name: spAttack_gunBlade_anim
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 241
-      lastFrame: 294
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 60
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -811,13 +647,13 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: fingerLFTRig_grp
       parentName: rig_systems
-      position: {x: -0, y: -0.0052747456, z: 0.005055794}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: middleLFTFkRig_grp
       parentName: fingerLFTRig_grp
-      position: {x: -0, y: 8.734772e-18, z: 0.00529667}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: middle01LFTFk_dvJnt
       parentName: middleLFTFkRig_grp
@@ -826,18 +662,18 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: middle02LFTFk_dvJnt
       parentName: middle01LFTFk_dvJnt
-      position: {x: -0, y: 0.0019750653, z: 2.7755575e-19}
+      position: {x: -0, y: 0.0019750653, z: 0}
       rotation: {x: 0.0017955746, y: 0.003827002, z: 0.07741691, w: 0.99698985}
       scale: {x: 1, y: 1, z: 1}
     - name: middle03LFTFk_dvJnt
       parentName: middle02LFTFk_dvJnt
       position: {x: 4.440892e-18, y: 0.0015255623, z: 2.220446e-18}
-      rotation: {x: -7.2759576e-10, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ringLFTFkRig_grp
       parentName: fingerLFTRig_grp
-      position: {x: -0, y: 0.0037126446, z: 0}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ring01LFTFk_dvJnt
       parentName: ringLFTFkRig_grp
@@ -852,12 +688,12 @@ ModelImporter:
     - name: ring03LFTFk_dvJnt
       parentName: ring02LFTFk_dvJnt
       position: {x: -0, y: 0.0015975339, z: -7.632783e-19}
-      rotation: {x: -0.000000034924597, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: indexLFTFkRig_grp
       parentName: fingerLFTRig_grp
-      position: {x: -0, y: 0.001979308, z: 0}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: index01LFTFk_dvJnt
       parentName: indexLFTFkRig_grp
@@ -872,12 +708,12 @@ ModelImporter:
     - name: index03LFTFk_dvJnt
       parentName: index02LFTFk_dvJnt
       position: {x: 6.661338e-18, y: 0.0014998592, z: -1.110223e-18}
-      rotation: {x: -0.000000011042871, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: pinkyLFTFkRig_grp
       parentName: fingerLFTRig_grp
-      position: {x: -0, y: -0.0008611818, z: -0.003827422}
-      rotation: {x: -0.031233985, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: pinky01LFTFk_dvJnt
       parentName: pinkyLFTFkRig_grp
@@ -892,12 +728,12 @@ ModelImporter:
     - name: pinky03LFTFk_dvJnt
       parentName: pinky02LFTFk_dvJnt
       position: {x: -1.5543122e-17, y: 0.0012764188, z: 1.3877787e-18}
-      rotation: {x: -0.033066638, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: thumbLFTFkRig_grp
       parentName: fingerLFTRig_grp
-      position: {x: -0, y: 0.0019750653, z: -1.4219181e-15}
-      rotation: {x: 0.00092152494, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: thumb01LFTFk_dvJnt
       parentName: thumbLFTFkRig_grp
@@ -912,17 +748,17 @@ ModelImporter:
     - name: thumb03LFTFk_dvJnt
       parentName: thumb02LFTFk_dvJnt
       position: {x: 1.11022296e-17, y: 0.0017570088, z: 1.2212453e-17}
-      rotation: {x: -0.009337029, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legLFTRig_grp
       parentName: rig_systems
-      position: {x: -0, y: 0.001597534, z: -9.853229e-16}
-      rotation: {x: 9.313226e-10, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legLFTFkRig_grp
       parentName: legLFTRig_grp
-      position: {x: -0, y: 0.0044319713, z: 0.0012358855}
-      rotation: {x: -0.009017701, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legUpperLFTFk_dvJnt
       parentName: legLFTFkRig_grp
@@ -932,7 +768,7 @@ ModelImporter:
     - name: legLowerLFTFk_dvJnt
       parentName: legUpperLFTFk_dvJnt
       position: {x: 9.992007e-18, y: 0.019051874, z: -8.326672e-18}
-      rotation: {x: -0.086723424, y: -0.000000005587935, z: -0, w: 0.99623245}
+      rotation: {x: -0.086723424, y: 0, z: -0, w: 0.99623245}
       scale: {x: 1, y: 1, z: 1}
     - name: legFootLFTFk_dvJnt
       parentName: legLowerLFTFk_dvJnt
@@ -941,18 +777,18 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: legLFTIkRig_grp
       parentName: legLFTRig_grp
-      position: {x: -0, y: 0.0016209123, z: -1.1390888e-15}
-      rotation: {x: 0.008213206, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legLFTSpring_IkHandleRP
       parentName: legLFTIkRig_grp
       position: {x: -0.006689217, y: 0.0052747456, z: -0.0012698841}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legFootLFTIk_IkHandleRP
       parentName: legLFTIkRig_grp
       position: {x: -0.006689217, y: 0.0052747456, z: -0.0012698841}
-      rotation: {x: 0.21570164, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legUpperLFTIk_dvJnt
       parentName: legLFTIkRig_grp
@@ -977,7 +813,7 @@ ModelImporter:
     - name: toeTipLFTIk_dvJnt
       parentName: toeAnkleLFTIk_dvJnt
       position: {x: 1.110223e-18, y: 1.0139019e-17, z: 0.00529667}
-      rotation: {x: -0.56827885, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legUpperLFTSpringIk_dvJnt
       parentName: legLFTIkRig_grp
@@ -996,8 +832,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: toeLFTFkRig_grp
       parentName: rig_systems
-      position: {x: -0, y: -0.0019750055, z: -0.0000000020977085}
-      rotation: {x: 0.000922344, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: toeAnkleLFTFk_dvJnt
       parentName: toeLFTFkRig_grp
@@ -1007,77 +843,77 @@ ModelImporter:
     - name: toeTipLFTFk_dvJnt
       parentName: toeAnkleLFTFk_dvJnt
       position: {x: -0, y: 9.992007e-18, z: 0.00529667}
-      rotation: {x: -0.03561806, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legFootLFTIkRevRig_grp
       parentName: rig_systems
-      position: {x: -0, y: -0.0017490527, z: 0.0000000028100433}
-      rotation: {x: -0.009338552, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legFootLFTRevLFT_offset
       parentName: legFootLFTIkRevRig_grp
       position: {x: -0.006689217, y: 0.0052747456, z: -0.0012698841}
-      rotation: {x: -0.000000028870993, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: innerLegfootlftLFT_offset
       parentName: legFootLFTRevLFT_offset
       position: {x: 0.0026858302, y: -0.0052747456, z: -4.440892e-18}
-      rotation: {x: -0.009018931, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: outerLegfootlftLFT_offset
       parentName: innerLegfootlftLFT_offset
       position: {x: -0.0059966124, y: 4.440892e-18, z: -1.3877787e-18}
-      rotation: {x: -0.012500056, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: heellegFootLFT_dvJntCtrl
       parentName: outerLegfootlftLFT_offset
       position: {x: 0.002997263, y: 2.220446e-18, z: -0.0028610858}
-      rotation: {x: 0.0000000074505797, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: toeTiplegFootLFT_dvJntCtrl
       parentName: heellegFootLFT_dvJntCtrl
       position: {x: -2.220446e-18, y: -2.2204459e-17, z: 0.01321355}
-      rotation: {x: -0.072799146, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: anklelegFootLFT_dvJntCtrl
       parentName: toeTiplegFootLFT_dvJntCtrl
       position: {x: 1.110223e-18, y: 8.881784e-18, z: -0.00529667}
-      rotation: {x: 0.0082140975, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: legFootLFT_dvJntCtrl
       parentName: anklelegFootLFT_dvJntCtrl
       position: {x: 0.00031351967, y: 0.0052747456, z: -0.0050557936}
-      rotation: {x: 0.00000002235174, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ankleLFTIkHandle_offset
       parentName: legFootLFTIkRevRig_grp
       position: {x: -0.007002736, y: 1.4432899e-17, z: 0.0037859096}
-      rotation: {x: 0.21570553, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: toeAnkleLFTIkLFT_ikHandleSC
       parentName: ankleLFTIkHandle_offset
-      position: {x: -0, y: -0.0018624658, z: 0.000000023918659}
-      rotation: {x: -0.014156393, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: toeLFTIkHandle_offset
       parentName: legFootLFTIkRevRig_grp
       position: {x: -0.007002736, y: 6.661338e-18, z: 0.00908258}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: toeTipLFTIkLFT_ikHandleSC
       parentName: toeLFTIkHandle_offset
-      position: {x: -1.110223e-18, y: -0.0036022428, z: -2.220446e-18}
-      rotation: {x: 0.20071314, y: -0.9752092, z: 1, w: 6.123234e-17}
+      position: {x: -1.110223e-18, y: 0, z: -2.220446e-18}
+      rotation: {x: 0, y: 0, z: 1, w: 6.123234e-17}
       scale: {x: 1, y: 1, z: 1}
     - name: armRGTRig_grp
       parentName: rig_systems
-      position: {x: -0, y: -0.003937161, z: 0}
-      rotation: {x: -0.028168693, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: armRGTFkRig_grp
       parentName: armRGTRig_grp
-      position: {x: -0, y: -0.019051876, z: 9.530204e-11}
-      rotation: {x: -0.08672342, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: armUpperRGTFk_dvJnt
       parentName: armRGTFkRig_grp
