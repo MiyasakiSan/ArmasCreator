@@ -13,16 +13,21 @@ public class CombatAnimationEvent : MonoBehaviour
 
     public void CanRotateEvent()
     {
-        playerMovement.SetCanRotate();
+        playerMovement.ResetRotate();
     }
 
     public void CannotRotateEvent()
     {
-        playerMovement.ResetRotate();
+        playerMovement.SetCanRotate();
     }
 
     public void MoveForwardEvent(float speed)
     {
         playerMovement.MoveForward(speed);
+    }
+
+    public void StopMoveForwardEvent()
+    {
+        playerMovement.StopMoveForward();
     }
 }
