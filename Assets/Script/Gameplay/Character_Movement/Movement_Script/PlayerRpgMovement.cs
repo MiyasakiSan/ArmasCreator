@@ -11,8 +11,6 @@ using ArmasCreator.Utilities;
 public class PlayerRpgMovement : NetworkBehaviour
 {
     //private weapon weaponHeld      Inprogress**
-    [SerializeField]
-    private CharacterController controller;
     public MovementAnim animController;
 
     [Header("Walk State Setting")]
@@ -86,6 +84,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             rb = this.GetComponent<Rigidbody>();
             animController = this.GetComponent<MovementAnim>();
+            animController.Init(this);
 
             currentMovementState = movementState.idle;
 
@@ -143,14 +142,19 @@ public class PlayerRpgMovement : NetworkBehaviour
         speedMultiplier = defaultSpeedMultiplier;
     }
 
-    public void SetRotateMultiplierOnCombat()
+    public void SetCanRotate()
     {
         CanRotate = false;
     }
 
-    public void ResetRotateMultiplier()
+    public void ResetRotate()
     {
         CanRotate = true;
+    }
+
+    public void MoveForward(float speed)
+    {
+        rb.AddForce(transform.forward * speed * speedMultiplier * Time.deltaTime, ForceMode.Force);
     }
 
     private void Movement()

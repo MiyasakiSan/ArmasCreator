@@ -187,7 +187,7 @@ public class CombatRpgManager : NetworkBehaviour
     private void ResetAnimBoolean()
     {
         playerMovement.ResetSpeedMultiplier();
-        //playerMovement.ResetRotateMultiplier();
+        playerMovement.ResetRotate();
 
         if (isSinglePlayer)
         {
@@ -224,6 +224,7 @@ public class CombatRpgManager : NetworkBehaviour
         SetCombatOveride();
 
         playerMovement.SetSpeedMultiplierOnCombat();
+        animController.StopOveride();
         //playerMovement.SetRotateMultiplierOnCombat();
     }
 
@@ -267,7 +268,7 @@ public class CombatRpgManager : NetworkBehaviour
             }
         }
 
-        if (animController.currentAnimatorStateInfoTime <= 0.5f) { return; }
+        if (animController.currentAnimatorStateInfoTime <= 0.3f) { return; }
 
         if (num > 2 && animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {

@@ -10,6 +10,11 @@ public class MovementAnim : NetworkBehaviour
 
     public Animator playerAnim;
 
+    private PlayerRpgMovement playerMovement;
+
+    [SerializeField]
+    private CombatAnimationEvent animEvent;
+
     [Header("Combat Manager")]
     [SerializeField]
     private int combatLayerIndex;
@@ -19,7 +24,13 @@ public class MovementAnim : NetworkBehaviour
 
     private Coroutine delayOverider;
 
-    // Start is called before the first frame update
+    public void Init(PlayerRpgMovement playerMovement)
+    {
+        this.playerMovement = playerMovement;
+
+        animEvent.Init(playerMovement);
+    }
+
     public float currentAnimatorStateInfoTime
     {
         get { return playerAnim.GetCurrentAnimatorStateInfo(1).normalizedTime % 1; }
@@ -32,12 +43,7 @@ public class MovementAnim : NetworkBehaviour
     {
         return playerAnim.GetCurrentAnimatorStateInfo(0).IsName(paramName);
     }
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     #region Movement Animation
 
     public void AnimationState(string paramName)
@@ -161,6 +167,15 @@ public class MovementAnim : NetworkBehaviour
         }
     }
 
+    public void StopOveride()
+    {
+        if (delayOverider != null)
+        {
+            StopCoroutine(delayOverider);
+            delayOverider = null;
+        }
+    }
+
     IEnumerator DelayOverideCombat()
     {
         float weight = 1;
@@ -228,5 +243,4 @@ public class MovementAnim : NetworkBehaviour
         
         playerAnim.SetTrigger("isDead");
     }
-
 }
