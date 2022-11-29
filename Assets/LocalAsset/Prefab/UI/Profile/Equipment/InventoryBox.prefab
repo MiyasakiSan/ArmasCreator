@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4437796810902140038}
   - component: {fileID: 4437796810902140036}
   - component: {fileID: 4437796810902140039}
+  - component: {fileID: 1899993335635677113}
   m_Layer: 5
   m_Name: InventoryBox
   m_TagString: Untagged
@@ -160,6 +161,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &1899993335635677113
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437796810902140033}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7411613922192193883
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +239,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Inventory
+  m_text: 'Equipment
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 136505739ff69894dbc9528bedb044d7, type: 2}
   m_sharedMaterial: {fileID: 1031750591725277081, guid: 136505739ff69894dbc9528bedb044d7,
