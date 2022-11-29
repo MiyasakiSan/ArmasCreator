@@ -8,6 +8,7 @@ using ArmasCreator.GameMode;
 using UnityEngine.SceneManagement;
 using ArmasCreator.UI;
 using ArmasCreator.Gameplay.UI;
+using UnityEngine.Rendering.Universal;
 
 namespace ArmasCreator.Gameplay
 {
@@ -58,6 +59,9 @@ namespace ArmasCreator.Gameplay
 
         private QuestInfo currentQuestInfo;
 
+        [SerializeField]
+        private Canvas profileCanvas;
+
         //TODO : implement player interaction
 
         public bool Interacable;
@@ -91,6 +95,18 @@ namespace ArmasCreator.Gameplay
 
             if (Input.GetKeyUp(KeyCode.Escape))
             {
+                if (profileCanvas.worldCamera == null)
+                {
+                    var cameraData = Camera.main.GetUniversalAdditionalCameraData();
+                    if (cameraData.cameraStack.Count > 0)
+                    {
+                        profileCanvas.worldCamera = cameraData.cameraStack[0];
+                    }
+                    else
+                    {
+                        profileCanvas.worldCamera = Camera.main;
+                    }
+                }
                 if (profilePanelController.Profile.activeSelf)
                 {
                     profilePanelController.CloseProfilePanel();
