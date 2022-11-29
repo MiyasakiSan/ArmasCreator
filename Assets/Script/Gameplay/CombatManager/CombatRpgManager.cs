@@ -140,7 +140,7 @@ public class CombatRpgManager : NetworkBehaviour
     }
     public void Melee_CurrentAnimOutOfTime()
     {
-        if (animController.currentAnimatorStateInfoIsName("Idle") && animController.currentAnimatorStateInfoTime <= 0.2f)
+        if (animController.currentAnimatorStateInfoIsName("Idle"))
         {
             ResetAnimBoolean();
         }
@@ -186,16 +186,17 @@ public class CombatRpgManager : NetworkBehaviour
 
     private void ResetAnimBoolean()
     {
-        playerMovement.ResetSpeedMultiplier();
+        //playerMovement.ResetSpeedMultiplier();
         playerMovement.ResetRotate();
+        playerMovement.canMove = true;
 
         if (isSinglePlayer)
         {
             noOfClicks = 0;
 
-            if (animController.IsOverideCompleted()) { return; }
+            //if (animController.IsOverideCompleted()) { return; }
 
-            animController.CombatOveride(0);
+            //animController.CombatOveride(0);
         }
         else
         {
@@ -221,10 +222,10 @@ public class CombatRpgManager : NetworkBehaviour
         noOfClicks++;
         noOfClicks = Mathf.Clamp(noOfClicks, 0, heldWeapon.comboCount);
         setComboBoolDependOn(noOfClicks);
-        SetCombatOveride();
+        playerMovement.canMove = false;
+        //SetCombatOveride();
 
-        playerMovement.SetSpeedMultiplierOnCombat();
-        animController.StopOveride();
+        //playerMovement.SetSpeedMultiplierOnCombat();
         //playerMovement.SetRotateMultiplierOnCombat();
     }
 

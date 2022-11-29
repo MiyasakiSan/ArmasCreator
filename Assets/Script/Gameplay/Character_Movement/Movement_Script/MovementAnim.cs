@@ -167,15 +167,6 @@ public class MovementAnim : NetworkBehaviour
         }
     }
 
-    public void StopOveride()
-    {
-        if (delayOverider != null)
-        {
-            StopCoroutine(delayOverider);
-            delayOverider = null;
-        }
-    }
-
     IEnumerator DelayOverideCombat()
     {
         float weight = 1;
