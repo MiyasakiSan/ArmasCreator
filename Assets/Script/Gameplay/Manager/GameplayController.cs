@@ -113,6 +113,11 @@ namespace ArmasCreator.Gameplay
             loadingPopup.LoadSceneAsync(questInfo.SceneName);
         }
 
+        private void EnterPreGameStage()
+        {
+
+        }
+
         public void EnterGameplayResult()
         {
             //TODO : Add something to player
