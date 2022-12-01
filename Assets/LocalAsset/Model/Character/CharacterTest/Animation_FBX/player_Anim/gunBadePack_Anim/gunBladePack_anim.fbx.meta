@@ -37,9 +37,9 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
       rotation in copied configuration does not match rotation in animation file:\n\t'pelvis_bJnt'
-      : rotation error = 3.366080 deg\n\t'spine02_bJnt' : rotation error = 3.366080
-      deg\n\t'spine05_bJnt' : rotation error = 5.356286 deg\n\t'spine06_bJnt' : rotation
-      error = 3.366080 deg\n\t'neck02_bJnt' : rotation error = 27.798471 deg\n"
+      : rotation error = 4.789539 deg\n\t'spine02_bJnt' : rotation error = 4.789539
+      deg\n\t'spine05_bJnt' : rotation error = 4.789539 deg\n\t'spine06_bJnt' : rotation
+      error = 4.789539 deg\n\t'neck02_bJnt' : rotation error = 25.282742 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -48,7 +48,11 @@ ModelImporter:
       humanoid transforms and has rotation animation that will be discarded.\n\t'spine05_bJnt'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'spine06_bJnt'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'neck02_bJnt'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'armLowerLFT_bJnt'
+      has translation animation that will be discarded.\n\t'armHandLFT_bJnt' has
+      translation animation that will be discarded.\n\t'armLowerRGT_bJnt' has translation
+      animation that will be discarded.\n\t'armHandRGT_bJnt' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -101,7 +105,7 @@ ModelImporter:
       name: idle_gunblade_anim
       takeName: Take 001
       internalID: 0
-      firstFrame: 90
+      firstFrame: 91
       lastFrame: 149
       wrapMode: 0
       orientationOffsetY: 0
@@ -113,10 +117,10 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -219,7 +223,7 @@ ModelImporter:
         functionName: MoveForwardEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
-        floatParameter: 7
+        floatParameter: 4
         intParameter: 0
         messageOptions: 0
       - time: 0.9255125
@@ -267,6 +271,20 @@ ModelImporter:
       events:
       - time: 0.15910868
         functionName: CannotRotateEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2492714
+        functionName: MoveForwardEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 3
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.42031595
+        functionName: StopMoveForwardEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
