@@ -51,6 +51,9 @@ public class PlayerRpgMovement : NetworkBehaviour
     private Transform mainCam;
 
     public bool canMove;
+    public bool canWalk;
+    public bool canRun;
+
     private Rigidbody rb;
 
     private bool isMovingForward;
@@ -122,8 +125,11 @@ public class PlayerRpgMovement : NetworkBehaviour
         if (IsLocalPlayer || isSinglePlayer)
         {
             floatCollider();
+
             if (!canMove) return;
+
             Movement();
+
             if(mainCam == null)
             {
                 mainCam = Camera.main.transform;
@@ -169,9 +175,19 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     IEnumerator MovingForwardCoroutine(float speed)
     {
-        while (isMovingForward)
+        while (isMovingForward )
         {
-            rb.AddForce(transform.forward * speed * speedMultiplier * Time.deltaTime);
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            float inputMultiplier = 1;
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            if (direction.magnitude <= 0)
+            {
+                inputMultiplier = 0;
+            }
+
+            rb.AddForce(transform.forward * speed * inputMultiplier * speedMultiplier * Time.deltaTime);
             yield return null;
         }
     }
@@ -181,6 +197,8 @@ public class PlayerRpgMovement : NetworkBehaviour
         StopCoroutine(MoveForwardCoroutine);
 
         MoveForwardCoroutine = null;
+
+        rb.velocity = Vector3.zero;
     }
 
     private void Movement()
@@ -199,31 +217,10 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             case movementState.walk:
                 walkToDirection(direction);
-
-                if (isSinglePlayer)
-                {
-                    animController.AnimationState(currentMovementState.ToString());
-                }
-                else
-                {
-                    animController.AnimationStateServerRpc(currentMovementState.ToString());
-                }
-
                 break;
 
             case movementState.run:
                 runToDirection(direction);
-                ReduceStaminaOnRun();
-
-                if (isSinglePlayer)
-                {
-                    animController.AnimationState(currentMovementState.ToString());
-                }
-                else
-                {
-                    animController.AnimationStateServerRpc(currentMovementState.ToString());
-                }
-
                 break;
 
             case movementState.idle:
@@ -298,8 +295,20 @@ public class PlayerRpgMovement : NetworkBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
+        if (canWalk)
+        {
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
+
+            if (isSinglePlayer)
+            {
+                animController.AnimationState(currentMovementState.ToString());
+            }
+            else
+            {
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
+            }
+        }
     }
 
     private void runToDirection(Vector3 direction)
@@ -312,8 +321,21 @@ public class PlayerRpgMovement : NetworkBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        rb.AddForce(moveDir.normalized * movementSpeed_Run * speedMultiplier * Time.deltaTime);
+        if (canRun)
+        {
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.AddForce(moveDir.normalized * movementSpeed_Run * speedMultiplier * Time.deltaTime);
+            ReduceStaminaOnRun();
+
+            if (isSinglePlayer)
+            {
+                animController.AnimationState(currentMovementState.ToString());
+            }
+            else
+            {
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
+            }
+        }
     }
     private void IsStopRunning()
     {

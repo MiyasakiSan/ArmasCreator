@@ -188,7 +188,8 @@ public class CombatRpgManager : NetworkBehaviour
     {
         //playerMovement.ResetSpeedMultiplier();
         playerMovement.ResetRotate();
-        playerMovement.canMove = true;
+        playerMovement.canWalk = true;
+        playerMovement.canRun = true;
 
         if (isSinglePlayer)
         {
@@ -222,7 +223,8 @@ public class CombatRpgManager : NetworkBehaviour
         noOfClicks++;
         noOfClicks = Mathf.Clamp(noOfClicks, 0, heldWeapon.comboCount);
         setComboBoolDependOn(noOfClicks);
-        playerMovement.canMove = false;
+        playerMovement.canWalk = false;
+        playerMovement.canRun= false;
         //SetCombatOveride();
 
         //playerMovement.SetSpeedMultiplierOnCombat();
