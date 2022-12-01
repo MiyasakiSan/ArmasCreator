@@ -50,6 +50,11 @@ namespace ArmasCreator.UI
         [SerializeField]
         private GameObject profileContent;
 
+        [Header("Animator")]
+        [SerializeField]
+        private Animator profileAnimator;
+
+
         public GameObject Profile => profileContent;
 
         private void Awake()
@@ -60,53 +65,66 @@ namespace ArmasCreator.UI
             });
             btn_Item.onClick.AddListener(() =>
             {
-                DeActivateAllContent();
-                itemsPanelController.SetUpItemPanel();
-                top_btn_Item.OnSelected();
+                profileAnimator.SetTrigger("FadeOutCD");
+                profileAnimator.SetTrigger("FadeOut");
+                profileAnimator.SetTrigger("FadeInItem");
+
             });
 
             btn_Equipment.onClick.AddListener(() =>
             {
-                DeActivateAllContent();
-                equipmentPanelController.SetUpEquipmentPanel();
-                top_btn_Equipment.OnSelected();
+                profileAnimator.SetTrigger("FadeOutCD");
+                profileAnimator.SetTrigger("FadeOut");
+                profileAnimator.SetTrigger("FadeInEquipment");
             });
 
             btn_Quest.onClick.AddListener(() =>
             {
-                DeActivateAllContent();
-                profileQuestPanelController.SetUpQuestPanel();
-                top_btn_Quest.OnSelected();
+                profileAnimator.SetTrigger("FadeOutCD");
+                profileAnimator.SetTrigger("FadeOut");
+                profileAnimator.SetTrigger("FadeInQuest");
             });
 
             btn_Challenges.onClick.AddListener(() =>
             {
-                DeActivateAllContent();
-                challengesPanelController.SetUpChallengePanel();
-                top_btn_Challenges.OnSelected();
+                profileAnimator.SetTrigger("FadeOut");
+                profileAnimator.SetTrigger("FadeInChallenge");
             });
 
             btn_Option.onClick.AddListener(() =>
             {
-                DeActivateAllContent();
-                optionPanelController.ShowOptionPanel();
-                top_btn_Option.OnSelected();
+                profileAnimator.SetTrigger("FadeOutCD");
+                profileAnimator.SetTrigger("FadeOut");
+                profileAnimator.SetTrigger("FadeInOption");
             });
         }
 
         public void OpenProfilePanel()
         {
             DeActivateAllContent();
-            profileContent.SetActive(true);
             optionPanelController.ShowOptionPanel();
             top_btn_Option.OnSelected();
+            profileAnimator.SetTrigger("FadeIn");
+            profileAnimator.SetTrigger("FadeInOption");
         }
 
         public void CloseProfilePanel()
         {
-            profileContent.SetActive(false);
+            profileAnimator.SetTrigger("FadeOutCD");
+            profileAnimator.SetTrigger("FadeOut");
+            profileAnimator.SetTrigger("FadeOutProfile");
             DeActivateAllContent();
             Time.timeScale = 1f;
+        }
+
+        public void ActiveChallengeDetailAnim()
+        {
+            profileAnimator.SetTrigger("FadeInCD");
+        }
+
+        public void ResetFadeOutCDTrigger()
+        {
+            profileAnimator.ResetTrigger("FadeOutCD");
         }
 
         public void DeActivateAllContent()
@@ -121,6 +139,36 @@ namespace ArmasCreator.UI
             top_btn_Challenges.OnDeSelected();
             top_btn_Option.OnDeSelected();
             top_btn_Quest.OnDeSelected();
+        }
+
+        public void SetUpItem()
+        {
+            itemsPanelController.SetUpItemPanel();
+            top_btn_Item.OnSelected();
+        }
+
+        public void SetUpEquipment()
+        {
+            equipmentPanelController.SetUpEquipmentPanel();
+            top_btn_Equipment.OnSelected();
+        }
+
+        public void SetUpQuest()
+        {
+            profileQuestPanelController.SetUpQuestPanel();
+            top_btn_Quest.OnSelected();
+        }
+
+        public void SetUpChallenge()
+        {
+            challengesPanelController.SetUpChallengePanel();
+            top_btn_Challenges.OnSelected();
+        }
+
+        public void SetUpOption()
+        {
+            optionPanelController.ShowOptionPanel();
+            top_btn_Option.OnSelected();
         }
     }
 }

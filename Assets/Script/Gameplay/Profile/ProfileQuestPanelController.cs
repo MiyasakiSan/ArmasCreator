@@ -27,7 +27,7 @@ namespace ArmasCreator.UI
 
         public void DeactivateQuestPanel()
         {
-            mainContent.SetActive(false);
+            
         }
 
         public void PopulateSideQuestNode()

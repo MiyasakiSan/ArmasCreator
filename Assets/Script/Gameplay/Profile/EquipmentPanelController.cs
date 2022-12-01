@@ -45,7 +45,6 @@ namespace ArmasCreator.UI
 
         public void DeactiveEquipmentPanel()
         {
-            mainContent.SetActive(false);
             ClearAllNode();
         }
 

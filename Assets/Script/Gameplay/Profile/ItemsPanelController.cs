@@ -42,7 +42,6 @@ namespace ArmasCreator.UI
 
         public void DeactiveItemPanel()
         {
-            mainContent.SetActive(false);
             if (listButton != null)
             {
                 foreach (GameObject itemButton in listButton)

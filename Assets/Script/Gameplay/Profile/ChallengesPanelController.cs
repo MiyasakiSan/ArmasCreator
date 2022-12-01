@@ -17,6 +17,9 @@ namespace ArmasCreator.UI
         private ChallengeDetailPanelController challengeDetailPanelController;
 
         [SerializeField]
+        private ProfilePanelController profilePanelController;
+
+        [SerializeField]
         private GameObject mainContent;
 
         [SerializeField]
@@ -28,6 +31,9 @@ namespace ArmasCreator.UI
 
         private List<ChallengeNode> challengeNodes = new List<ChallengeNode>();
 
+        [SerializeField]
+        private GameObject challengeDetailContent;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -37,17 +43,12 @@ namespace ArmasCreator.UI
 
         public void SetUpChallengePanel()
         {
-            if (!mainContent.activeSelf)
-            {
-                mainContent.SetActive(true);
-                PopulateChallengesNode();
-                SetUpAllChallengeNodeButton();
-            }
+            PopulateChallengesNode();
+            SetUpAllChallengeNodeButton();
         }
 
         public void DeactiveChallengePanel()
         {
-            mainContent.SetActive(false);
             if (challengeNodes != null)
             {
                 foreach (ChallengeNode challengeNode in challengeNodes)
@@ -78,6 +79,7 @@ namespace ArmasCreator.UI
                 ins_ChallengeNode.SetChallengeDetailPanelController(challengeDetailPanelController);
                 ins_ChallengeNode.SetChallengePanelController(this);
                 ins_ChallengeNode.SetAchievementID(achievementID);
+                ins_ChallengeNode.SetChallengeDetailContent(challengeDetailContent);
                 var achievementExist = gameDataManager.TryGetAchievementInfo(achievementID, out var achievementInfo);
                 if (!achievementExist)
                 {
@@ -90,6 +92,11 @@ namespace ArmasCreator.UI
                 bool checkPass = achievementInfo.Progress <= userDataManager.UserData.UserDataProgression.Achievements[achievementInfo.ID];
                 ins_ChallengeNode.SetCheckPass(checkPass);
             }
+        }
+
+        public void PlayChallengeDetailFadeIn()
+        {
+            profilePanelController.ActiveChallengeDetailAnim();
         }
 
         public void OnDeSelectedAll()

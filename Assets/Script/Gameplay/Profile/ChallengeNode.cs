@@ -34,6 +34,13 @@ namespace ArmasCreator.UI
         [SerializeField]
         private Button btn_ChallengeNode;
 
+        private GameObject challengeDetailContent;
+
+        private void OnDestroy()
+        {
+            //btn_ChallengeNode.onClick.RemoveAllListeners();
+        }
+
         public void SetUpButton()
         {
             btn_ChallengeNode.onClick.AddListener(() =>
@@ -48,6 +55,10 @@ namespace ArmasCreator.UI
         public void OnSelectedChallengeNode()
         {
             imageBG.sprite = selectedSprite;
+            if(!challengeDetailContent.activeSelf)
+            {
+                challengePanelController.PlayChallengeDetailFadeIn();
+            }
         }
 
         public void OnDeSelectedChallengeNode()
@@ -63,6 +74,11 @@ namespace ArmasCreator.UI
         public void SetChallengePanelController(ChallengesPanelController newChallengesPanelController)
         {
             challengePanelController = newChallengesPanelController;
+        }
+
+        public void SetChallengeDetailContent(GameObject newChallengeDetailContent)
+        {
+            challengeDetailContent = newChallengeDetailContent;
         }
 
         public void SetAchievementID(string newAchievementID)
