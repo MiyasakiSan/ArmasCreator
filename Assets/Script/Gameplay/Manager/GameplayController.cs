@@ -20,6 +20,7 @@ namespace ArmasCreator.Gameplay
             Town,
             Story,
             Challenge,
+            PreGame,
             Result
         }
 
@@ -56,6 +57,7 @@ namespace ArmasCreator.Gameplay
         private GameModeController gameModeController;
         private GameDataManager gameDataManager;
         private LoadingPopup loadingPopup;
+        private UIPlayerController uiPlayerController;
 
         private QuestInfo currentQuestInfo;
 
@@ -65,6 +67,9 @@ namespace ArmasCreator.Gameplay
         //TODO : implement player interaction
 
         public bool Interacable;
+
+        private bool isPreGameFinished;
+        private Coroutine PreGameCoroutine;
 
         private void Awake()
         {
@@ -127,11 +132,45 @@ namespace ArmasCreator.Gameplay
             currentQuestInfo = questInfo;
 
             loadingPopup.LoadSceneAsync(questInfo.SceneName);
+            loadingPopup.OnLoadingSceneFinished += EnterPreGameStage;
         }
 
         private void EnterPreGameStage()
         {
+            CurrentGameplays = Gameplays.PreGame;
+            isPreGameFinished = false;
 
+            uiPlayerController = SharedContext.Instance.Get<UIPlayerController>();
+
+            Debug.Assert(uiPlayerController != null, "UIPlayerController is null");
+            uiPlayerController.Hide();
+
+            loadingPopup.OnLoadingSceneFinished -= EnterPreGameStage;
+
+            if(PreGameCoroutine != null)
+            {
+                StopCoroutine(PreGameCoroutine);
+                PreGameCoroutine = null;
+            }
+
+            PreGameCoroutine = StartCoroutine(PreGameEnumerator());
+        }
+
+        private IEnumerator PreGameEnumerator()
+        {
+            yield return new WaitUntil(() => isPreGameFinished);
+
+            CurrentGameplays = Gameplays.Challenge;
+            loadingPopup.FadeBlack();
+        }
+
+        public void PreGameFinish()
+        {
+            isPreGameFinished = true;
+
+            uiPlayerController.Show();
+
+            Debug.Log("===================== Pre Game Finish ==========================");
         }
 
         public void EnterGameplayResult()

@@ -194,9 +194,12 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     public void StopMoveForward()
     {
-        StopCoroutine(MoveForwardCoroutine);
+        if(MoveForwardCoroutine != null)
+        {
+            StopCoroutine(MoveForwardCoroutine);
 
-        MoveForwardCoroutine = null;
+            MoveForwardCoroutine = null;
+        }
 
         rb.velocity = Vector3.zero;
     }
@@ -239,11 +242,12 @@ public class PlayerRpgMovement : NetworkBehaviour
     }
     private movementState CheckMovementState(Vector3 direction)
     {
-        bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge");
+        bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge") &&
+                        !animController.currentAnimatorCombatStateInfoIsName("Dodge");
 
         if (direction.magnitude < 0.1f) { return movementState.idle; }
 
-        if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge)
+        if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge && !isDodging)
         {
             StartCoroutine(Dodge());
         }
@@ -267,17 +271,25 @@ public class PlayerRpgMovement : NetworkBehaviour
             animController.DodgeServerRpc();
         }
 
+        if (isDodging)
+        {
+            yield break;
+        }
+
         isDodging = true;
+
         float timer = 0;
-        reduceStaminaOnDodge(10f);
+        reduceStaminaOnDodge(dodgestaminaUse);
+
         while(timer < dodgeTimer)
         {
             float speed = dodgeCurve.Evaluate(timer);
-            Vector3 dir = (transform.forward * speed); /*+ (Vector3.up * speed/3);*/
+            Vector3 dir = (transform.forward * speed);
             rb.AddForce(dir *dodgeForce* Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
         }
+
         isDodging = false;
     }
     private void reduceStaminaOnDodge(float amount)
@@ -335,6 +347,13 @@ public class PlayerRpgMovement : NetworkBehaviour
             {
                 animController.AnimationStateServerRpc(currentMovementState.ToString());
             }
+        }
+        else
+        {
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
+
+            animController.AnimationState(movementState.walk.ToString());
         }
     }
     private void IsStopRunning()

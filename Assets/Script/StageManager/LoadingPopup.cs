@@ -34,6 +34,9 @@ namespace ArmasCreator.UI
         [SerializeField]
         private Image bgImage;
 
+        public delegate void OnLoadingSceneFinishedCallback();
+        public event OnLoadingSceneFinishedCallback OnLoadingSceneFinished;
+
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -91,8 +94,16 @@ namespace ArmasCreator.UI
                 yield return null;
             }
 
+            OnLoadingSceneFinished?.Invoke();
             LPBG.Reset();
             loadingCanvas.SetActive(false);
+        }
+
+        public void FadeBlack()
+        {
+            //TODO : Fade black in and out
+
+            Debug.Log("Fade Black");
         }
     }
 }

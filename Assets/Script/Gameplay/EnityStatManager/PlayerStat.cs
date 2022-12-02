@@ -31,6 +31,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     private  Coroutine staminaRegen;
     private  Coroutine staminaReduceOverTime;
+    private Coroutine staminaCooldown;
+
     [SerializeField]
     private bool IsReduceStaminaRunning;
 
@@ -141,20 +143,23 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     public void stopReduceStamina()
     {
-        if(CurrentStamina >= 0 && staminaReduceOverTime != null)
+        if(staminaReduceOverTime != null)
         {
             StopCoroutine(staminaReduceOverTime);
+            staminaReduceOverTime = null;
         }
 
-        staminaReduceOverTime = null;
         IsReduceStaminaRunning = false;
 
-        if (staminaRegen != null)
+        if (staminaRegen != null && staminaCooldown == null)
         {
             StopCoroutine(staminaRegen);
+            staminaRegen = StartCoroutine(RegenStamina());
         }
-
-        staminaRegen = StartCoroutine(RegenStamina());
+        else
+        {
+            staminaRegen = StartCoroutine(RegenStamina());
+        }
     }
   
     public override void receiveAttack(float damage)
@@ -186,7 +191,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             if (isSinglePlayer)
             {
-                currentStamina += maxStamina / 150;
+                currentStamina += maxStamina / 100;
                 uiStat.UpdateStaminaUI(currentStamina);
             }
             else
@@ -194,15 +199,17 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                 currentStaminaServerRpc(CurrentStamina + maxStamina / 150);
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
+
+        currentStamina = maxStamina;
         staminaRegen = null;
     }
 
     public IEnumerator ReduceStaminaOverTime(float amount)
     {
         IsReduceStaminaRunning = true;
-        while (CurrentStamina >= 0)
+        while (CurrentStamina > 0)
         {
             if (isSinglePlayer)
             {
@@ -214,9 +221,25 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                 currentStaminaServerRpc(CurrentStamina - (maxStamina / 100) * amount);
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
+
         IsReduceStaminaRunning = false;
+        currentStamina = 0;
+
+        staminaCooldown = StartCoroutine(StaminaCoolDown());
+        staminaReduceOverTime = null;
+    }
+
+    public IEnumerator StaminaCoolDown()
+    {
+        playerMovement.canRun = false;
+        staminaRegen = StartCoroutine(RegenStamina());
+
+        yield return new WaitUntil(() => currentStamina == maxStamina);
+
+        playerMovement.canRun = true;
+        staminaCooldown = null;
     }
 
     public void respawnResetHealth()
@@ -279,34 +302,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         uiStat.transform.SetParent(otherPlayerCanvas.transform);
         uiStat.tag = "OtherPlayerBar";
         uiStat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
-    }
-
-    private void SceneManager_sceneUnloaded(Scene arg0)
-    {
-        //if (IsLocalPlayer)
-        //{
-        //    onStaminaUpDate += upDateStaminaUI;
-        //    onHealthUpDate += upDateHealthUI;
-        //    currentHealthServerRpc(maxHealth);
-        //    currentStaminaServerRpc(maxStamina);
-        //    IsReduceStaminaRunning = false;
-        //    UIstat.SetHealthUI(maxHealth);
-        //    UIstat.SetStaminaUI(maxStamina);
-        //    setParam = true;
-        //    SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
-        //}
-        NetworkcurrentStamina.OnValueChanged += StaminaChange;
-        NetworkcurrentHealth.OnValueChanged += HealthChange;
-        uiStat.SetHealthUI(maxHealth);
-        uiStat.SetStaminaUI(maxStamina);
-
-        if (!IsLocalPlayer)
-        {
-            GameObject Canvas = GameObject.FindGameObjectWithTag("OtherBar");
-            uiStat.transform.SetParent(Canvas.transform);
-            uiStat.tag = "OtherPlayerBar";
-            uiStat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
-        }
     }
 
     private void Awake()

@@ -35,7 +35,7 @@ public class MovementAnim : NetworkBehaviour
     {
         get { return playerAnim.GetCurrentAnimatorStateInfo(1).normalizedTime % 1; }
     }
-    public bool currentAnimatorStateInfoIsName(string paramName)
+    public bool currentAnimatorCombatStateInfoIsName(string paramName)
     {
         return playerAnim.GetCurrentAnimatorStateInfo(1).IsName(paramName);
     }
