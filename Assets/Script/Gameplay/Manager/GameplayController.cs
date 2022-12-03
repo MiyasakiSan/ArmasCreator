@@ -82,10 +82,7 @@ namespace ArmasCreator.Gameplay
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
             loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
             Interacable = true;
-        }
 
-        void Start()
-        {
             CurrentGameplays = Gameplays.Town;
         }
 

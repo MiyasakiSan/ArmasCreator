@@ -5,6 +5,7 @@ using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
 using Unity.Netcode;
 using TMPro;
+using ArmasCreator.UserData;
 
 namespace ArmasCreator.Gameplay.UI
 {
@@ -25,7 +26,12 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private GameObject content;
 
+        [SerializeField]
+        private UIItemBar itemBar;
+
         private GameModeController gameModeController;
+        private UserDataManager userDataManager;
+        private GameplayController gameplayController;
 
         private bool IsSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -33,11 +39,21 @@ namespace ArmasCreator.Gameplay.UI
         {
             SharedContext.Instance.Add(this);
             gameModeController = SharedContext.Instance.Get<GameModeController>();
+            userDataManager = SharedContext.Instance.Get<UserDataManager>();
         }
 
         private void Start()
         {
             playerNameText.text = PlayerPrefs.GetString("PName");
+
+            itemBar.Init(userDataManager);
+
+            gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+            if (gameplayController.CurrentGameplays == GameplayController.Gameplays.Town)
+            {
+                itemBar.Hide();
+            }
         }
 
         public void Show()

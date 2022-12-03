@@ -215,6 +215,18 @@ namespace ArmasCreator.UserData
             return equipItemList;
         }
 
+        public List<string> GetAllConsumableItemIds()
+        {
+            List<string> consumeItemList = new List<string>();
+
+            foreach (KeyValuePair<string, int> item in ConsumableItems)
+            {
+                consumeItemList.Add(item.Key);
+            }
+
+            return consumeItemList;
+        }
+
         public EquipableItemModel GetEquipItemInfo(SubType itemType)
         {
             var gameDataManager = SharedContext.Instance.Get<GameDataManager>();

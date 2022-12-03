@@ -118,6 +118,7 @@ namespace ArmasCreator.UI
             var sprite = atlas.GetSprite(itemInfo.IconName);
 
             displayItemImage.sprite = sprite;
+
             displayItemDetail.text = userDataManager.UserData.UserDataInventory.ConsumableItems[itemInfo.ID].ToString();
             // Set other information here
 
