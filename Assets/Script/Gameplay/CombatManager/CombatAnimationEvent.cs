@@ -6,6 +6,9 @@ public class CombatAnimationEvent : MonoBehaviour
 {
     private PlayerRpgMovement playerMovement;
 
+    [SerializeField]
+    private CombatRpgManager combatManager;
+
     public void Init(PlayerRpgMovement playerMovement)
     {
         this.playerMovement = playerMovement;
@@ -29,5 +32,15 @@ public class CombatAnimationEvent : MonoBehaviour
     public void StopMoveForwardEvent()
     {
         playerMovement.StopMoveForward();
+    }
+
+    public void WithdrawFinish()
+    {
+        combatManager.isWithdrawing = false;
+    }
+
+    public void SheathFinish()
+    {
+        combatManager.isSheathing = false;
     }
 }

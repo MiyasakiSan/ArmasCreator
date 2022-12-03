@@ -35,6 +35,9 @@ public class CombatRpgManager : NetworkBehaviour
     [SerializeField]
     private float maxComboDelay = 0.5f;
 
+    public bool isSheathing;
+    public bool isWithdrawing;
+
     public enum gameState
     {
         neutral,combat
@@ -74,17 +77,21 @@ public class CombatRpgManager : NetworkBehaviour
     }
     private void gameStateCheck()
     {
-        if (!Input.GetKeyDown(gameStateSwitchButton)) { return ; }
-        if(!animController.currentAnimatorCombatStateInfoIsName("Idle")) { return; }
-        if(currentGameState == gameState.neutral)
+        if (!Input.GetKeyUp(gameStateSwitchButton)) { return ; }
+
+        if (!animController.currentAnimatorCombatStateInfoIsName("Idle")) { return; }
+
+        if (currentGameState == gameState.neutral && !isSheathing && !isWithdrawing && !animController.playerAnim.GetBool("isCombat"))
         {
             changeGameState(gameState.combat);
-            ChangeanimLayer(currentGameState);
+            ChangeanimLayer(gameState.combat);
+            isWithdrawing = true;
         }
-        else
+        else if (currentGameState == gameState.combat && !isSheathing && !isWithdrawing && animController.playerAnim.GetBool("isCombat"))
         {
+            isSheathing = true;
             changeGameState(gameState.neutral);
-            ChangeanimLayer(currentGameState);
+            ChangeanimLayer(gameState.neutral);
         }
     }
     private void ChangeanimLayer(gameState current_gameState)

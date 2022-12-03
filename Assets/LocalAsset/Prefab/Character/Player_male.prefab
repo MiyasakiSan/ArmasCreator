@@ -249,6 +249,8 @@ MonoBehaviour:
   noOfClicks: 0
   lastClickedTime: 0
   maxComboDelay: 0.75
+  isSheathing: 0
+  isWithdrawing: 0
 --- !u!114 &7298463663340378696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +449,31 @@ PrefabInstance:
       propertyPath: combatManager
       value: 
       objectReference: {fileID: 8756940726212863584}
+    - target: {fileID: 2224832262304413709, guid: df323df1a7159114db3bc7bacb31a269,
+        type: 3}
+      propertyPath: combatManager
+      value: 
+      objectReference: {fileID: 8756940726212863584}
+    - target: {fileID: 4003339198342117164, guid: df323df1a7159114db3bc7bacb31a269,
+        type: 3}
+      propertyPath: ParticleSystems.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003339198342117164, guid: df323df1a7159114db3bc7bacb31a269,
+        type: 3}
+      propertyPath: ParticleSystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 3259355405849724013}
+    - target: {fileID: 4003339198342117164, guid: df323df1a7159114db3bc7bacb31a269,
+        type: 3}
+      propertyPath: ParticleSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 6717582773191906825}
+    - target: {fileID: 4003339198342117164, guid: df323df1a7159114db3bc7bacb31a269,
+        type: 3}
+      propertyPath: ParticleSystems.Array.data[2]
+      value: 
+      objectReference: {fileID: 8327321286493171205}
     - target: {fileID: 6009006526375641726, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: m_Name
@@ -521,6 +548,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d0e33d97c899b46942900f853f2cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &3259355405849724013 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3204827110239422644, guid: df323df1a7159114db3bc7bacb31a269,
+    type: 3}
+  m_PrefabInstance: {fileID: 90735272570965209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &3702720222250652499 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3612150042923048842, guid: df323df1a7159114db3bc7bacb31a269,
@@ -530,6 +563,18 @@ Animator:
 --- !u!4 &6444030985982923805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6354463856809449668, guid: df323df1a7159114db3bc7bacb31a269,
+    type: 3}
+  m_PrefabInstance: {fileID: 90735272570965209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6717582773191906825 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6664200238826511056, guid: df323df1a7159114db3bc7bacb31a269,
+    type: 3}
+  m_PrefabInstance: {fileID: 90735272570965209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8327321286493171205 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8273901590659310300, guid: df323df1a7159114db3bc7bacb31a269,
     type: 3}
   m_PrefabInstance: {fileID: 90735272570965209}
   m_PrefabAsset: {fileID: 0}

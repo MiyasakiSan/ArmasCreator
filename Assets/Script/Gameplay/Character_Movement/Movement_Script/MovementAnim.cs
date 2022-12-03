@@ -23,6 +23,7 @@ public class MovementAnim : NetworkBehaviour
     private int combatLayerOverideIndex;
 
     private Coroutine delayOverider;
+    private Coroutine switchStance;
 
     public void Init(PlayerRpgMovement playerMovement)
     {
@@ -96,7 +97,12 @@ public class MovementAnim : NetworkBehaviour
 
     public void changeCombatLayerWeight(float weight)
     {
-        StartCoroutine(SwitchStance(weight));
+        if(switchStance != null) 
+        {
+            switchStance = null;
+        }
+
+        switchStance = StartCoroutine(SwitchStance(weight));
     }
 
     [ServerRpc]
@@ -111,15 +117,17 @@ public class MovementAnim : NetworkBehaviour
     {
         if (weight == 1)
         {
+            playerAnim.SetBool("isCombat", true);
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
-            playerAnim.SetBool("isCombat", !playerAnim.GetBool("isCombat"));
         }
         else
         {
-            playerAnim.SetBool("isCombat", !playerAnim.GetBool("isCombat"));
-            yield return new WaitForSeconds(1.6f);
+            playerAnim.SetBool("isCombat", false);
+            yield return new WaitForSeconds(1f);
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
         }
+
+        switchStance = null;
     }
 
     [ServerRpc]
