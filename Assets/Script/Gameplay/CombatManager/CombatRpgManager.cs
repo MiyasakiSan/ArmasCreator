@@ -75,7 +75,7 @@ public class CombatRpgManager : NetworkBehaviour
     private void gameStateCheck()
     {
         if (!Input.GetKeyDown(gameStateSwitchButton)) { return ; }
-        if(!animController.currentAnimatorStateInfoIsName("Idle")) { return; }
+        if(!animController.currentAnimatorCombatStateInfoIsName("Idle")) { return; }
         if(currentGameState == gameState.neutral)
         {
             changeGameState(gameState.combat);
@@ -140,14 +140,14 @@ public class CombatRpgManager : NetworkBehaviour
     }
     public void Melee_CurrentAnimOutOfTime()
     {
-        if (animController.currentAnimatorStateInfoIsName("Idle"))
+        if (animController.currentAnimatorCombatStateInfoIsName("Idle"))
         {
             ResetAnimBoolean();
         }
 
         if (animController.currentAnimatorStateInfoTime <= 0.9f) { return; }
 
-        else if (animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
+        else if (animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
             if (isSinglePlayer)
             {
@@ -158,7 +158,7 @@ public class CombatRpgManager : NetworkBehaviour
                 animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", false);
             }
         }
-        else if(animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
+        else if(animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
             if (isSinglePlayer)
             {
@@ -169,7 +169,7 @@ public class CombatRpgManager : NetworkBehaviour
                 animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", false);
             }
         }
-        else if(animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack3"))
+        else if(animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack3"))
         {
             if (isSinglePlayer)
             {
@@ -259,7 +259,7 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (animController.currentAnimatorStateInfoTime <= 0.3f) { return; }
 
-        if (num > 1  && animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
+        if (num > 0  && animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
             if (isSinglePlayer)
             {
@@ -273,7 +273,7 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (animController.currentAnimatorStateInfoTime <= 0.3f) { return; }
 
-        if (num > 2 && animController.currentAnimatorStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
+        if (num > 1 && animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
             if (isSinglePlayer)
             {

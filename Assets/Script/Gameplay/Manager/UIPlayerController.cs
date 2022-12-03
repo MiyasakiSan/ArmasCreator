@@ -22,6 +22,9 @@ namespace ArmasCreator.Gameplay.UI
         private GameObject otherPlayerCanvas;
         public GameObject OtherPlayerCanvas => otherPlayerCanvas;
 
+        [SerializeField]
+        private GameObject content;
+
         private GameModeController gameModeController;
 
         private bool IsSinglePlayer => gameModeController.IsSinglePlayerMode;
@@ -35,15 +38,16 @@ namespace ArmasCreator.Gameplay.UI
         private void Start()
         {
             playerNameText.text = PlayerPrefs.GetString("PName");
+        }
 
-            if (IsSinglePlayer) 
-            {
-               
-            }
-            else
-            {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStat>().SetupVariable();
-            }
+        public void Show()
+        {
+            content.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            content.SetActive(false);
         }
 
         private void OnDestroy()

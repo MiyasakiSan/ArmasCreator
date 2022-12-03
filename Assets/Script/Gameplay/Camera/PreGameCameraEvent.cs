@@ -1,18 +1,37 @@
+using ArmasCreator.Gameplay;
+using ArmasCreator.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using static ArmasCreator.Gameplay.GameplayController;
 
-public class PreGameCameraTween : MonoBehaviour
+public class PreGameCameraEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameplayController gameplayController;
+
+    [SerializeField]
+    private PlayableDirector currentDirector;
+
+    [SerializeField]
+    private float timeToSkipTo;
+
+    private void Awake()
     {
-        
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.Escape) && gameplayController.CurrentGameplays == Gameplays.PreGame)
+        {
+            currentDirector.time = timeToSkipTo;
+        }
+    }
+
+    public void PreGameFinishEvent()
+    {
+        Debug.Assert(gameplayController != null, "gameplayController is null");
+        gameplayController.PreGameFinish();
     }
 }
