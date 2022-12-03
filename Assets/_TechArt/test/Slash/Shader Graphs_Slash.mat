@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_LightningShader
-  m_Shader: {fileID: -6465566751694194690, guid: 44e6a4bcc6548a6438b251fc210fae1e,
+  m_Name: Shader Graphs_Slash
+  m_Shader: {fileID: -6465566751694194690, guid: 05b97b5b9012c8f4397dbb5e8a0667d5,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -22,8 +22,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_002fe678153d47889049f93b3d8c5e86:
-        m_Texture: {fileID: 2800000, guid: 71ff797844c6811499a182185ec1785b, type: 3}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 40caf96e0c949c241b6fd09bac4e133d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -40,25 +40,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_1b1d3556b2284060aa0ed4acbb72521b: 1
-    - Vector1_be57d28242c94ed5ad6b891d4d3670cf: 0.4
     - _AlphaClip: 1
-    - _Blend: 3
+    - _Blend: 2
     - _CastShadows: 1
     - _Cull: 0
-    - _DstBlend: 0
+    - _DstBlend: 1
+    - _NoiseSpeed: -1.2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SrcBlend: 2
+    - _SrcBlend: 5
     - _Surface: 1
+    - _YOffset: 0.25
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - Color_231f6aaa18ea45ccb2f419a64ef5f515: {r: 0.0726449, g: 0.2482034, b: 1.1562647,
-        a: 0}
+    - _Color: {r: 102.01236, g: 102.01236, b: 102.01236, a: 0}
+    - _Tilling: {r: 1, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &985519200196048399
+--- !u!114 &8553467080582194430
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
