@@ -21,15 +21,25 @@ namespace ArmasCreator.Gameplay.UI
         private ConsumableButton previousItem;
 
         [SerializeField]
+        private ConsumableButton preNextItem;
+
+        [SerializeField]
+        private ConsumableButton prePreviousItem;
+
+        [SerializeField]
         private TextMeshProUGUI itemName;
 
         [SerializeField]
         private GameObject content;
 
+        [SerializeField]
+        private Animator itemBarAnimator;
+
         private int currentIndex;
         private int previousIndex;
+        private int prePreviousIndex;
         private int nextIndex;
-
+        private int preNextIndex;
         private List<string> allConsumableItemIds = new List<string>();
 
         private UserDataManager userDataManager;
@@ -41,7 +51,7 @@ namespace ArmasCreator.Gameplay.UI
             allConsumableItemIds = userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds();
             currentIndex = 0;
 
-            Populate();
+            Populate(currentIndex);
         }
 
         public void Hide()
@@ -56,26 +66,39 @@ namespace ArmasCreator.Gameplay.UI
 
         private void SetIndex()
         {
-            if (currentIndex < 0)
-            {
-                currentIndex = allConsumableItemIds.Count - 1;
-            }
-            else if (currentIndex > allConsumableItemIds.Count - 1)
-            {
-                currentIndex = 0;
-            }
+            currentIndex %= allConsumableItemIds.Count;
 
             previousIndex = currentIndex - 1;
+            prePreviousIndex = currentIndex - 2;
             nextIndex = currentIndex + 1;
+            preNextIndex = currentIndex + 2;
+
+            if (currentIndex < 0)
+            {
+                currentIndex = allConsumableItemIds.Count + currentIndex;
+                currentIndex %= allConsumableItemIds.Count;
+            }
 
             if (previousIndex < 0)
             {
-                previousIndex = allConsumableItemIds.Count - 1;
+                previousIndex = allConsumableItemIds.Count + previousIndex;
+                previousIndex %= allConsumableItemIds.Count;
             }
 
             if(nextIndex > allConsumableItemIds.Count - 1)
             {
-                nextIndex = 0;
+                nextIndex %= allConsumableItemIds.Count;
+            }
+
+            if (prePreviousIndex < 0)
+            {
+                prePreviousIndex = allConsumableItemIds.Count + prePreviousIndex;
+                prePreviousIndex %= allConsumableItemIds.Count;
+            }
+
+            if (preNextIndex > allConsumableItemIds.Count - 1)
+            {
+                preNextIndex %= allConsumableItemIds.Count;
             }
         }
 
@@ -84,13 +107,16 @@ namespace ArmasCreator.Gameplay.UI
             Debug.Log($"Use {allConsumableItemIds[currentIndex]}");
         }
 
-        public void Populate()
+        public void Populate(int plusIndex)
         {
+            currentIndex += plusIndex;
             SetIndex();
 
-            previousItem.SetDisplayItem(allConsumableItemIds[previousIndex]);
-            nextItem.SetDisplayItem(allConsumableItemIds[nextIndex]);
-            currentItem.SetDisplayItem(allConsumableItemIds[currentIndex]);
+            previousItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(previousIndex)]);
+            nextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(nextIndex)]);
+            currentItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(currentIndex)]);
+            prePreviousItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(prePreviousIndex)]);
+            preNextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(preNextIndex)]);
 
             itemName.text = currentItem.ItemInfo.Name;
         }
@@ -104,13 +130,11 @@ namespace ArmasCreator.Gameplay.UI
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
-                currentIndex++;
-                Populate();
+                itemBarAnimator.SetTrigger("Right");
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
             {
-                currentIndex--;
-                Populate();
+                itemBarAnimator.SetTrigger("Left");
             }
         }
     }
