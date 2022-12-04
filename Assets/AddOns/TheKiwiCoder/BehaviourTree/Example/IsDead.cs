@@ -23,19 +23,22 @@ public class IsDead : ActionNode
     }
     private bool isDead()
     {
-        //float currentHealth = context.gameObject.GetComponent<EnemyStat>().CurrentHealth;
-        //if (currentHealth <= 0)
-        //{
-        //    if (context.gameObject.GetComponent<enemyAnimController>() != null)
-        //    {
-        //        context.gameObject.GetComponent<enemyAnimController>().DeadServerRpc();
-        //    }
+        float currentHealth = context.gameObject.GetComponent<EnemyStat>().CurrentHealth;
 
-        //    return true;
-        //}
-        //else
-        //{
+        if (currentHealth <= 0 && !blackboard.IsDead)
+        {
+            blackboard.IsDead = true;
+
+            if (context.gameObject.GetComponent<enemyAnimController>() != null)
+            {
+                context.gameObject.GetComponent<enemyAnimController>().Dead();
+            }
+
+            return true;
+        }
+        else
+        {
             return false;
-        //}
+        }
     }
 }

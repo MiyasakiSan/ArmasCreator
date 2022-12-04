@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Events;
+using ArmasCreator.GameMode;
+using ArmasCreator.Utilities;
+
 public class EnemyStat : AttackTarget, IDamagable<float>
 {
     [SerializeField]
@@ -13,10 +16,37 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     NetworkVariable<float> NetworkcurrentHealth = new NetworkVariable<float>();
     public UnityAction<float> onHealthUpDate;
 
+    private GameModeController gameModeController;
+
+    private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
+
+    [SerializeField]
+    private float currentHealth;
+
     public float CurrentHealth
     {
-        get { return NetworkcurrentHealth.Value; }
-        set { NetworkcurrentHealth.Value = value; }
+        get
+        {
+            if (isSinglePlayer)
+            {
+                return currentHealth;
+            }
+            else
+            {
+                return NetworkcurrentHealth.Value;
+            }
+        }
+        set
+        {
+            if (isSinglePlayer)
+            {
+                currentHealth = value;
+            }
+            else
+            {
+                NetworkcurrentHealth.Value = value;
+            }
+        }
     }
     [ServerRpc]
     public void currentHealthServerRpc(float value)
@@ -25,7 +55,14 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     }
     public override void receiveAttack(float damage)
     {
-        receiveAttackServerRpc(damage);
+        if (isSinglePlayer)
+        {
+            CurrentHealth -= damage;
+        }
+        else
+        {
+            receiveAttackServerRpc(damage);
+        }
     }
     [ServerRpc(RequireOwnership = false)]
     public void receiveAttackServerRpc(float damage)
@@ -33,17 +70,20 @@ public class EnemyStat : AttackTarget, IDamagable<float>
         CurrentHealth -= damage;
     }
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        gameModeController = SharedContext.Instance.Get<GameModeController>();
+    }
+
     void Start()
     {
-        if (!IsOwner) { return; }
-        currentHealthServerRpc(maxHealth);
+        if (isSinglePlayer)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealthServerRpc(maxHealth);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 }

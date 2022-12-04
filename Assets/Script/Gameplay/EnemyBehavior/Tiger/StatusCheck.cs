@@ -11,23 +11,23 @@ public class StatusCheck : ActionNode
     protected override void OnStop() {
     }
 
-    protected override State OnUpdate() {
+    protected override State OnUpdate() 
+    {
         if (!CheckCurrentStatus())
         {
             return State.Failure;
         }
         else
         {
-            return State.Running;
+            return State.Success;
         }
     }
 
     private bool CheckCurrentStatus()
     {
-        Debug.Log(context.gameObject);
         var enemyStat = context.gameObject.GetComponent<EnemyStat>();
 
-        if(enemyStat == null) { return false; }
+        if (enemyStat == null) { return false; }
 
         float maxHealth = enemyStat.MaxHealth;
         float currentHealth = enemyStat.CurrentHealth;

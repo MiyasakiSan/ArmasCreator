@@ -22,6 +22,7 @@ MonoBehaviour:
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
@@ -43,48 +44,19 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 6feb00b77513f784691d710a9cebd8e8
-  position: {x: 131.33333, y: 649.3333}
+  position: {x: 75.33328, y: 724.6441}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
---- !u!114 &-843320043716869159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  state: 2
-  started: 0
-  guid: 2066ca469c62b0b4f868c7aa3f62be51
-  position: {x: -205.19902, y: 484.66672}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-    CurrentAttackPattern: {fileID: 0}
-  description: 
-  drawGizmos: 0
-  children:
-  - {fileID: 6516967406905786214}
-  - {fileID: 760807915532348710}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,23 +76,22 @@ MonoBehaviour:
   - {fileID: 3964595408751014720}
   - {fileID: 6886120431543504417}
   - {fileID: 6138442160220864189}
-  - {fileID: -843320043716869159}
-  - {fileID: 4922759796844413321}
-  - {fileID: 3399324270424228788}
   - {fileID: 6516967406905786214}
   - {fileID: 760807915532348710}
   - {fileID: -3282221169115235948}
-  - {fileID: 2709389679094520898}
-  - {fileID: 8739090318124431842}
   - {fileID: 6549167335751347871}
   - {fileID: 4872307726482557741}
   - {fileID: 8995882645581040522}
+  - {fileID: 3114853107376617917}
+  - {fileID: 2572728521966819717}
+  - {fileID: 6089394717417668432}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
@@ -139,46 +110,20 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 1f5571df036854c4faad1f9a08d52d26
-  position: {x: -100.959595, y: 649.33325}
+  position: {x: 0.6666298, y: 494.6666}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
---- !u!114 &2709389679094520898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6c264bd2fdaf5499bf25e378f08eba, type: 3}
-  m_Name: StatusCheck
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 1
-  guid: f53fff150b2e3e74d9414c5ba9104831
-  position: {x: 668.4361, y: 616.6666}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-    CurrentAttackPattern: {fileID: 0}
-  description: 
-  drawGizmos: 0
---- !u!114 &3399324270424228788
+--- !u!114 &2572728521966819717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,15 +136,16 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
-  guid: c398b2e6a6d03b6459e774ac7be4346a
-  position: {x: 223.66682, y: 494.6666}
+  started: 0
+  guid: ee457fdb45bec0b4486f8f5cafdc4fdb
+  position: {x: 272.66672, y: 494.66672}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
@@ -207,7 +153,36 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: -3282221169115235948}
+  - {fileID: 3114853107376617917}
   - {fileID: 6138442160220864189}
+--- !u!114 &3114853107376617917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6c264bd2fdaf5499bf25e378f08eba, type: 3}
+  m_Name: StatusCheck
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 53df8fdc581b45a4a90972ecc9d25d93
+  position: {x: 272.66672, y: 724.6441}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    IsPlayerEnterStage: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
 --- !u!114 &3964595408751014720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +205,7 @@ MonoBehaviour:
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
@@ -237,7 +213,7 @@ MonoBehaviour:
   drawGizmos: 0
   child: {fileID: 6886120431543504417}
   restartOnSuccess: 1
-  restartOnFailure: 0
+  restartOnFailure: 1
   DetectedRanged: 0
 --- !u!114 &4872307726482557741
 MonoBehaviour:
@@ -254,19 +230,20 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6548d191d7e591f43a03318b5cc76f41
-  position: {x: 640.6667, y: 985.99994}
+  position: {x: 497.33334, y: 914.6441}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
---- !u!114 &4922759796844413321
+--- !u!114 &6089394717417668432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,25 +252,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2932073b8a6c3b34391576c45d359457, type: 3}
-  m_Name: Parallel
+  m_Script: {fileID: 11500000, guid: fbcce382e36a02c4190919fc02e0c414, type: 3}
+  m_Name: AttackPatternController
   m_EditorClassIdentifier: 
   state: 0
-  started: 1
-  guid: 4af6a7ac215e6a0498da40b4bcbcb9fc
-  position: {x: 479.99997, y: 604.6667}
+  started: 0
+  guid: ee80e68d00e0aee4c9882e4edb776de5
+  position: {x: 96.66668, y: 914.6666}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
-  children: []
+  allAttackPattern: []
 --- !u!114 &6138442160220864189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,20 +287,21 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2c75eff799e09f241a6682fc90392dae
-  position: {x: 490.70508, y: 806.1646}
+  position: {x: 497.33334, y: 724.6441}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
-  - {fileID: 8739090318124431842}
+  - {fileID: 6089394717417668432}
   - {fileID: 6549167335751347871}
   - {fileID: 4872307726482557741}
   - {fileID: 8995882645581040522}
@@ -341,13 +320,14 @@ MonoBehaviour:
   state: 2
   started: 0
   guid: 4a2ed8e8ff9f90240ab7199219da42ff
-  position: {x: -303.16116, y: 649.41364}
+  position: {x: -209.9725, y: 494.6667}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
@@ -368,13 +348,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a47fecaa09d406448b39651cde6ff49a
-  position: {x: 435.59332, y: 985.99994}
+  position: {x: 291.9999, y: 914.6441}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
@@ -384,6 +365,7 @@ MonoBehaviour:
   updateRotation: 1
   acceleration: 40
   tolerance: 3
+  disable: 0
 --- !u!114 &6886120431543504417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,49 +381,23 @@ MonoBehaviour:
   state: 0
   started: 1
   guid: ba2ee866208302d49a804250eef00bfc
-  position: {x: -0.0000038146973, y: 321.0903}
+  position: {x: 0.33319983, y: 302.6773}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
   children:
-  - {fileID: -843320043716869159}
-  - {fileID: 3399324270424228788}
---- !u!114 &8739090318124431842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbcce382e36a02c4190919fc02e0c414, type: 3}
-  m_Name: AttackPatternController
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 76020d38bbb385841a95565bdf085751
-  position: {x: 197.99995, y: 985.70013}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-    CurrentAttackPattern: {fileID: 0}
-  description: 
-  drawGizmos: 0
-  allAttackPattern: []
+  - {fileID: 6516967406905786214}
+  - {fileID: 760807915532348710}
+  - {fileID: 2572728521966819717}
 --- !u!114 &8995882645581040522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,13 +413,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 13a67095000d7984dab8b8566f41992e
-  position: {x: 847.7235, y: 985.99994}
+  position: {x: 704.66675, y: 914.6441}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     IsDead: 0
     IsStun: 0
     IsEnrage: 0
+    IsPlayerEnterStage: 0
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}

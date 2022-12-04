@@ -6,12 +6,20 @@ using ArmasCreator.Behavior;
 public class EnemyCombatManager : NetworkBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float damage;
-    [SerializeField] enemyAnimController enemyAnim;
+    [SerializeField] 
+    private float damage;
+
+    [SerializeField] 
+    enemyAnimController enemyAnim;
+
+    [SerializeField]
+    private EnemyStat enemyStat;
+
     [SerializeField]
     private List<EnemyBoxCollider> enemyBoxColliderList;
 
     public List<AttackPattern> AllAttackPattern;
+
 
     void Start()
     {
@@ -27,6 +35,7 @@ public class EnemyCombatManager : NetworkBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
+
         if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
@@ -69,7 +78,11 @@ public class EnemyCombatManager : NetworkBehaviour
     {
         if (!col.CompareTag("Weapon")) { return;  }
 
-        Debug.LogError($"กูเจ็บ ตรง {gameObject} เพราะ โดน {col.gameObject.name}");
+        Debug.Log($"กูเจ็บ ตรง {gameObject} เพราะ โดน {col.gameObject.name}");
+
+        float damage = col.GetComponent<Weapon>().weaponDamage;
+
+        enemyStat.receiveAttack(damage);
     }
 
     private void OnDestroy()

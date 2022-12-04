@@ -13,7 +13,7 @@ public class AttackTargetPattern : ActionNode
 
     protected override State OnUpdate() {
 
-        if(blackboard.CurrentAttackPattern != null) { Debug.Log($"ATTACK TARGET WITH {blackboard.CurrentAttackPattern.AttackAnimaiton.name}"); }
+        if (blackboard.CurrentAttackPattern != null) { Debug.Log($"ATTACK TARGET WITH {blackboard.CurrentAttackPattern.AttackAnimaiton.name}"); }
 
         return State.Success;
     }
