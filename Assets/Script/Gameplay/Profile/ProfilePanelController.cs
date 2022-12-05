@@ -68,6 +68,8 @@ namespace ArmasCreator.UI
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInItem");
+                AllInteractableTrue();
+                btn_Item.interactable = false;
 
             });
 
@@ -76,6 +78,8 @@ namespace ArmasCreator.UI
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInEquipment");
+                AllInteractableTrue();
+                btn_Equipment.interactable = false;
             });
 
             btn_Quest.onClick.AddListener(() =>
@@ -83,12 +87,16 @@ namespace ArmasCreator.UI
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInQuest");
+                AllInteractableTrue();
+                btn_Quest.interactable = false;
             });
 
             btn_Challenges.onClick.AddListener(() =>
             {
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInChallenge");
+                AllInteractableTrue();
+                btn_Challenges.interactable = false;
             });
 
             btn_Option.onClick.AddListener(() =>
@@ -96,12 +104,16 @@ namespace ArmasCreator.UI
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInOption");
+                AllInteractableTrue();
+                btn_Option.interactable = false;
             });
         }
 
         public void OpenProfilePanel()
         {
             DeActivateAllContent();
+            AllInteractableTrue();
+            btn_Option.interactable = false;
             optionPanelController.ShowOptionPanel();
             top_btn_Option.OnSelected();
             profileAnimator.SetTrigger("FadeIn");
@@ -113,7 +125,6 @@ namespace ArmasCreator.UI
             profileAnimator.SetTrigger("FadeOutCD");
             profileAnimator.SetTrigger("FadeOut");
             profileAnimator.SetTrigger("FadeOutProfile");
-            DeActivateAllContent();
             Time.timeScale = 1f;
         }
 
@@ -139,6 +150,15 @@ namespace ArmasCreator.UI
             top_btn_Challenges.OnDeSelected();
             top_btn_Option.OnDeSelected();
             top_btn_Quest.OnDeSelected();
+        }
+
+        public void AllInteractableTrue()
+        {
+            btn_Item.interactable = true;
+            btn_Option.interactable = true;
+            btn_Equipment.interactable = true;
+            btn_Quest.interactable = true;
+            btn_Challenges.interactable = true;
         }
 
         public void SetUpItem()

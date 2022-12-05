@@ -30,11 +30,35 @@ public class UseVFX : MonoBehaviour
 
     public void OnUsePS(int VFXNumber)
     {
-        ParticleSystems[VFXNumber].enableEmission = (true);
+        ParticleSystem[] particleSystems = ParticleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+        ParticleSystems[VFXNumber].enableEmission = true;
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            particleSystem.enableEmission = true;
+        }
+        
     }
 
     public void OnStopPS(int VFXNumber)
     {
-        ParticleSystems[VFXNumber].enableEmission = (false);
+        ParticleSystem[] particleSystems = ParticleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+        ParticleSystems[VFXNumber].enableEmission = false;
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            particleSystem.enableEmission = false;
+        }
+    }
+
+    public void OnStopAllPS()
+    {
+        for (int VFXNumber = 0; VFXNumber < ParticleSystems.Length; VFXNumber++)
+        {
+            ParticleSystem[] particleSystems = ParticleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+            ParticleSystems[VFXNumber].enableEmission = false;
+            foreach (ParticleSystem particleSystem in particleSystems)
+            {
+                particleSystem.enableEmission = false;
+            }
+        }
     }
 }
