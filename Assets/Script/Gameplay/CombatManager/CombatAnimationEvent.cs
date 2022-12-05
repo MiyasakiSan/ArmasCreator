@@ -34,6 +34,11 @@ public class CombatAnimationEvent : MonoBehaviour
         playerMovement.StopMoveForward();
     }
 
+    public void StopMoveForwardVelo()
+    {
+        playerMovement.StopMoveForwardNotResetVelo();
+    }
+
     public void WithdrawFinish()
     {
         combatManager.isWithdrawing = false;

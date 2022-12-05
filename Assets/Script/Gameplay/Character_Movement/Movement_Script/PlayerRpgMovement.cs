@@ -204,6 +204,16 @@ public class PlayerRpgMovement : NetworkBehaviour
         rb.velocity = Vector3.zero;
     }
 
+    public void StopMoveForwardNotResetVelo()
+    {
+        if (MoveForwardCoroutine != null)
+        {
+            StopCoroutine(MoveForwardCoroutine);
+
+            MoveForwardCoroutine = null;
+        }
+    }
+
     private void Movement()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -262,6 +272,11 @@ public class PlayerRpgMovement : NetworkBehaviour
     }
     IEnumerator Dodge()
     {
+        if (isDodging)
+        {
+            yield break;
+        }
+
         if (isSinglePlayer)
         {
             animController.Dodge();
@@ -271,11 +286,6 @@ public class PlayerRpgMovement : NetworkBehaviour
             animController.DodgeServerRpc();
         }
 
-        if (isDodging)
-        {
-            yield break;
-        }
-
         isDodging = true;
 
         float timer = 0;
@@ -283,6 +293,8 @@ public class PlayerRpgMovement : NetworkBehaviour
 
         while(timer < dodgeTimer)
         {
+            StopMoveForwardNotResetVelo();
+
             float speed = dodgeCurve.Evaluate(timer);
             Vector3 dir = (transform.forward * speed);
             rb.AddForce(dir *dodgeForce* Time.deltaTime);
