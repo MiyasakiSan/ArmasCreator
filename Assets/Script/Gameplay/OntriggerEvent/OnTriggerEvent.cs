@@ -9,9 +9,24 @@ namespace ArmasCreator.Gameplay
     {
         public UnityEvent<Collider> onTriggerStay;
 
+        public UnityEvent<Collider> onTriggerEnter;
+
+        [SerializeField]
+        private GameObject boxCollider;
+
         void OnTriggerStay(Collider col)
         {
             if (onTriggerStay != null) onTriggerStay.Invoke(col);
+        }
+
+        void OnTriggerEnter(Collider col)
+        {
+            if (onTriggerEnter != null) onTriggerEnter.Invoke(col);
+        }
+
+        public void SetBoxCollider(bool active)
+        {
+            boxCollider.SetActive(active);
         }
     }
 }

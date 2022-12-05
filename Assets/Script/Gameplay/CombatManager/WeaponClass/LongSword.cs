@@ -37,7 +37,7 @@ public class LongSword : IMeleeWeapon
   
     public override void Attack(AttackTarget target, float damage)
     {
-        base.Attack(target,damage);
+        //base.Attack(target,damage);
         Debug.Log("Attack");
     }
 

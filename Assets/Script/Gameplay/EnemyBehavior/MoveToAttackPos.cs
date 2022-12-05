@@ -9,19 +9,15 @@ public class MoveToAttackPos : ActionNode
 
     public bool updateRotation = true;
     public float acceleration = 40.0f;
-    public float tolerance = 3.0f;
+    public float tolerance = 5.0f;
+
+    public bool disable;
 
     protected override void OnStart() 
     {
-        if(blackboard.CurrentAttackPattern != null)
-        {
-            context.agent.stoppingDistance = blackboard.CurrentAttackPattern.AttackDistance;
-        }
-
-        context.agent.speed = speed;
-        context.agent.destination = blackboard.Target.transform.position;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
+        context.agent.speed = speed;
     }
 
     protected override void OnStop() {
@@ -29,26 +25,51 @@ public class MoveToAttackPos : ActionNode
 
     protected override State OnUpdate() 
     {
-        return State.Success;
+        if (disable) { return State.Success; }
 
-        if (context.agent.pathPending)
+        if (blackboard.CurrentAttackPattern != null && !blackboard.IsRunToAttackPos)
         {
+            context.agent.isStopped = false;
+
+            context.agent.stoppingDistance = blackboard.CurrentAttackPattern.AttackDistance;
+            context.agent.destination = blackboard.Target.transform.position;
+
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
+            blackboard.IsRunToAttackPos = true;
+            return State.Running;
+        }
+
+        if (blackboard.IsRunToAttackPos)
+        {
+            context.agent.stoppingDistance = blackboard.CurrentAttackPattern.AttackDistance;
+            context.agent.destination = blackboard.Target.transform.position;
+
+            if (context.agent.remainingDistance < blackboard.CurrentAttackPattern.AttackDistance)
+            {
+                Debug.Log(context.agent.remainingDistance);
+
+                context.agent.isStopped = true;
+                blackboard.IsRunToAttackPos = false;
+                context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+                return State.Success;
+            }
+
             context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
             return State.Running;
         }
 
-        if (context.agent.remainingDistance < tolerance)
-        {
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
-            return State.Success;
-        }
-
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
+            context.agent.isStopped = true;
             context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
             return State.Failure;
         }
+        else
+        {
+            Debug.Log(blackboard.CurrentAttackPattern);
 
-        return State.Running;
+            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            return State.Success;
+        }
     }
 }

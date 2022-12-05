@@ -10,6 +10,7 @@ namespace ArmasCreator.Behavior
         [SerializeField]
         private List<AttackPattern> allAttackPattern;
 
+        [SerializeField]
         private List<AttackPatternContainer> allAttackPatternContainer = new List<AttackPatternContainer>();
 
         private bool isInit;
@@ -37,7 +38,7 @@ namespace ArmasCreator.Behavior
 
         private void GenerateAttackPatternContainer()
         {
-            if(isInit) { return; }
+            if (isInit) { return; }
 
             allAttackPattern = context.gameObject.GetComponent<EnemyCombatManager>().AllAttackPattern;
 
@@ -88,7 +89,7 @@ namespace ArmasCreator.Behavior
         private void GetAvaliableAttackPattern( out List<AttackPattern> avaliableAttackPattern)
         {
             avaliableAttackPattern = new List<AttackPattern>();
-            var distance = Vector2.Distance(blackboard.Target.transform.position, context.gameObject.transform.position);
+            var distance = Vector3.Distance(blackboard.Target.transform.position, context.gameObject.transform.position);
 
             foreach (var attackPatternContainer in allAttackPatternContainer)
             {
@@ -98,12 +99,12 @@ namespace ArmasCreator.Behavior
                     continue;
                 }
 
-                if (distance > attackPatternContainer.AttackPattern.ActiveDistance )
+                if (!CheckDirection(attackPatternContainer.AttackPattern))
                 {
                     continue;
                 }
 
-                if (!CheckDirection(attackPatternContainer.AttackPattern))
+                if (distance > attackPatternContainer.AttackPattern.ActiveDistance )
                 {
                     continue;
                 }
@@ -118,7 +119,7 @@ namespace ArmasCreator.Behavior
             var attackDirection = Vector3.Normalize(Quaternion.Euler(0, context.transform.eulerAngles.y, 0) * attackPattern.ActiveDirection);
             var directDot = Vector3.Dot(playerDirection, attackDirection);
 
-            //Debug.LogError($"directDot : {directDot}   ||  offset :  { Mathf.Cos(attackPattern.ActiveAngleOffset / 2 * Mathf.Deg2Rad)}");
+            //Debug.LogError($"{attackPattern.AttackAnimaiton.name}  : directDot : {directDot}   ||  offset :  { Mathf.Cos(attackPattern.ActiveAngleOffset / 2 * Mathf.Deg2Rad)}");
 
             if (directDot >= Mathf.Cos(attackPattern.ActiveAngleOffset/2 * Mathf.Deg2Rad))
             {
