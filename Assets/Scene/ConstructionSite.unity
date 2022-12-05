@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7004271, g: 0.77887654, b: 0.7672576, a: 1}
+  m_IndirectSpecularColor: {r: 0.7018344, g: 0.78017443, b: 0.76788247, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -712,15 +712,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2110641682}
     m_Modifications:
-    - target: {fileID: 2605361722608635433, guid: f4ad43c64334c95448271e362f696600,
-        type: 3}
-      propertyPath: content
-      value: 
-      objectReference: {fileID: 676824973}
     - target: {fileID: 2738980237201056113, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738980238219647357, guid: f4ad43c64334c95448271e362f696600,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2738980238382208448, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
@@ -832,10 +832,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2738980238570023163, guid: f4ad43c64334c95448271e362f696600,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738980238636916573, guid: f4ad43c64334c95448271e362f696600,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2738980238646957514, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738980238942823854, guid: f4ad43c64334c95448271e362f696600,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -280
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297883790936815437, guid: f4ad43c64334c95448271e362f696600,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562838206503693934, guid: f4ad43c64334c95448271e362f696600,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -145
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ad43c64334c95448271e362f696600, type: 3}
@@ -1477,12 +1502,6 @@ Transform:
   m_Father: {fileID: 238033995}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &676824973 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2738980238646957514, guid: f4ad43c64334c95448271e362f696600,
-    type: 3}
-  m_PrefabInstance: {fileID: 273838742}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &696837129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0880d9ac631f24f409114af2781b3480,
@@ -6478,25 +6497,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1245781760}
     m_Modifications:
-    - target: {fileID: 169199643903320116, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -239.99997
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324032437628128, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1580324032630434314, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
       propertyPath: m_Name
       value: PlayerCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324032630434314, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1580324032630434325, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
@@ -6541,21 +6545,6 @@ PrefabInstance:
     - target: {fileID: 1580324032630434325, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324032630434325, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324032630434325, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324032630434325, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1580324032630434325, guid: 960103404a3e4d2419e5f7efbfde2667,
@@ -6622,36 +6611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1456617154}
-    - target: {fileID: 1580324032630434326, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324032630434326, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_PlaneDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580324033263377691, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -112.8999
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1678595557}
     - target: {fileID: 3391081553911352421, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1436074091
-      objectReference: {fileID: 0}
-    - target: {fileID: 4440965700776094632, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5041370868787657003, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5625131478266663828, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
@@ -6667,11 +6631,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012395175791661427, guid: 960103404a3e4d2419e5f7efbfde2667,
-        type: 3}
-      propertyPath: Player
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8265222419842121824, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}

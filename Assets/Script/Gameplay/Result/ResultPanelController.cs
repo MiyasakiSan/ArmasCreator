@@ -52,6 +52,9 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private GameObject content;
 
+        [SerializeField]
+        private Animator resultPanelAnimator;
+
         private int minute;
         private int second;
         private int milliSecond;
