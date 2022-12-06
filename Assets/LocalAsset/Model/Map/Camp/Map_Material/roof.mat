@@ -14,8 +14,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -90,6 +91,7 @@ Material:
     - _BulgePower: 0.2
     - _BulgeWidth: 6
     - _BumpScale: 1
+    - _CastShadows: 1
     - _CelShadeMidPoint: -0.15
     - _CelShadeSoftness: 0.05
     - _ClearCoatMask: 0
@@ -141,7 +143,9 @@ Material:
     - _UseEmission: 1
     - _UseOcclusion: 1
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 0.3773585, g: 0.1975792, b: 0.1975792, a: 1}
     - _Color: {r: 0.3773585, g: 0.1975792, b: 0.1975792, a: 1}
