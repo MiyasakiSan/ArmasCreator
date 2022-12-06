@@ -6,44 +6,94 @@ using Unity.Netcode;
 
 public class UseVFX : MonoBehaviour
 {
-    public VisualEffect[] VisualEffects;
+    [SerializeField]
+    private VisualEffect[] visualEffects;
 
-    public ParticleSystem[] ParticleSystems;
+    [SerializeField]
+    private VisualEffect[] visualEffectsMagMode;
+
+    [SerializeField]
+    private ParticleSystem[] particleSystems;
+
+    [SerializeField]
+    private ParticleSystem[] particleSystemsMagMode;
+
+    [SerializeField]
+    private bool isMagnetMode = false;
 
     public void OnUseVFX(int VFXNumber)
     {
-        VisualEffects[VFXNumber].Play();
+        if (isMagnetMode)
+        {
+            visualEffectsMagMode[VFXNumber].Play();
+        }
+        else
+        {
+            visualEffects[VFXNumber].Play();
+        }
     }
 
 
     public void OnPlayVFXDuration(int VFXNumber)
     {
-        StartCoroutine(Duration(VFXNumber));
+        if(isMagnetMode)
+        {
+            StartCoroutine(DurationMagnet(VFXNumber));
+        }
+        else
+        {
+            StartCoroutine(Duration(VFXNumber));
+        }
     }
 
     IEnumerator Duration(int VFXNumber)
     {
-        VisualEffects[VFXNumber].Play();
+        visualEffects[VFXNumber].Play();
         yield return new WaitForSeconds(2f);
-        VisualEffects[VFXNumber].Stop();
+        visualEffects[VFXNumber].Stop();
+    }
+
+    IEnumerator DurationMagnet(int VFXNumber)
+    {
+        visualEffectsMagMode[VFXNumber].Play();
+        yield return new WaitForSeconds(2f);
+        visualEffectsMagMode[VFXNumber].Stop();
     }
 
     public void OnUsePS(int VFXNumber)
     {
-        ParticleSystem[] particleSystems = ParticleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
-        ParticleSystems[VFXNumber].enableEmission = true;
-        foreach (ParticleSystem particleSystem in particleSystems)
+        if(isMagnetMode)
         {
-            particleSystem.enableEmission = true;
+            ParticleSystem[] particleSystemArray = particleSystemsMagMode[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+            particleSystemsMagMode[VFXNumber].enableEmission = true;
+            foreach (ParticleSystem particleSystem in particleSystemArray)
+            {
+                particleSystem.enableEmission = true;
+            }
         }
-        
+        else
+        {
+            ParticleSystem[] particleSystemArray = particleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+            particleSystems[VFXNumber].enableEmission = true;
+            foreach (ParticleSystem particleSystem in particleSystemArray)
+            {
+                particleSystem.enableEmission = true;
+            }
+        }
     }
 
     public void OnStopPS(int VFXNumber)
     {
-        ParticleSystem[] particleSystems = ParticleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
-        ParticleSystems[VFXNumber].enableEmission = false;
-        foreach (ParticleSystem particleSystem in particleSystems)
+
+        ParticleSystem[] particleSystemArray = particleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+        particleSystems[VFXNumber].enableEmission = false;
+        foreach (ParticleSystem particleSystem in particleSystemArray)
+        {
+            particleSystem.enableEmission = false;
+        }
+        particleSystemArray = particleSystemsMagMode[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+        particleSystemsMagMode[VFXNumber].enableEmission = false;
+        foreach (ParticleSystem particleSystem in particleSystemArray)
         {
             particleSystem.enableEmission = false;
         }
@@ -51,14 +101,29 @@ public class UseVFX : MonoBehaviour
 
     public void OnStopAllPS()
     {
-        for (int VFXNumber = 0; VFXNumber < ParticleSystems.Length; VFXNumber++)
+        for (int VFXNumber = 0; VFXNumber < particleSystems.Length; VFXNumber++)
         {
-            ParticleSystem[] particleSystems = ParticleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
-            ParticleSystems[VFXNumber].enableEmission = false;
-            foreach (ParticleSystem particleSystem in particleSystems)
+            ParticleSystem[] particleSystemArray = particleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+            particleSystems[VFXNumber].enableEmission = false;
+            foreach (ParticleSystem particleSystem in particleSystemArray)
             {
                 particleSystem.enableEmission = false;
             }
         }
+
+        for (int VFXNumber = 0; VFXNumber < particleSystemsMagMode.Length; VFXNumber++)
+        {
+            ParticleSystem[] particleSystemArray = particleSystemsMagMode[VFXNumber].GetComponentsInChildren<ParticleSystem>();
+            particleSystemsMagMode[VFXNumber].enableEmission = false;
+            foreach (ParticleSystem particleSystem in particleSystemArray)
+            {
+                particleSystem.enableEmission = false;
+            }
+        }
+    }
+
+    public void SetIsMagnetMode(bool isMagnetMode)
+    {
+        this.isMagnetMode = isMagnetMode;
     }
 }
