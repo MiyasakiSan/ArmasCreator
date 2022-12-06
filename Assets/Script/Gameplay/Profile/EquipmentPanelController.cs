@@ -38,9 +38,9 @@ namespace ArmasCreator.UI
             if (!mainContent.activeSelf)
             {
                 mainContent.SetActive(true);
-                PopulateInventoryNode();
-                equipmentBoxController.SetAllEquipmentData();
             }
+            PopulateInventoryNode();
+            equipmentBoxController.SetAllEquipmentData();
         }
 
         public void DeactiveEquipmentPanel()

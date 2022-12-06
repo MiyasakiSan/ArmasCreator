@@ -36,8 +36,8 @@ namespace ArmasCreator.UI
             if (!mainContent.activeSelf)
             {
                 mainContent.SetActive(true);
-                PopulateInventoryNode();
             }
+            PopulateInventoryNode();
         }
 
         public void DeactiveItemPanel()
