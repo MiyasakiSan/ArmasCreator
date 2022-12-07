@@ -12,12 +12,15 @@ public class MoveToAttackPos : ActionNode
     public float tolerance = 5.0f;
 
     public bool disable;
+    private enemyAnimController animController;
 
     protected override void OnStart() 
     {
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
         context.agent.speed = speed;
+
+        animController = context.gameObject.GetComponent<enemyAnimController>();
     }
 
     protected override void OnStop() {
@@ -34,7 +37,7 @@ public class MoveToAttackPos : ActionNode
             context.agent.stoppingDistance = blackboard.CurrentAttackPattern.AttackDistance;
             context.agent.destination = blackboard.Target.transform.position;
 
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
+            animController.SetMoving(true);
             blackboard.IsRunToAttackPos = true;
             return State.Running;
         }
@@ -50,25 +53,27 @@ public class MoveToAttackPos : ActionNode
 
                 context.agent.isStopped = true;
                 blackboard.IsRunToAttackPos = false;
-                context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+                animController.SetMoving(false);
+                animController.ResetAllLookAt();
                 return State.Success;
             }
 
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
+            animController.SetMoving(true);
+            animController.SetAllLookAtWeight(1);
             return State.Running;
         }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
             context.agent.isStopped = true;
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            animController.SetMoving(false);
             return State.Failure;
         }
         else
         {
             Debug.Log(blackboard.CurrentAttackPattern);
 
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            animController.SetMoving(false);
             return State.Success;
         }
     }

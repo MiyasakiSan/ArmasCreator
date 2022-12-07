@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.Netcode;
 using ArmasCreator.Gameplay;
 using ArmasCreator.Utilities;
+using TheKiwiCoder;
+using DitzelGames.FastIK;
 
 public class enemyAnimController : NetworkBehaviour
 {
@@ -11,7 +13,10 @@ public class enemyAnimController : NetworkBehaviour
     [SerializeField] private GameObject coin;
 
     private GameplayController gameplayController;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    private List<FastIKLook> allLookAtIK;
+
     void Start()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -20,16 +25,36 @@ public class enemyAnimController : NetworkBehaviour
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(paramName);
     }
-    // Update is called once per frame
-    void Update()
+
+    public void SetAllLookAt(Transform transform)
     {
-        
+        foreach (var IK in allLookAtIK)
+        {
+            IK.Target = transform;
+        }
     }
-    [ServerRpc]
-    public void MovingServerRpc(bool value)
+
+    public void SetAllLookAtWeight(float amount)
+    {
+        foreach (var IK in allLookAtIK)
+        {
+            IK.SetWeight(amount);
+        }
+    }
+
+    public void ResetAllLookAt()
+    {
+        foreach (var IK in allLookAtIK)
+        {
+            IK.ResetWeight();
+        }
+    }
+
+    public void SetMoving(bool value)
     {
         anim.SetBool("isMoving", value);
     }
+
     [ServerRpc]
     public void AttackServerRpc()
     {
@@ -61,6 +86,16 @@ public class enemyAnimController : NetworkBehaviour
             anim?.SetTrigger("isDead");
             StartCoroutine(despawn());
         }
+    }
+
+    public void RunAnimation(AnimationClip clip)
+    {
+        anim.Play(Animator.StringToHash(clip.name));
+    }
+
+    public void SetAnimationRootNode(bool isApply)
+    {
+        anim.applyRootMotion = isApply;
     }
 
     [ClientRpc]
