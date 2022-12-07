@@ -21,6 +21,7 @@ namespace TheKiwiCoder {
         public bool IsEnrage;
         public bool IsPlayerEnterStage;
         public bool IsRunToAttackPos;
+        public bool IsAttacking;
 
         public float HpPercentage; // Max : 1  ||  Min : 0
         public bool IsMapAttackAvaliable;
