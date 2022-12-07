@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8201900089631456122}
   - component: {fileID: -7601071113566942995}
   - component: {fileID: 8204138606131472184}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GunBlade
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 5650242088807431083}
   - component: {fileID: 478316426611660137}
   - component: {fileID: 8759425802741258594}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SwordSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,15 +314,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 270668371211418519, guid: 4cf80b25e2876a04a9be23ca599cb68d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4cf80b25e2876a04a9be23ca599cb68d,
         type: 3}
       propertyPath: m_Name
       value: gunblade
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4cf80b25e2876a04a9be23ca599cb68d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486661543501798017, guid: 4cf80b25e2876a04a9be23ca599cb68d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274997965092213186, guid: 4cf80b25e2876a04a9be23ca599cb68d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7274997965092213186, guid: 4cf80b25e2876a04a9be23ca599cb68d,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939196909575815729, guid: 4cf80b25e2876a04a9be23ca599cb68d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cf80b25e2876a04a9be23ca599cb68d, type: 3}
