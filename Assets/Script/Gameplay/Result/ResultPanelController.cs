@@ -114,14 +114,49 @@ namespace ArmasCreator.Gameplay.UI
             SetCompletionTime(10, 30, 99);
             SetRewardAmount(2500);
             SetResultData(5000, 3000, 10);
+            SetRank("A", "A", "A", "A");
 
-            StartCoroutine(ResultSequence());
+            resultPanelAnimator.SetTrigger("show");
         }
 
-        IEnumerator ResultSequence()
+        public void Skip()
         {
-            content.SetActive(true);
+            completionTimeText.text = minute.ToString().PadLeft(2, '0') + ":" + second.ToString().PadLeft(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
+            rewardText.text = rewardAmount.ToString() + " s";
+            damageDealtText.text = damageDealtAmount.ToString();
+            damageTakenText.text = damagetakenAmount.ToString();
+            damageTakenText.text = damagetakenAmount.ToString();
+            SetRank("A","A","A","A");
+            resultPanelAnimator.SetTrigger("Skip");
+        }
 
+        public void PlayTimeSequence()
+        {
+            StartCoroutine(TimeSequence());
+        }
+
+        public void PlayRewardSequence()
+        {
+            StartCoroutine(RewardSequence());
+        }
+
+        public void PlayDealtSequence()
+        {
+            StartCoroutine(DamageDealtSequence());
+        }
+
+        public void PlayTakenSequence()
+        {
+            StartCoroutine(DamageTakenSequence());
+        }
+
+        public void PlayItemSequence()
+        {
+            StartCoroutine(ItemSequence());
+        }
+
+        public IEnumerator TimeSequence()
+        {
             StartCoroutine(CountMilliSecondTime());
 
             yield return new WaitUntil(() => IsMilliSequenceFinished);
@@ -134,25 +169,51 @@ namespace ArmasCreator.Gameplay.UI
 
             yield return new WaitUntil(() => IsMinuteSequenceFinished);
 
+            resultPanelAnimator.SetTrigger("timeComplete");
+        }
+
+        public IEnumerator RewardSequence()
+        {
             StartCoroutine(CountReward());
 
             yield return new WaitUntil(() => IsRewardSequenceFinished);
 
+            resultPanelAnimator.SetTrigger("rewardComplete");
+        }
+
+        public IEnumerator DamageDealtSequence()
+        {
             StartCoroutine(CountDamageDealt());
 
             yield return new WaitUntil(() => IsDamageDeltSequenceFinished);
 
+            resultPanelAnimator.SetTrigger("dealtComplete");
+        }
+
+        public IEnumerator DamageTakenSequence()
+        {
             StartCoroutine(CountDamageTaken());
 
             yield return new WaitUntil(() => IsDamageTakenSequenceFinished);
 
+            resultPanelAnimator.SetTrigger("takenComplete");
+        }
+
+        public IEnumerator ItemSequence()
+        {
             StartCoroutine(CountItemUsed());
 
             yield return new WaitUntil(() => IsItemUsedSequenceFinished);
 
+            resultPanelAnimator.SetTrigger("itemComplete");
+
+        }
+
+        public void ResultSequenceFinished()
+        {
             IsResultSequenceFinished = true;
         }
-        
+
         IEnumerator CountMilliSecondTime()
         {
             completionTimeText.text = "00" + ":" + "00" + ":" + "00" + "'";
@@ -161,7 +222,7 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countMilliSecondTime += 1;
                 completionTimeText.text = "00" + ":" + "00" + ":" + countMilliSecondTime.ToString().PadRight(2,'0') + "'";
-                yield return new WaitForSeconds(runTime);
+                yield return new WaitForSeconds(runTime / 3);
             }
             completionTimeText.text = "00" + ":" + "00" + ":" + milliSecond.ToString().PadLeft(2,'0') + "'";
             IsMilliSequenceFinished = true;
@@ -175,7 +236,7 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countSecondTime += 1;
                 completionTimeText.text = "00" + ":" + countSecondTime.ToString().PadRight(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
-                yield return new WaitForSeconds(runTime);
+                yield return new WaitForSeconds(runTime / 3);
             }
             completionTimeText.text = "00" + ":" + second.ToString().PadLeft(2,'0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
             IsSecSequenceFinished = true;
@@ -189,7 +250,7 @@ namespace ArmasCreator.Gameplay.UI
             {
                 countMinuteTime += 1;
                 completionTimeText.text = countMinuteTime.ToString().PadLeft(2,'0') + ":" + second.ToString().PadRight(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
-                yield return new WaitForSeconds(runTime);
+                yield return new WaitForSeconds(runTime / 3);
             }
             completionTimeText.text = minute.ToString().PadLeft(2, '0') + ":" + second.ToString().PadLeft(2, '0') + ":" + milliSecond.ToString().PadLeft(2, '0') + "'";
             IsMinuteSequenceFinished = true;
