@@ -175,6 +175,7 @@ namespace ArmasCreator.Gameplay
             //TODO : Add something to player
             CurrentGameplays = Gameplays.Result;
             Debug.Log("Show Result");
+            uiPlayerController.Hide();
 
             StartCoroutine(ShowGameResultCoroutine());
         }
