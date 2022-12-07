@@ -78,12 +78,12 @@ public class enemyAnimController : NetworkBehaviour
     {
         if(anim == null)
         {
+            gameplayController.EnterGameplayResult();
             return;
         }
         else
         {
             anim?.SetTrigger("isDead");
-            gameplayController.EnterGameplayResult();
             StartCoroutine(despawn());
         }
     }
@@ -126,6 +126,6 @@ public class enemyAnimController : NetworkBehaviour
     {
         yield return new WaitForSeconds(2f);
         SpawnCoinClientRpc();
-        Destroy(this.gameObject);
+        GetComponent<NetworkObject>().Despawn();
     }
 }
