@@ -256,6 +256,10 @@ namespace ArmasCreator.Gameplay.UI
             {
                 selectedPresetSlot.PresetButton.onClick?.Invoke();
             }
+            else
+            {
+                presetSlot[0].PresetButton.onClick?.Invoke();
+            }
         }
 
         private void SetCurrentPreset(PresetSlot preset)
