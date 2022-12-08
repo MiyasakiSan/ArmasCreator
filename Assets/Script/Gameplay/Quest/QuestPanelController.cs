@@ -219,7 +219,7 @@ namespace ArmasCreator.Gameplay.UI
 
             int localPrestIndex = 0;
 
-            for(int i =0; i< presetSlot.Count; i++)
+            for (int i =0; i< presetSlot.Count; i++)
             {
                 if(presetSlot[i].Type == PresetSlot.PresetType.Challenge)
                 {
@@ -252,7 +252,7 @@ namespace ArmasCreator.Gameplay.UI
                 presetSlot[i].PresetInfo += SetCurrentPreset;
             }
 
-            if(selectedPresetSlot != null)
+            if (selectedPresetSlot != null)
             {
                 selectedPresetSlot.PresetButton.onClick?.Invoke();
             }
