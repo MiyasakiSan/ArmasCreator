@@ -21,10 +21,10 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.691
+    m_Value: 0.8
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.504
   rounded:
     m_OverrideState: 0
     m_Value: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 0
     m_Value: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.21
+    m_Value: 0.388
   clamp:
     m_OverrideState: 1
     m_Value: 0.05
@@ -84,13 +84,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.7885828, z: 0.8219245, w: 0.25761124}
+    m_Value: {x: 1, y: 0.7885828, z: 0.8219245, w: -0.6255587}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.8126313, z: 0.91257817, w: 0}
+    m_Value: {x: 1, y: 0.70625633, z: 0.68343496, w: -0.008936361}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9984804, z: 0.8041395, w: 0}
+    m_Value: {x: 1, y: 0.90752894, z: 0.82304317, w: 0.07149192}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -118,13 +118,13 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 2.68
+    m_Value: 4.88
   intensity:
     m_OverrideState: 1
-    m_Value: 5.54
+    m_Value: 3.41
   scatter:
     m_OverrideState: 1
-    m_Value: 0.62
+    m_Value: 0.541
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -158,19 +158,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.93
+    m_Value: 5.51
   contrast:
     m_OverrideState: 1
-    m_Value: -16
+    m_Value: 42
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -7
   saturation:
     m_OverrideState: 1
-    m_Value: 18
+    m_Value: 38
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,3 +190,23 @@ MonoBehaviour:
   - {fileID: -2364305528750015321}
   - {fileID: -5092203818153425204}
   - {fileID: -105310423165487820}
+  - {fileID: 1911411979810136764}
+--- !u!114 &1911411979810136764
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  temperature:
+    m_OverrideState: 1
+    m_Value: 6
+  tint:
+    m_OverrideState: 1
+    m_Value: 18
