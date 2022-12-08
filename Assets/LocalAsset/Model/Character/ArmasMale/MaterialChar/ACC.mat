@@ -8,24 +8,24 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ACC
-  m_Shader: {fileID: -6465566751694194690, guid: 4ef6018904c7e3247a701189cd3a5f2f,
-    type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _EMISSION _NORMALMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2600
-  stringTagMap: {}
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: dad82d63fed687d4d80031c54d13638a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5adf208c6c9c4af459c4f9e5ad3a35ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c91334993e678834a89c0c9146d6f25f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: dad82d63fed687d4d80031c54d13638a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5adf208c6c9c4af459c4f9e5ad3a35ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -89,12 +89,12 @@ Material:
     - _BulgeAmount: 1
     - _BulgePower: 0.2
     - _BulgeWidth: 6
-    - _BumpScale: 1
+    - _BumpScale: 0.1
     - _CelShadeMidPoint: -0.5
     - _CelShadeSoftness: 0.05
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DepthSensitivity: 0
     - _DetailAlbedoMapScale: 1
@@ -111,7 +111,7 @@ Material:
     - _IsFace: 0
     - _LightingCutoff: 0
     - _MainLightIgnoreCelShade: 0
-    - _Metallic: 0
+    - _Metallic: 0.976
     - _Mode: 0
     - _NormalsSensitivity: 1
     - _OcclusionRemapEnd: 1
@@ -130,7 +130,7 @@ Material:
     - _ReceiveShadowMappingPosOffset: 0
     - _ReceiveShadows: 1
     - _ShadowStrength: 3
-    - _Smoothness: 0.5
+    - _Smoothness: 0.29
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

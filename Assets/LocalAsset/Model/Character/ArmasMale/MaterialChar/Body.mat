@@ -21,13 +21,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Body
-  m_Shader: {fileID: -6465566751694194690, guid: 9b7ca2825398b5c49acd74f8c04a89d2,
-    type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2600
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -35,11 +34,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 580f1250eb7f9e140b1f24c6707f3b69, type: 3}
+        m_Texture: {fileID: 2800000, guid: ac8c53c587ddeb344910ecafff99ddc0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c53a4ea8ab0d49e4d98c681a061c2cb5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -59,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 580f1250eb7f9e140b1f24c6707f3b69, type: 3}
+        m_Texture: {fileID: 2800000, guid: ac8c53c587ddeb344910ecafff99ddc0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -100,10 +99,11 @@ Material:
     - _AdditionalLightIgnoreCelShade: 0.9
     - _AlphaClip: 0
     - _Blend: 0
+    - _BlendOp: 0
     - _BulgeAmount: 1
     - _BulgePower: 0.2
     - _BulgeWidth: 6
-    - _BumpScale: 1
+    - _BumpScale: 0.2
     - _CastShadows: 1
     - _CelShadeMidPoint: -0.5
     - _CelShadeSoftness: 0.05
@@ -144,6 +144,7 @@ Material:
     - _ReceiveShadowMappingAmount: 0.65
     - _ReceiveShadowMappingPosOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _ShadowStrength: 4
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
