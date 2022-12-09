@@ -144,7 +144,8 @@ namespace ArmasCreator.UserData
             saveModel.CraftableItems = new Dictionary<string, int>();
             saveModel.Achievements = gameDataManager.GetAllInitAchievements();
             saveModel.recipes = new List<string>();
-            userDataQuestPreset.SetupUserQuestPrest(saveModel);
+
+            SetupUserData();
 
             PlayerPrefs.SetString("PName", name);
         }
