@@ -20,6 +20,8 @@ namespace ArmasCreator.UI
         private Transform contentTransform;
         [SerializeField]
         private GameObject mainContent;
+        [SerializeField]
+        private ItemDetailBoxController itemDetailBoxController;
 
         private UserDataManager userDataManager;
 
@@ -72,6 +74,7 @@ namespace ArmasCreator.UI
                 GameObject insInventoryNode = Instantiate(consumableItemNodePrefab, contentTransform);
                 ConsumableButton insConsumable_btn = insInventoryNode.GetComponent<ConsumableButton>();
                 insConsumable_btn.SetDisplayItem(itemId);
+                insConsumable_btn.SetItemDetailController(itemDetailBoxController);
                 listButton.Add(insConsumable_btn.gameObject);
             }
             foreach (string itemId in craftableItems.Keys)

@@ -234,6 +234,23 @@ namespace ArmasCreator.GameData
             return true;
         }
 
+        public bool TryGetConsumableItemInfoById(string id, out ConsumeableItemModel consumeableItemInfo)
+        {
+            bool exist = consumeableitemInfos.TryGetValue(id, out ConsumeableItemModel itemInfo);
+
+            if (!exist)
+            {
+                Debug.LogError($"{id} doesn't exist in equipable items");
+
+                consumeableItemInfo = new ConsumeableItemModel();
+
+                return false;
+            }
+
+            consumeableItemInfo = itemInfo;
+            return true;
+        }
+
         public ItemType GetItemType(string id)
         {
             bool exist = consumeableitemInfos.ContainsKey(id);
