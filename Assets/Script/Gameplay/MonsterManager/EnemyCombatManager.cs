@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using ArmasCreator.Behavior;
+using ArmasCreator.Gameplay;
+using ArmasCreator.Utilities;
+
 public class EnemyCombatManager : NetworkBehaviour
 {
     // Start is called before the first frame update
@@ -20,7 +23,7 @@ public class EnemyCombatManager : NetworkBehaviour
 
     public List<AttackPattern> AllAttackPattern;
 
-
+    private GameplayController gameplayController;
     void Start()
     {
         Init();
@@ -44,7 +47,9 @@ public class EnemyCombatManager : NetworkBehaviour
     
     private void Init()
     {
-        if(enemyBoxColliderList.Count <= 0) { return; }
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        if (enemyBoxColliderList.Count <= 0) { return; }
 
         foreach(EnemyBoxCollider enemyBoxCollider in enemyBoxColliderList)
         {
@@ -83,6 +88,8 @@ public class EnemyCombatManager : NetworkBehaviour
         float damage = col.GetComponent<Weapon>().weaponDamage;
 
         enemyStat.receiveAttack(damage);
+
+        gameplayController.UpdatePlayerDamageDelt(damage);
     }
 
     private void OnDestroy()

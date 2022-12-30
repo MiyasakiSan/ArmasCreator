@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 3443728320252205352}
+  EMT_Gauge: {fileID: 0}
   canBattle: 1
   heldWeapon: {fileID: 8401013730907822839, guid: 6029889c2c77ce34086b941983d814d9,
     type: 3}
@@ -785,6 +786,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4003339198342117164, guid: df323df1a7159114db3bc7bacb31a269,
+        type: 3}
+      propertyPath: combatManager
+      value: 
+      objectReference: {fileID: 8756940726212863584}
     - target: {fileID: 4003339198342117164, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: ParticleSystems.Array.size

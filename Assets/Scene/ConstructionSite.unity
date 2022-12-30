@@ -5704,6 +5704,11 @@ PrefabInstance:
       propertyPath: allLookAtIK.Array.data[0]
       value: 
       objectReference: {fileID: 1221027838}
+    - target: {fileID: 1479299266428193983, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 1749348329626047203, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
         type: 3}
       propertyPath: m_Name
@@ -6601,6 +6606,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1200845881562927678, guid: 5dc1612e9e9d5d64ab00e6cdf20199ab,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3924631990
+      objectReference: {fileID: 0}
     - target: {fileID: 2566431370824309925, guid: 5dc1612e9e9d5d64ab00e6cdf20199ab,
         type: 3}
       propertyPath: m_Name
@@ -6666,6 +6676,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1777007302
       objectReference: {fileID: 0}
+    - target: {fileID: 8756940726212863584, guid: 5dc1612e9e9d5d64ab00e6cdf20199ab,
+        type: 3}
+      propertyPath: EMT_Gauge
+      value: 
+      objectReference: {fileID: 2134340789}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dc1612e9e9d5d64ab00e6cdf20199ab, type: 3}
 --- !u!4 &2133231059 stripped
@@ -6846,6 +6861,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1436074091
       objectReference: {fileID: 0}
+    - target: {fileID: 4185082137320449418, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4440965700776094632, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
       propertyPath: m_Layer
@@ -6888,6 +6908,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960103404a3e4d2419e5f7efbfde2667, type: 3}
+--- !u!114 &2134340789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3650920335414700635, guid: 960103404a3e4d2419e5f7efbfde2667,
+    type: 3}
+  m_PrefabInstance: {fileID: 2134340788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9058384422057975
 Transform:
   m_ObjectHideFlags: 0

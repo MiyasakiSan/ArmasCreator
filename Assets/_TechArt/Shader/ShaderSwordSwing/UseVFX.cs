@@ -7,6 +7,9 @@ using Unity.Netcode;
 public class UseVFX : MonoBehaviour
 {
     [SerializeField]
+    private CombatRpgManager combatManager;
+
+    [SerializeField]
     private VisualEffect[] visualEffects;
 
     [SerializeField]
@@ -19,7 +22,7 @@ public class UseVFX : MonoBehaviour
     private ParticleSystem[] particleSystemsMagMode;
 
     [SerializeField]
-    private bool isMagnetMode = false;
+    private bool isMagnetMode => combatManager.IsEMTState;
 
     public void OnUseVFX(int VFXNumber)
     {
@@ -122,8 +125,8 @@ public class UseVFX : MonoBehaviour
         }
     }
 
-    public void SetIsMagnetMode(bool isMagnetMode)
-    {
-        this.isMagnetMode = isMagnetMode;
-    }
+    //public void SetIsMagnetMode(bool isMagnetMode)
+    //{
+    //    this.isMagnetMode = isMagnetMode;
+    //}
 }
