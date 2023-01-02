@@ -4,11 +4,25 @@ using UnityEngine;
 using Unity.Netcode;
 using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
+using ArmasCreator.Gameplay;
+using UnityEngine.UI;
 
 public class CombatRpgManager : NetworkBehaviour 
 {
     [SerializeField]
     private PlayerRpgMovement playerMovement;
+
+    [Header("EMT")]
+
+    [SerializeField]
+    private Slider EMT_Gauge;
+
+    private float EMT_Amount;
+
+    private bool isEMTState;
+    public bool IsEMTState => isEMTState;
+
+    private Coroutine decreaseEMTgaugeCoroutine;
 
     public bool canBattle;
     public Weapon heldWeapon;
@@ -44,6 +58,7 @@ public class CombatRpgManager : NetworkBehaviour
     }
 
     private GameModeController gameModeController;
+    private GameplayController gameplayController;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -58,6 +73,16 @@ public class CombatRpgManager : NetworkBehaviour
         {
             changeGameState(gameState.neutral);
         }
+
+        if(EMT_Gauge != null)
+        {
+            EMT_Gauge.maxValue = 20; //TODO : Check is we need to make a gameData for this
+            EMT_Gauge.value = 0;
+        }
+
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        gameplayController.OnPlayerDealDamage += IncreaseEMTgauge;
     }
     void Update()
     {
@@ -69,6 +94,11 @@ public class CombatRpgManager : NetworkBehaviour
             if(currentGameState != gameState.combat) { return; }
 
             CombatDependOnHeldWeapon(heldWeapon);
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                UseEMT();
+            }
         }
     }
     public void changeGameState(gameState value)
@@ -125,6 +155,7 @@ public class CombatRpgManager : NetworkBehaviour
                 break;
         }
     }
+
     private void CombatDependOnHeldWeapon(Weapon currentWeapon)
     {
         switch (currentWeapon)
@@ -133,6 +164,50 @@ public class CombatRpgManager : NetworkBehaviour
                 MeleeCombo();
                 break;
         }
+    }
+
+    private void IncreaseEMTgauge()
+    {
+        if (isEMTState) { return; }
+
+        if (EMT_Amount == EMT_Gauge.maxValue) { return; }
+
+        EMT_Amount++;
+        EMT_Gauge.value = EMT_Amount;
+    }
+
+    private void UseEMT()
+    {
+        Debug.Log("Use EMT");
+
+        if (isEMTState && decreaseEMTgaugeCoroutine != null)
+        {
+            StopCoroutine(decreaseEMTgaugeCoroutine);
+
+            decreaseEMTgaugeCoroutine = null;
+            isEMTState = false;
+        }
+        else if(!isEMTState && EMT_Amount == 20)
+        {
+            isEMTState = true;
+
+            decreaseEMTgaugeCoroutine = StartCoroutine(DecreaseEMTgauge(2));
+        }
+    }
+
+    private IEnumerator DecreaseEMTgauge(float decreaseRate)
+    {
+        while (EMT_Amount > 0)
+        {
+            EMT_Amount -= 0.01f;
+            EMT_Gauge.value = EMT_Amount;
+
+            yield return new WaitForSeconds(0.01f / decreaseRate);
+        }
+
+        EMT_Amount = 0;
+        EMT_Gauge.value = 0;
+        isEMTState = false;
     }
 
     #region Melee Combat
@@ -302,4 +377,9 @@ public class CombatRpgManager : NetworkBehaviour
         canBattle = true;
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        gameplayController.OnPlayerDealDamage -= IncreaseEMTgauge;
+    }
 }

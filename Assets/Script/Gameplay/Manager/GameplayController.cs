@@ -26,6 +26,12 @@ namespace ArmasCreator.Gameplay
 
         public Gameplays CurrentGameplays;
 
+        private float currentDamageDelt = 0;
+
+        private float currentStageTime = 0;
+
+        private float currentDamageTaken = 0;
+
         [SerializeField]
         private ProfilePanelController profilePanelController;
 
@@ -49,6 +55,9 @@ namespace ArmasCreator.Gameplay
 
         public delegate void OnStateResultCallback();
         public OnStateResultCallback OnStateResult;
+
+        public delegate void OnPlayerDealDamageCallback();
+        public OnPlayerDealDamageCallback OnPlayerDealDamage;
 
         public PlayerGroupController PlayerGroupController { get; private set; }
         //public GameDataManager GameDataManager { get; private set; }
@@ -194,6 +203,13 @@ namespace ArmasCreator.Gameplay
             Dispose();
             loadingPopup.LoadSceneAsync("Mainmenu");
             Time.timeScale = 1f;
+        }
+
+        public void UpdatePlayerDamageDelt(float damage)
+        {
+            currentDamageDelt += damage;
+
+            OnPlayerDealDamage?.Invoke();
         }
 
         private void Dispose()
