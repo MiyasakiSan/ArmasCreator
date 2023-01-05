@@ -31,7 +31,7 @@ namespace ArmasCreator.UI
         private void SetItemDetailBox(Sprite newIconSprite, Sprite newIconTypeSprite, string newNameText, string newDetailText)
         {
             iconImage.sprite = newIconSprite;
-            iconTypeImage.sprite = newIconTypeSprite;
+            //iconTypeImage.sprite = newIconTypeSprite;
             nameText.text = newNameText;
             detailText.text = newDetailText;
         }

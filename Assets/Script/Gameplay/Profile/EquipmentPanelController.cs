@@ -20,6 +20,8 @@ namespace ArmasCreator.UI
         private GameObject mainContent;
         [SerializeField]
         private EquipmentBoxController equipmentBoxController;
+        [SerializeField]
+        private EquipmentDetailBoxController equipmentDetailBoxController;
 
         private UserDataManager userDataManager;
 
@@ -70,6 +72,7 @@ namespace ArmasCreator.UI
                 {
                     GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                     EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                    ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                     ins_equipmentItem.SetDisplayItem(itemId);
                     ins_equipmentItem.SetThisItemID(itemId);
                     ins_equipmentItem.SetThisItemSubType(EquipmentType);
@@ -99,6 +102,7 @@ namespace ArmasCreator.UI
             {
                 GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                 EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                 ins_equipmentItem.SetDisplayItem(itemId);
                 ins_equipmentItem.SetThisItemID(itemId);
                 ins_equipmentItem.SetThisItemSubType(SubType.Weapon);
@@ -127,6 +131,7 @@ namespace ArmasCreator.UI
             {
                 GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                 EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                 ins_equipmentItem.SetDisplayItem(itemId);
                 ins_equipmentItem.SetThisItemID(itemId);
                 ins_equipmentItem.SetThisItemSubType(SubType.Helmet);
@@ -155,6 +160,7 @@ namespace ArmasCreator.UI
             {
                 GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                 EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                 ins_equipmentItem.SetDisplayItem(itemId);
                 ins_equipmentItem.SetThisItemID(itemId);
                 ins_equipmentItem.SetThisItemSubType(SubType.Shirt);
@@ -183,6 +189,7 @@ namespace ArmasCreator.UI
             {
                 GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                 EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                 ins_equipmentItem.SetDisplayItem(itemId);
                 ins_equipmentItem.SetThisItemID(itemId);
                 ins_equipmentItem.SetThisItemSubType(SubType.Glove);
@@ -211,6 +218,7 @@ namespace ArmasCreator.UI
             {
                 GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                 EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                 ins_equipmentItem.SetDisplayItem(itemId);
                 ins_equipmentItem.SetThisItemID(itemId);
                 ins_equipmentItem.SetThisItemSubType(SubType.Pant);
@@ -239,6 +247,7 @@ namespace ArmasCreator.UI
             {
                 GameObject insInventoryNode = Instantiate(equipmentItemButtonPrefab.gameObject, inventoryBoxContentTransform);
                 EquipmentItemButton ins_equipmentItem = insInventoryNode.GetComponent<EquipmentItemButton>();
+                ins_equipmentItem.SetEquipmentDetailBoxController(equipmentDetailBoxController);
                 ins_equipmentItem.SetDisplayItem(itemId);
                 ins_equipmentItem.SetThisItemID(itemId);
                 ins_equipmentItem.SetThisItemSubType(SubType.Shoes);

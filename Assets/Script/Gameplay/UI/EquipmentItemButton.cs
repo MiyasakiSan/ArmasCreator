@@ -9,10 +9,11 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 namespace ArmasCreator.UI
 {
-    public class EquipmentItemButton : Button
+    public class EquipmentItemButton : Button, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField]
         protected Image displayItemImage;
@@ -34,12 +35,21 @@ namespace ArmasCreator.UI
 
         protected Coroutine loadingSpriteCoroutine;
 
-        private ItemInfoModel itemInfo; /*====>  put some item info here See in Game Data*/
-        public ItemInfoModel ItemInfo => itemInfo;
+        private EquipableItemModel itemInfo; /*====>  put some item info here See in Game Data*/
+        public EquipableItemModel ItemInfo => itemInfo;
 
         private string thisItemID;
 
         private SubType thisItemSubType;
+
+        protected EquipmentDetailBoxController equipmentDetailBoxController;
+
+        private float atk;
+        private float def;
+        private float vit;
+        private float crit;
+        private string itemName;
+        private Sprite iconSprite;
 
         protected override void Awake()
         {
@@ -83,7 +93,7 @@ namespace ArmasCreator.UI
 
         public void SetDisplayItem(string itemId)
         {
-            var exist = gameDataManager.TryGetItemInfoWithType(itemId, ItemType.Equipable, out var itemInfo);
+            var exist = gameDataManager.TryGetEquipItemInfoById(itemId, out var itemInfo);
 
             if (!exist)
             {
@@ -99,7 +109,7 @@ namespace ArmasCreator.UI
             SetItemInfo(itemInfo);
         }
 
-        private void SetItemInfo(ItemInfoModel itemInfo)
+        private void SetItemInfo(EquipableItemModel itemInfo)
         {
             ClearDisplayItemInfo();
 
@@ -136,12 +146,36 @@ namespace ArmasCreator.UI
 
             var sprite = atlas.GetSprite(itemInfo.IconName);
 
+            atk = itemInfo.ATK;
+            def = itemInfo.DEF;
+            vit = itemInfo.VIT;
+            crit = itemInfo.CRT;
+            itemName = itemInfo.Name;
+            iconSprite = sprite;
+
             displayItemImage.sprite = sprite;
             displayItemDetail.gameObject.SetActive(userDataManager.UserData.UserDataInventory.EquipableItems[thisItemSubType].EquippedId == itemInfo.ID);
 
             // Set other information here
 
             loadingSpriteCoroutine = null;
+        }
+
+        public void SetEquipmentDetailBoxController(EquipmentDetailBoxController newEquipmentDetailBoxController)
+        {
+            equipmentDetailBoxController = newEquipmentDetailBoxController;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            var thisRectTranform = this.GetComponent<RectTransform>().anchoredPosition;
+            equipmentDetailBoxController.GetComponent<RectTransform>().anchoredPosition = new Vector2(thisRectTranform.x + 90, thisRectTranform.y - 170);
+            equipmentDetailBoxController.OnMouseEnterItemSlot(iconSprite, itemName, atk, def, vit, crit);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            equipmentDetailBoxController.OnMouseExitItemSlot();
         }
     }
 }

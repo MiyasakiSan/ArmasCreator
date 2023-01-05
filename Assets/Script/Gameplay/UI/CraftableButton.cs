@@ -9,10 +9,11 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 namespace ArmasCreator.UI
 {
-    public class CraftableButton : Button
+    public class CraftableButton : Button, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField]
         protected Image displayItemImage;
@@ -36,6 +37,11 @@ namespace ArmasCreator.UI
 
         private ItemInfoModel itemInfo; /*====>  put some item info here See in Game Data*/
         public ItemInfoModel ItemInfo => itemInfo;
+
+        protected CraftDetailBoxController craftDetailBoxController;
+
+        private string itemName;
+        private Sprite itemIconSprite;
 
         protected override void Awake()
         {
@@ -116,12 +122,33 @@ namespace ArmasCreator.UI
 
             var sprite = atlas.GetSprite(itemInfo.IconName);
 
+            itemName = itemInfo.Name;
+
+            itemIconSprite = sprite;
+
             displayItemImage.sprite = sprite;
             displayItemDetail.text = userDataManager.UserData.UserDataInventory.CraftableItems[itemInfo.ID].ToString();
 
             // Set other information here
 
             loadingSpriteCoroutine = null;
+        }
+
+        public void SetCraftDetailBoxController(CraftDetailBoxController newCraftDetailBoxController)
+        {
+            craftDetailBoxController = newCraftDetailBoxController;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            var thisRectTranform = this.GetComponent<RectTransform>().anchoredPosition;
+            craftDetailBoxController.GetComponent<RectTransform>().anchoredPosition = new Vector2(thisRectTranform.x + 115, thisRectTranform.y - 170);
+            craftDetailBoxController.OnMouseEnterItemSlot(itemIconSprite, null, itemName, null);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            craftDetailBoxController.OnMouseExitItemSlot();
         }
     }
 }

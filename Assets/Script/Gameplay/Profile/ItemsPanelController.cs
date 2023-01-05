@@ -22,6 +22,8 @@ namespace ArmasCreator.UI
         private GameObject mainContent;
         [SerializeField]
         private ItemDetailBoxController itemDetailBoxController;
+        [SerializeField]
+        private CraftDetailBoxController craftDetailBoxController;
 
         private UserDataManager userDataManager;
 

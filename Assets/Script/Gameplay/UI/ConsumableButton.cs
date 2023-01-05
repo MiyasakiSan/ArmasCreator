@@ -159,7 +159,7 @@ namespace ArmasCreator.UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             var thisRectTranform = this.GetComponent<RectTransform>().anchoredPosition;
-            itemDetailBoxController.GetComponent<RectTransform>().anchoredPosition = new Vector2(thisRectTranform.x + 105, thisRectTranform.y - 155);
+            itemDetailBoxController.GetComponent<RectTransform>().anchoredPosition = new Vector2(thisRectTranform.x + 115, thisRectTranform.y - 155);
             itemDetailBoxController.OnMouseEnterItemSlot(itemIconSprite, itemIconTypeSprite, itemName, itemDetail);
         }
 
