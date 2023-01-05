@@ -46,7 +46,7 @@ public class LongSword : IMeleeWeapon
         if (other.GetComponent<AttackTarget>() && !other.CompareTag("Player"))
         {
             Attack(other.GetComponent<AttackTarget>(), _weaponDamage);
-            other.GetComponent<UseVFX>().OnUseVFX(0);
+            //other.GetComponent<UseVFX>().OnUseVFX(0);
         }
     }
 }
