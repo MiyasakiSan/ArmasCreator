@@ -8,6 +8,7 @@ using ArmasCreator.Utilities;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.U2D;
 using UnityEngine.AddressableAssets;
+using TMPro;
 
 
 namespace ArmasCreator.UI
@@ -17,8 +18,6 @@ namespace ArmasCreator.UI
         private Sprite defaultSprite;
 
         private GameDataManager gameDataManager;
-
-        private UserDataManager userDataManager;
 
         private CoroutineHelper coroutineHelper;
 
@@ -34,6 +33,14 @@ namespace ArmasCreator.UI
         [SerializeField]
         private Image displayItemImage;
 
+        [SerializeField]
+        private TMP_Text itemNameText;
+
+        [SerializeField]
+        private TMP_Text itemPriceText;
+
+        [SerializeField]
+        private GameObject selectedBG;
 
         protected virtual void OnDestroy()
         {
@@ -44,7 +51,6 @@ namespace ArmasCreator.UI
         protected override void Awake()
         {
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
-            userDataManager = SharedContext.Instance.Get<UserDataManager>();
             coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
             defaultSprite = displayItemImage.sprite;
         }
@@ -84,10 +90,14 @@ namespace ArmasCreator.UI
             {
                 Debug.LogError("Fail to find info for a itemId: " + itemId);
                 displayItemImage.gameObject.SetActive(false);
+                itemNameText.gameObject.SetActive(false);
+                itemPriceText.gameObject.SetActive(false);
                 return;
             }
 
             displayItemImage.gameObject.SetActive(true);
+            itemNameText.gameObject.SetActive(true);
+            itemPriceText.gameObject.SetActive(true);
 
             SetItemInfo(itemInfo);
         }
@@ -115,6 +125,9 @@ namespace ArmasCreator.UI
 
             displayItemImage.sprite = sprite;
 
+            itemNameText.text = itemInfo.Name;
+
+            itemPriceText.text = itemInfo.BuyPrice.ToString() + " s";
             // Set other information here
 
             loadingSpriteCoroutine = null;

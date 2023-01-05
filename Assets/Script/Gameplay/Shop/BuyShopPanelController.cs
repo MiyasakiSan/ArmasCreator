@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ArmasCreator.GameData;
+using ArmasCreator.Utilities;
 
 namespace ArmasCreator.UI
 {
@@ -9,22 +11,41 @@ namespace ArmasCreator.UI
     {
         [SerializeField]
         private BuyItemNode buyItemNode;
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField]
+        private Transform buyBoxContent;
 
+        private GameDataManager gameDataManager;
+
+        private List<BuyItemNode> buyItemNodes;
+
+        private void Awake()
+        {
+            gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         }
 
-        // Update is called once per frame
-        void Update()
+        void Start()
         {
-
+            ClearAllItemShop();
+            PopulateBuyItemNode();
         }
 
         public void PopulateBuyItemNode()
         {
-            var insBuyItemNode = Instantiate(buyItemNode.gameObject);
+            List<string> consumableItemIds = gameDataManager.GetAllItemIdByType(ItemType.Consumable);
+            foreach (string id in consumableItemIds)
+            {
+                var insBuyItemNode = Instantiate(buyItemNode.gameObject, buyBoxContent).GetComponent<BuyItemNode>();
+                insBuyItemNode.SetDisplayItem(id);
+                buyItemNodes.Add(insBuyItemNode);
+            }
+        }
 
+        public void ClearAllItemShop()
+        {
+            foreach(BuyItemNode buyItemNodeForClear in buyItemNodes)
+            {
+                Destroy(buyItemNodeForClear.gameObject);
+            }
         }
     }
 }
