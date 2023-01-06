@@ -12,6 +12,8 @@ namespace ArmasCreator.UI
     public class ConfirmBuyBoxController : MonoBehaviour
     {
         [SerializeField]
+        private ShopPanelController ShopPanelController;
+        [SerializeField]
         private BuyShopPanelController buyShopPanelController;
         [SerializeField]
         private Button arrowUpButton;
@@ -33,8 +35,6 @@ namespace ArmasCreator.UI
         private GameObject confirmBuyBoxContent;
 
         private UserDataManager userDataManager;
-
-        private int buyAmount;
 
         private float itemPrice;
 
@@ -82,9 +82,18 @@ namespace ArmasCreator.UI
             buyButton.onClick.AddListener(() => 
             {
                 bool buyComplete = true;
+                if (userDataManager.UserData.Coins < itemPrice * float.Parse(buyAmountText.text))
+                {
+                    buyComplete = false;
+                }
                 if (buyComplete)
                 {
+                    var newCoin = userDataManager.UserData.Coins - itemPrice * float.Parse(buyAmountText.text);
+                    userDataManager.UserData.UpdateCoin(newCoin);
+                    userDataManager.UserData.UserDataInventory.AddConsumeItem(itemId, int.Parse(buyAmountText.text));
+                    ShopPanelController.UpdatePlayerCoinsText();
                     buyShopPanelController.UpdateItemBag();
+                    buyAmountText.text = "0";
                 }
             });
             cancelButton.onClick.AddListener(() =>
