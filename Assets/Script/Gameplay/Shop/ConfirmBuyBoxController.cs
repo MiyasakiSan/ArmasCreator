@@ -123,6 +123,11 @@ namespace ArmasCreator.UI
             {
                 buyAmountText.text = (0).ToString();
             }
+            var resultPrice = float.Parse(buyAmountText.text) * itemPrice;
+            if(resultPrice > userDataManager.UserData.Coins)
+            {
+                buyAmountText.text = Mathf.FloorToInt(userDataManager.UserData.Coins / itemPrice).ToString();
+            }
             itempriceText.text = (itemPrice * float.Parse(buyAmountText.text)).ToString() + " s";
         }
 
