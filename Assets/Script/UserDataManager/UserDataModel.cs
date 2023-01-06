@@ -17,6 +17,9 @@ namespace ArmasCreator.UserData
         private string userID;
         public string UserID => userID;
 
+        private float coin;
+        public float Coin => coin;
+
         private UserSaveDataModel saveModel;
 
         //private UserDataGameSettingModel userDataGameSetting;
@@ -111,6 +114,7 @@ namespace ArmasCreator.UserData
 
             userID = saveModel.UserId;
             PlayerPrefs.SetString("PName", userID);
+            coin = saveModel.Coins;
 
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
             userDataInventory.SetupUserInventory(saveModel);

@@ -168,14 +168,20 @@ namespace ArmasCreator.UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            var thisRectTranform = this.GetComponent<RectTransform>().anchoredPosition;
-            equipmentDetailBoxController.GetComponent<RectTransform>().anchoredPosition = new Vector2(thisRectTranform.x + 90, thisRectTranform.y - 170);
-            equipmentDetailBoxController.OnMouseEnterItemSlot(iconSprite, itemName, atk, def, vit, crit);
+            if (equipmentDetailBoxController != null)
+            {
+                var thisRectTranform = this.GetComponent<RectTransform>().anchoredPosition;
+                equipmentDetailBoxController.GetComponent<RectTransform>().anchoredPosition = new Vector2(thisRectTranform.x + 90, thisRectTranform.y - 170);
+                equipmentDetailBoxController.OnMouseEnterItemSlot(iconSprite, itemName, atk, def, vit, crit);
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            equipmentDetailBoxController.OnMouseExitItemSlot();
+            if (equipmentDetailBoxController != null)
+            {
+                equipmentDetailBoxController.OnMouseExitItemSlot();
+            }
         }
     }
 }

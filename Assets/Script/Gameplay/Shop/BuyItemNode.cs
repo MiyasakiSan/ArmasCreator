@@ -42,6 +42,10 @@ namespace ArmasCreator.UI
         [SerializeField]
         private GameObject selectedBG;
 
+        private float itemPrice;
+
+        private ConfirmBuyBoxController confirmBuyBoxController;
+
         protected virtual void OnDestroy()
         {
             ClearDisplayItemInfo();
@@ -127,10 +131,21 @@ namespace ArmasCreator.UI
 
             itemNameText.text = itemInfo.Name;
 
+            itemPrice = itemInfo.BuyPrice;
+
             itemPriceText.text = itemInfo.BuyPrice.ToString() + " s";
-            // Set other information here
 
             loadingSpriteCoroutine = null;
+        }
+
+        public void SetUPNewConfirmBuyBox(ConfirmBuyBoxController newConfirmBuyBoxController)
+        {
+            confirmBuyBoxController = newConfirmBuyBoxController;
+        }
+
+        public void SetUpConfirmBuyBox()
+        {
+            confirmBuyBoxController.SetUpConfirmBuyBox(displayItemImage.sprite, itemNameText.text, itemPrice,itemInfo.ID);
         }
     }
 }

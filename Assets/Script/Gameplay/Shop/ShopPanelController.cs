@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ArmasCreator.Utilities;
+using ArmasCreator.UserData;
+using TMPro;
 
 namespace ArmasCreator.UI
 {
@@ -12,11 +15,18 @@ namespace ArmasCreator.UI
         private Button buyButton;
         [SerializeField]
         private Button sellButton;
+        [SerializeField]
+        private TMP_Text playerCurrencyText;
 
         [Header("SubControllerScript")]
         [SerializeField]
         private BuyShopPanelController buyShopPanelController;
 
+        private UserDataModel userDataModel;
+        private void Awake()
+        {
+            userDataModel = SharedContext.Instance.Get<UserDataModel>();
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -28,6 +38,7 @@ namespace ArmasCreator.UI
             {
                 ShowSellShopPanel();
             });
+            playerCurrencyText.text = userDataModel.Coin.ToString();
         }
 
         // Update is called once per frame

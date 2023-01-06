@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using ArmasCreator.UserData;
+using ArmasCreator.Utilities;
 
 namespace ArmasCreator.UI
 {
     public class ConfirmBuyBoxController : MonoBehaviour
     {
+        [SerializeField]
+        private BuyShopPanelController buyShopPanelController;
         [SerializeField]
         private Button arrowUpButton;
         [SerializeField]
@@ -21,21 +26,108 @@ namespace ArmasCreator.UI
         [SerializeField]
         private TMP_Text itemNameText;
         [SerializeField]
-        private TMP_Text priceText;
+        private TMP_Text itempriceText;
         [SerializeField]
         private TMP_InputField buyAmountText;
+        [SerializeField]
+        private GameObject confirmBuyBoxContent;
+
+        private UserDataManager userDataManager;
 
         private int buyAmount;
+
+        private float itemPrice;
+
+        private string itemId;
         // Start is called before the first frame update
+
+        private void Awake()
+        {
+            userDataManager = SharedContext.Instance.Get<UserDataManager>();
+        }
         void Start()
         {
-
+            buyAmountText.onValueChanged.AddListener(delegate 
+            { 
+                OnItemAmountChanged();
+            });
+            buyAmountText.onEndEdit.AddListener(delegate
+            {
+                OnEndEdititemAmount();
+            });
+            arrowUpButton.onClick.AddListener(() =>
+            {
+                if (userDataManager.UserData.UserDataInventory.ConsumableItems.TryGetValue(itemId,out int itemAmount))
+                {
+                    if (float.Parse(buyAmountText.text) < 99 - itemAmount)
+                    {
+                        buyAmountText.text = (float.Parse(buyAmountText.text) + 1).ToString();
+                    }
+                }
+                else
+                {
+                    if (float.Parse(buyAmountText.text) < 99)
+                    {
+                        buyAmountText.text = (float.Parse(buyAmountText.text) + 1).ToString();
+                    }
+                }
+            });
+            arrowDownButton.onClick.AddListener(() =>
+            {
+                if (float.Parse(buyAmountText.text) > 0)
+                {
+                    buyAmountText.text = (float.Parse(buyAmountText.text) - 1).ToString();
+                }
+            });
+            buyButton.onClick.AddListener(() => 
+            {
+                bool buyComplete = true;
+                if (buyComplete)
+                {
+                    buyShopPanelController.UpdateItemBag();
+                }
+            });
+            cancelButton.onClick.AddListener(() =>
+            {
+                confirmBuyBoxContent.SetActive(false);
+            });
         }
 
-        // Update is called once per frame
-        void Update()
+        public void SetUpConfirmBuyBox(Sprite newItemIconSprite,string newItemName,float newPrice,string newItemId)
         {
-            
+            itemIcon.sprite = newItemIconSprite;
+            itemNameText.text = newItemName;
+            itemPrice = newPrice;
+            itemId = newItemId;
+            buyAmountText.text = "0";
+            itempriceText.text = "0 s";
+        }
+
+        public void OnItemAmountChanged()
+        {
+            var exists = userDataManager.UserData.UserDataInventory.ConsumableItems.TryGetValue(itemId, out int itemAmount);
+            if(float.Parse(buyAmountText.text) > 99 - itemAmount && exists)
+            {
+                buyAmountText.text = (99 - itemAmount).ToString();
+            }
+            if(float.Parse(buyAmountText.text) < 0)
+            {
+                buyAmountText.text = (0).ToString();
+            }
+            itempriceText.text = (itemPrice * float.Parse(buyAmountText.text)).ToString() + " s";
+        }
+
+        public void OnEndEdititemAmount()
+        {
+            if (string.IsNullOrEmpty(buyAmountText.text))
+            {
+                buyAmountText.text = (0).ToString();
+            }
+        }
+
+        public void OpenConfirmBox()
+        {
+            confirmBuyBoxContent.SetActive(true);
         }
     }
 }

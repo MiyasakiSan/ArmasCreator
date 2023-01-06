@@ -47,7 +47,7 @@ namespace ArmasCreator.GameData
         [JsonProperty("sell_price")]
         public float SellPrice;
 
-        [JsonProperty("buy_price")]
+        [JsonProperty("buy_value")]
         public float BuyPrice;
 
         [JsonProperty("asset")]
