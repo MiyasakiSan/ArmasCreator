@@ -17,8 +17,8 @@ namespace ArmasCreator.UserData
         private string userID;
         public string UserID => userID;
 
-        private float coin;
-        public float Coin => coin;
+        private float coins;
+        public float Coins => coins;
 
         private UserSaveDataModel saveModel;
 
@@ -114,7 +114,7 @@ namespace ArmasCreator.UserData
 
             userID = saveModel.UserId;
             PlayerPrefs.SetString("PName", userID);
-            coin = saveModel.Coins;
+            coins = saveModel.Coins;
 
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
             userDataInventory.SetupUserInventory(saveModel);
@@ -205,6 +205,14 @@ namespace ArmasCreator.UserData
         {
             saveModel.Achievements[achievementId] = progress;
 
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateCoin(float currentCoin)
+        {
+            coins = currentCoin;
+
+            saveModel.Coins = (int)coins;
             SaveUserDataToLocal();
         }
     }

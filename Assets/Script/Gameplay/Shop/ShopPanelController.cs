@@ -38,7 +38,7 @@ namespace ArmasCreator.UI
             {
                 ShowSellShopPanel();
             });
-            playerCurrencyText.text = userDataModel.Coin.ToString();
+            playerCurrencyText.text = userDataModel.Coins.ToString();
         }
 
         // Update is called once per frame
