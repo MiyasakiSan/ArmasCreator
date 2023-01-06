@@ -22,6 +22,9 @@ namespace ArmasCreator.UI
         [SerializeField]
         private Slider loadingSlider;
 
+        [SerializeField]
+        private Image FadeBlackImage;
+
         private float targetValue;
         private float currentValue;
 
@@ -36,6 +39,8 @@ namespace ArmasCreator.UI
 
         public delegate void OnLoadingSceneFinishedCallback();
         public event OnLoadingSceneFinishedCallback OnLoadingSceneFinished;
+
+        private bool isFadingBlack = false;
 
         private void Awake()
         {
@@ -64,6 +69,8 @@ namespace ArmasCreator.UI
             loadingSlider.value = 0;
             targetValue = 0;
             currentValue = 0;
+
+            yield return new WaitUntil(() => isFadingBlack == false);
 
             var cameraData = Camera.main.GetUniversalAdditionalCameraData();
             if (cameraData.cameraStack.Count > 0)
@@ -96,14 +103,40 @@ namespace ArmasCreator.UI
 
             OnLoadingSceneFinished?.Invoke();
             LPBG.Reset();
+            FadeBlack();
+            yield return new WaitForSeconds(1f);
             loadingCanvas.SetActive(false);
         }
 
         public void FadeBlack()
         {
             //TODO : Fade black in and out
-
+            isFadingBlack = true;
+            StartCoroutine(FadeBlackCoroutine());
             Debug.Log("Fade Black");
+        }
+
+        IEnumerator FadeBlackCoroutine()
+        {
+            while (FadeBlackImage.color.a < 1)
+            {
+                var tempColor = FadeBlackImage.color;
+                tempColor.a += 0.05f;
+                FadeBlackImage.color = tempColor;
+                yield return new WaitForSeconds(0.025f);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            while (FadeBlackImage.color.a > 0)
+            {
+                var tempColor = FadeBlackImage.color;
+                tempColor.a -= 0.05f;
+                FadeBlackImage.color = tempColor;
+                yield return new WaitForSeconds(0.025f);
+            }
+
+            isFadingBlack = false;
         }
     }
 }

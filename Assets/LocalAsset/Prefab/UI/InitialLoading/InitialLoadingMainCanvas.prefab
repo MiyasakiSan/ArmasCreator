@@ -56,7 +56,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -64,7 +64,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 99
   m_TargetDisplay: 0
 --- !u!114 &1080310096183706762
 MonoBehaviour:
@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 1080310096639599328}
   - component: {fileID: 1080310096639599335}
   - component: {fileID: 1546021437498705928}
+  - component: {fileID: 1256321133}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -279,6 +280,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1256321133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080310096639599333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428c6aa94cac56747979eb686092a28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LP: {fileID: 0}
+  anim: {fileID: 1546021437498705928}
 --- !u!1 &4565934369704879338
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +504,7 @@ GameObject:
   - component: {fileID: 6812654019492903147}
   - component: {fileID: 6812654019492903157}
   - component: {fileID: 6812654019492903146}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5487,6 +5502,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244717036506736668, guid: 92787400a7fc54e479d580f9845a20fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244717036507246892, guid: 92787400a7fc54e479d580f9845a20fc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.069301
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244717036507246892, guid: 92787400a7fc54e479d580f9845a20fc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.069301
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244717036507246892, guid: 92787400a7fc54e479d580f9845a20fc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.6886792
       objectReference: {fileID: 0}
     - target: {fileID: 7244717036507246893, guid: 92787400a7fc54e479d580f9845a20fc,
         type: 3}
