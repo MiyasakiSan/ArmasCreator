@@ -16,16 +16,16 @@ namespace ArmasCreator.UI
         [SerializeField]
         private Button sellButton;
         [SerializeField]
-        private TMP_Text playerCurrencyText;
+        private TMP_Text playerCoinsText;
 
         [Header("SubControllerScript")]
         [SerializeField]
         private BuyShopPanelController buyShopPanelController;
 
-        private UserDataModel userDataModel;
+        private UserDataManager userDataManager;
         private void Awake()
         {
-            userDataModel = SharedContext.Instance.Get<UserDataModel>();
+            userDataManager = SharedContext.Instance.Get<UserDataManager>();
         }
         // Start is called before the first frame update
         void Start()
@@ -38,7 +38,7 @@ namespace ArmasCreator.UI
             {
                 ShowSellShopPanel();
             });
-            playerCurrencyText.text = userDataModel.Coins.ToString();
+            playerCoinsText.text = userDataManager.UserData.Coins.ToString() + " s";
         }
 
         // Update is called once per frame
@@ -55,5 +55,10 @@ namespace ArmasCreator.UI
        {
 
        }
+
+       public void UpdatePlayerCoinsText()
+       {
+            playerCoinsText.text = userDataManager.UserData.Coins.ToString() + " s";
+        }
     }
 }

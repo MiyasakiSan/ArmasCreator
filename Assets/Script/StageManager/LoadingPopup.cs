@@ -102,6 +102,15 @@ namespace ArmasCreator.UI
             }
 
             OnLoadingSceneFinished?.Invoke();
+            cameraData = Camera.main.GetUniversalAdditionalCameraData();
+            if (cameraData.cameraStack.Count > 0)
+            {
+                loadingCanvas.GetComponent<Canvas>().worldCamera = cameraData.cameraStack[0];
+            }
+            else
+            {
+                loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+            }
             LPBG.Reset();
             FadeBlack();
             yield return new WaitForSeconds(1f);

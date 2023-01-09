@@ -3468,6 +3468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyButton: {fileID: 2003406848}
   sellButton: {fileID: 1834094684}
+  playerCoinsText: {fileID: 147152386}
   buyShopPanelController: {fileID: 959353372}
 --- !u!1 &630982744
 GameObject:
@@ -3847,6 +3848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075343c240ce80f45a3b4fbc75308dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShopPanelController: {fileID: 617098928}
   buyShopPanelController: {fileID: 959353372}
   arrowUpButton: {fileID: 340011596}
   arrowDownButton: {fileID: 1357504645}
@@ -5088,7 +5090,7 @@ MonoBehaviour:
     type: 3}
   buyBoxContent: {fileID: 1157669647}
   confirmBuyBoxController: {fileID: 723538984}
-  consumableButtonPrefab: {fileID: 6424312424678983738, guid: 0f2bbdcbc9a787b45a5a8be16edebe54,
+  consumableButtonPrefab: {fileID: 6424312424678983738, guid: 5d9bfdd97db86a241bf0b5693db66d98,
     type: 3}
   blankNodePrefab: {fileID: 261308146777016606, guid: 61ae2117631253e45b85eeb99b936ae3,
     type: 3}
@@ -11740,7 +11742,7 @@ PrefabInstance:
     - target: {fileID: 80608509156773590, guid: e2ac8af159d258346b0ce766c7a13c43,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.041312825
+      value: 0.043592587
       objectReference: {fileID: 0}
     - target: {fileID: 80608509172441095, guid: e2ac8af159d258346b0ce766c7a13c43,
         type: 3}
@@ -11800,7 +11802,7 @@ PrefabInstance:
     - target: {fileID: 80608509716065690, guid: e2ac8af159d258346b0ce766c7a13c43,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.028543247
+      value: 0.025776044
       objectReference: {fileID: 0}
     - target: {fileID: 80608509731540288, guid: e2ac8af159d258346b0ce766c7a13c43,
         type: 3}
@@ -11830,7 +11832,7 @@ PrefabInstance:
     - target: {fileID: 80608509818321154, guid: e2ac8af159d258346b0ce766c7a13c43,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.022677246
+      value: 0.028037328
       objectReference: {fileID: 0}
     - target: {fileID: 80608509853831023, guid: e2ac8af159d258346b0ce766c7a13c43,
         type: 3}
