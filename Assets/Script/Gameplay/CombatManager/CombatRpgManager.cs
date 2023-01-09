@@ -109,7 +109,7 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (!Input.GetKeyUp(gameStateSwitchButton)) { return ; }
 
-        if (!animController.currentAnimatorCombatStateInfoIsName("Idle")) { return; }
+        if (!(animController.currentAnimatorCombatStateInfoIsName("Idle") || animController.currentAnimatorCombatStateInfoIsName("Walk"))) { return; }
 
         if (currentGameState == gameState.neutral && !isSheathing && !isWithdrawing && !animController.playerAnim.GetBool("isCombat"))
         {
@@ -266,7 +266,7 @@ public class CombatRpgManager : NetworkBehaviour
         }
     }
 
-    private void ResetAnimBoolean()
+    public void ResetAnimBoolean()
     {
         //playerMovement.ResetSpeedMultiplier();
         playerMovement.ResetRotate();

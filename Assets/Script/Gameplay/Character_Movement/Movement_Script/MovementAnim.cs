@@ -117,14 +117,19 @@ public class MovementAnim : NetworkBehaviour
     {
         if (weight == 1)
         {
+            playerMovement.canMove = false;
             playerAnim.SetBool("isCombat", true);
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
+            yield return new WaitForSeconds(1f);
+            playerMovement.canMove = true;
         }
         else
         {
+            playerMovement.canMove = false;
             playerAnim.SetBool("isCombat", false);
             yield return new WaitForSeconds(1f);
             playerAnim.SetLayerWeight(combatLayerIndex, weight);
+            playerMovement.canMove = true;
         }
 
         switchStance = null;

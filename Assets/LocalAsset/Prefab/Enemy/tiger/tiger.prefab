@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 1372823441003939751}
   - component: {fileID: 6806880783302249736}
   - component: {fileID: 3131459071004100972}
-  - component: {fileID: 2909611132269665654}
+  - component: {fileID: 500549717406950804}
   m_Layer: 0
   m_Name: tiger
   m_TagString: Enemy
@@ -319,14 +319,13 @@ MonoBehaviour:
   damage: 10
   enemyAnim: {fileID: 1479299266428193981}
   enemyStat: {fileID: 1479299266428193983}
-  enemyBoxColliderList:
-  - {fileID: 1479299265816323478}
-  - {fileID: 1479299266216329520}
-  - {fileID: 1479299264922321196}
-  - {fileID: 1479299265908697716}
+  hitBoxColliderList: []
+  hurtBoxColliderList: []
   AllAttackPattern:
   - {fileID: 11400000, guid: 31bb31298f34ca64fbe2ff84694a37d3, type: 2}
   - {fileID: 11400000, guid: 7580027aa050a574e97fd604dd80aebe, type: 2}
+  IsAttacking: 0
+  currentAttackPattern: {fileID: 0}
 --- !u!114 &1479299266428193981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,8 +550,8 @@ MonoBehaviour:
   - {fileID: 673700496035198217}
   - {fileID: 7182367215967374614}
   - {fileID: 3893677278882729417}
---- !u!65 &2909611132269665654
-BoxCollider:
+--- !u!136 &500549717406950804
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -561,9 +560,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5476258, y: 1.2396895, z: 4.513588}
-  m_Center: {x: -0.00023523165, y: 1.4966118, z: 0.6357682}
+  m_Radius: 0.71
+  m_Height: 4.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.26, z: 0}
 --- !u!1 &7071903123663423256
 GameObject:
   m_ObjectHideFlags: 0

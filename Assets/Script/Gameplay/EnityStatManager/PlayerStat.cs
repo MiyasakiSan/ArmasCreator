@@ -42,6 +42,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     private GameModeController gameModeController;
 
+    private bool isValnurable;
+
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
     public float CurrentHealth
@@ -168,8 +170,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
 
+            if (isValnurable) { return; }
+
             currentHealth -= damage;
             uiStat.UpdateHealthUI(currentHealth);
+
+            StartCoroutine(ValnurableStage());
 
             if (CurrentHealth <= 0) { playerMovement.PlayerDie(); return; }
         }
@@ -182,6 +188,15 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             currentHealthServerRpc(CurrentHealth - damage);
             if (CurrentHealth <= 0) { playerMovement.PlayerDie(); return; }
         }
+    }
+
+    IEnumerator ValnurableStage()
+    {
+        isValnurable = true;
+
+        yield return new WaitForSeconds(2f);
+
+        isValnurable = false;
     }
 
     public IEnumerator RegenStamina()

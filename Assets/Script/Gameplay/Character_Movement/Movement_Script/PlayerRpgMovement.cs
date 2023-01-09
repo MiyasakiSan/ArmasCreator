@@ -43,6 +43,7 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     [Header("Battle setting")]
     public bool isBattle;
+    private CombatRpgManager combatManager;
 
     [SerializeField]
     private CinemachineFreeLook Vcam;
@@ -68,7 +69,7 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     public enum movementState
     {
-        idle,walk,run
+        idle,walk,run,roll
     }
 
     public movementState currentMovementState;
@@ -89,6 +90,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         if (isSinglePlayer) 
         {
             rb = this.GetComponent<Rigidbody>();
+            combatManager = this.GetComponent<CombatRpgManager>();
             animController = this.GetComponent<MovementAnim>();
             animController.Init(this);
 
@@ -236,6 +238,10 @@ public class PlayerRpgMovement : NetworkBehaviour
                 runToDirection(direction);
                 break;
 
+            case movementState.roll:
+                rollToDirection(direction);
+                break;
+
             case movementState.idle:
                 
                 if (isSinglePlayer)
@@ -257,9 +263,9 @@ public class PlayerRpgMovement : NetworkBehaviour
 
         if (direction.magnitude < 0.1f) { return movementState.idle; }
 
-        if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge && !isDodging)
+        if (Input.GetKeyUp(KeyCode.Space) && haveStamina(dodgestaminaUse) /*&& canDodge && !isDodging*/)
         {
-            StartCoroutine(Dodge());
+            return movementState.roll;
         }
 
         if (Input.GetKey(KeyCode.LeftShift)) { return movementState.run; }
@@ -291,12 +297,21 @@ public class PlayerRpgMovement : NetworkBehaviour
         float timer = 0;
         reduceStaminaOnDodge(dodgestaminaUse);
 
-        while(timer < dodgeTimer)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        while (timer < dodgeTimer)
         {
             StopMoveForwardNotResetVelo();
 
             float speed = dodgeCurve.Evaluate(timer);
-            Vector3 dir = (transform.forward * speed);
+
+            Vector3 direction = new Vector3(horizontal, 0f, vertical);
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
+
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            Vector3 dir = transform.forward * speed;
             rb.AddForce(dir *dodgeForce* Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
@@ -333,6 +348,13 @@ public class PlayerRpgMovement : NetworkBehaviour
                 animController.AnimationStateServerRpc(currentMovementState.ToString());
             }
         }
+    }
+
+    private void rollToDirection(Vector3 direction)
+    {
+        combatManager.ResetAnimBoolean();
+
+        StartCoroutine(Dodge());
     }
 
     private void runToDirection(Vector3 direction)
