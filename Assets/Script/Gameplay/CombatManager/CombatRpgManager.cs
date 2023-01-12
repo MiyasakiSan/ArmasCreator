@@ -6,6 +6,7 @@ using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
 using ArmasCreator.Gameplay;
 using UnityEngine.UI;
+using ArmasCreator.GameData;
 
 public class CombatRpgManager : NetworkBehaviour 
 {
@@ -51,6 +52,11 @@ public class CombatRpgManager : NetworkBehaviour
 
     public bool isSheathing;
     public bool isWithdrawing;
+    public bool isUsingItem;
+
+    private bool canSwitchStance;
+
+    private Coroutine useItemCoroutine;
 
     public enum gameState
     {
@@ -59,12 +65,14 @@ public class CombatRpgManager : NetworkBehaviour
 
     private GameModeController gameModeController;
     private GameplayController gameplayController;
+    private GameDataManager gameDataManager;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
     private void Awake()
     {
         gameModeController = SharedContext.Instance.Get<GameModeController>();
+        gameDataManager = SharedContext.Instance.Get<GameDataManager>();
     }
 
     void Start()
@@ -83,6 +91,7 @@ public class CombatRpgManager : NetworkBehaviour
         gameplayController = SharedContext.Instance.Get<GameplayController>();
 
         gameplayController.OnPlayerDealDamage += IncreaseEMTgauge;
+        canSwitchStance = true;
     }
     void Update()
     {
@@ -107,6 +116,8 @@ public class CombatRpgManager : NetworkBehaviour
     }
     private void gameStateCheck()
     {
+        if (!canSwitchStance) { return; }
+
         if (!Input.GetKeyUp(gameStateSwitchButton)) { return ; }
 
         if (!(animController.currentAnimatorCombatStateInfoIsName("Idle") || animController.currentAnimatorCombatStateInfoIsName("Walk"))) { return; }
@@ -166,6 +177,84 @@ public class CombatRpgManager : NetworkBehaviour
         }
     }
 
+    public void UseItem(string itemId)
+    {
+        if (useItemCoroutine != null) { return; }
+
+        useItemCoroutine = StartCoroutine(UseItemCoroutine(itemId));
+    }
+
+    IEnumerator UseItemCoroutine(string itemId)
+    {
+        canSwitchStance = false;
+        isUsingItem = true;
+        ResetAnimBoolean();
+        playerMovement.canRun = false;
+
+        playerMovement.SetSpeedMultiplierOnUsingItem();
+
+        if (currentGameState == gameState.combat && !isSheathing && !isWithdrawing && animController.playerAnim.GetBool("isCombat"))
+        {
+            isSheathing = true;
+            changeGameState(gameState.neutral);
+            ChangeanimLayer(gameState.neutral);
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        animController.StartUseItemAnimation();
+
+        yield return new WaitForSeconds(3.1f);
+
+        animController.EndUseItemAnimation();
+        playerMovement.canRun = true;
+        playerMovement.ResetSpeedMultiplierOnUsingItem();
+
+        canSwitchStance = true;
+        isUsingItem = false;
+        useItemCoroutine = null;
+        UseItemByInfo(itemId);
+    }
+
+    public void CancelUseItem()
+    {
+        animController.EndUseItemAnimation();
+
+        if (useItemCoroutine != null)
+        {
+            StopCoroutine(useItemCoroutine);
+            playerMovement.ResetSpeedMultiplierOnUsingItem();
+
+            useItemCoroutine = null;
+            playerMovement.canRun = true;
+            canSwitchStance = true;
+            isUsingItem = false;
+        }
+    }
+
+    private void UseItemByInfo(string itemId)
+    {
+        var exist = gameDataManager.TryGetConsumeItemInfo(itemId, out ConsumeableItemModel consumeItemInfo);
+
+        if (!exist)
+        {
+            Debug.LogError("=============  Can't use item  ================");
+            return;
+        }
+
+        PlayerStat playerStat = GetComponent<PlayerStat>();
+
+        if (consumeItemInfo.SubType == SubType.Health)
+        {
+            playerStat.Heal(consumeItemInfo.ConsumePercent);
+        }
+        else
+        {
+            playerStat.IncreaseStaminaRegenRate(1 + consumeItemInfo.ConsumePercent / 100);
+        }
+    }
+
+    #region EMT
     private void IncreaseEMTgauge()
     {
         if (isEMTState) { return; }
@@ -187,7 +276,7 @@ public class CombatRpgManager : NetworkBehaviour
             decreaseEMTgaugeCoroutine = null;
             isEMTState = false;
         }
-        else if(!isEMTState && EMT_Amount == 20)
+        else if (!isEMTState && EMT_Amount == 20)
         {
             isEMTState = true;
 
@@ -208,7 +297,8 @@ public class CombatRpgManager : NetworkBehaviour
         EMT_Amount = 0;
         EMT_Gauge.value = 0;
         isEMTState = false;
-    }
+    } 
+    #endregion
 
     #region Melee Combat
     public void MeleeCombo()
@@ -268,7 +358,6 @@ public class CombatRpgManager : NetworkBehaviour
 
     public void ResetAnimBoolean()
     {
-        //playerMovement.ResetSpeedMultiplier();
         playerMovement.ResetRotate();
         playerMovement.canWalk = true;
         playerMovement.canRun = true;
@@ -276,10 +365,6 @@ public class CombatRpgManager : NetworkBehaviour
         if (isSinglePlayer)
         {
             noOfClicks = 0;
-
-            //if (animController.IsOverideCompleted()) { return; }
-
-            //animController.CombatOveride(0);
         }
         else
         {
@@ -307,22 +392,6 @@ public class CombatRpgManager : NetworkBehaviour
         setComboBoolDependOn(noOfClicks);
         playerMovement.canWalk = false;
         playerMovement.canRun= false;
-        //SetCombatOveride();
-
-        //playerMovement.SetSpeedMultiplierOnCombat();
-        //playerMovement.SetRotateMultiplierOnCombat();
-    }
-
-    private void SetCombatOveride()
-    {
-        if (isSinglePlayer)
-        {
-            animController.CombatOveride(1);
-        }
-        else
-        {
-            animController.CombatOverideServerRpc(1);
-        }
     }
 
     public void setComboBoolDependOn(int num)

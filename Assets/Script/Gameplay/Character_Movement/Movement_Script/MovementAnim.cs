@@ -22,6 +22,9 @@ public class MovementAnim : NetworkBehaviour
     [SerializeField]
     private int combatLayerOverideIndex;
 
+    [SerializeField]
+    private int useItemLayerIndex;
+
     private Coroutine delayOverider;
     private Coroutine switchStance;
 
@@ -92,6 +95,17 @@ public class MovementAnim : NetworkBehaviour
         playerAnim.SetTrigger("roll");
     }
     #endregion
+
+    public void StartUseItemAnimation()
+    {
+        playerAnim.SetLayerWeight(useItemLayerIndex, 1);
+        playerAnim.SetTrigger("useItem");
+    }
+
+    public void EndUseItemAnimation()
+    {
+        playerAnim.SetLayerWeight(useItemLayerIndex, 0);
+    }
 
     #region LayerWeight Animation
 
@@ -204,29 +218,12 @@ public class MovementAnim : NetworkBehaviour
 
     public void MeleeSetBool(string paramName, bool var)
     {
-        //List<string> MeleeParams = new List<string> { "LongSwordNormal_hit1", "LongSwordNormal_hit2" };
-        //foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
-        //{
-        //    if (MeleeParams.Contains(parameter.name))
-        //    {
-        //        playerAnim.SetBool(parameter.name, false);
-        //    }
-        //}
         playerAnim.SetBool(paramName, var);
     }
 
     [ServerRpc]
     public void MeleeSetBoolServerRpc(string paramName,bool var)
     {
-        //TODO : Create GameDataManager for not hard CODING !! BITCH
-        //List<string> MeleeParams = new List<string> { "LongSwordNormal_hit1", "LongSwordNormal_hit2" };
-        //foreach (AnimatorControllerParameter parameter in playerAnim.parameters)
-        //{
-        //    if (MeleeParams.Contains(parameter.name))
-        //    {
-        //        playerAnim.SetBool(parameter.name, false);
-        //    }
-        //}
         playerAnim.SetBool(paramName, var);
     }
 

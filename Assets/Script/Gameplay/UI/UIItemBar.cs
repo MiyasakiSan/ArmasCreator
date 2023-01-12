@@ -35,12 +35,17 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private Animator itemBarAnimator;
 
+        [SerializeField]
+        private CombatRpgManager combatController;
+
         private int currentIndex;
         private int previousIndex;
         private int prePreviousIndex;
         private int nextIndex;
         private int preNextIndex;
         private List<string> allConsumableItemIds = new List<string>();
+
+        private bool canUseItem;
 
         private UserDataManager userDataManager;
 
@@ -50,6 +55,7 @@ namespace ArmasCreator.Gameplay.UI
 
             allConsumableItemIds = userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds();
             currentIndex = 0;
+            canUseItem = true;
 
             Populate(currentIndex);
         }
@@ -57,11 +63,13 @@ namespace ArmasCreator.Gameplay.UI
         public void Hide()
         {
             content.SetActive(false);
+            canUseItem = false;
         }
 
         public void Show()
         {
             content.SetActive(true);
+            canUseItem = true;
         }
 
         private void SetIndex()
@@ -104,7 +112,13 @@ namespace ArmasCreator.Gameplay.UI
 
         private void UseItem()
         {
+            if (!canUseItem) { return; }
+
+            if (combatController.isUsingItem) { return; }
+
             Debug.Log($"Use {allConsumableItemIds[currentIndex]}");
+
+            combatController.UseItem(allConsumableItemIds[currentIndex]);
         }
 
         public void Populate(int plusIndex)

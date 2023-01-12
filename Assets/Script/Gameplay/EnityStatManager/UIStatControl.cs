@@ -9,13 +9,19 @@ public class UIStatControl : MonoBehaviour
 {
     public Slider healthSlider;
     public Slider staminaSlider;
+
+    [SerializeField]
+    private Image staminaBarImage;
+
+    private Color defaultStaminaColor;
+
     private void Awake()
     {
         
     }
     void Start()
     {
-        
+        defaultStaminaColor = staminaBarImage.color;
     }
 
     public void SetHealthUI(float value)
@@ -35,6 +41,16 @@ public class UIStatControl : MonoBehaviour
     public void UpdateStaminaUI(float value)
     {
         staminaSlider.value = value;
+    }
+
+    public void IncreaseStaminaRateState()
+    {
+        staminaBarImage.color = new Color(0, 129, 171);
+    }
+
+    public void ResetIncreaseStaminaRateState()
+    {
+        staminaBarImage.color = defaultStaminaColor;
     }
 
 }

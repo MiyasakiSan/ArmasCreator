@@ -900,12 +900,12 @@ PrefabInstance:
     - target: {fileID: 2738980238942823854, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -280
+      value: -279.99997
       objectReference: {fileID: 0}
     - target: {fileID: 4562838206503693934, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -145
+      value: -144.99998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ad43c64334c95448271e362f696600, type: 3}
@@ -1257,7 +1257,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2603,7 +2603,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2619,7 +2619,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101385954}
-  m_LocalRotation: {x: 0.13454418, y: -0.000000019062403, z: 0.0000000025882694, w: 0.9909076}
+  m_LocalRotation: {x: 0.13454418, y: 0.000000019062405, z: -0.0000000025882696, w: 0.9909076}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8584,6 +8584,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2133231058}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2133231060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8756940726212863584, guid: 5dc1612e9e9d5d64ab00e6cdf20199ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 2133231058}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a6e84795cfe7143a452e34c8615155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2134340788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8751,6 +8763,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -112.8999
       objectReference: {fileID: 0}
+    - target: {fileID: 2991898055935182572, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: combatController
+      value: 
+      objectReference: {fileID: 2133231060}
     - target: {fileID: 3391081553911352421, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -8780,6 +8797,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1630025829
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836537542328994875, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.5999999
       objectReference: {fileID: 0}
     - target: {fileID: 6634227972214966101, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}

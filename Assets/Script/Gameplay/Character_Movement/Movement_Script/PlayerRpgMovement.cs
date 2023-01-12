@@ -143,14 +143,16 @@ public class PlayerRpgMovement : NetworkBehaviour
         }
     }
 
-    public void SetSpeedMultiplierOnCombat()
+    public void SetSpeedMultiplierOnUsingItem()
     {
-        speedMultiplier = 1f;
+        speedMultiplier *= 0.5f;
+        animController.playerAnim.SetFloat("speedMultiplier", 0.5f);
     }
 
-    public void ResetSpeedMultiplier()
+    public void ResetSpeedMultiplierOnUsingItem()
     {
         speedMultiplier = defaultSpeedMultiplier;
+        animController.playerAnim.SetFloat("speedMultiplier", 1f);
     }
 
     public void SetCanRotate()
@@ -296,6 +298,11 @@ public class PlayerRpgMovement : NetworkBehaviour
 
         float timer = 0;
         reduceStaminaOnDodge(dodgestaminaUse);
+
+        if (combatManager.isUsingItem)
+        {
+            combatManager.CancelUseItem();
+        }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
