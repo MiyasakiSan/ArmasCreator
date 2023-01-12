@@ -13,7 +13,7 @@ namespace ArmasCreator.UI
     public class ConfirmSellBoxController : MonoBehaviour
     {
         [SerializeField]
-        private ShopPanelController ShopPanelController;
+        private ShopPanelController shopPanelController;
         [SerializeField]
         private SellShopPanelController sellShopPanelController;
         [SerializeField]
@@ -120,15 +120,17 @@ namespace ArmasCreator.UI
                     {
                         userDataManager.UserData.UserDataInventory.RemoveCraftItem(itemId, int.Parse(sellAmountText.text));
                     }
-                    ShopPanelController.UpdatePlayerCoinsText();
+                    shopPanelController.UpdatePlayerCoinsText();
                     sellShopPanelController.UpdateItemBag();
                     sellAmountText.text = "0";
-                    ShopPanelController.HideConfirmSellShop();
+                    shopPanelController.ResetAllTrigger();
+                    shopPanelController.HideConfirmSellShop();
                 }
             });
             cancelButton.onClick.AddListener(() =>
             {
-                ShopPanelController.HideConfirmSellShop();
+                shopPanelController.ResetAllTrigger();
+                shopPanelController.HideConfirmSellShop();
             });
         }
 
@@ -168,8 +170,8 @@ namespace ArmasCreator.UI
 
         public void OpenConfirmBox()
         {
-            ShopPanelController.ResetAllTrigger();
-            ShopPanelController.ShowConfirmSellShop();
+            shopPanelController.ResetAllTrigger();
+            shopPanelController.ShowConfirmSellShop();
         }
     }
 }

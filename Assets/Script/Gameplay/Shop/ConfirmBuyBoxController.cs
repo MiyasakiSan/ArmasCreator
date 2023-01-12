@@ -94,11 +94,13 @@ namespace ArmasCreator.UI
                     shopPanelController.UpdatePlayerCoinsText();
                     buyShopPanelController.UpdateItemBag();
                     buyAmountText.text = "0";
+                    shopPanelController.ResetAllTrigger();
                     shopPanelController.HideConfirmBuyShop();
                 }
             });
             cancelButton.onClick.AddListener(() =>
             {
+                shopPanelController.ResetAllTrigger();
                 shopPanelController.HideConfirmBuyShop();
             });
         }
