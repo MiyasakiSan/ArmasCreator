@@ -22,6 +22,10 @@ namespace ArmasCreator.UI
         [SerializeField]
         private BuyShopPanelController buyShopPanelController;
 
+        [Header("Animator")]
+        [SerializeField]
+        private Animator buyShopPanelAnimator;
+
         private UserDataManager userDataManager;
         private void Awake()
         {
@@ -47,17 +51,60 @@ namespace ArmasCreator.UI
 
         }
 
-       public void ShowBuyShopPanel()
-       {
+        public void ShowMainShop()
+        {
+            buyShopPanelAnimator.SetTrigger("showMainShop");
+        }
+        public void HideMainShop()
+        {
+            buyShopPanelAnimator.SetTrigger("hideMainShop");
+        }
+        public void ShowBuyShopPanel()
+        {
+            buyShopPanelAnimator.SetTrigger("showBuyShop");
+        }
+        public void ShowSellShopPanel()
+        {
+            buyShopPanelAnimator.SetTrigger("showSellShop");
+        }
+        public void ShowConfirmBuyShop()
+        {
+            buyShopPanelAnimator.SetTrigger("showConfirmBuy");
+        }
+        public void ShowConfirmSellShop()
+        {
+            buyShopPanelAnimator.SetTrigger("showConfirmSell");
+        }
+        public void HideBuyShopPanel()
+        {
+            buyShopPanelAnimator.SetTrigger("hideBuyShop");
+        }
+        public void HideSellShopPanel()
+        {
+            buyShopPanelAnimator.SetTrigger("hideSellShop");
+        }
+        public void HideConfirmBuyShop()
+        {
+            buyShopPanelAnimator.SetTrigger("hideConfirmBuy");
+        }
+        public void HideConfirmSellShop()
+        {
+            buyShopPanelAnimator.SetTrigger("hideConfirmSell");
+        }
 
-       }
-       public void ShowSellShopPanel()
-       {
-
-       }
-
-       public void UpdatePlayerCoinsText()
-       {
+        public void ResetAllTrigger()
+        {
+            buyShopPanelAnimator.ResetTrigger("showBuyShop");
+            buyShopPanelAnimator.ResetTrigger("showSellShop");
+            buyShopPanelAnimator.ResetTrigger("showConfirmBuy");
+            buyShopPanelAnimator.ResetTrigger("showConfirmSell");
+            buyShopPanelAnimator.ResetTrigger("hideBuyShop");
+            buyShopPanelAnimator.ResetTrigger("hideSellShop");
+            buyShopPanelAnimator.ResetTrigger("hideConfirmBuy");
+            buyShopPanelAnimator.ResetTrigger("hideConfirmSell");
+        }
+        public void UpdatePlayerCoinsText()
+        {
             playerCoinsText.text = userDataManager.UserData.Coins.ToString() + " s";
         }
     }

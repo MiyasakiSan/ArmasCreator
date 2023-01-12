@@ -123,12 +123,12 @@ namespace ArmasCreator.UI
                     ShopPanelController.UpdatePlayerCoinsText();
                     sellShopPanelController.UpdateItemBag();
                     sellAmountText.text = "0";
-                    confirmSellBoxContent.SetActive(false);
+                    ShopPanelController.HideConfirmSellShop();
                 }
             });
             cancelButton.onClick.AddListener(() =>
             {
-                confirmSellBoxContent.SetActive(false);
+                ShopPanelController.HideConfirmSellShop();
             });
         }
 
@@ -168,7 +168,8 @@ namespace ArmasCreator.UI
 
         public void OpenConfirmBox()
         {
-            confirmSellBoxContent.SetActive(true);
+            ShopPanelController.ResetAllTrigger();
+            ShopPanelController.ShowConfirmSellShop();
         }
     }
 }

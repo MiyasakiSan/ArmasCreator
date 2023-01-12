@@ -12,7 +12,7 @@ namespace ArmasCreator.UI
     public class ConfirmBuyBoxController : MonoBehaviour
     {
         [SerializeField]
-        private ShopPanelController ShopPanelController;
+        private ShopPanelController shopPanelController;
         [SerializeField]
         private BuyShopPanelController buyShopPanelController;
         [SerializeField]
@@ -91,14 +91,15 @@ namespace ArmasCreator.UI
                     var newCoin = userDataManager.UserData.Coins - itemPrice * float.Parse(buyAmountText.text);
                     userDataManager.UserData.UpdateCoin(newCoin);
                     userDataManager.UserData.UserDataInventory.AddConsumeItem(itemId, int.Parse(buyAmountText.text));
-                    ShopPanelController.UpdatePlayerCoinsText();
+                    shopPanelController.UpdatePlayerCoinsText();
                     buyShopPanelController.UpdateItemBag();
                     buyAmountText.text = "0";
+                    shopPanelController.HideConfirmBuyShop();
                 }
             });
             cancelButton.onClick.AddListener(() =>
             {
-                confirmBuyBoxContent.SetActive(false);
+                shopPanelController.HideConfirmBuyShop();
             });
         }
 
@@ -141,7 +142,8 @@ namespace ArmasCreator.UI
 
         public void OpenConfirmBox()
         {
-            confirmBuyBoxContent.SetActive(true);
+            shopPanelController.ResetAllTrigger();
+            shopPanelController.ShowConfirmBuyShop();
         }
     }
 }

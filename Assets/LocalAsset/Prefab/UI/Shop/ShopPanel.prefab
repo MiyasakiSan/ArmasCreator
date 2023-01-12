@@ -703,6 +703,7 @@ MonoBehaviour:
   sellButton: {fileID: 1716083709727135359}
   playerCoinsText: {fileID: 1716083710321334305}
   buyShopPanelController: {fileID: 1716083710603973695}
+  buyShopPanelAnimator: {fileID: 9170872260759903169}
 --- !u!95 &9170872260759903169
 Animator:
   serializedVersion: 4
@@ -786,7 +787,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -933,6 +934,11 @@ PrefabInstance:
     - target: {fileID: 1688923957330882315, guid: 1bda6b88500b8e9438134dd76b077672,
         type: 3}
       propertyPath: ShopPanelController
+      value: 
+      objectReference: {fileID: 1716083710925006995}
+    - target: {fileID: 1688923957330882315, guid: 1bda6b88500b8e9438134dd76b077672,
+        type: 3}
+      propertyPath: shopPanelController
       value: 
       objectReference: {fileID: 1716083710925006995}
     - target: {fileID: 1688923958938100064, guid: 1bda6b88500b8e9438134dd76b077672,
