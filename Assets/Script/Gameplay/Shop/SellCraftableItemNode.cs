@@ -29,8 +29,8 @@ namespace ArmasCreator.UI
 
         protected Coroutine loadingSpriteCoroutine;
 
-        private ConsumeableItemModel itemInfo; /*====>  put some item info here See in Game Data*/
-        public ConsumeableItemModel ItemInfo => itemInfo;
+        private ItemInfoModel itemInfo; /*====>  put some item info here See in Game Data*/
+        public ItemInfoModel ItemInfo => itemInfo;
 
         [SerializeField]
         private Image displayItemImage;
@@ -85,7 +85,7 @@ namespace ArmasCreator.UI
 
         public void SetDisplayItem(string itemId)
         {
-            var exist = gameDataManager.TryGetConsumableItemInfoById(itemId, out var itemInfo);
+            var exist = gameDataManager.TryGetCraftItemInfo(itemId, out var itemInfo);
 
             if (!exist)
             {
@@ -101,7 +101,7 @@ namespace ArmasCreator.UI
             SetItemInfo(itemInfo);
         }
 
-        private void SetItemInfo(ConsumeableItemModel itemInfo)
+        private void SetItemInfo(ItemInfoModel itemInfo)
         {
             ClearDisplayItemInfo();
 

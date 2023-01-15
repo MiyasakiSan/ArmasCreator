@@ -251,6 +251,23 @@ namespace ArmasCreator.GameData
             return true;
         }
 
+        public bool TryGetCraftItemInfo(string id, out ItemInfoModel consumeItemInfo)
+        {
+            bool exist = monsterPartInfos.TryGetValue(id, out ItemInfoModel itemInfo);
+
+            if (!exist)
+            {
+                Debug.LogError($"{id} doesn't exist in consumable items");
+
+                consumeItemInfo = new ItemInfoModel();
+
+                return false;
+            }
+
+            consumeItemInfo = itemInfo;
+            return true;
+        }
+
         public ItemType GetItemType(string id)
         {
             bool exist = consumeableitemInfos.ContainsKey(id);
@@ -359,6 +376,34 @@ namespace ArmasCreator.GameData
             }
         }
 
+        public List<string> GetAllItemIdByType(ItemType itemType)
+        {
+            List<string> itemIds = new List<string>();
+
+            if (itemType == ItemType.Consumable)
+            {
+                foreach (string Id in consumeableitemInfos.Keys)
+                {
+                    itemIds.Add(Id);
+                }
+            }
+            else if (itemType == ItemType.Equipable)
+            {
+                foreach (string Id in equipableitemInfos.Keys)
+                {
+                    itemIds.Add(Id);
+                }
+            }
+            else if (itemType == ItemType.Craftable)
+            {
+                foreach (string Id in monsterPartInfos.Keys)
+                {
+                    itemIds.Add(Id);
+                }
+            }
+
+            return itemIds;
+        }
 
 
         #endregion

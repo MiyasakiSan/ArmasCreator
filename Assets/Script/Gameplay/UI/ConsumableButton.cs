@@ -89,7 +89,7 @@ namespace ArmasCreator.UI
 
         public void SetDisplayItem(string itemId)
         {
-            var exist = gameDataManager.TryGetConsumableItemInfoById(itemId, out var itemInfo);
+            var exist = gameDataManager.TryGetConsumeItemInfo(itemId, out var itemInfo);
 
             if (!exist)
             {
