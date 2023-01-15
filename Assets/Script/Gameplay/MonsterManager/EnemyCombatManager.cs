@@ -5,6 +5,7 @@ using Unity.Netcode;
 using ArmasCreator.Behavior;
 using ArmasCreator.Gameplay;
 using ArmasCreator.Utilities;
+using TheKiwiCoder;
 
 public class EnemyCombatManager : NetworkBehaviour
 {
@@ -19,11 +20,19 @@ public class EnemyCombatManager : NetworkBehaviour
     private EnemyStat enemyStat;
 
     [SerializeField]
-    private List<EnemyBoxCollider> enemyBoxColliderList;
+    private List<EnemyBoxCollider> hitBoxColliderList;
+
+    [SerializeField]
+    private List<EnemyBoxCollider> hurtBoxColliderList;
 
     public List<AttackPattern> AllAttackPattern;
 
     private GameplayController gameplayController;
+
+    public bool IsAttacking;
+
+    public AttackPattern currentAttackPattern;
+
     void Start()
     {
         Init();
@@ -35,23 +44,31 @@ public class EnemyCombatManager : NetworkBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
 
-        if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
-        }
-    }
+    //TODO : Obsolete
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
+
+    //    if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
+    //    }
+    //}
     
     private void Init()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
 
-        if (enemyBoxColliderList.Count <= 0) { return; }
+        if (hitBoxColliderList.Count <= 0) { return; }
 
-        foreach(EnemyBoxCollider enemyBoxCollider in enemyBoxColliderList)
+        foreach(EnemyBoxCollider enemyBoxCollider in hitBoxColliderList)
+        {
+            enemyBoxCollider.onTriggerEnter.AddListener(OnHitBoxTriggerEnter);
+        }
+
+        foreach (EnemyBoxCollider enemyBoxCollider in hurtBoxColliderList)
         {
             enemyBoxCollider.onTriggerEnter.AddListener(OnHurtBoxTriggerEnter);
         }
@@ -79,7 +96,7 @@ public class EnemyCombatManager : NetworkBehaviour
         }
     }
 
-    private void OnHurtBoxTriggerEnter(Collider col,GameObject gameObject)
+    private void OnHitBoxTriggerEnter(Collider col,GameObject gameObject)
     {
         if (!col.CompareTag("Weapon")) { return;  }
 
@@ -92,13 +109,26 @@ public class EnemyCombatManager : NetworkBehaviour
         gameplayController.UpdatePlayerDamageDelt(damage);
     }
 
+    private void OnHurtBoxTriggerEnter(Collider col, GameObject gameObject)
+    {
+        if (!col.CompareTag("Player")) { return; }
+
+        if (!IsAttacking) { return; }
+
+        if (currentAttackPattern == null) { return; }
+
+        Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
+
+        col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage);
+    }
+
     private void OnDestroy()
     {
-        if (enemyBoxColliderList.Count <= 0) { return; }
+        if (hitBoxColliderList.Count <= 0) { return; }
 
-        foreach (EnemyBoxCollider enemyBoxCollider in enemyBoxColliderList)
+        foreach (EnemyBoxCollider enemyBoxCollider in hitBoxColliderList)
         {
-            enemyBoxCollider.onTriggerEnter.RemoveListener(OnHurtBoxTriggerEnter);
+            enemyBoxCollider.onTriggerEnter.RemoveListener(OnHitBoxTriggerEnter);
         }
     }
 }

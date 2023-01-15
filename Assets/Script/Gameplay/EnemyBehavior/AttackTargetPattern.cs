@@ -9,10 +9,12 @@ public class AttackTargetPattern : ActionNode
     private Coroutine attackCoroutine;
     private CoroutineHelper coroutineHelper;
     private enemyAnimController animController;
+    private EnemyCombatManager enemyCombatManager;
 
     protected override void OnStart() {
 
         animController = context.gameObject.GetComponent<enemyAnimController>();
+        enemyCombatManager = context.gameObject.GetComponent<EnemyCombatManager>();
 
         if (blackboard.CurrentAttackPattern != null) 
         { 
@@ -25,6 +27,9 @@ public class AttackTargetPattern : ActionNode
             animController.ResetAllLookAt();
 
             blackboard.IsAttacking = true;
+            enemyCombatManager.IsAttacking = true;
+            enemyCombatManager.currentAttackPattern = blackboard.CurrentAttackPattern;
+            context.transform.LookAt(blackboard.Target.transform);
 
             if (attackCoroutine == null)
             {
@@ -55,6 +60,8 @@ public class AttackTargetPattern : ActionNode
         yield return new WaitForSeconds(length);
 
         blackboard.IsAttacking = false;
+        enemyCombatManager.IsAttacking = false;
+        enemyCombatManager.currentAttackPattern = null;
         animController.SetAnimationRootNode(false);
         animController.SetAllLookAtWeight(1);
 

@@ -29,9 +29,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private UIPlayerController uiPlayerController;
     private GameObject otherPlayerCanvas;
 
-    private  Coroutine staminaRegen;
-    private  Coroutine staminaReduceOverTime;
+    private Coroutine staminaRegen;
+    private Coroutine staminaReduceOverTime;
     private Coroutine staminaCooldown;
+    private Coroutine staminaRateIncrease;
+
+    private float staminaRegenRate = 1f;
 
     [SerializeField]
     private bool IsReduceStaminaRunning;
@@ -41,6 +44,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private PlayerRpgMovement playerMovement;
 
     private GameModeController gameModeController;
+
+    private bool isValnurable;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -161,6 +166,20 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             staminaRegen = StartCoroutine(RegenStamina());
         }
     }
+
+    public void Heal(float percent)
+    {
+        if(currentHealth + (percent/100)*maxHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += (percent / 100) * maxHealth;
+        }
+
+        uiStat.UpdateHealthUI(currentHealth);
+    }
   
     public override void receiveAttack(float damage)
     {
@@ -168,8 +187,12 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
 
+            if (isValnurable) { return; }
+
             currentHealth -= damage;
             uiStat.UpdateHealthUI(currentHealth);
+
+            StartCoroutine(ValnurableStage());
 
             if (CurrentHealth <= 0) { playerMovement.PlayerDie(); return; }
         }
@@ -184,6 +207,36 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         }
     }
 
+    IEnumerator ValnurableStage()
+    {
+        isValnurable = true;
+
+        yield return new WaitForSeconds(2f);
+
+        isValnurable = false;
+    }
+
+    public void IncreaseStaminaRegenRate(float rate)
+    {
+        uiStat.IncreaseStaminaRateState();
+
+        if (staminaRateIncrease != null)
+        {
+            StopCoroutine(staminaRateIncrease);
+            staminaRateIncrease = null;
+        }
+
+        staminaRateIncrease = StartCoroutine(IncreaseStaminaRegenRateCoroutine(rate));
+    }
+
+    IEnumerator IncreaseStaminaRegenRateCoroutine(float rate)
+    {
+        staminaRegenRate = rate;
+        yield return new WaitForSeconds(30f);
+        staminaRegenRate = 1f;
+        uiStat.ResetIncreaseStaminaRateState();
+    }
+
     public IEnumerator RegenStamina()
     {
         yield return new WaitForSeconds(2f);
@@ -191,7 +244,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             if (isSinglePlayer)
             {
-                currentStamina += maxStamina / 100;
+                currentStamina += (maxStamina / 100)*staminaRegenRate;
                 uiStat.UpdateStaminaUI(currentStamina);
             }
             else

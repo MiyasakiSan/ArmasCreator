@@ -193,35 +193,6 @@ namespace ArmasCreator.GameData
             return initItemDict;
         } 
 
-        public List<string> GetAllItemIdByType(ItemType itemType)
-        {
-            List<string> itemIds = new List<string>();
-
-            if (itemType == ItemType.Consumable)
-            {
-                foreach (string Id in consumeableitemInfos.Keys)
-                {
-                    itemIds.Add(Id);
-                }
-            }
-            else if(itemType == ItemType.Equipable)
-            {
-                foreach (string Id in equipableitemInfos.Keys)
-                {
-                    itemIds.Add(Id);
-                }
-            }
-            else if(itemType == ItemType.Craftable)
-            {
-                foreach (string Id in monsterPartInfos.Keys)
-                {
-                    itemIds.Add(Id);
-                }
-            }
-
-            return itemIds;
-        }
-
         public bool TryGetEquipItemInfoWithSubType(string id, SubType itemType, out EquipableItemModel equipItemInfo)
         {
             bool exist = equipableitemInfos.TryGetValue(id, out EquipableItemModel itemInfo);
@@ -263,20 +234,20 @@ namespace ArmasCreator.GameData
             return true;
         }
 
-        public bool TryGetConsumableItemInfoById(string id, out ConsumeableItemModel consumeableItemInfo)
+        public bool TryGetConsumeItemInfo(string id, out ConsumeableItemModel consumeItemInfo)
         {
             bool exist = consumeableitemInfos.TryGetValue(id, out ConsumeableItemModel itemInfo);
 
             if (!exist)
             {
-                Debug.LogError($"{id} doesn't exist in equipable items");
+                Debug.LogError($"{id} doesn't exist in consumable items");
 
-                consumeableItemInfo = new ConsumeableItemModel();
+                consumeItemInfo = new ConsumeableItemModel();
 
                 return false;
             }
 
-            consumeableItemInfo = itemInfo;
+            consumeItemInfo = itemInfo;
             return true;
         }
 
