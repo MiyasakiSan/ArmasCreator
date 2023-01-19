@@ -16,6 +16,7 @@ namespace ArmasCreator.GameData
     {
         Elimination,
         Destination,
+        Conversation,
         Survival,
         Request
     }
@@ -89,12 +90,18 @@ namespace ArmasCreator.GameData
     public class SurvivalQuestModel : QuestModel
     {
         [JsonProperty("time_amount")]
-        public List<string> TargetDestination;
+        public float TimeAmount;
     }
 
     public class RequestQuestModel : QuestModel
     {
         [JsonProperty("request_item_ids")]
         public Dictionary<string, int> RequestItemIds;
+    }
+
+    public class ConversationQuestModel : QuestModel
+    {
+        [JsonProperty("npc_id")]
+        public string NpcId;
     }
 }
