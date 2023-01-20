@@ -34,15 +34,21 @@ namespace ArmasCreator.Gameplay
         private Animator anim;
 
         [SerializeField]
+        private Outline QuestBoardOutline;
+
+        [SerializeField]
         private QuestPanelController questPanelController;
 
         private GameDataManager gameDataManager;
+
 
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+
+            QuestBoardOutline.OutlineWidth = 0f;
         }
 
         public void ShowQuestCanvas()
@@ -83,6 +89,20 @@ namespace ArmasCreator.Gameplay
             questCanvas.SetActive(false);
 
             gameplayController.Interacable = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            QuestBoardOutline.OutlineWidth = 4.5f;
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            QuestBoardOutline.OutlineWidth = 0f;
         }
 
         private void OnTriggerStay(Collider other)
