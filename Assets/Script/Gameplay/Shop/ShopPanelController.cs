@@ -57,6 +57,10 @@ namespace ArmasCreator.UI
         }
         public void HideMainShop()
         {
+            HideConfirmSellShop();
+            HideConfirmBuyShop();
+            HideSellShopPanel();
+            HideBuyShopPanel();
             buyShopPanelAnimator.SetTrigger("hideMainShop");
         }
         public void ShowBuyShopPanel()

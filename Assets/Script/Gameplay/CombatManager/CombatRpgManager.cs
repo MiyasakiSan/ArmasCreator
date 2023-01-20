@@ -7,6 +7,7 @@ using ArmasCreator.Utilities;
 using ArmasCreator.Gameplay;
 using UnityEngine.UI;
 using ArmasCreator.GameData;
+using ArmasCreator.UserData;
 
 public class CombatRpgManager : NetworkBehaviour 
 {
@@ -66,6 +67,7 @@ public class CombatRpgManager : NetworkBehaviour
     private GameModeController gameModeController;
     private GameplayController gameplayController;
     private GameDataManager gameDataManager;
+    private UserDataManager userDataManager;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -73,6 +75,7 @@ public class CombatRpgManager : NetworkBehaviour
     {
         gameModeController = SharedContext.Instance.Get<GameModeController>();
         gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+        userDataManager = SharedContext.Instance.Get<UserDataManager>();
     }
 
     void Start()
@@ -252,6 +255,8 @@ public class CombatRpgManager : NetworkBehaviour
         {
             playerStat.IncreaseStaminaRegenRate(1 + consumeItemInfo.ConsumePercent / 100);
         }
+
+        userDataManager.UserData.UserDataInventory.RemoveConsumeItem(itemId, 1);
     }
 
     #region EMT
