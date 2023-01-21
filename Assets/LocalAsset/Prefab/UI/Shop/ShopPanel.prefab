@@ -704,6 +704,8 @@ MonoBehaviour:
   playerCoinsText: {fileID: 1716083710321334305}
   buyShopPanelController: {fileID: 1716083710603973695}
   buyShopPanelAnimator: {fileID: 9170872260759903169}
+  buyShopBackButton: {fileID: 8853995190114870323}
+  sellShopBackButton: {fileID: 915576880875802907}
 --- !u!95 &9170872260759903169
 Animator:
   serializedVersion: 4
@@ -991,6 +993,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16348b75ebf10c47a885f02928a8c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8853995190114870323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8826835203606862131, guid: 1bda6b88500b8e9438134dd76b077672,
+    type: 3}
+  m_PrefabInstance: {fileID: 45179409060478208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3113972282757890662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1120,6 +1134,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 856d89a8d4aa96641abf0d823b59dfb7, type: 3}
+--- !u!114 &915576880875802907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2847336098833355645, guid: 856d89a8d4aa96641abf0d823b59dfb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3113972282757890662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1716083709404484347 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4388700939122495645, guid: 856d89a8d4aa96641abf0d823b59dfb7,

@@ -70,8 +70,6 @@ namespace ArmasCreator.UI
             targetValue = 0;
             currentValue = 0;
 
-            yield return new WaitUntil(() => isFadingBlack == false);
-
             var cameraData = Camera.main.GetUniversalAdditionalCameraData();
             if (cameraData.cameraStack.Count > 0)
             {
