@@ -109,6 +109,7 @@ namespace ArmasCreator.UI
             {
                 loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
             }
+
             LPBG.Reset();
             FadeBlack();
             yield return new WaitForSeconds(1f);

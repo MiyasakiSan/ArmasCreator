@@ -96,10 +96,22 @@ public class MovementAnim : NetworkBehaviour
     }
     #endregion
 
-    public void StartUseItemAnimation()
+    public void StartUseItemAnimation(string itemId)
     {
         playerAnim.SetLayerWeight(useItemLayerIndex, 1);
-        playerAnim.SetTrigger("useItem");
+
+        if (itemId == "bandage")
+        {
+            playerAnim.SetTrigger("bandaging");
+        }
+        else if (itemId == "adrenaline")
+        {
+            playerAnim.SetTrigger("injecting");
+        }
+        else
+        {
+            playerAnim.SetTrigger("useItem");
+        }
     }
 
     public void EndUseItemAnimation()
