@@ -1,4 +1,5 @@
 using ArmasCreator.Gameplay;
+using ArmasCreator.UI;
 using ArmasCreator.Utilities;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,11 +15,16 @@ public class PreGameCameraEvent : MonoBehaviour
     private PlayableDirector currentDirector;
 
     [SerializeField]
+    private LoadingPopup loadingPopup;
+
+    [SerializeField]
     private float timeToSkipTo;
 
     private void Awake()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
     }
 
     private void Update()
@@ -26,6 +32,8 @@ public class PreGameCameraEvent : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape) && gameplayController.CurrentGameplays == Gameplays.PreGame)
         {
             currentDirector.time = timeToSkipTo;
+
+            loadingPopup.FadeBlack();
         }
     }
 

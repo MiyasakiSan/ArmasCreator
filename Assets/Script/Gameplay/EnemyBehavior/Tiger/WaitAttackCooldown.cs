@@ -14,6 +14,7 @@ public class WaitAttackCooldown : ActionNode
 
     private Coroutine cooldownCoroutine;
     private CoroutineHelper coroutineHelper;
+    private enemyAnimController animController;
 
     private bool isOnCooldown;
 
@@ -21,10 +22,15 @@ public class WaitAttackCooldown : ActionNode
 
         if (blackboard.CurrentAttackPattern != null)
         {
+            animController = context.gameObject.GetComponent<enemyAnimController>();
+
             context.agent.stoppingDistance = stoppingDistance;
             context.agent.speed = speed;
             context.agent.updateRotation = updateRotation;
             context.agent.acceleration = acceleration;
+            context.agent.isStopped = false;
+
+            animController.SetAllLookAtWeight(1);
 
             coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
             cooldownCoroutine = coroutineHelper.Play(AttackCooldown(blackboard.CurrentAttackPattern.AttackCooldown));
@@ -40,7 +46,14 @@ public class WaitAttackCooldown : ActionNode
         if (isOnCooldown)
         {
             context.gameObject.GetComponent<enemyAnimController>().SetWalking(true);
-            context.agent.Move(context.transform.forward * Time.deltaTime);
+
+            Vector3 dir = blackboard.Target.transform.position - context.transform.position;
+
+            Vector3 pos = new Vector3(blackboard.Target.transform.position.x + dir.magnitude * Mathf.Cos(30 * Mathf.Deg2Rad), 0,
+                                      blackboard.Target.transform.position.z + dir.magnitude * Mathf.Sin(30 * Mathf.Deg2Rad));
+
+            context.agent.destination = pos;
+
             return State.Running;
         }
         else
@@ -55,7 +68,7 @@ public class WaitAttackCooldown : ActionNode
     {
         isOnCooldown = true;
 
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(cooldown + 0.25f);
 
         isOnCooldown = false;
 

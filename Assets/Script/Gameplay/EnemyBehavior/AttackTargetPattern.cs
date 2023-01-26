@@ -63,7 +63,6 @@ public class AttackTargetPattern : ActionNode
         enemyCombatManager.IsAttacking = false;
         enemyCombatManager.currentAttackPattern = null;
         animController.SetAnimationRootNode(false);
-        animController.SetAllLookAtWeight(1);
 
         coroutineHelper.Stop(attackCoroutine);
 

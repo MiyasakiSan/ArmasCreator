@@ -52,8 +52,6 @@ public class MoveToAttackPos : ActionNode
 
             if (context.agent.remainingDistance < blackboard.CurrentAttackPattern.AttackDistance)
             {
-                Debug.Log(context.agent.remainingDistance);
-
                 context.agent.isStopped = true;
                 blackboard.IsRunToAttackPos = false;
                 animController.SetMoving(false);

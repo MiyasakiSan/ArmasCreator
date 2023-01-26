@@ -27,7 +27,6 @@ namespace DitzelGames.FastIK
         /// </summary>
         protected Quaternion StartRotation;
 
-
         void Awake()
         {
             if (Target == null)
@@ -74,17 +73,16 @@ namespace DitzelGames.FastIK
 
             if (dot < Mathf.Cos(80))
             {
-                UpdateStartValue();
                 return;
             }
-            else if (weight == 0)
+
+            if (weight == 0)
             {
-                UpdateStartValue();
                 return;
             }
             else
             {
-                var rotation = Quaternion.Lerp(StartRotation, Quaternion.FromToRotation(StartDirection, Target.position - transform.position) * StartRotation, weight);
+                var rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Parent.transform.forward, Target.position - transform.position) * transform.rotation, weight);
 
                 var angle = rotation.eulerAngles;
                 transform.eulerAngles = angle;
