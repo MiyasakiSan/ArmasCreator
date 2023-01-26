@@ -10,6 +10,8 @@ namespace ArmasCreator.UserData
     {
         public Dictionary<string, int> Achievements;
 
+        public Dictionary<QuestType, CurrentQuestModel> AllQuest = new Dictionary<QuestType, CurrentQuestModel>();
+
         private UserDataManager userDataManager;
         public void Init(UserDataManager userData)
         {
@@ -21,6 +23,8 @@ namespace ArmasCreator.UserData
             Achievements = new Dictionary<string, int>();
 
             Achievements = saveModel.Achievements;
+
+            AllQuest = saveModel.AllQuest;
         }
 
         public void UpdateAchievementProgression(string achievementId, int progress)

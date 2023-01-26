@@ -5197,6 +5197,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1698333554}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1706336260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8858716682897766456, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
+    type: 3}
+  m_PrefabInstance: {fileID: 1898336252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db2cc9d15d8e1c4e81fbc747c163d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1755192815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5575,6 +5587,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 2133231059}
+    - target: {fileID: 1221027838, guid: 2044dfb5f9ffe2e42a7f88f49b858033, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 35106269619043746, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -5940,6 +5956,21 @@ PrefabInstance:
       propertyPath: hurtBoxColliderList.Array.data[0]
       value: 
       objectReference: {fileID: 1898336253}
+    - target: {fileID: 1479299266428193981, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
+        type: 3}
+      propertyPath: allLookAtIK.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479299266428193981, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
+        type: 3}
+      propertyPath: allLookAtIK.Array.data[0]
+      value: 
+      objectReference: {fileID: 1706336260}
+    - target: {fileID: 1479299266428193981, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
+        type: 3}
+      propertyPath: allLookAtIK.Array.data[1]
+      value: 
+      objectReference: {fileID: 1706336260}
     - target: {fileID: 1479299266428193983, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
         type: 3}
       propertyPath: maxHealth
@@ -7505,6 +7536,11 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 2133231059}
+    - target: {fileID: 8858716682897766456, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8929147942869854391, guid: 2044dfb5f9ffe2e42a7f88f49b858033,
         type: 3}
       propertyPath: m_LocalPosition.x

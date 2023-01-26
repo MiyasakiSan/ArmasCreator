@@ -165,6 +165,11 @@ public class PlayerRpgMovement : NetworkBehaviour
         CanRotate = true;
     }
 
+    public void ResetAnimBoolean()
+    {
+        animController.ResetAnimBoolean();
+    }
+
     public void MoveForward(float speed)
     {
         isMovingForward = true;

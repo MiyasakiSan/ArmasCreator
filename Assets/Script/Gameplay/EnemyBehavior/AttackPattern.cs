@@ -33,6 +33,10 @@ namespace ArmasCreator.Behavior
         public float Damage => damage;
 
         [SerializeField]
+        private float attackCooldown;
+        public float AttackCooldown => attackCooldown;
+
+        [SerializeField]
         private AnimationClip attackAnimaiton;
         public AnimationClip AttackAnimaiton => attackAnimaiton;
     }

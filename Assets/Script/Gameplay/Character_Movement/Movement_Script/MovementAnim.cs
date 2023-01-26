@@ -63,6 +63,13 @@ public class MovementAnim : NetworkBehaviour
         playerAnim.SetBool(paramName, true);
     }
 
+    public void ResetAnimBoolean()
+    {
+        playerAnim.SetBool("run", false);
+        playerAnim.SetBool("walk", false);
+        playerAnim.SetBool("idle", true);
+    }
+
     [ServerRpc]
     public void AnimationStateServerRpc(string paramName)
     {

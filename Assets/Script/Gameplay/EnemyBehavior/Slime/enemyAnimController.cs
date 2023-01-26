@@ -55,6 +55,11 @@ public class enemyAnimController : NetworkBehaviour
         anim.SetBool("isMoving", value);
     }
 
+    public void SetWalking(bool value)
+    {
+        anim.SetBool("isWalking", value);
+    }
+
     [ServerRpc]
     public void AttackServerRpc()
     {
@@ -128,4 +133,12 @@ public class enemyAnimController : NetworkBehaviour
         SpawnCoinClientRpc();
         Destroy(this.gameObject);
     }
+
+
+    #region Boss animation event
+    public void SpawnSpike()
+    {
+        Debug.Log("Spawn Spike!");
+    } 
+    #endregion
 }

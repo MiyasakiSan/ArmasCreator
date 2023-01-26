@@ -49,6 +49,8 @@ namespace ArmasCreator.UserData
         public List<string> SurvivalQuestIds = new List<string>();
         public List<string> RequestQuestIds = new List<string>();
         public List<string> ConversationQuestIds = new List<string>();
+        
+        public List<string> FinishedQuestIds = new List<string>();
 
         public string LatestActiveQuest;
     }

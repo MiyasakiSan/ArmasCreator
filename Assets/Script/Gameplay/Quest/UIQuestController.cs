@@ -114,6 +114,7 @@ namespace ArmasCreator.Gameplay
             {
                 ShowQuestCanvas();
                 other.GetComponent<PlayerRpgMovement>().canMove = false;
+                other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && questVcam.activeSelf)
             {

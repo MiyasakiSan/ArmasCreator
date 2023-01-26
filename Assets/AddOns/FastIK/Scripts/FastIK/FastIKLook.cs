@@ -27,6 +27,7 @@ namespace DitzelGames.FastIK
         /// </summary>
         protected Quaternion StartRotation;
 
+
         void Awake()
         {
             if (Target == null)
@@ -40,7 +41,7 @@ namespace DitzelGames.FastIK
         {
             while (weight > 0)
             {
-                weight -= Time.deltaTime;
+                weight -= Time.deltaTime * 2;
                 yield return null;
             }
 
@@ -52,7 +53,7 @@ namespace DitzelGames.FastIK
         {
             while (weight < amount)
             {
-                weight += Time.deltaTime;
+                weight += Time.deltaTime * 2;
                 yield return null;
             }
 
@@ -63,7 +64,9 @@ namespace DitzelGames.FastIK
         void LateUpdate()
         {
             if (Target == null)
+            {
                 return;
+            }
 
             var dir = Vector3.Normalize(Target.position - Parent.position);
 
@@ -71,18 +74,21 @@ namespace DitzelGames.FastIK
 
             if (dot < Mathf.Cos(80))
             {
+                UpdateStartValue();
                 return;
             }
-
-            if(weight == 0)
+            else if (weight == 0)
             {
+                UpdateStartValue();
                 return;
             }
+            else
+            {
+                var rotation = Quaternion.Lerp(StartRotation, Quaternion.FromToRotation(StartDirection, Target.position - transform.position) * StartRotation, weight);
 
-            var rotation = Quaternion.Lerp(StartRotation, Quaternion.FromToRotation(StartDirection, Target.position - transform.position) * StartRotation, weight);
-
-            var angle = rotation.eulerAngles;
-            transform.eulerAngles = angle;
+                var angle = rotation.eulerAngles;
+                transform.eulerAngles = angle;
+            }
         }
 
         public void UpdateStartValue()
