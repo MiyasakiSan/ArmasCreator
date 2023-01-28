@@ -88,6 +88,8 @@ namespace ArmasCreator.GameData
     {
         [JsonProperty("recipe")]
         public Dictionary<string, int> Recipe;
+        [JsonProperty("craft_item_id")]
+        public string Craft_item_id;
     }
 
 }

@@ -251,20 +251,37 @@ namespace ArmasCreator.GameData
             return true;
         }
 
-        public bool TryGetCraftItemInfo(string id, out ItemInfoModel consumeItemInfo)
+        public bool TryGetCraftItemInfo(string id, out ItemInfoModel monsterPartInfo)
         {
             bool exist = monsterPartInfos.TryGetValue(id, out ItemInfoModel itemInfo);
 
             if (!exist)
             {
-                Debug.LogError($"{id} doesn't exist in consumable items");
+                Debug.LogError($"{id} doesn't exist in craft items");
 
-                consumeItemInfo = new ItemInfoModel();
+                monsterPartInfo = new ItemInfoModel();
 
                 return false;
             }
 
-            consumeItemInfo = itemInfo;
+            monsterPartInfo = itemInfo;
+            return true;
+        }
+
+        public bool TryGetRecipeInfo(string id, out RecipeModel recipeInfo)
+        {
+            bool exist = recipeInfos.TryGetValue(id, out RecipeModel itemInfo);
+
+            if (!exist)
+            {
+                Debug.LogError($"{id} doesn't exist in recipe items");
+
+                recipeInfo = new RecipeModel();
+
+                return false;
+            }
+
+            recipeInfo = itemInfo;
             return true;
         }
 
@@ -315,6 +332,13 @@ namespace ArmasCreator.GameData
             if (exist)
             {
                 return monsterPartInfos[id].SubType;
+            }
+
+            exist = recipeInfos.ContainsKey(id);
+
+            if (exist)
+            {
+                return recipeInfos[id].SubType;
             }
 
             return SubType.None;
@@ -397,6 +421,13 @@ namespace ArmasCreator.GameData
             else if (itemType == ItemType.Craftable)
             {
                 foreach (string Id in monsterPartInfos.Keys)
+                {
+                    itemIds.Add(Id);
+                }
+            }
+            else if (itemType == ItemType.Recipe)
+            {
+                foreach (string Id in recipeInfos.Keys)
                 {
                     itemIds.Add(Id);
                 }
