@@ -10,12 +10,19 @@ using DitzelGames.FastIK;
 public class enemyAnimController : NetworkBehaviour
 {
     public Animator anim;
-    [SerializeField] private GameObject coin;
 
     private GameplayController gameplayController;
 
     [SerializeField]
+    private DynamicBone dynamicBone;
+
+    [SerializeField]
     private List<FastIKLook> allLookAtIK;
+
+    [Header("Move Set")]
+
+    [SerializeField]
+    private ProjectileSpawner spikeSpawner;
 
     void Start()
     {
@@ -48,6 +55,16 @@ public class enemyAnimController : NetworkBehaviour
         {
             IK.ResetWeight();
         }
+    }
+
+    public void SetDynamicBoneWeight(float value)
+    {
+        dynamicBone.SetWeight(value);
+    }
+
+    public void ResetDynamicBoneWeight()
+    {
+        dynamicBone.SetWeight(1);
     }
 
     public void SetMoving(bool value)
@@ -121,16 +138,9 @@ public class enemyAnimController : NetworkBehaviour
         anim.SetTrigger("Alert");
     }
 
-    [ClientRpc]
-    public void SpawnCoinClientRpc()
-    {
-        GameObject coinSpawn = Instantiate(coin, transform.position, Quaternion.identity);
-    }
-
     IEnumerator despawn()
     {
         yield return new WaitForSeconds(2f);
-        SpawnCoinClientRpc();
         Destroy(this.gameObject);
     }
 
@@ -138,6 +148,8 @@ public class enemyAnimController : NetworkBehaviour
     #region Boss animation event
     public void SpawnSpike()
     {
+        spikeSpawner.SpawnProjectile();
+
         Debug.Log("Spawn Spike!");
     } 
     #endregion
