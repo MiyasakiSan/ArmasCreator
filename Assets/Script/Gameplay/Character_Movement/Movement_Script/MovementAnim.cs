@@ -88,7 +88,12 @@ public class MovementAnim : NetworkBehaviour
     #region Dodge Animation
     public void Dodge()
     {
-        playerAnim.SetTrigger("roll");
+        playerAnim.SetBool("roll",true);
+    }
+
+    public void StopDodge()
+    {
+        playerAnim.SetBool("roll", false);
     }
 
     [ServerRpc]

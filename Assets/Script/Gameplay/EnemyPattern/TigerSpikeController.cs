@@ -12,6 +12,10 @@ namespace ArmasCreator.Gameplay
 
         private Rigidbody rb;
 
+        public float Damage;
+
+        private bool isHit;
+
         private void Awake()
         {
             rb = this.GetComponent<Rigidbody>();
@@ -24,15 +28,34 @@ namespace ArmasCreator.Gameplay
             rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Impulse);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject.CompareTag("Walkable"))
+            if (isHit) { return; }
+
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<AttackTarget>().receiveAttack(Damage);
+
+                isHit = true;
+            }
+
+            if (other.gameObject.CompareTag("Walkable"))
             {
                 isHittingGround = true;
                 rb.velocity = Vector3.zero;
 
-                this.transform.parent = collision.transform;
+                this.transform.parent = other.transform;
+
+                isHit = true;
+
+                StartCoroutine(autoDestroy());
             }
+        }
+        IEnumerator autoDestroy()
+        {
+            yield return new WaitForSeconds(4f);
+
+            Destroy(this.gameObject);
         }
     }
 }

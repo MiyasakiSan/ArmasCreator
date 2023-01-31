@@ -22,9 +22,6 @@ public class AttackTargetPattern : ActionNode
 
             coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
 
-            animController.SetAnimationRootNode(true);
-            animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
-
             if (blackboard.CurrentAttackPattern.IsFollow)
             {
                 animController.SetAllLookAtWeight(1);
@@ -72,6 +69,13 @@ public class AttackTargetPattern : ActionNode
 
     private IEnumerator attackingCoroutine(float length)
     {
+        animController.SetMoving(false);
+
+        yield return new WaitForSeconds(0.25f);
+
+        animController.SetAnimationRootNode(true);
+        animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
+
         yield return new WaitForSeconds(length);
 
         blackboard.IsAttacking = false;
