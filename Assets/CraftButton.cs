@@ -16,6 +16,9 @@ namespace ArmasCreator.UI
         private CraftBoxController craftBoxController;
 
         [SerializeField]
+        private CraftShopPanelController craftShopPanelController;
+
+        [SerializeField]
         private Image ButtonOutline;
 
         private string currentSelectedID;
@@ -62,6 +65,8 @@ namespace ArmasCreator.UI
                     clickTime = 0;
                     isCraftRequireComplete = false;
                     ButtonOutline.fillAmount = clickTime / maxTime;
+                    OnCraftComplete();
+                    craftShopPanelController.UpdatePlayerCoin();
                 }
             }
             if(!isHold)

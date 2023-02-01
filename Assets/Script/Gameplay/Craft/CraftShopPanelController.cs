@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using ArmasCreator.GameData;
 using ArmasCreator.UserData;
+using ArmasCreator.Utilities;
 using ArmasCreator.Gameplay.UI;
+using TMPro;
 
 namespace ArmasCreator.UI
 {
@@ -19,7 +21,15 @@ namespace ArmasCreator.UI
         [SerializeField]
         private List<BannerSlot> bannerSlots;
 
+        [SerializeField]
+        private TMP_Text playerCurrency;
 
+        private UserDataManager userDataManager;
+
+        private void Awake()
+        {
+            userDataManager = SharedContext.Instance.Get<UserDataManager>();
+        }
         public void Start()
         {
             bannerButtons[0].onClick.AddListener(() => 
@@ -36,6 +46,7 @@ namespace ArmasCreator.UI
                 bannerSlots[1].OnSelectedBanner();
                 ShowCraftBox();
             });
+            UpdatePlayerCoin();
         }
 
         public void DeselectedAllBannerSlot()
@@ -49,6 +60,11 @@ namespace ArmasCreator.UI
         public void ShowCraftBox()
         {
             craftBoxController.UpdateCraftBoxItem();
+        }
+
+        public void UpdatePlayerCoin()
+        {
+            playerCurrency.text = userDataManager.UserData.Coins.ToString() + " s";
         }
     }
 }

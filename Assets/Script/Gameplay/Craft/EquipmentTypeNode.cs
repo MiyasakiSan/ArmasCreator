@@ -53,6 +53,8 @@ namespace ArmasCreator.UI
         private RecipeModel itemInfo; /*====>  put some item info here See in Game Data*/
         public RecipeModel ItemInfo => itemInfo;
 
+        private bool isUnlock = false;
+
         void Awake()
         {
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
@@ -130,28 +132,34 @@ namespace ArmasCreator.UI
             loadingSpriteCoroutine = null;
         }
 
-        public void SetUnlockEquipmentTypeNode()
+        public void SetIsUnlockEquipmentTypeNode(bool isUnlock)
         {
-            lockIcon.SetActive(false);
+            lockIcon.SetActive(isUnlock);
         }
 
         public void OnSelectedEquipmentTypeNode()
         {
-            PopulateItemRequireNode();
-            selectedBorder.SetActive(true);
-            if (userDataManager.UserData.Coins >= itemInfo.BuyPrice)
+            if (!lockIcon.activeSelf)
             {
-                moneyRequire.text = string.Format("<color=white>{0} s</color>", itemInfo.BuyPrice.ToString());
+                if (!OwnedText.activeSelf)
+                {
+                    PopulateItemRequireNode();
+                    selectedBorder.SetActive(true);
+                    if (userDataManager.UserData.Coins >= itemInfo.BuyPrice)
+                    {
+                        moneyRequire.text = string.Format("<color=white>{0} s</color>", itemInfo.BuyPrice.ToString());
+                    }
+                    else
+                    {
+                        moneyRequire.text = string.Format("{0} s", itemInfo.BuyPrice.ToString());
+                    }
+                    craftButton.OnClickEquipmentTypeNode(itemInfo.ID);
+                    craftButton.SetCurrentEquipmentTypeNode(this);
+                }
             }
-            else
-            {
-                moneyRequire.text = string.Format("{0} s", itemInfo.BuyPrice.ToString());
-            }
-            craftButton.OnClickEquipmentTypeNode(itemInfo.ID);
-            craftButton.SetCurrentEquipmentTypeNode(this);
         }
 
-        public void IsOwned(bool isOwned)
+        public void SetIsOwned(bool isOwned)
         {
             OwnedText.SetActive(isOwned);
         }

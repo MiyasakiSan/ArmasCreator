@@ -82,10 +82,37 @@ namespace ArmasCreator.UI
                                 ins_EquipmentTypeNode.OnSelectedEquipmentTypeNode();
                                 currentRecipeSelectedID = itemID;
                             });
+                            var userRecipes = userDataManager.UserData.UserDataInventory.Recipes;
+
+                            foreach (string recipeID in userRecipes)
+                            {
+                                if (recipeID == itemID)
+                                {
+                                    ins_EquipmentTypeNode.SetIsUnlockEquipmentTypeNode(true);
+                                    break;
+                                }
+                            }
+
+                            var recipeEquipment = gameDataManager.TryGetRecipeInfo(itemID, out var recipeInfo);
+
+                            var subType = gameDataManager.GetItemSubType(recipeInfo.Craft_item_id);
+
+                            var userEquipment = userDataManager.UserData.UserDataInventory.EquipableItems[subType];
+                            
+
+                            foreach(var equipment in userEquipment.UnlockIds)
+                            {
+                                if(recipeInfo.Craft_item_id == equipment)
+                                {
+                                    ins_EquipmentTypeNode.SetIsOwned(true);
+                                    ins_EquipmentTypeNode.SetIsUnlockEquipmentTypeNode(false);
+                                    break;
+                                }
+                            }
+                            break;
                         }
                     }
                 }
-
                 equipmentTypeNodes.Add(ins_EquipmentTypeNode);
             }
             
