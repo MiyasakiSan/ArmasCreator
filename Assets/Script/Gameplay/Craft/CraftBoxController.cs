@@ -81,6 +81,7 @@ namespace ArmasCreator.UI
                                 ClearAllItemRequireNode();
                                 ins_EquipmentTypeNode.OnSelectedEquipmentTypeNode();
                                 currentRecipeSelectedID = itemID;
+                                craftShopPanelController.ShowCraftDetail();
                             });
                             var userRecipes = userDataManager.UserData.UserDataInventory.Recipes;
 

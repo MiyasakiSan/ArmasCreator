@@ -24,6 +24,9 @@ namespace ArmasCreator.UI
         [SerializeField]
         private TMP_Text playerCurrency;
 
+        [SerializeField]
+        private Animator craftShopPanelAnimator;
+
         private UserDataManager userDataManager;
 
         private void Awake()
@@ -32,7 +35,7 @@ namespace ArmasCreator.UI
         }
         public void Start()
         {
-            bannerButtons[0].onClick.AddListener(() => 
+            bannerButtons[0].onClick.AddListener(() =>
             {
                 craftBoxController.SetCurrentSubType(SubType.Lion);
                 DeselectedAllBannerSlot();
@@ -51,20 +54,48 @@ namespace ArmasCreator.UI
 
         public void DeselectedAllBannerSlot()
         {
-            foreach(BannerSlot bannerSlot in bannerSlots)
+            foreach (BannerSlot bannerSlot in bannerSlots)
             {
                 bannerSlot.OnDeselectedBanner();
             }
         }
-
-        public void ShowCraftBox()
-        {
-            craftBoxController.UpdateCraftBoxItem();
-        }
-
         public void UpdatePlayerCoin()
         {
             playerCurrency.text = userDataManager.UserData.Coins.ToString() + " s";
+        }
+
+        public void ShowCraftBox()
+        {
+            craftShopPanelAnimator.SetTrigger("showCraftBox");
+            craftBoxController.UpdateCraftBoxItem();
+        }
+
+        public void ShowCraftShop()
+        {
+            craftShopPanelAnimator.SetTrigger("showCraftShop");
+        }
+
+        public void ShowCraftDetail()
+        {
+            craftShopPanelAnimator.SetTrigger("showCraftDetail");
+        }
+
+        public void ShowCraftComplete()
+        {
+            craftShopPanelAnimator.SetTrigger("showCraftComplete");
+        }
+
+        public void HideCraftShop()
+        {
+            craftShopPanelAnimator.SetTrigger("hideCraftComplete");
+            craftShopPanelAnimator.SetTrigger("hideCraftDetail");
+            craftShopPanelAnimator.SetTrigger("hideCraftBox");
+            craftShopPanelAnimator.SetTrigger("hideCraftShop");
+        }
+
+        public void HideCraftComplete()
+        {
+            craftShopPanelAnimator.SetTrigger("hideCraftComplete");
         }
     }
 }

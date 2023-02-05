@@ -7,6 +7,7 @@ using ArmasCreator.UserData;
 using ArmasCreator.GameData;
 using ArmasCreator.Utilities;
 using System;
+using TMPro;
 
 namespace ArmasCreator.UI
 {
@@ -20,6 +21,12 @@ namespace ArmasCreator.UI
 
         [SerializeField]
         private Image ButtonOutline;
+
+        [SerializeField]
+        private Button confirmCraftButton;
+
+        [SerializeField]
+        private TMP_Text craftedDetailText;
 
         private string currentSelectedID;
 
@@ -37,15 +44,20 @@ namespace ArmasCreator.UI
 
         private RecipeModel recipeInfo;
 
-        private EquipmentTypeNode currentEquipmentTypeNode;
-
         void Awake()
         {
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         }
 
-        void Update()
+        void Start()
+        {
+            confirmCraftButton.onClick.AddListener(() => {
+                OnClickCraftComplete();
+            });
+        }
+
+    void Update()
         {
             if (isHold & isCraftRequireComplete)
             {
@@ -123,13 +135,16 @@ namespace ArmasCreator.UI
 
         public void OnCraftComplete()
         {
-            craftBoxController.UpdateCraftBoxItem();
-            craftBoxController.ClearAllItemRequireNode();
+            gameDataManager.TryGetEquipItemInfoById(recipeInfo.Craft_item_id, out var equipmentInfo);
+            craftedDetailText.text = equipmentInfo.Name + " is crafted";
+            craftShopPanelController.ShowCraftComplete();
         }
 
-        public void SetCurrentEquipmentTypeNode(EquipmentTypeNode newEquipmentTypeNode)
+        public void OnClickCraftComplete()
         {
-            currentEquipmentTypeNode = newEquipmentTypeNode;
+            craftBoxController.UpdateCraftBoxItem();
+            craftBoxController.ClearAllItemRequireNode();
+            craftShopPanelController.HideCraftComplete();
         }
     }
 }

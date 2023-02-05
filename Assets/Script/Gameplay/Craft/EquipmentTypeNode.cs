@@ -154,7 +154,6 @@ namespace ArmasCreator.UI
                         moneyRequire.text = string.Format("{0} s", itemInfo.BuyPrice.ToString());
                     }
                     craftButton.OnClickEquipmentTypeNode(itemInfo.ID);
-                    craftButton.SetCurrentEquipmentTypeNode(this);
                 }
             }
         }
