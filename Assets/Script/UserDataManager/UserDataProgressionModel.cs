@@ -3,6 +3,7 @@ using UnityEngine;
 using ArmasCreator.GameData;
 using System.Collections.Generic;
 using ArmasCreator.Utilities;
+using ArmasCreator.UI;
 
 namespace ArmasCreator.UserData
 {
@@ -74,6 +75,43 @@ namespace ArmasCreator.UserData
                 var subType = gameDataManager.GetItemSubType(reward.Key);
 
                 userDataManager.UserData.UserDataInventory.AddItem(reward.Key, subType, reward.Value);
+            }
+        }
+
+        public void StartQuest(string questId)
+        {
+            var gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+
+            var questType = gameDataManager.GetQuestType(questId);
+
+            var questSubType = gameDataManager.GetQuestSubType(questId);
+
+            if (questType == QuestType.None)
+            {
+                Debug.LogError("Quest Type doesn't exist");
+            }
+
+            if (questSubType == QuestSubType.None)
+            {
+                Debug.LogError("Quest SubType doesn't exist");
+            }
+
+            if (questSubType == QuestSubType.Conversation)
+            {
+                var exist = gameDataManager.TryGetConversationQuestInfo(questId, out ConversationQuestModel questInfo);
+
+                if (!exist)
+                {
+                    Debug.LogError("Quest doesn't exist");
+                }
+
+                AllQuest[questType].ConversationQuestIds.Add(questId);
+
+                AllQuest[questType].LatestActiveQuest = questId;
+
+                var dialogueManager = SharedContext.Instance.Get<DialogueManager>();
+
+
             }
         }
     }
