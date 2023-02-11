@@ -74,6 +74,8 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     public movementState currentMovementState;
 
+    private Coroutine dodgeCoroutine;
+
     private GameModeController gameModeController;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
@@ -163,6 +165,11 @@ public class PlayerRpgMovement : NetworkBehaviour
     public void ResetRotate()
     {
         CanRotate = true;
+    }
+
+    public void ResetAnimBoolean()
+    {
+        animController.ResetAnimBoolean();
     }
 
     public void MoveForward(float speed)
@@ -265,7 +272,7 @@ public class PlayerRpgMovement : NetworkBehaviour
 
         if (direction.magnitude < 0.1f) { return movementState.idle; }
 
-        if (Input.GetKeyUp(KeyCode.Space) && haveStamina(dodgestaminaUse) /*&& canDodge && !isDodging*/)
+        if (Input.GetKeyUp(KeyCode.Space) && haveStamina(dodgestaminaUse) || isDodging)
         {
             return movementState.roll;
         }
@@ -278,6 +285,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         PlayerStat playerStat = GetComponent<PlayerStat>();
         return playerStat.CurrentStamina - dodgeStaminaUse >= 0;
     }
+
     IEnumerator Dodge()
     {
         if (isDodging)
@@ -285,16 +293,9 @@ public class PlayerRpgMovement : NetworkBehaviour
             yield break;
         }
 
-        if (isSinglePlayer)
-        {
-            animController.Dodge();
-        }
-        else
-        {
-            animController.DodgeServerRpc();
-        }
-
         isDodging = true;
+
+        animController.Dodge();
 
         float timer = 0;
         reduceStaminaOnDodge(dodgestaminaUse);
@@ -324,7 +325,9 @@ public class PlayerRpgMovement : NetworkBehaviour
             yield return null;
         }
 
+        animController.StopDodge();
         isDodging = false;
+        dodgeCoroutine = null;
     }
     private void reduceStaminaOnDodge(float amount)
     {
@@ -361,7 +364,12 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         combatManager.ResetAnimBoolean();
 
-        StartCoroutine(Dodge());
+        if (dodgeCoroutine != null)
+        {
+            return;
+        }
+
+        dodgeCoroutine = StartCoroutine(Dodge());
     }
 
     private void runToDirection(Vector3 direction)

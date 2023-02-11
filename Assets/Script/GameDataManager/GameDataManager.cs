@@ -52,8 +52,8 @@ namespace ArmasCreator.GameData
         [GameData("dialogue_config")]
         private Dictionary<string, DialogueModel> dialogueConfig;
 
-        [GameData("quest_config")]
-        private Dictionary<string, QuestModel> questConfig;
+        [GameData("conversation_quest_config")]
+        private Dictionary<string, ConversationQuestModel> conversationQuestConfig;
 
         [GameData("character_config")]
         private Dictionary<string, CharacterModel> characterConfig;
@@ -482,6 +482,49 @@ namespace ArmasCreator.GameData
             }
 
             dialogueInfo = dialogue;
+            return true;
+        }
+
+        public QuestType GetQuestType(string questId)
+        {
+            bool exist = conversationQuestConfig.TryGetValue(questId, out ConversationQuestModel questModel);
+
+            if (exist)
+            {
+                return questModel.Type;
+            }
+
+            return QuestType.None;
+            //TODO : ADD MORE QUEST TYPE
+        }
+
+        public QuestSubType GetQuestSubType(string questId)
+        {
+            bool exist = conversationQuestConfig.TryGetValue(questId, out ConversationQuestModel questModel);
+
+            if (exist)
+            {
+                return questModel.SubType;
+            }
+
+            return QuestSubType.None;
+            //TODO : ADD MORE QUEST TYPE
+        }
+
+        public bool TryGetConversationQuestInfo(string questId, out ConversationQuestModel questInfo)
+        {
+            bool exist = conversationQuestConfig.TryGetValue(questId, out ConversationQuestModel questModel);
+
+            if (!exist)
+            {
+                Debug.LogError($"{questId} doesn't exist in cpnversation config");
+
+                questInfo = new ConversationQuestModel();
+
+                return false;
+            }
+
+            questInfo = questModel; 
             return true;
         }
     }

@@ -63,6 +63,13 @@ public class MovementAnim : NetworkBehaviour
         playerAnim.SetBool(paramName, true);
     }
 
+    public void ResetAnimBoolean()
+    {
+        playerAnim.SetBool("run", false);
+        playerAnim.SetBool("walk", false);
+        playerAnim.SetBool("idle", true);
+    }
+
     [ServerRpc]
     public void AnimationStateServerRpc(string paramName)
     {
@@ -81,7 +88,12 @@ public class MovementAnim : NetworkBehaviour
     #region Dodge Animation
     public void Dodge()
     {
-        playerAnim.SetTrigger("roll");
+        playerAnim.SetBool("roll",true);
+    }
+
+    public void StopDodge()
+    {
+        playerAnim.SetBool("roll", false);
     }
 
     [ServerRpc]
@@ -96,10 +108,22 @@ public class MovementAnim : NetworkBehaviour
     }
     #endregion
 
-    public void StartUseItemAnimation()
+    public void StartUseItemAnimation(string itemId)
     {
         playerAnim.SetLayerWeight(useItemLayerIndex, 1);
-        playerAnim.SetTrigger("useItem");
+
+        if (itemId == "bandage")
+        {
+            playerAnim.SetTrigger("bandaging");
+        }
+        else if (itemId == "adrenaline")
+        {
+            playerAnim.SetTrigger("injecting");
+        }
+        else
+        {
+            playerAnim.SetTrigger("useItem");
+        }
     }
 
     public void EndUseItemAnimation()

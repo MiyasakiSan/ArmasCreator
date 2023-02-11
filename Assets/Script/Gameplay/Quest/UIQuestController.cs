@@ -6,20 +6,14 @@ using ArmasCreator.Utilities;
 using UnityEngine;
 using ArmasCreator.GameMode;
 using ArmasCreator.Gameplay.UI;
+using ArmasCreator.UI;
 
 namespace ArmasCreator.Gameplay
 {
     public class UIQuestController : MonoBehaviour
     {
-        private float atkMultiplier;
-        private float speedMultiplier;
-        private float hpMultiplier;
-
         private GameplayController gameplayController;
         private UserDataManager userDataManager;
-
-        private string currentMapId;
-        private Dictionary<string, PresetInfo> presetInfos = new Dictionary<string, PresetInfo>();
 
         [SerializeField]
         private GameObject questCanvas;
@@ -38,6 +32,9 @@ namespace ArmasCreator.Gameplay
 
         [SerializeField]
         private QuestPanelController questPanelController;
+
+        [SerializeField]
+        private UIRotateTowardPlayer interactUI;
 
         private GameDataManager gameDataManager;
 
@@ -96,6 +93,8 @@ namespace ArmasCreator.Gameplay
             if (!other.gameObject.CompareTag("Player")) { return; }
 
             QuestBoardOutline.OutlineWidth = 4.5f;
+
+            interactUI.Show();
         }
 
         private void OnTriggerExit(Collider other)
@@ -103,6 +102,8 @@ namespace ArmasCreator.Gameplay
             if (!other.gameObject.CompareTag("Player")) { return; }
 
             QuestBoardOutline.OutlineWidth = 0f;
+
+            interactUI.Hide();
         }
 
         private void OnTriggerStay(Collider other)
@@ -113,6 +114,7 @@ namespace ArmasCreator.Gameplay
             {
                 ShowQuestCanvas();
                 other.GetComponent<PlayerRpgMovement>().canMove = false;
+                other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && questVcam.activeSelf)
             {

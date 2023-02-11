@@ -16,11 +16,14 @@ public class MoveToAttackPos : ActionNode
 
     protected override void OnStart() 
     {
+        context.agent.isStopped = false;
         context.agent.updateRotation = updateRotation;
         context.agent.acceleration = acceleration;
         context.agent.speed = speed;
 
         animController = context.gameObject.GetComponent<enemyAnimController>();
+
+        animController.ResetAllLookAt();
     }
 
     protected override void OnStop() {
@@ -49,17 +52,15 @@ public class MoveToAttackPos : ActionNode
 
             if (context.agent.remainingDistance < blackboard.CurrentAttackPattern.AttackDistance)
             {
-                Debug.Log(context.agent.remainingDistance);
-
                 context.agent.isStopped = true;
                 blackboard.IsRunToAttackPos = false;
                 animController.SetMoving(false);
-                animController.ResetAllLookAt();
+                //animController.ResetAllLookAt();
                 return State.Success;
             }
 
             animController.SetMoving(true);
-            animController.SetAllLookAtWeight(1);
+            //animController.SetAllLookAtWeight(1);
             return State.Running;
         }
 

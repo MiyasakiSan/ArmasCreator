@@ -205,7 +205,7 @@ public class CombatRpgManager : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        animController.StartUseItemAnimation();
+        animController.StartUseItemAnimation(itemId);
 
         yield return new WaitForSeconds(3.1f);
 

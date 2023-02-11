@@ -73,7 +73,19 @@ namespace ArmasCreator.UI
             var cameraData = Camera.main.GetUniversalAdditionalCameraData();
             if (cameraData.cameraStack.Count > 0)
             {
-                loadingCanvas.GetComponent<Canvas>().worldCamera = cameraData.cameraStack[0];
+                bool cameraUIExist = false;
+                foreach (Camera stackCamera in cameraData.cameraStack)
+                {
+                    if (stackCamera.gameObject.name == "UICamera")
+                    {
+                        loadingCanvas.GetComponent<Canvas>().worldCamera = stackCamera;
+                        cameraUIExist = true;
+                    }
+                }
+                if (cameraUIExist == false)
+                {
+                    loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+                }
             }
             else
             {
@@ -103,12 +115,25 @@ namespace ArmasCreator.UI
             cameraData = Camera.main.GetUniversalAdditionalCameraData();
             if (cameraData.cameraStack.Count > 0)
             {
-                loadingCanvas.GetComponent<Canvas>().worldCamera = cameraData.cameraStack[0];
+                bool cameraUIExist = false;
+                foreach (Camera stackCamera in cameraData.cameraStack)
+                {
+                    if (stackCamera.gameObject.name == "UICamera")
+                    {
+                        loadingCanvas.GetComponent<Canvas>().worldCamera = stackCamera;
+                        cameraUIExist = true;
+                    }
+                }
+                if(cameraUIExist == false)
+                {
+                    loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+                }
             }
             else
             {
                 loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
             }
+
             LPBG.Reset();
             FadeBlack();
             yield return new WaitForSeconds(1f);

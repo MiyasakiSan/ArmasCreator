@@ -22,9 +22,14 @@ public class AttackTargetPattern : ActionNode
 
             coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
 
-            animController.SetAnimationRootNode(true);
-            animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
-            animController.ResetAllLookAt();
+            if (blackboard.CurrentAttackPattern.IsFollow)
+            {
+                animController.SetAllLookAtWeight(1);
+            }
+            else
+            {
+                animController.ResetAllLookAt();
+            }
 
             blackboard.IsAttacking = true;
             enemyCombatManager.IsAttacking = true;
@@ -36,8 +41,10 @@ public class AttackTargetPattern : ActionNode
                 attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackAnimaiton.length));
             }
         }
-
-        animController.ResetAllLookAt();
+        else
+        {
+            animController.ResetAllLookAt();
+        }
     }
 
     protected override void OnStop() {
@@ -51,19 +58,30 @@ public class AttackTargetPattern : ActionNode
         }
         else
         {
+            if (blackboard.CurrentAttackPattern.IsFollow)
+            {
+                context.transform.LookAt(blackboard.Target.transform);
+            }
+
             return State.Running;
         }
     }
 
     private IEnumerator attackingCoroutine(float length)
     {
+        animController.SetMoving(false);
+
+        yield return new WaitForSeconds(0.25f);
+
+        animController.SetAnimationRootNode(true);
+        animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
+
         yield return new WaitForSeconds(length);
 
         blackboard.IsAttacking = false;
         enemyCombatManager.IsAttacking = false;
         enemyCombatManager.currentAttackPattern = null;
         animController.SetAnimationRootNode(false);
-        animController.SetAllLookAtWeight(1);
 
         coroutineHelper.Stop(attackCoroutine);
 

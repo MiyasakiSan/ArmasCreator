@@ -148,6 +148,10 @@ namespace ArmasCreator.UserData
             saveModel.CraftableItems = new Dictionary<string, int>();
             saveModel.Achievements = gameDataManager.GetAllInitAchievements();
             saveModel.recipes = new List<string>();
+            saveModel.AllQuest = new Dictionary<QuestType, CurrentQuestModel>();
+
+            saveModel.AllQuest.Add(QuestType.Main, new CurrentQuestModel());
+            saveModel.AllQuest.Add(QuestType.Side, new CurrentQuestModel());
 
             SetupUserData();
 

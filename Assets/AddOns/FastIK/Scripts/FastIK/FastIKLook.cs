@@ -40,7 +40,7 @@ namespace DitzelGames.FastIK
         {
             while (weight > 0)
             {
-                weight -= Time.deltaTime;
+                weight -= Time.deltaTime * 2;
                 yield return null;
             }
 
@@ -52,7 +52,7 @@ namespace DitzelGames.FastIK
         {
             while (weight < amount)
             {
-                weight += Time.deltaTime;
+                weight += Time.deltaTime * 2;
                 yield return null;
             }
 
@@ -63,7 +63,9 @@ namespace DitzelGames.FastIK
         void LateUpdate()
         {
             if (Target == null)
+            {
                 return;
+            }
 
             var dir = Vector3.Normalize(Target.position - Parent.position);
 
@@ -74,15 +76,17 @@ namespace DitzelGames.FastIK
                 return;
             }
 
-            if(weight == 0)
+            if (weight == 0)
             {
                 return;
             }
+            else
+            {
+                var rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Parent.transform.forward, Target.position - transform.position) * transform.rotation, weight);
 
-            var rotation = Quaternion.Lerp(StartRotation, Quaternion.FromToRotation(StartDirection, Target.position - transform.position) * StartRotation, weight);
-
-            var angle = rotation.eulerAngles;
-            transform.eulerAngles = angle;
+                var angle = rotation.eulerAngles;
+                transform.eulerAngles = angle;
+            }
         }
 
         public void UpdateStartValue()

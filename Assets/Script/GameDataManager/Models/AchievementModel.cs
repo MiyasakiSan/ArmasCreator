@@ -20,6 +20,9 @@ namespace ArmasCreator.GameData
 
         [JsonProperty("rewards")]
         public Dictionary<string,int> Rewards;
+
+        [JsonProperty("icon")]
+        public string Icon;
     }
 }
 

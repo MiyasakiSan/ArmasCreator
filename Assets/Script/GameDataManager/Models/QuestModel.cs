@@ -8,12 +8,14 @@ namespace ArmasCreator.GameData
 {
     public enum QuestType
     {
+        None,
         Main,
         Side
     }
 
     public enum QuestSubType
     {
+        None,
         Elimination,
         Destination,
         Conversation,

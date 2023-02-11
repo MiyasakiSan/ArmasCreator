@@ -211,7 +211,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     {
         isValnurable = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.25f);
 
         isValnurable = false;
     }
