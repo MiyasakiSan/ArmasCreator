@@ -96,7 +96,7 @@ namespace ArmasCreator.UI
             }
 
             displayItemImage.gameObject.SetActive(true);
-            displayItemDetail.gameObject.SetActive(false);
+            displayItemDetail.gameObject.SetActive(true);
 
             SetItemInfo(itemInfo);
         }

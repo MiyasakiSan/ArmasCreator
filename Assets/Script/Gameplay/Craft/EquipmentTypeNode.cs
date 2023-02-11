@@ -30,6 +30,8 @@ namespace ArmasCreator.UI
         [SerializeField]
         private ItemRequireNode itemRequireNodePrefab;
 
+        private CraftShopPanelController craftShopPanelController;
+
         private CraftButton craftButton;
 
         private Transform itemRequireBox;
@@ -145,6 +147,7 @@ namespace ArmasCreator.UI
                 {
                     PopulateItemRequireNode();
                     selectedBorder.SetActive(true);
+                    craftShopPanelController.ShowCraftDetail();
                     if (userDataManager.UserData.Coins >= itemInfo.BuyPrice)
                     {
                         moneyRequire.text = string.Format("<color=white>{0} s</color>", itemInfo.BuyPrice.ToString());
@@ -154,6 +157,10 @@ namespace ArmasCreator.UI
                         moneyRequire.text = string.Format("{0} s", itemInfo.BuyPrice.ToString());
                     }
                     craftButton.OnClickEquipmentTypeNode(itemInfo.ID);
+                }
+                else
+                {
+                    craftShopPanelController.HideCraftShopDetail();
                 }
             }
         }
@@ -196,6 +203,11 @@ namespace ArmasCreator.UI
                     ins_itemRequire.SetDisplayItem(itemID, recipeInfo.Recipe[itemID]);
                 }
             }
+        }
+
+        public void SetCraftShopPanelController(CraftShopPanelController newCraftShopPanelController)
+        {
+            craftShopPanelController = newCraftShopPanelController;
         }
     }
 }

@@ -86,7 +86,7 @@ namespace ArmasCreator.UI
                 insCraftable_btn.SetDisplayItem(itemId);
                 listButton.Add(insCraftable_btn.gameObject);
             }
-            for (int BlankNode = 0; BlankNode < 48 - consumableItems.Keys.Count + craftableItems.Keys.Count; BlankNode++)
+            for (int BlankNode = 0; BlankNode < 48 - (consumableItems.Keys.Count + craftableItems.Keys.Count); BlankNode++)
             {
 
                 listButton.Add(Instantiate(blankItemNodePrefab, contentTransform));

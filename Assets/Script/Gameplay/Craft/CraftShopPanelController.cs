@@ -85,12 +85,22 @@ namespace ArmasCreator.UI
             craftShopPanelAnimator.SetTrigger("showCraftComplete");
         }
 
+        public void HideCraftShopDetail()
+        {
+            craftShopPanelAnimator.SetTrigger("hideCraftDetail");
+        }
+
         public void HideCraftShop()
         {
             craftShopPanelAnimator.SetTrigger("hideCraftComplete");
             craftShopPanelAnimator.SetTrigger("hideCraftDetail");
             craftShopPanelAnimator.SetTrigger("hideCraftBox");
             craftShopPanelAnimator.SetTrigger("hideCraftShop");
+        }
+
+        public void ResetTriggerByName(string triggerName)
+        {
+            craftShopPanelAnimator.ResetTrigger(triggerName);
         }
 
         public void HideCraftComplete()

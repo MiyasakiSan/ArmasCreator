@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class UIBlacksmithController : MonoBehaviour
 {
-    //[SerializeField]
-    //private BlacksmithController blacksmithController;
+    [SerializeField]
+    private CraftShopPanelController craftShopPanelController;
 
     [SerializeField]
     private GameObject playerCanvas;
@@ -34,7 +34,7 @@ public class UIBlacksmithController : MonoBehaviour
     IEnumerator ShowUIBlacksmith()
     {
         playerCanvas.SetActive(false);
-        //blacksmithController.ShowMainBlacksmith();
+        craftShopPanelController.ShowCraftShop();
 
         yield return new WaitForSeconds(1.5f);
 
@@ -43,7 +43,7 @@ public class UIBlacksmithController : MonoBehaviour
 
     IEnumerator HideUIBlacksmith()
     {
-        //blacksmithController.HideMainShop();
+        craftShopPanelController.HideCraftShop();
 
         yield return new WaitForSeconds(2.7f);
 
