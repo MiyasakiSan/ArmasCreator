@@ -46,20 +46,25 @@ namespace ArmasCreator.UI
         [SerializeField]
         private string testDialogueId;
 
+        [SerializeField]
+        private string currentDialogueId;
+
+        public QuestModel CurrentQuestInfo;
+
         private void Awake()
         {
             SharedContext.Instance.Add(this);
             DontDestroyOnLoad(this);
+        }
 
+        private void Start()
+        {
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
 
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
 
             coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
-        }
 
-        private void Start()
-        {
             LoadCharacterIconSpriteAtlas();
 
             playerPanel.OnDialogueClick += ShowDialogue;
@@ -122,6 +127,7 @@ namespace ArmasCreator.UI
                 return; 
             }
 
+            currentDialogueId = dialogueId;
             playerPanel.Reset();
             npcPanel.Reset();
             dialogueInfo = dialogue;
@@ -159,10 +165,7 @@ namespace ArmasCreator.UI
 
         private void ShowDialogue()
         {
-            if (dialogueInfo == null)
-            {
-                return;
-            }
+            if (dialogueInfo == null) { return; }
 
             if (sequenceIndex >= dialogueInfo.DialogSequences.Count)
             {
@@ -173,13 +176,25 @@ namespace ArmasCreator.UI
                 dialogueInfo = null;
                 dialogueBG.SetTrigger("hide");
 
+                if (CurrentQuestInfo != null)
+                {
+                    if (currentDialogueId == CurrentQuestInfo.EndDialogueId) 
+                    {
+                        userDataManager.UserData.UserDataProgression.EndQuest(CurrentQuestInfo.Id);
+                        Debug.Log($"Complete Quest ID : {CurrentQuestInfo.Id} ");
+                    }
+                }
+
                 Debug.Log($"Complete dialog ");
+
+                currentDialogueId = null;
+                CurrentQuestInfo = null;
                 return;
             }
 
             var sequence = dialogueInfo.DialogSequences[sequenceIndex];
 
-            if(sequence == null)
+            if (sequence == null)
             {
                 return;
             }

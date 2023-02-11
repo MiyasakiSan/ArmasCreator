@@ -22,11 +22,19 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private GameObject shopVcam;
 
+        [SerializeField]
+        private Outline ShopOutline;
+
+        [SerializeField]
+        private UIRotateTowardPlayer interactUI;
+
         private GameplayController gameplayController;
 
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+            ShopOutline.OutlineWidth = 0f;
         }
 
         IEnumerator ShowUIShop()
@@ -69,6 +77,24 @@ namespace ArmasCreator.Gameplay
 
                 other.GetComponent<PlayerRpgMovement>().canMove = true;
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            ShopOutline.OutlineWidth = 4.5f;
+
+            interactUI.Show();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            ShopOutline.OutlineWidth = 0f;
+
+            interactUI.Hide();
         }
     }
 }

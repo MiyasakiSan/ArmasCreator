@@ -7,7 +7,7 @@ using ArmasCreator.UI;
 
 namespace ArmasCreator.UserData
 {
-    public class UserDataProgressionModel 
+    public class UserDataProgressionModel
     {
         public Dictionary<string, int> Achievements;
 
@@ -48,7 +48,7 @@ namespace ArmasCreator.UserData
                 return;
             }
 
-            if(Achievements[achievementId] + progress > info.Progress)
+            if (Achievements[achievementId] + progress > info.Progress)
             {
                 Debug.LogError($"{nameof(UpdateAchievementProgression)} ====> achievement ID : {achievementId} already finish");
                 return;
@@ -70,7 +70,7 @@ namespace ArmasCreator.UserData
                 //TODO : Some Exception;
             }
 
-            foreach(var reward in achievementInfo.Rewards)
+            foreach (var reward in achievementInfo.Rewards)
             {
                 var subType = gameDataManager.GetItemSubType(reward.Key);
 
@@ -111,7 +111,47 @@ namespace ArmasCreator.UserData
 
                 var dialogueManager = SharedContext.Instance.Get<DialogueManager>();
 
+                dialogueManager.SetDialogueSequence(questInfo.StartDialogueId);
+            }
+        }
 
+        public void EndQuest(string questId)
+        {
+            var gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+
+            var questType = gameDataManager.GetQuestType(questId);
+
+            var questSubType = gameDataManager.GetQuestSubType(questId);
+
+            if (questType == QuestType.None)
+            {
+                Debug.LogError("Quest Type doesn't exist");
+            }
+
+            if (questSubType == QuestSubType.None)
+            {
+                Debug.LogError("Quest SubType doesn't exist");
+            }
+
+            if (questSubType == QuestSubType.Conversation)
+            {
+                var exist = gameDataManager.TryGetConversationQuestInfo(questId, out ConversationQuestModel questInfo);
+
+                if (!exist)
+                {
+                    Debug.LogError("Quest doesn't exist");
+                }
+
+                AllQuest[questType].ConversationQuestIds.Remove(questId);
+
+                AllQuest[questType].FinishedQuestIds.Add(questId);
+
+                AllQuest[questType].LatestActiveQuest = "";
+
+                foreach(var rewards in questInfo.Rewards)
+                {
+                    userDataManager.UserData.UserDataInventory.AddItem(rewards.Key, SubType.None, rewards.Value);
+                }
             }
         }
     }

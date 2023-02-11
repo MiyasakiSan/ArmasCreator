@@ -73,6 +73,9 @@ namespace ArmasCreator.GameData
         [JsonProperty("start_dailogue_id")]
         public string StartDialogueId { get; set; }
 
+        [JsonProperty("npc_dailogue_id")]
+        public string NpcDialogueId { get; set; }
+
         [JsonProperty("end_dailogue_id")]
         public string EndDialogueId { get; set; }
     }
