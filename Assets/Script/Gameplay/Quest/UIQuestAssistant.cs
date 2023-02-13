@@ -19,10 +19,12 @@ public class UIQuestAssistant : MonoBehaviour
     private GameObject questVcam;
 
     private GameplayController gameplayController;
+    private UserDataManager userDataManager;
 
     private void Awake()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+        userDataManager = SharedContext.Instance.Get<UserDataManager>();
 
         QuestAssistantOutline.OutlineWidth = 0f;
     }
@@ -65,6 +67,13 @@ public class UIQuestAssistant : MonoBehaviour
             HideQuestAssistantCanvas();
             other.GetComponent<PlayerRpgMovement>().canMove = true;
         }
+
+        //Test Quest
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            userDataManager.UserData.UserDataProgression.StartQuest("tr-00");
+        }
+
     }
 
     public void ShowQuestAssistantCanvas()

@@ -9,6 +9,9 @@ using UnityEngine;
 public class QuestHolder : MonoBehaviour
 {
     [SerializeField]
+    private string npcId;
+
+    [SerializeField]
     public List<string> HolderQuestIds;
 
     [SerializeField]
@@ -17,11 +20,19 @@ public class QuestHolder : MonoBehaviour
     [SerializeField]
     private UIRotateTowardPlayer interactUI;
 
+    [SerializeField]
+    private GameObject mainQuestUI;
+
+    [SerializeField]
+    private GameObject sideQuestUI;
+
     private DialogueManager dialogueManager;
     private UserDataManager userDataManager;
     private GameDataManager gameDataManager;
 
+    [SerializeField]
     private string latestMainQuestId;
+    [SerializeField]
     private string latestSideQuestId;
 
     private QuestModel activeQuestInfo;
@@ -32,27 +43,9 @@ public class QuestHolder : MonoBehaviour
     {
         dialogueManager = SharedContext.Instance.Get<DialogueManager>();
         userDataManager = SharedContext.Instance.Get<UserDataManager>();
+        gameDataManager = SharedContext.Instance.Get<GameDataManager>();
 
-        latestMainQuestId = userDataManager.UserData.UserDataProgression.AllQuest[ArmasCreator.GameData.QuestType.Main].LatestActiveQuest;
-        latestSideQuestId = userDataManager.UserData.UserDataProgression.AllQuest[ArmasCreator.GameData.QuestType.Side].LatestActiveQuest;
-
-        if (HolderQuestIds.Contains(latestMainQuestId))
-        {
-            gameDataManager.TryGetConversationQuestInfo(latestMainQuestId, out ConversationQuestModel questInfo);
-
-            activeQuestInfo = questInfo;
-
-            return;
-        }
-
-        if (HolderQuestIds.Contains(latestSideQuestId))
-        {
-            gameDataManager.TryGetConversationQuestInfo(latestSideQuestId, out ConversationQuestModel questInfo);
-
-            activeQuestInfo = questInfo;
-
-            return;
-        }
+        CheckCurrentQuest();
     }
 
     void Update()
@@ -89,13 +82,50 @@ public class QuestHolder : MonoBehaviour
         if (activeQuestInfo == null)
         {
             Debug.Log("Default dialogue");
-            dialogueManager.SetDialogueSequence("Default Dialogue");
             return;
         }
 
-        dialogueManager.SetDialogueSequence(activeQuestInfo.NpcDialogueId);
+        dialogueManager.SetDialogueSequence(activeQuestInfo.EndDialogueId);
         dialogueManager.CurrentQuestInfo = activeQuestInfo;
         onDialogue = true;
+    }
 
+    public void CheckCurrentQuest()
+    {
+        activeQuestInfo = null;
+
+        latestMainQuestId = userDataManager.UserData.UserDataProgression.AllQuest[ArmasCreator.GameData.QuestType.Main].LatestActiveQuest;
+        latestSideQuestId = userDataManager.UserData.UserDataProgression.AllQuest[ArmasCreator.GameData.QuestType.Side].LatestActiveQuest;
+
+        mainQuestUI.gameObject.SetActive(false);
+        sideQuestUI.gameObject.SetActive(false);
+
+        if (!string.IsNullOrEmpty(latestMainQuestId))
+        {
+            if (HolderQuestIds.Contains(latestMainQuestId))
+            {
+                gameDataManager.TryGetConversationQuestInfo(latestMainQuestId, out ConversationQuestModel questInfo);
+
+                activeQuestInfo = questInfo;
+
+                mainQuestUI.gameObject.SetActive(true);
+
+                return;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(latestSideQuestId))
+        {
+            if (HolderQuestIds.Contains(latestSideQuestId))
+            {
+                gameDataManager.TryGetConversationQuestInfo(latestSideQuestId, out ConversationQuestModel questInfo);
+
+                activeQuestInfo = questInfo;
+
+                sideQuestUI.gameObject.SetActive(true);
+
+                return;
+            }
+        }
     }
 }

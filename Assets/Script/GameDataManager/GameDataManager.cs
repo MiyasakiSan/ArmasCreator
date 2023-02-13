@@ -527,6 +527,11 @@ namespace ArmasCreator.GameData
             questInfo = questModel; 
             return true;
         }
+
+        public Dictionary<string, ConversationQuestModel> GetAllConversationQuestInfo()
+        {
+            return conversationQuestConfig;
+        }
     }
 }
 

@@ -111,7 +111,18 @@ namespace ArmasCreator.UserData
 
                 var dialogueManager = SharedContext.Instance.Get<DialogueManager>();
 
+                Debug.Log($"=============  Start {questInfo.Name} ==============");
+
                 dialogueManager.SetDialogueSequence(questInfo.StartDialogueId);
+
+                var questHolders = GameObject.FindObjectsOfType<QuestHolder>();
+
+                foreach(var questHolder in questHolders)
+                {
+                    questHolder.CheckCurrentQuest();
+                }
+
+                userDataManager.UserData.UpdateAllQuest(AllQuest);
             }
         }
 
@@ -152,7 +163,23 @@ namespace ArmasCreator.UserData
                 {
                     userDataManager.UserData.UserDataInventory.AddItem(rewards.Key, SubType.None, rewards.Value);
                 }
+
+                Debug.Log($"=============  End {questInfo.Name} ==============");
+
+                if (!string.IsNullOrEmpty(questInfo.NextQuestId))
+                {
+                    StartQuest(questInfo.NextQuestId);
+                }
             }
+
+            var questHolders = GameObject.FindObjectsOfType<QuestHolder>();
+
+            foreach (var questHolder in questHolders)
+            {
+                questHolder.CheckCurrentQuest();
+            }
+
+            userDataManager.UserData.UpdateAllQuest(AllQuest);
         }
     }
 }

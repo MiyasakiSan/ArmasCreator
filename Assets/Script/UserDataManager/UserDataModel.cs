@@ -219,6 +219,12 @@ namespace ArmasCreator.UserData
             saveModel.Coins = (int)coins;
             SaveUserDataToLocal();
         }
+
+        public void UpdateAllQuest(Dictionary<QuestType, CurrentQuestModel> AllQuest)
+        {
+            saveModel.AllQuest = AllQuest;
+            SaveUserDataToLocal();
+        }
     }
 }
 

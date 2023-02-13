@@ -578,23 +578,135 @@
                     "sentence" : "see you Kotaro "
                 }
             ]
+        },
+        "tr-00-start" :
+        {
+            "id" : "tr-00-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " W A S D "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "Press it   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-00-end" :
+        {
+            "id" : "tr-00-end",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " That right"
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "yeah  "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-01-start" :
+        {
+            "id" : "tr-01-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " ESC "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "Press it   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-01-end" :
+        {
+            "id" : "tr-01-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " nice "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : " good job  "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
         }
     },
-    "quest_config" :
+    "conversation_quest_config" :
     {
-        "test":
+        "tr-00":
         {
-            "id" : "test",
-            "name" : "test",
+            "id" : "tr-00",
+            "name" : "Tutorial I",
+            "description" : "basic movement",
             "type" : "main",
-            "sub_type" : "Destination",
+            "sub_type" : "Conversation",
             "rewards" : 
             {
                 "bandage" : 5
             },
+            "previous_quest_id": "",
+            "next_quest_id": "tr-01",
+            "start_dialogue_id" : "tr-00-start",
+            "end_dialogue_id" : "tr-00-end",
+            "npc_id" : "oof"
+        },
+        "tr-01":
+        {
+            "id" : "tr-01",
+            "name" : "Tutorial II",
+            "description" : "basic inventory",
+            "type" : "main",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "previous_quest_id": "",
             "next_quest_id": "",
-            "start_dialogue_id" : "test_start",
-            "end_dialogue_id" : "test_end"
+            "start_dialogue_id" : "tr-01-start",
+            "end_dialogue_id" : "tr-01-end",
+            "npc_id" : "joe"
         }
     }
 }

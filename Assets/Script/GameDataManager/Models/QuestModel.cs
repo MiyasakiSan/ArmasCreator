@@ -58,6 +58,9 @@ namespace ArmasCreator.GameData
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
         [JsonProperty("type")]
         public QuestType Type { get; set; }
 
@@ -67,16 +70,16 @@ namespace ArmasCreator.GameData
         [JsonProperty("rewards")]
         public Dictionary<string, int> Rewards { get; set; }
 
+        [JsonProperty("previous_quest_id")]
+        public List<string> PreviousQuestId { get; set; }
+
         [JsonProperty("next_quest_id")]
         public string NextQuestId { get; set; }
 
-        [JsonProperty("start_dailogue_id")]
+        [JsonProperty("start_dialogue_id")]
         public string StartDialogueId { get; set; }
 
-        [JsonProperty("npc_dailogue_id")]
-        public string NpcDialogueId { get; set; }
-
-        [JsonProperty("end_dailogue_id")]
+        [JsonProperty("end_dialogue_id")]
         public string EndDialogueId { get; set; }
     }
 

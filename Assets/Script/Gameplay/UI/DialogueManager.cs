@@ -76,10 +76,10 @@ namespace ArmasCreator.UI
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.RightShift) && Input.GetKeyUp(KeyCode.U))
-            {
-                SetDialogueSequence(testDialogueId);
-            }
+            //if (Input.GetKeyUp(KeyCode.RightShift) && Input.GetKeyUp(KeyCode.U))
+            //{
+            //    SetDialogueSequence(testDialogueId);
+            //}
         }
 
         private void LoadCharacterIconSpriteAtlas()
@@ -119,6 +119,7 @@ namespace ArmasCreator.UI
 
         public void SetDialogueSequence(string dialogueId)
         {
+            Debug.Log("Show " + dialogueId);
             bool exist = gameDataManager.TryGetDialogueInfo(dialogueId, out DialogueModel dialogue);
 
             if (!exist) 
