@@ -137,6 +137,8 @@ namespace ArmasCreator.UI
             dialogueBG.SetTrigger("show");
 
             StartCoroutine(InitDialogue());
+
+            GameObject.FindObjectOfType<PlayerRpgMovement>().canMove = false;
         }
 
         private IEnumerator InitDialogue()
@@ -182,6 +184,7 @@ namespace ArmasCreator.UI
                     if (currentDialogueId == CurrentQuestInfo.EndDialogueId) 
                     {
                         userDataManager.UserData.UserDataProgression.EndQuest(CurrentQuestInfo.Id);
+
                         Debug.Log($"Complete Quest ID : {CurrentQuestInfo.Id} ");
                     }
                 }
@@ -190,6 +193,7 @@ namespace ArmasCreator.UI
 
                 currentDialogueId = null;
                 CurrentQuestInfo = null;
+                GameObject.FindObjectOfType<PlayerRpgMovement>().canMove = true;
                 return;
             }
 
