@@ -679,13 +679,13 @@
             "id" : "tr-00",
             "name" : "Tutorial I",
             "description" : "basic movement",
-            "type" : "main",
+            "type" : "Main",
             "sub_type" : "Conversation",
             "rewards" : 
             {
                 "bandage" : 5
             },
-            "previous_quest_id": "",
+            "previous_quest_id": [],
             "next_quest_id": "tr-01",
             "start_dialogue_id" : "tr-00-start",
             "end_dialogue_id" : "tr-00-end",
@@ -696,13 +696,47 @@
             "id" : "tr-01",
             "name" : "Tutorial II",
             "description" : "basic inventory",
-            "type" : "main",
+            "type" : "Main",
             "sub_type" : "Conversation",
             "rewards" : 
             {
                 "bandage" : 5
             },
-            "previous_quest_id": "",
+            "previous_quest_id": [],
+            "next_quest_id": "",
+            "start_dialogue_id" : "tr-01-start",
+            "end_dialogue_id" : "tr-01-end",
+            "npc_id" : "joe"
+        },
+        "tr-02":
+        {
+            "id" : "tr-02",
+            "name" : "Tutorial III",
+            "description" : "basic inventory",
+            "type" : "Main",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "previous_quest_id": ["tr-01"],
+            "next_quest_id": "",
+            "start_dialogue_id" : "tr-01-start",
+            "end_dialogue_id" : "tr-01-end",
+            "npc_id" : "joe"
+        },
+        "tr-03":
+        {
+            "id" : "tr-03",
+            "name" : "Tutorial IV",
+            "description" : "basic inventory",
+            "type" : "Side",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "medicine" : 5
+            },
+            "previous_quest_id": [],
             "next_quest_id": "",
             "start_dialogue_id" : "tr-01-start",
             "end_dialogue_id" : "tr-01-end",

@@ -18,6 +18,9 @@ public class UIQuestAssistant : MonoBehaviour
     [SerializeField]
     private GameObject questVcam;
 
+    [SerializeField]
+    private NPCQuestController nPCQuestController;
+
     private GameplayController gameplayController;
     private UserDataManager userDataManager;
 
@@ -79,10 +82,12 @@ public class UIQuestAssistant : MonoBehaviour
     public void ShowQuestAssistantCanvas()
     {
         gameplayController.Interacable = false;
+        nPCQuestController.ShowQuestHeader();
     }
 
     public void HideQuestAssistantCanvas()
     {
         gameplayController.Interacable = true;
+        nPCQuestController.HideQuestHeader();
     }
 }
