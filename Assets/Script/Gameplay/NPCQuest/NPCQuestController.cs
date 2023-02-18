@@ -117,7 +117,7 @@ namespace ArmasCreator.UI
 
         public void OnClickAcceptButton(ConversationQuestModel conversationQuestInfo)
         {
-            //ToDo: Add Play Dialog or someting else that you want to do
+            userDataManager.UserData.UserDataProgression.StartQuest(conversationQuestInfo.Id);
         }
 
         public bool CheckAllPreviousQuestAreComplete(ConversationQuestModel conversationQuestInfo,QuestType questType)
