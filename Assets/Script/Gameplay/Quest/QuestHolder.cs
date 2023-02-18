@@ -45,6 +45,8 @@ public class QuestHolder : MonoBehaviour
         userDataManager = SharedContext.Instance.Get<UserDataManager>();
         gameDataManager = SharedContext.Instance.Get<GameDataManager>();
 
+        QuestHolderOutline.OutlineWidth = 0f;
+
         CheckCurrentQuest();
     }
 
