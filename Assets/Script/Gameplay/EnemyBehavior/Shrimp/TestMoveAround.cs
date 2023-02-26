@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestMoveAround : MonoBehaviour
 {
+    public float speed;
     [SerializeField]
     private Transform center;
 
@@ -84,7 +85,7 @@ public class TestMoveAround : MonoBehaviour
 
         //transform.position = new Vector3(xPos, transform.position.y, yPos);
 
-        transform.position = Vector3.Lerp(transform.position, new Vector3(xPos, transform.position.y, yPos), Time.deltaTime );
+        transform.position = Vector3.Lerp(transform.position, new Vector3(xPos, transform.position.y, yPos), Time.deltaTime * speed );
 
         var lookPos = playerPos.position - transform.position;
         lookPos.y = 0;
