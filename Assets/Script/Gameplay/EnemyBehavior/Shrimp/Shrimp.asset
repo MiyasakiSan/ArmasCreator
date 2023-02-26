@@ -22,12 +22,12 @@ MonoBehaviour:
   - {fileID: 6516967406905786214, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: 760807915532348710, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: -3282221169115235948, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
-  - {fileID: 6549167335751347871, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: 4872307726482557741, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: 3114853107376617917, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: 2572728521966819717, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: 6089394717417668432, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
   - {fileID: -7537216669912222147, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 1946930840604179278}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -40,6 +40,38 @@ MonoBehaviour:
     HpPercentage: 0
     IsMapAttackAvaliable: 0
     CurrentAttackPattern: {fileID: 0}
+--- !u!114 &1946930840604179278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76092ed064468394b8599ac596504a11, type: 3}
+  m_Name: ShrimpMoveToAttackPos
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c963e3b944eca854e803767dc9259bac
+  position: {x: 345.3333, y: 914.6666}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    IsPlayerEnterStage: 0
+    IsRunToAttackPos: 0
+    IsAttacking: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  disable: 0
+  radius: 0
 --- !u!114 &4541311856032509266
 MonoBehaviour:
   m_ObjectHideFlags: 0
