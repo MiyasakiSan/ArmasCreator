@@ -118,7 +118,7 @@ MonoBehaviour:
   - {fileID: 6516967406905786214}
   - {fileID: 760807915532348710}
   - {fileID: -3282221169115235948}
-  - {fileID: 6549167335751347871}
+  - {fileID: 0}
   - {fileID: 4872307726482557741}
   - {fileID: 3114853107376617917}
   - {fileID: 2572728521966819717}
@@ -279,7 +279,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6548d191d7e591f43a03318b5cc76f41
-  position: {x: 623.3307, y: 914.6666}
+  position: {x: 623.3333, y: 914.6666}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
@@ -357,7 +357,7 @@ MonoBehaviour:
   drawGizmos: 0
   children:
   - {fileID: 6089394717417668432}
-  - {fileID: 6549167335751347871}
+  - {fileID: 1946930840604179278, guid: 47d48b0faf53b064c8f9f62f78464a8f, type: 2}
   - {fileID: 4872307726482557741}
   - {fileID: -7537216669912222147}
 --- !u!114 &6516967406905786214
@@ -390,41 +390,6 @@ MonoBehaviour:
     CurrentAttackPattern: {fileID: 0}
   description: 
   drawGizmos: 0
---- !u!114 &6549167335751347871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c724142d90b42a040b0076eca868e053, type: 3}
-  m_Name: MoveToAttackPos
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: a47fecaa09d406448b39651cde6ff49a
-  position: {x: 347.66675, y: 914.6666}
-  blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
-    Target: {fileID: 0}
-    IsDead: 0
-    IsStun: 0
-    IsEnrage: 0
-    IsPlayerEnterStage: 0
-    IsRunToAttackPos: 0
-    IsAttacking: 0
-    HpPercentage: 0
-    IsMapAttackAvaliable: 0
-    CurrentAttackPattern: {fileID: 0}
-  description: 
-  drawGizmos: 0
-  speed: 5
-  updateRotation: 1
-  acceleration: 40
-  tolerance: 3
-  disable: 0
 --- !u!114 &6886120431543504417
 MonoBehaviour:
   m_ObjectHideFlags: 0
