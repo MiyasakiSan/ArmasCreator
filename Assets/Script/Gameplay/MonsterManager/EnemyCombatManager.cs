@@ -6,6 +6,7 @@ using ArmasCreator.Behavior;
 using ArmasCreator.Gameplay;
 using ArmasCreator.Utilities;
 using TheKiwiCoder;
+using ArmasCreator.Gameplay.UI;
 
 public class EnemyCombatManager : NetworkBehaviour
 {
@@ -28,6 +29,8 @@ public class EnemyCombatManager : NetworkBehaviour
     public List<AttackPattern> AllAttackPattern;
 
     private GameplayController gameplayController;
+
+    private UIPlayerController uIPlayerController;
 
     public bool IsAttacking;
 
@@ -60,6 +63,8 @@ public class EnemyCombatManager : NetworkBehaviour
     private void Init()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        uIPlayerController = SharedContext.Instance.Get<UIPlayerController>();
 
         if (hitBoxColliderList.Count <= 0) { return; }
 
@@ -105,6 +110,10 @@ public class EnemyCombatManager : NetworkBehaviour
         float damage = col.GetComponent<Weapon>().weaponDamage;
 
         enemyStat.receiveAttack(damage);
+
+        var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
+
+        uIPlayerController.ShowDamage(contactPoint, damage);
 
         gameplayController.UpdatePlayerDamageDelt(damage);
     }
