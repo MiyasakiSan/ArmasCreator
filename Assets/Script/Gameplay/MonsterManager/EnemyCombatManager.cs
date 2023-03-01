@@ -46,19 +46,6 @@ public class EnemyCombatManager : NetworkBehaviour
     {
         
     }
-
-
-    //TODO : Obsolete
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
-
-    //    if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
-    //    {
-    //        collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
-    //    }
-    //}
     
     private void Init()
     {
@@ -98,6 +85,7 @@ public class EnemyCombatManager : NetworkBehaviour
 
             var pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
+            GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.MinActiveDistance);
         }
     }
 
@@ -111,7 +99,13 @@ public class EnemyCombatManager : NetworkBehaviour
 
         enemyStat.receiveAttack(damage);
 
-        var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
+        //var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
+
+        Vector3 contactPoint;
+
+        //contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
+
+        contactPoint = gameObject.transform.position;
 
         uIPlayerController.ShowDamage(contactPoint, damage);
 

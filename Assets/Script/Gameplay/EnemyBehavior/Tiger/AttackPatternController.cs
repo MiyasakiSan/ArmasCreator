@@ -109,6 +109,11 @@ namespace ArmasCreator.Behavior
                     continue;
                 }
 
+                if (distance < attackPatternContainer.AttackPattern.MinActiveDistance)
+                {
+                    continue;
+                }
+
                 avaliableAttackPattern.Add(attackPatternContainer.AttackPattern);
             }
         }

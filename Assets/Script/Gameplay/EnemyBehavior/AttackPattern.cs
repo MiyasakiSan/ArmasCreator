@@ -17,6 +17,10 @@ namespace ArmasCreator.Behavior
         public float ActiveDistance => activeDistance;
 
         [SerializeField]
+        private float minActiveDistance;
+        public float MinActiveDistance => minActiveDistance;
+
+        [SerializeField]
         private float attackDistance;
         public float AttackDistance => attackDistance;
 

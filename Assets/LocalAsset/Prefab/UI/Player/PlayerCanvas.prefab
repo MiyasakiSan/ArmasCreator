@@ -365,6 +365,7 @@ MonoBehaviour:
   content: {fileID: 834182452773981897}
   itemBar: {fileID: 2991898055935182572}
   damageDealtText: {fileID: 5158301553824625210}
+  damageDealtAnim: {fileID: 2552411509602107803}
   cam: {fileID: 0}
   rectTransform: {fileID: 6076971353308179004}
 --- !u!114 &5625131478266663828
@@ -530,13 +531,14 @@ GameObject:
   - component: {fileID: 4733133674242707462}
   - component: {fileID: 3496766693647021881}
   - component: {fileID: 5158301553824625210}
+  - component: {fileID: 2552411509602107803}
   m_Layer: 5
   m_Name: DamageDeltText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4733133674242707462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -552,10 +554,10 @@ RectTransform:
   m_Father: {fileID: 6076971353308179004}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3496766693647021881
 CanvasRenderer:
@@ -649,12 +651,32 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.3394775, w: -34.9831}
+  m_margin: {x: 903.9219, y: 472.8125, z: 865.89844, w: 493.57812}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &2552411509602107803
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568091555725727352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e45a905a513422947ad57615ac5daa3e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8805111977080361609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977035785069603878, guid: 266d441234aa181499850d0f24781839,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.5999999
       objectReference: {fileID: 0}
     - target: {fileID: 5228636843260112595, guid: 266d441234aa181499850d0f24781839,
         type: 3}

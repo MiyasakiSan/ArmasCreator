@@ -32,6 +32,9 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private TextMeshProUGUI damageDealtText;
 
+        [SerializeField]
+        private Animator damageDealtAnim;
+
         private Coroutine damageDealtCoroutine;
 
         private GameModeController gameModeController;
@@ -79,7 +82,7 @@ namespace ArmasCreator.Gameplay.UI
 
             Vector3 screenPos = cam.WorldToScreenPoint(contactPoint);
             var correctPoint = new Vector2(screenPos.x / Screen.width * rectTransform.sizeDelta.x, screenPos.y / Screen.height * rectTransform.sizeDelta.y);
-            damageDealtText.GetComponent<RectTransform>().anchoredPosition = correctPoint;
+            damageDealtText.GetComponent<RectTransform>().anchoredPosition = screenPos;
 
             damageDealtCoroutine = StartCoroutine(showDeltDamage(damage));
         }
@@ -88,8 +91,9 @@ namespace ArmasCreator.Gameplay.UI
         {
             damageDealtText.gameObject.SetActive(true);
             damageDealtText.text = damage.ToString();
+            damageDealtAnim.SetTrigger("hit");
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.75f);
 
             damageDealtText.gameObject.SetActive(false);
             damageDealtCoroutine = null;
