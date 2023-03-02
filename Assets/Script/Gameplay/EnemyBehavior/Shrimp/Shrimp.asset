@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: Shrimp
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 4541311856032509266}
+  treeState: 0
+  nodes:
+  - {fileID: -5197628570080384083, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 3964595408751014720, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 6886120431543504417, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 0}
+  - {fileID: 6516967406905786214, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 760807915532348710, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: -3282221169115235948, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 4872307726482557741, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 3114853107376617917, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 2572728521966819717, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 6089394717417668432, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: -7537216669912222147, guid: 7e5e3c04843dd6843819bb1499b94806, type: 2}
+  - {fileID: 1946930840604179278}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    IsPlayerEnterStage: 0
+    IsRunToAttackPos: 0
+    IsAttacking: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+--- !u!114 &1946930840604179278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76092ed064468394b8599ac596504a11, type: 3}
+  m_Name: ShrimpMoveToAttackPos
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c963e3b944eca854e803767dc9259bac
+  position: {x: 345.3333, y: 914.6666}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    IsPlayerEnterStage: 0
+    IsRunToAttackPos: 0
+    IsAttacking: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  disable: 0
+  radius: 0
+--- !u!114 &4541311856032509266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163c147d123e4a945b688eddc64e3ea5, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e789945a9417ac84d80679adc8d2f735
+  position: {x: -42.584526, y: -100.377754}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    Target: {fileID: 0}
+    IsDead: 0
+    IsStun: 0
+    IsEnrage: 0
+    IsPlayerEnterStage: 0
+    IsRunToAttackPos: 0
+    IsAttacking: 0
+    HpPercentage: 0
+    IsMapAttackAvaliable: 0
+    CurrentAttackPattern: {fileID: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 0}

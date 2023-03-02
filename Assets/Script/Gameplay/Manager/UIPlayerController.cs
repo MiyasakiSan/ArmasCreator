@@ -29,9 +29,23 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private UIItemBar itemBar;
 
+        [SerializeField]
+        private TextMeshProUGUI damageDealtText;
+
+        [SerializeField]
+        private Animator damageDealtAnim;
+
+        private Coroutine damageDealtCoroutine;
+
         private GameModeController gameModeController;
         private UserDataManager userDataManager;
         private GameplayController gameplayController;
+
+        [SerializeField]
+        private Camera cam;
+
+        [SerializeField]
+        private RectTransform rectTransform;
 
         private bool IsSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -54,6 +68,35 @@ namespace ArmasCreator.Gameplay.UI
             {
                 itemBar.Hide();
             }
+
+            damageDealtText.gameObject.SetActive(false);
+        }
+
+        public void ShowDamage(Vector3 contactPoint, float damage)
+        {
+            if (damageDealtCoroutine != null)
+            {
+                StopCoroutine(damageDealtCoroutine);
+                damageDealtCoroutine = null;
+            }
+
+            Vector3 screenPos = cam.WorldToScreenPoint(contactPoint);
+            var correctPoint = new Vector2(screenPos.x / Screen.width * rectTransform.sizeDelta.x, screenPos.y / Screen.height * rectTransform.sizeDelta.y);
+            damageDealtText.GetComponent<RectTransform>().anchoredPosition = screenPos;
+
+            damageDealtCoroutine = StartCoroutine(showDeltDamage(damage));
+        }
+
+        IEnumerator showDeltDamage(float damage)
+        {
+            damageDealtText.gameObject.SetActive(true);
+            damageDealtText.text = damage.ToString();
+            damageDealtAnim.SetTrigger("hit");
+
+            yield return new WaitForSeconds(0.75f);
+
+            damageDealtText.gameObject.SetActive(false);
+            damageDealtCoroutine = null;
         }
 
         public void Show()

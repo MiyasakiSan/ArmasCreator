@@ -71,6 +71,11 @@ namespace DitzelGames.FastIK
 
             var dot = Vector3.Dot(dir, Parent.forward);
 
+            if(Vector3.Distance(Target.position,Parent.position) < 4)
+            {
+                return;
+            }
+
             if (dot < Mathf.Cos(80))
             {
                 return;
