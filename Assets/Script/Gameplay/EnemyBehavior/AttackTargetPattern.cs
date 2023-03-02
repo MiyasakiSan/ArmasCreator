@@ -38,7 +38,7 @@ public class AttackTargetPattern : ActionNode
 
             if (attackCoroutine == null)
             {
-                attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackAnimaiton.length));
+                attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackDuration));
             }
         }
         else
@@ -83,6 +83,11 @@ public class AttackTargetPattern : ActionNode
         animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
 
         yield return new WaitForSeconds(length);
+
+        if (blackboard.CurrentAttackPattern.IsEnrageFinishMove)
+        {
+            blackboard.canUseEnrageFinishMove = false;
+        }
 
         blackboard.IsAttacking = false;
         enemyCombatManager.IsAttacking = false;

@@ -42,12 +42,24 @@ namespace ArmasCreator.Behavior
 
         [SerializeField]
         private bool isFollow;
-
         public bool IsFollow => isFollow;
+
+        [SerializeField]
+        private bool isEnrageFinishMove;
+        public bool IsEnrageFinishMove => isEnrageFinishMove;
+
+        [SerializeField]
+        private string hurtBoxName;
+        public string HurtBoxName => hurtBoxName;
 
         [SerializeField]
         private AnimationClip attackAnimaiton;
         public AnimationClip AttackAnimaiton => attackAnimaiton;
+
+        [SerializeField]
+        private float attackDuration;
+        public float AttackDuration => attackDuration;
+
     }
 }
 
