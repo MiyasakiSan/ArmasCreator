@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wind 1
-  m_Shader: {fileID: -6465566751694194690, guid: 401d020b81574864b9623d799ebc5e7a,
+  m_Shader: {fileID: -6465566751694194690, guid: d271dcb1e0e21824f8ff4ac4f4fe1201,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 2
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: e2604c84bf06f87498c9fff313c58280, type: 3}
+        m_Texture: {fileID: 2800000, guid: 71ff797844c6811499a182185ec1785b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,13 +42,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
-    - _AlphaClipValue: 0.5
+    - _AlphaClipValue: 0
     - _Blend: 2
     - _CastShadows: 0
-    - _CellDensity: 20
+    - _CellDensity: 0
     - _Cull: 0
     - _DstBlend: 1
-    - _NoiseScale: 30
+    - _NoiseScale: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -59,8 +59,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.14335813, g: 0.5982663, b: 0.31484184, a: 0}
-    - _WindSpeed: {r: 0.5, g: 0.1, b: 0, a: 0}
+    - _Color: {r: 341.78006, g: 0, b: 5.3681817, a: 0}
+    - _Vector2: {r: 0, g: 0, b: 0, a: 0}
+    - _WindSpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8526525429086437061
 MonoBehaviour:
