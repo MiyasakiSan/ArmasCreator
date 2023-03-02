@@ -5,20 +5,15 @@ using ArmasCreator.UserData;
 using ArmasCreator.Utilities;
 using UnityEngine;
 using ArmasCreator.GameMode;
+using ArmasCreator.Gameplay.UI;
+using ArmasCreator.UI;
 
 namespace ArmasCreator.Gameplay
 {
     public class UIQuestController : MonoBehaviour
     {
-        private float atkMultiplier;
-        private float speedMultiplier;
-        private float hpMultiplier;
-
         private GameplayController gameplayController;
         private UserDataManager userDataManager;
-
-        private string currentMapId;
-        private Dictionary<string, PresetInfo> presetInfos = new Dictionary<string, PresetInfo>();
 
         [SerializeField]
         private GameObject questCanvas;
@@ -29,105 +24,102 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private GameObject questVcam;
 
+        [SerializeField]
+        private Animator anim;
+
+        [SerializeField]
+        private Outline QuestBoardOutline;
+
+        [SerializeField]
+        private QuestPanelController questPanelController;
+
+        [SerializeField]
+        private UIRotateTowardPlayer interactUI;
+
         private GameDataManager gameDataManager;
+
 
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
-        }
 
-        void Start()
-        {
-
-        }
-
-        public void NewPreset(string MapId)
-        {
-
-        }
-
-        public void LoadPresets()
-        {
-
-        }
-
-        public void SavePresets(string MapId)
-        {
-
-        }
-
-        public void SetSelectedMap(string mapId)
-        {
-            currentMapId = mapId;
-        }
-
-        public void SetATKMultiplier(float value)
-        {
-            atkMultiplier = value;
-        }
-
-        public void SetSpeedMultiplier(float value)
-        {
-            speedMultiplier = value;
-        }
-
-        public void SetHpMultiplier(float value)
-        {
-            hpMultiplier = value;
-        }
-
-        public void StartChallengeQuest()
-        {
-            bool exist = gameDataManager.TryGetSelectedChallengeModeInfo(currentMapId, out ChallengeModeModel challengeModeInfo);
-
-            if (!exist)
-            {
-                Debug.LogError("Doesn't have challenge info for map ID :" + currentMapId);
-                return;
-            }
-
-            var initATK = challengeModeInfo.DefaultAtk * atkMultiplier;
-            var initHP = challengeModeInfo.DefaultHp * hpMultiplier;
-            var initSPD = challengeModeInfo.DefaultSpeed * speedMultiplier;
-
-            QuestInfo startQuestInfo = new QuestInfo(currentMapId, challengeModeInfo.SceneName, initATK, initSPD, initHP, challengeModeInfo.Duration);
-
-            gameplayController.EnterChallengeStage(startQuestInfo);
-
-            //TODO : do something
+            QuestBoardOutline.OutlineWidth = 0f;
         }
 
         public void ShowQuestCanvas()
         {
             questVcam.SetActive(true);
-
             questCanvas.SetActive(true);
-            playerCanvas.SetActive(false);
+            anim.SetTrigger("show");
 
-            //TODO : Wait some shit
+            StartCoroutine(ShowUIQuest());
         }
 
         public void HideQuestCanvas()
         {
             questVcam.SetActive(false);
+            questPanelController.DeselectAllBanner();
+            anim.SetTrigger("hidePreset");
+            anim.SetTrigger("hideAdjust");
+            anim.SetTrigger("hide");
 
-            questCanvas.SetActive(false);
+
+            StartCoroutine(HideUIQuest());
+        }
+
+        IEnumerator ShowUIQuest()
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            playerCanvas.SetActive(false);
+
+            gameplayController.Interacable = false;
+        }
+
+        IEnumerator HideUIQuest()
+        {
+            yield return new WaitForSeconds(2.7f);
+
             playerCanvas.SetActive(true);
+            questCanvas.SetActive(false);
+
+            gameplayController.Interacable = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            QuestBoardOutline.OutlineWidth = 4.5f;
+
+            interactUI.Show();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.gameObject.CompareTag("Player")) { return; }
+
+            QuestBoardOutline.OutlineWidth = 0f;
+
+            interactUI.Hide();
         }
 
         private void OnTriggerStay(Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) { return; }
 
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.T) && !questVcam.activeSelf)
             {
                 ShowQuestCanvas();
+                other.GetComponent<PlayerRpgMovement>().canMove = false;
+                other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
             }
-            else if(Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.Escape) && questVcam.activeSelf)
             {
                 HideQuestCanvas();
+                other.GetComponent<PlayerRpgMovement>().canMove = true;
             }
         }
     }

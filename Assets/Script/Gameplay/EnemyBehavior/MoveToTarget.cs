@@ -24,19 +24,19 @@ public class MoveToTarget : ActionNode
     protected override State OnUpdate() {
         if (context.agent.pathPending)
         {
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(true);
+            context.gameObject.GetComponent<enemyAnimController>().SetMoving(true);
             return State.Running;
         }
 
         if (context.agent.remainingDistance < tolerance)
         {
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            context.gameObject.GetComponent<enemyAnimController>().SetMoving(false);
             return State.Success;
         }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            context.gameObject.GetComponent<enemyAnimController>().MovingServerRpc(false);
+            context.gameObject.GetComponent<enemyAnimController>().SetMoving(false);
             return State.Failure;
         }
 

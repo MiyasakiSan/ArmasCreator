@@ -24,11 +24,14 @@ namespace ArmasCreator.Gameplay.UI
 
         private void Awake()
         {
-            bannerButton.onClick.AddListener(() =>
+            if (questPanelController != null)
             {
-                questPanelController.OnClickBanner();
-                OnSelectedBanner();
-            });
+                bannerButton.onClick.AddListener(() =>
+                {
+                    questPanelController.OnClickBanner();
+                    OnSelectedBanner();
+                });
+            }
         }
 
         public void SetMapId(string mapId)
@@ -39,7 +42,10 @@ namespace ArmasCreator.Gameplay.UI
         {
             selectedBorderGameObject.SetActive(true);
             bannerSlotCanvasGroup.alpha = 1;
-            BannerMapId?.Invoke(mapId);
+            if (!String.IsNullOrEmpty(mapId))
+            {
+                BannerMapId?.Invoke(mapId);
+            }
         }
 
         public void OnDeselectedBanner()
@@ -50,11 +56,14 @@ namespace ArmasCreator.Gameplay.UI
 
         private void OnDestroy()
         {
-            bannerButton.onClick.RemoveListener(() =>
+            if (questPanelController != null)
             {
-                questPanelController.OnClickBanner();
-                OnSelectedBanner();
-            });
+                bannerButton.onClick.RemoveListener(() =>
+                {
+                    questPanelController.OnClickBanner();
+                    OnSelectedBanner();
+                });
+            }
         }
     }
 }

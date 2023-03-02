@@ -14,7 +14,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -46,16 +46,18 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_018b2d1cb9114537bf4c75e11ddd67c1: 0
-    - Vector1_08092c00160d4686bc8156b42fa5b9c1: 10
-    - Vector1_1b8c853eb5a24e3197cf280d3cd25593: 2
-    - Vector1_2976f202f03f410cba1459cc471bbf44: 0
-    - Vector1_66ff11d1abee40349fd3a9e5f0b6cf47: 0.35
+    - Vector1_08092c00160d4686bc8156b42fa5b9c1: 5
+    - Vector1_1b8c853eb5a24e3197cf280d3cd25593: 0.2
+    - Vector1_2976f202f03f410cba1459cc471bbf44: 0.2
+    - Vector1_66ff11d1abee40349fd3a9e5f0b6cf47: 0.45
     - _AlphaClip: 1
+    - _AlphaValue: 1
     - _Blend: 3
+    - _Bool: 0
     - _CastShadows: 0
     - _Cull: 2
     - _DstBlend: 0
-    - _Fill: 0.6
+    - _Fill: 0.05
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 2
@@ -64,9 +66,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - Color_5f9770ff449146ba8683fb114d679107: {r: 0.103773594, g: 0.07940747, b: 0.070879325,
+    - Color_5f9770ff449146ba8683fb114d679107: {r: 0.11320752, g: 0.11320752, b: 0.21176471,
         a: 0}
-    - Vector2_334ddf00d34747f0b0ef6cd1d19cf452: {r: 2, g: 2, b: 0, a: 0}
+    - Vector2_334ddf00d34747f0b0ef6cd1d19cf452: {r: 80, g: 80, b: 0, a: 0}
     - Vector4_2e54fd86f9164805a1667f30a1608597: {r: 0, g: 0, b: 0, a: 0}
     - Vector4_8880f02a4786432ab8296be9b00a0f3d: {r: 0, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using ArmasCreator.LocalFile;
 using UnityEngine;
 using ArmasCreator.Gameplay;
+using ArmasCreator.GameData;
+using ArmasCreator.Utilities;
 
 namespace ArmasCreator.UserData
 {
@@ -15,16 +17,16 @@ namespace ArmasCreator.UserData
         private string userID;
         public string UserID => userID;
 
+        private float coins;
+        public float Coins => coins;
+
         private UserSaveDataModel saveModel;
 
         //private UserDataGameSettingModel userDataGameSetting;
         //public UserDataGameSettingModel UserDataGameSetting => userDataGameSetting;
 
-        //private UserDataGameProgressionModel userDataGameProgression;
-        //public UserDataGameProgressionModel UserDataGameProgression => userDataGameProgression;
-
-        //private UserDataInventoryModel userDataInventory;
-        //public UserDataInventoryModel UserDataInventory => userDataInventory;
+        private UserDataProgressionModel userDataProgression;
+        public UserDataProgressionModel UserDataProgression => userDataProgression;
 
         private UserDataQuestPresetModel userDataQuestPreset;
         public UserDataQuestPresetModel UserDataQuestPreset => userDataQuestPreset;
@@ -37,14 +39,17 @@ namespace ArmasCreator.UserData
         public void Init(UserDataManager userDataManager)
         {
             //userDataGameSetting = new UserDataGameSettingModel();
-            //userDataGameProgression = new UserDataGameProgressionModel();
-            //userDataGameProgression.Init(userDataManager);
+            userDataProgression = new UserDataProgressionModel();
+            userDataProgression.Init(userDataManager);
 
             userDataInventory = new UserDataInventoryModel();
-            userDataInventory.Init(this);
+            userDataInventory.Init(userDataManager);
 
             userDataQuestPreset = new UserDataQuestPresetModel();
-            userDataQuestPreset.Init(this);
+            userDataQuestPreset.Init(userDataManager);
+
+            userDataProgression = new UserDataProgressionModel();
+            userDataProgression.Init(userDataManager);
 
             LoadUserDataFromLocalData();
         }
@@ -109,9 +114,11 @@ namespace ArmasCreator.UserData
 
             userID = saveModel.UserId;
             PlayerPrefs.SetString("PName", userID);
+            coins = saveModel.Coins;
 
             userDataQuestPreset.SetupUserQuestPrest(saveModel);
             userDataInventory.SetupUserInventory(saveModel);
+            userDataProgression.SetupUserProgression(saveModel);
         }
 
         public void SaveUserDataToLocal()
@@ -130,12 +137,23 @@ namespace ArmasCreator.UserData
 
         public void SetUserID(string name)
         {
+            GameDataManager gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+
             userID = name;
             saveModel = new UserSaveDataModel();
             saveModel.UserId = name;
             saveModel.AllSavePresets = new List<UserSavePresetModel>();
-            saveModel.ConsumableItems = new Dictionary<string, int>();
-            saveModel.EquipableItems = new Dictionary<string, bool>();
+            saveModel.ConsumableItems = gameDataManager.GetAllInitConsumeItems();
+            saveModel.EquipableItems = gameDataManager.GetAllInitEquipItems();
+            saveModel.CraftableItems = new Dictionary<string, int>();
+            saveModel.Achievements = gameDataManager.GetAllInitAchievements();
+            saveModel.recipes = new List<string>();
+            saveModel.AllQuest = new Dictionary<QuestType, CurrentQuestModel>();
+
+            saveModel.AllQuest.Add(QuestType.Main, new CurrentQuestModel());
+            saveModel.AllQuest.Add(QuestType.Side, new CurrentQuestModel());
+
+            SetupUserData();
 
             PlayerPrefs.SetString("PName", name);
         }
@@ -171,6 +189,40 @@ namespace ArmasCreator.UserData
             var savePreset = saveModel.AllSavePresets.Find(x => x.MapId == mapId);
             savePreset.Presets.Sort(userDataQuestPreset.SortByPresetId);
 
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateSaveInventory(Dictionary<string, int> consumableDict, 
+                                        Dictionary<SubType, EquipmentModel> equipableDict, 
+                                        List<string> recipes, 
+                                        Dictionary<string, int> craftableDict)
+        {
+            saveModel.ConsumableItems = consumableDict;
+            saveModel.EquipableItems = equipableDict;
+            saveModel.recipes = recipes;
+            saveModel.CraftableItems = craftableDict;
+
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateSaveAchievement(string achievementId, int progress)
+        {
+            saveModel.Achievements[achievementId] = progress;
+
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateCoin(float currentCoin)
+        {
+            coins = currentCoin;
+
+            saveModel.Coins = (int)coins;
+            SaveUserDataToLocal();
+        }
+
+        public void UpdateAllQuest(Dictionary<QuestType, CurrentQuestModel> AllQuest)
+        {
+            saveModel.AllQuest = AllQuest;
             SaveUserDataToLocal();
         }
     }

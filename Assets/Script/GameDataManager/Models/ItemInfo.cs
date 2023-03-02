@@ -6,13 +6,15 @@ using UnityEngine;
 
 namespace ArmasCreator.GameData
 {
-    public enum itemType
+    public enum ItemType
     {
         Consumable,
         Equipable,
+        Craftable,
+        Recipe
     }
 
-    public enum subType
+    public enum SubType
     {
         None,
         Weapon,
@@ -22,7 +24,9 @@ namespace ArmasCreator.GameData
         Pant,
         Shoes,
         Stamina,
-        Health
+        Health,
+        Lion,
+        Shrimp
     }
 
     [Serializable]
@@ -31,16 +35,19 @@ namespace ArmasCreator.GameData
         [JsonProperty("id")]
         public string ID;
 
+        [JsonProperty("name")]
+        public string Name;
+
         [JsonProperty("item_type")]
-        public itemType Type;
+        public ItemType Type;
 
         [JsonProperty("sub_type")]
-        public subType SubType;
+        public SubType SubType;
 
         [JsonProperty("sell_price")]
         public float SellPrice;
 
-        [JsonProperty("buy_price")]
+        [JsonProperty("buy_value")]
         public float BuyPrice;
 
         [JsonProperty("asset")]
@@ -74,6 +81,15 @@ namespace ArmasCreator.GameData
 
         [JsonProperty("crit")]
         public float CRT;
+    }
+
+    [Serializable]
+    public class RecipeModel : ItemInfoModel
+    {
+        [JsonProperty("recipe")]
+        public Dictionary<string, int> Recipe;
+        [JsonProperty("craft_item_id")]
+        public string Craft_item_id;
     }
 
 }

@@ -54,6 +54,40 @@
             "duration" : 1800
         }
     },
+    "achievement_config" :
+    {
+        "am_01" : 
+        {
+            "id" : "am_01",
+            "header" : "Complete Ciladae Roca in Normal ",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet_recipe" : 1,
+		"ciladae_shirt_recipe" : 1
+            }
+        },
+        "am_02" : 
+        {
+            "id" : "am_02",
+            "header" : "Complete Ciladae Roca in Challenge I ",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet_recipe" : 1
+            }
+        },
+        "am_03" : 
+        {
+            "id" : "am_03",
+            "header" : "Complete Ciladae Roca in Challenge II ",
+            "progress" : 8,
+            "rewards" : 
+            {
+                "ciladae_helmet_recipe" : 1
+            }
+        }
+    },
     "game_info" :
     {
         "result_time_rating" :
@@ -80,6 +114,7 @@
         "bandage": 
         {
             "id": "bandage",
+            "name" : "Bandage",
             "item_type": "Consumable",
             "sub_type": "Health",
             "sell_price": 75,
@@ -92,6 +127,7 @@
         "medicine": 
         {
             "id": "medicine",
+            "name" : "Medicine",
             "item_type": "Consumable",
             "sub_type": "Health",
             "sell_price": 150,
@@ -104,6 +140,7 @@
         "first_aid": 
         {
             "id": "first_aid",
+            "name" : "First Aid",
             "item_type": "Consumable",
             "sub_type": "Health",
             "sell_price": 350,
@@ -116,6 +153,7 @@
         "cola_drink": 
         {
             "id": "cola_drink",
+            "name" : "Cola Drink",
             "item_type": "Consumable",
             "sub_type": "Stamina",
             "sell_price": 100,
@@ -128,6 +166,7 @@
         "energy_drink": 
         {
             "id": "energy_drink",
+            "name" : "Energy Drink",
             "item_type": "Consumable",
             "sub_type": "Stamina",
             "sell_price": 200,
@@ -140,6 +179,7 @@
         "adrenaline": 
         {
             "id": "adrenaline",
+            "name" : "Adrenaline",
             "item_type": "Consumable",
             "sub_type": "Stamina",
             "sell_price": 400,
@@ -155,6 +195,7 @@
         "init_helmet": 
         {
             "id": "init_helmet",
+            "name" : "Gas Mask",
             "item_type": "Equipable",
             "sub_type": "Helmet",
             "sell_price": 0,
@@ -170,6 +211,7 @@
         "init_shirt": 
         {
             "id": "init_shirt",
+            "name" : "Cotton Shirt",
             "item_type": "Equipable",
             "sub_type": "Shirt",
             "sell_price": 0,
@@ -185,6 +227,7 @@
         "init_glove": 
         {
             "id": "init_glove",
+            "name" : "Leather Gloves",
             "item_type": "Equipable",
             "sub_type": "Glove",
             "sell_price": 0,
@@ -200,6 +243,7 @@
         "init_pant": 
         {
             "id": "init_pant",
+            "name" : "Leather Pant",
             "item_type": "Equipable",
             "sub_type": "Pant",
             "sell_price": 0,
@@ -215,6 +259,7 @@
         "init_shoes": 
         {
             "id": "init_shoes",
+            "name" : "Hide Boots",
             "item_type": "Equipable",
             "sub_type": "Shoes",
             "sell_price": 0,
@@ -230,6 +275,7 @@
         "init_gunblade": 
         {
             "id": "init_gunblade",
+            "name" : "Steel Gunblade",
             "item_type": "Equipable",
             "sub_type": "Weapon",
             "sell_price": 0,
@@ -241,6 +287,460 @@
             "def": 0,
             "vit": 0,
             "crit": 10.0
+        },
+	    "ciladae_gunblade": 
+        {
+            "id": "ciladae_gunblade",
+            "name" : "Ciladea Gunblade",
+            "item_type": "Equipable",
+            "sub_type": "Weapon",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_gunblade",
+            "icon": "init_gunblade",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 0,
+            "vit": 0,
+            "crit": 10.0
+        },"ciladae_helmet": 
+        {
+            "id": "ciladae_helmet",
+            "name" : "Ciladae Helmet",
+            "item_type": "Equipable",
+            "sub_type": "Helmet",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_helmet",
+            "icon": "init_helmet_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "ciladae_shirt": 
+        {
+            "id": "ciladae_shirt",
+            "name" : "Ciladae Shirt",
+            "item_type": "Equipable",
+            "sub_type": "Shirt",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_shirt",
+            "icon": "init_shirt_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 10.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "ciladae_glove": 
+        {
+            "id": "ciladae_glove",
+            "name" : "Ciladae Gloves",
+            "item_type": "Equipable",
+            "sub_type": "Glove",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_glove",
+            "icon": "init_glove_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 10.0,
+            "def": 2.0,
+            "vit": 20.0,
+            "crit": 5.0
+        },
+        "ciladae_pant": 
+        {
+            "id": "ciladae_pant",
+            "name" : "Ciladae Pant",
+            "item_type": "Equipable",
+            "sub_type": "Pant",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_pant",
+            "icon": "init_pant_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "ciladae_shoes": 
+        {
+            "id": "ciladae_shoes",
+            "name" : "Ciladae Boots",
+            "item_type": "Equipable",
+            "sub_type": "Shoes",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "init_shoes",
+            "icon": "init_shoes_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        }
+    },
+    "monster_parts" :
+    {
+        "spike_horn": 
+        {
+            "id": "spike_horn",
+            "name" : "Spike Horn",
+            "item_type": "Craftable",
+            "sub_type": "Lion",
+            "sell_price": 75,
+            "buy_value": 100,
+            "asset": "spike_horn",
+            "icon": "spike_horn_icon",
+            "atlas_icon": "AtlasCraftableItemIcons"
+        }
+    },
+    "recipes" :
+    {
+        "ciladae_gunblade_recipe": 
+        {
+            "id": "ciladae_gunblade_recipe",
+            "name" : "Cliadae Gunblade Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 1000,
+            "asset": "ciladae_gunblade_recipe",
+            "icon": "ciladae_gunblade_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            },
+            "craft_item_id": "ciladae_gunblade"
+        },
+	    "ciladae_helmet_recipe": 
+        {
+            "id": "ciladae_helmet_recipe",
+            "name" : "Cliadae Helmet Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 500,
+            "asset": "ciladae_helmet_recipe",
+            "icon": "ciladae_helmet_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            },
+            "craft_item_id": "ciladae_helmet"
+        },
+	    "ciladae_shirt_recipe": 
+        {
+            "id": "ciladae_shirt_recipe",
+            "name" : "Cliadae Shirt Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 500,
+            "asset": "ciladae_shirt_recipe",
+            "icon": "ciladae_shirt_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            },
+            "craft_item_id": "ciladae_shirt"
+        },
+	    "ciladae_glove_recipe": 
+        {
+            "id": "ciladae_glove_recipe",
+            "name" : "Cliadae Glove Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 500,
+            "asset": "ciladae_glove_recipe",
+            "icon": "ciladae_glove_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            },
+            "craft_item_id": "ciladae_glove"
+        },
+	    "ciladae_pant_recipe": 
+        {
+            "id": "ciladae_pant_recipe",
+            "name" : "Cliadae Pant Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 500,
+            "asset": "ciladae_pant_recipe",
+            "icon": "ciladae_pant_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            },
+            "craft_item_id": "ciladae_pant"
+        },
+	    "ciladae_shoes_recipe": 
+        {
+            "id": "ciladae_shoes_recipe",
+            "name" : "Cliadae Shoes Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Lion",
+            "sell_price": 0,
+            "buy_value": 500,
+            "asset": "ciladae_shoes_recipe",
+            "icon": "ciladae_shoes_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn": 5
+            },
+            "craft_item_id": "ciladae_shoes"
+        }
+    },
+    "init_equip_items" : 
+    [
+        "init_helmet","init_shirt","init_glove","init_pant","init_shoes","init_gunblade"
+    ],
+    "init_consume_items" :
+    [
+        "bandage","cola_drink"
+    ],
+    "character_config" :
+    {
+        "main":
+        {
+            "id" : "main",
+            "name" : "",
+            "asset" : "main",
+            "icon" : "main",
+            "atlas_icon" : "AtlasCharacterIcon"
+        },
+        "kotaro":
+        {
+            "id" : "kotaro",
+            "name" : "kotaro",
+            "asset" : "kotaro",
+            "icon" : "kotaro",
+            "atlas_icon" : "AtlasCharacterIcon"
+        }
+    },
+    "dialogue_config":
+    {
+        "test_start" :
+        {
+            "id" : "test_start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : "hell oo . oooo  My name is Kotaroo oo "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "how are youuu  today   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "hello Kotaro my name is {0}"
+                }
+            ]
+        },
+        "test_end" :
+        {
+            "id" : "test_end",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : "bye . Kotaroo oo "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "how are youuu  today   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "see you Kotaro "
+                }
+            ]
+        },
+        "tr-00-start" :
+        {
+            "id" : "tr-00-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " W A S D "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "Press it   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-00-end" :
+        {
+            "id" : "tr-00-end",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " That right"
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "yeah  "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-01-start" :
+        {
+            "id" : "tr-01-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " ESC "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "Press it   "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-01-end" :
+        {
+            "id" : "tr-01-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " nice "
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : " good job  "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        }
+    },
+    "conversation_quest_config" :
+    {
+        "tr-00":
+        {
+            "id" : "tr-00",
+            "name" : "Tutorial I",
+            "description" : "basic movement",
+            "type" : "Main",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "previous_quest_id": [],
+            "next_quest_id": "tr-01",
+            "start_dialogue_id" : "tr-00-start",
+            "end_dialogue_id" : "tr-00-end",
+            "npc_id" : "oof"
+        },
+        "tr-01":
+        {
+            "id" : "tr-01",
+            "name" : "Tutorial II",
+            "description" : "basic inventory",
+            "type" : "Main",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "previous_quest_id": [],
+            "next_quest_id": "",
+            "start_dialogue_id" : "tr-01-start",
+            "end_dialogue_id" : "tr-01-end",
+            "npc_id" : "joe"
+        },
+        "tr-02":
+        {
+            "id" : "tr-02",
+            "name" : "Tutorial III",
+            "description" : "basic inventory",
+            "type" : "Main",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "bandage" : 5
+            },
+            "previous_quest_id": ["tr-01"],
+            "next_quest_id": "",
+            "start_dialogue_id" : "tr-01-start",
+            "end_dialogue_id" : "tr-01-end",
+            "npc_id" : "joe"
+        },
+        "tr-03":
+        {
+            "id" : "tr-03",
+            "name" : "Tutorial IV",
+            "description" : "basic inventory",
+            "type" : "Side",
+            "sub_type" : "Conversation",
+            "rewards" : 
+            {
+                "medicine" : 5
+            },
+            "previous_quest_id": [],
+            "next_quest_id": "",
+            "start_dialogue_id" : "tr-01-start",
+            "end_dialogue_id" : "tr-01-end",
+            "npc_id" : "joe"
         }
     }
 }

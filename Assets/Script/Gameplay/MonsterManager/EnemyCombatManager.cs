@@ -3,15 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using ArmasCreator.Behavior;
+using ArmasCreator.Gameplay;
+using ArmasCreator.Utilities;
+using TheKiwiCoder;
+
 public class EnemyCombatManager : NetworkBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float damage;
-    [SerializeField] enemyAnimController enemyAnim;
+    [SerializeField] 
+    private float damage;
+
+    [SerializeField] 
+    enemyAnimController enemyAnim;
+
     [SerializeField]
-    private List<EnemyBoxCollider> enemyBoxColliderList;
+    private EnemyStat enemyStat;
+
+    [SerializeField]
+    private List<EnemyBoxCollider> hitBoxColliderList;
+
+    [SerializeField]
+    private List<EnemyBoxCollider> hurtBoxColliderList;
 
     public List<AttackPattern> AllAttackPattern;
+
+    private GameplayController gameplayController;
+
+    public bool IsAttacking;
+
+    public AttackPattern currentAttackPattern;
 
     void Start()
     {
@@ -24,20 +44,31 @@ public class EnemyCombatManager : NetworkBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
-        if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
-        }
-    }
+
+    //TODO : Obsolete
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
+
+    //    if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
+    //    }
+    //}
     
     private void Init()
     {
-        if(enemyBoxColliderList.Count <= 0) { return; }
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
 
-        foreach(EnemyBoxCollider enemyBoxCollider in enemyBoxColliderList)
+        if (hitBoxColliderList.Count <= 0) { return; }
+
+        foreach(EnemyBoxCollider enemyBoxCollider in hitBoxColliderList)
+        {
+            enemyBoxCollider.onTriggerEnter.AddListener(OnHitBoxTriggerEnter);
+        }
+
+        foreach (EnemyBoxCollider enemyBoxCollider in hurtBoxColliderList)
         {
             enemyBoxCollider.onTriggerEnter.AddListener(OnHurtBoxTriggerEnter);
         }
@@ -60,24 +91,44 @@ public class EnemyCombatManager : NetworkBehaviour
                 Gizmos.color = Color.green;
             }
 
-            GizmosExtensions.DrawWireArc(transform.position, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
+            var pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+            GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
         }
     }
 
-    private void OnHurtBoxTriggerEnter(Collider col,GameObject gameObject)
+    private void OnHitBoxTriggerEnter(Collider col,GameObject gameObject)
     {
         if (!col.CompareTag("Weapon")) { return;  }
 
-        Debug.LogError($"กูเจ็บ ตรง {gameObject} เพราะ โดน {col.gameObject.name}");
+        Debug.Log($"กูเจ็บ ตรง {gameObject} เพราะ โดน {col.gameObject.name}");
+
+        float damage = col.GetComponent<Weapon>().weaponDamage;
+
+        enemyStat.receiveAttack(damage);
+
+        gameplayController.UpdatePlayerDamageDelt(damage);
+    }
+
+    private void OnHurtBoxTriggerEnter(Collider col, GameObject gameObject)
+    {
+        if (!col.CompareTag("Player")) { return; }
+
+        if (!IsAttacking) { return; }
+
+        if (currentAttackPattern == null) { return; }
+
+        Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
+
+        col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage);
     }
 
     private void OnDestroy()
     {
-        if (enemyBoxColliderList.Count <= 0) { return; }
+        if (hitBoxColliderList.Count <= 0) { return; }
 
-        foreach (EnemyBoxCollider enemyBoxCollider in enemyBoxColliderList)
+        foreach (EnemyBoxCollider enemyBoxCollider in hitBoxColliderList)
         {
-            enemyBoxCollider.onTriggerEnter.RemoveListener(OnHurtBoxTriggerEnter);
+            enemyBoxCollider.onTriggerEnter.RemoveListener(OnHitBoxTriggerEnter);
         }
     }
 }

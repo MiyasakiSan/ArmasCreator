@@ -11,7 +11,8 @@ public class InitBoss : ActionNode
     protected override void OnStop() {
     }
 
-    protected override State OnUpdate() {
+    protected override State OnUpdate() 
+    {
         return State.Success;
     }
 }

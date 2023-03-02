@@ -11,15 +11,15 @@ using ArmasCreator.Utilities;
 public class PlayerRpgMovement : NetworkBehaviour
 {
     //private weapon weaponHeld      Inprogress**
-    [SerializeField]
-    private CharacterController controller;
     public MovementAnim animController;
 
     [Header("Walk State Setting")]
     [Range(0f, 10f)]
     public float movementSpeed;
-    [Range(100f, 1000f)]
+    [Range(1f, 1000f)]
     public float speedMultiplier;
+
+    private float defaultSpeedMultiplier;
 
     [Header("Run State Setting")]
     [Range(0f, 10f)]
@@ -43,25 +43,38 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     [Header("Battle setting")]
     public bool isBattle;
+    private CombatRpgManager combatManager;
 
     [SerializeField]
     private CinemachineFreeLook Vcam;
+
     [SerializeField]
     private Transform mainCam;
+
     public bool canMove;
+    public bool canWalk;
+    public bool canRun;
+
     private Rigidbody rb;
+
+    private bool isMovingForward;
+    private Coroutine MoveForwardCoroutine;
 
     [Header("Float Collider")]
     [SerializeField]
     private LayerMask groundLayer;
     public float distanceToGround;
 
+    public bool CanRotate;
+
     public enum movementState
     {
-        idle,walk,run
+        idle,walk,run,roll
     }
 
     public movementState currentMovementState;
+
+    private Coroutine dodgeCoroutine;
 
     private GameModeController gameModeController;
 
@@ -74,10 +87,14 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     void Start()
     {
-        if(isSinglePlayer) 
+        defaultSpeedMultiplier = speedMultiplier;
+
+        if (isSinglePlayer) 
         {
             rb = this.GetComponent<Rigidbody>();
+            combatManager = this.GetComponent<CombatRpgManager>();
             animController = this.GetComponent<MovementAnim>();
+            animController.Init(this);
 
             currentMovementState = movementState.idle;
 
@@ -112,8 +129,11 @@ public class PlayerRpgMovement : NetworkBehaviour
         if (IsLocalPlayer || isSinglePlayer)
         {
             floatCollider();
+
             if (!canMove) return;
+
             Movement();
+
             if(mainCam == null)
             {
                 mainCam = Camera.main.transform;
@@ -124,6 +144,87 @@ public class PlayerRpgMovement : NetworkBehaviour
             }
         }
     }
+
+    public void SetSpeedMultiplierOnUsingItem()
+    {
+        speedMultiplier *= 0.5f;
+        animController.playerAnim.SetFloat("speedMultiplier", 0.5f);
+    }
+
+    public void ResetSpeedMultiplierOnUsingItem()
+    {
+        speedMultiplier = defaultSpeedMultiplier;
+        animController.playerAnim.SetFloat("speedMultiplier", 1f);
+    }
+
+    public void SetCanRotate()
+    {
+        CanRotate = false;
+    }
+
+    public void ResetRotate()
+    {
+        CanRotate = true;
+    }
+
+    public void ResetAnimBoolean()
+    {
+        animController.ResetAnimBoolean();
+    }
+
+    public void MoveForward(float speed)
+    {
+        isMovingForward = true;
+
+        if(MoveForwardCoroutine != null)
+        {
+            StopMoveForward();
+        }
+
+        MoveForwardCoroutine = StartCoroutine(MovingForwardCoroutine(speed));
+    }
+
+    IEnumerator MovingForwardCoroutine(float speed)
+    {
+        while (isMovingForward )
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            float inputMultiplier = 1;
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            if (direction.magnitude <= 0)
+            {
+                inputMultiplier = 0;
+            }
+
+            rb.AddForce(transform.forward * speed * inputMultiplier * speedMultiplier * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    public void StopMoveForward()
+    {
+        if(MoveForwardCoroutine != null)
+        {
+            StopCoroutine(MoveForwardCoroutine);
+
+            MoveForwardCoroutine = null;
+        }
+
+        rb.velocity = Vector3.zero;
+    }
+
+    public void StopMoveForwardNotResetVelo()
+    {
+        if (MoveForwardCoroutine != null)
+        {
+            StopCoroutine(MoveForwardCoroutine);
+
+            MoveForwardCoroutine = null;
+        }
+    }
+
     private void Movement()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -140,31 +241,14 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             case movementState.walk:
                 walkToDirection(direction);
-
-                if (isSinglePlayer)
-                {
-                    animController.AnimationState(currentMovementState.ToString());
-                }
-                else
-                {
-                    animController.AnimationStateServerRpc(currentMovementState.ToString());
-                }
-
                 break;
 
             case movementState.run:
                 runToDirection(direction);
-                ReduceStaminaOnRun();
+                break;
 
-                if (isSinglePlayer)
-                {
-                    animController.AnimationState(currentMovementState.ToString());
-                }
-                else
-                {
-                    animController.AnimationStateServerRpc(currentMovementState.ToString());
-                }
-
+            case movementState.roll:
+                rollToDirection(direction);
                 break;
 
             case movementState.idle:
@@ -183,13 +267,14 @@ public class PlayerRpgMovement : NetworkBehaviour
     }
     private movementState CheckMovementState(Vector3 direction)
     {
-        bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge");
+        bool canDodge = !animController.currentAnimatorStateBaseIsName("Dodge") &&
+                        !animController.currentAnimatorCombatStateInfoIsName("Dodge");
 
         if (direction.magnitude < 0.1f) { return movementState.idle; }
 
-        if (Input.GetKeyUp(KeyCode.Space)&&haveStamina(dodgestaminaUse)&&canDodge)
+        if (Input.GetKeyUp(KeyCode.Space) && haveStamina(dodgestaminaUse) || isDodging)
         {
-            StartCoroutine(Dodge());
+            return movementState.roll;
         }
 
         if (Input.GetKey(KeyCode.LeftShift)) { return movementState.run; }
@@ -200,29 +285,49 @@ public class PlayerRpgMovement : NetworkBehaviour
         PlayerStat playerStat = GetComponent<PlayerStat>();
         return playerStat.CurrentStamina - dodgeStaminaUse >= 0;
     }
+
     IEnumerator Dodge()
     {
-        if (isSinglePlayer)
+        if (isDodging)
         {
-            animController.Dodge();
-        }
-        else
-        {
-            animController.DodgeServerRpc();
+            yield break;
         }
 
         isDodging = true;
+
+        animController.Dodge();
+
         float timer = 0;
-        reduceStaminaOnDodge(10f);
-        while(timer < dodgeTimer)
+        reduceStaminaOnDodge(dodgestaminaUse);
+
+        if (combatManager.isUsingItem)
         {
+            combatManager.CancelUseItem();
+        }
+
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        while (timer < dodgeTimer)
+        {
+            StopMoveForwardNotResetVelo();
+
             float speed = dodgeCurve.Evaluate(timer);
-            Vector3 dir = (transform.forward * speed) + (Vector3.up * speed/3);
+
+            Vector3 direction = new Vector3(horizontal, 0f, vertical);
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
+
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            Vector3 dir = transform.forward * speed;
             rb.AddForce(dir *dodgeForce* Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
         }
+
+        animController.StopDodge();
         isDodging = false;
+        dodgeCoroutine = null;
     }
     private void reduceStaminaOnDodge(float amount)
     {
@@ -233,20 +338,72 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
+        if (CanRotate)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        if (canWalk)
+        {
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
+
+            if (isSinglePlayer)
+            {
+                animController.AnimationState(currentMovementState.ToString());
+            }
+            else
+            {
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
+            }
+        }
+    }
+
+    private void rollToDirection(Vector3 direction)
+    {
+        combatManager.ResetAnimBoolean();
+
+        if (dodgeCoroutine != null)
+        {
+            return;
+        }
+
+        dodgeCoroutine = StartCoroutine(Dodge());
     }
 
     private void runToDirection(Vector3 direction)
     {
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCam.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        rb.AddForce(moveDir.normalized * movementSpeed_Run * speedMultiplier * Time.deltaTime);
+        if (CanRotate)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        if (canRun)
+        {
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.AddForce(moveDir.normalized * movementSpeed_Run * speedMultiplier * Time.deltaTime);
+            ReduceStaminaOnRun();
+
+            if (isSinglePlayer)
+            {
+                animController.AnimationState(currentMovementState.ToString());
+            }
+            else
+            {
+                animController.AnimationStateServerRpc(currentMovementState.ToString());
+            }
+        }
+        else
+        {
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.AddForce(moveDir.normalized * movementSpeed * speedMultiplier * Time.deltaTime);
+
+            animController.AnimationState(movementState.walk.ToString());
+        }
     }
     private void IsStopRunning()
     {
