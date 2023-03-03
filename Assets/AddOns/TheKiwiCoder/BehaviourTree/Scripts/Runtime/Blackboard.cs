@@ -19,7 +19,9 @@ namespace TheKiwiCoder {
         public bool IsDead;
         public bool IsStun;
         public bool IsEnrage;
+        public bool IsUseEnrageMode;
         public bool IsPlayerEnterStage;
+        public bool canUseEnrageFinishMove;
         public bool IsRunToAttackPos;
         public bool IsAttacking;
 

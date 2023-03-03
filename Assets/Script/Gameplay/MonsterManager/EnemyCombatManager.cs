@@ -6,6 +6,8 @@ using ArmasCreator.Behavior;
 using ArmasCreator.Gameplay;
 using ArmasCreator.Utilities;
 using TheKiwiCoder;
+using ArmasCreator.Gameplay.UI;
+using UnityEditor;
 
 public class EnemyCombatManager : NetworkBehaviour
 {
@@ -29,6 +31,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
     private GameplayController gameplayController;
 
+    private UIPlayerController uIPlayerController;
+
     public bool IsAttacking;
 
     public AttackPattern currentAttackPattern;
@@ -43,23 +47,12 @@ public class EnemyCombatManager : NetworkBehaviour
     {
         
     }
-
-
-    //TODO : Obsolete
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (!enemyAnim.currentAnimatorStateBaseIsName("attack")) { return; }
-
-    //    if (collision.gameObject.GetComponent<AttackTarget>() && !collision.gameObject.CompareTag("Enemy"))
-    //    {
-    //        collision.gameObject.GetComponent<AttackTarget>().receiveAttack(damage);
-    //    }
-    //}
     
     private void Init()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        uIPlayerController = SharedContext.Instance.Get<UIPlayerController>();
 
         if (hitBoxColliderList.Count <= 0) { return; }
 
@@ -78,11 +71,11 @@ public class EnemyCombatManager : NetworkBehaviour
     {
         foreach (var attackPattern in AllAttackPattern)
         {
-            if(attackPattern.ActiveDistance >= 30)
+            if(attackPattern.ActiveDistance >= 15)
             {
                 Gizmos.color = Color.red;
             }
-            else if(attackPattern.ActiveDistance >= 15)
+            else if(attackPattern.ActiveDistance >= 8)
             {
                 Gizmos.color = Color.yellow;
             }
@@ -91,8 +84,11 @@ public class EnemyCombatManager : NetworkBehaviour
                 Gizmos.color = Color.green;
             }
 
+            Handles.Label(transform.position + Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection * attackPattern.ActiveDistance/2 + Vector3.up * 5, attackPattern.name);
+
             var pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.ActiveDistance);
+            GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.MinActiveDistance);
         }
     }
 
@@ -106,6 +102,16 @@ public class EnemyCombatManager : NetworkBehaviour
 
         enemyStat.receiveAttack(damage);
 
+        //var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
+
+        Vector3 contactPoint;
+
+        //contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
+
+        contactPoint = gameObject.transform.position;
+
+        uIPlayerController.ShowDamage(contactPoint, damage);
+
         gameplayController.UpdatePlayerDamageDelt(damage);
     }
 
@@ -116,6 +122,8 @@ public class EnemyCombatManager : NetworkBehaviour
         if (!IsAttacking) { return; }
 
         if (currentAttackPattern == null) { return; }
+
+        if (currentAttackPattern.HurtBoxName != gameObject.name) { return; }
 
         Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
 

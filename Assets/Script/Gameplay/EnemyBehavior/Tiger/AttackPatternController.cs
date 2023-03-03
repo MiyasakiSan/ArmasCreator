@@ -84,6 +84,11 @@ namespace ArmasCreator.Behavior
             {
                 currentAttackPattern = null;
             }
+
+            if (blackboard.canUseEnrageFinishMove)
+            {
+                currentAttackPattern = allAttackPatternContainer.Find(x => x.AttackPattern.IsEnrageFinishMove).AttackPattern;
+            }
         }
 
         private void GetAvaliableAttackPattern( out List<AttackPattern> avaliableAttackPattern)
@@ -105,6 +110,16 @@ namespace ArmasCreator.Behavior
                 }
 
                 if (distance > attackPatternContainer.AttackPattern.ActiveDistance )
+                {
+                    continue;
+                }
+
+                if (distance < attackPatternContainer.AttackPattern.MinActiveDistance)
+                {
+                    continue;
+                }
+
+                if (!blackboard.canUseEnrageFinishMove && attackPatternContainer.AttackPattern.IsEnrageFinishMove)
                 {
                     continue;
                 }

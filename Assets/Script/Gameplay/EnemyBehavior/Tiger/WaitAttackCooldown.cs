@@ -43,6 +43,17 @@ public class WaitAttackCooldown : ActionNode
 
     protected override State OnUpdate() 
     {
+        if (blackboard.CurrentAttackPattern != null)
+        {
+            if (blackboard.CurrentAttackPattern.AttackCooldown == 0)
+            {
+                coroutineHelper.StopCoroutine(cooldownCoroutine);
+                cooldownCoroutine = null;
+
+                return State.Success;
+            }
+        }
+
         if (isOnCooldown)
         {
             context.gameObject.GetComponent<enemyAnimController>().SetWalking(true);
@@ -71,8 +82,6 @@ public class WaitAttackCooldown : ActionNode
         yield return new WaitForSeconds(cooldown + 0.25f);
 
         isOnCooldown = false;
-
-        coroutineHelper.Stop(AttackCooldown(blackboard.CurrentAttackPattern.AttackCooldown));
 
         cooldownCoroutine = null;
     }
