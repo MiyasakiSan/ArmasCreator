@@ -14623,13 +14623,28 @@ VisualEffect:
       - m_Value: 20
         m_Name: BurstCount
         m_Overridden: 1
-      - m_Value: 0.15
+      - m_Value: 0.2
         m_Name: BurstLifetime
+        m_Overridden: 1
+      - m_Value: 0.1
+        m_Name: Radius
+        m_Overridden: 1
+      - m_Value: 3
+        m_Name: Speed
+        m_Overridden: 1
+      - m_Value: 25
+        m_Name: Burst
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 1, y: 0.1, z: 0.1}
+        m_Name: Scale
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: SpawnPosition
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
