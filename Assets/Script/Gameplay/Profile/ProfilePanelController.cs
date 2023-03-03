@@ -65,6 +65,7 @@ namespace ArmasCreator.UI
             });
             btn_Item.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInItem");
@@ -75,6 +76,7 @@ namespace ArmasCreator.UI
 
             btn_Equipment.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInEquipment");
@@ -93,6 +95,7 @@ namespace ArmasCreator.UI
 
             btn_Challenges.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInChallenge");
                 AllInteractableTrue();
@@ -114,7 +117,6 @@ namespace ArmasCreator.UI
             DeActivateAllContent();
             AllInteractableTrue();
             btn_Option.interactable = false;
-            optionPanelController.ShowOptionPanel();
             top_btn_Option.OnSelected();
             profileAnimator.SetTrigger("FadeIn");
             profileAnimator.SetTrigger("FadeInOption");
@@ -122,6 +124,7 @@ namespace ArmasCreator.UI
 
         public void CloseProfilePanel()
         {
+            profileAnimator.SetTrigger("FadeOutSD");
             profileAnimator.SetTrigger("FadeOutCD");
             profileAnimator.SetTrigger("FadeOut");
             profileAnimator.SetTrigger("FadeOutProfile");
@@ -138,12 +141,26 @@ namespace ArmasCreator.UI
             profileAnimator.ResetTrigger("FadeOutCD");
         }
 
+        public void ActiveSettingDetailAnim()
+        {
+            profileAnimator.SetTrigger("FadeInSD");
+        }
+
+        public void DeactiveSettingDetailAnim()
+        {
+            profileAnimator.SetTrigger("FadeOutSD");
+        }
+
+        public void ResetFadeOutSDTrigger()
+        {
+            profileAnimator.ResetTrigger("FadeOutSD");
+        }
+
         public void DeActivateAllContent()
         {
             itemsPanelController.DeactiveItemPanel();
             equipmentPanelController.DeactiveEquipmentPanel();
             challengesPanelController.DeactiveChallengePanel();
-            optionPanelController.DeactivateOptionPanel();
             profileQuestPanelController.DeactivateQuestPanel();
             top_btn_Item.OnDeSelected();
             top_btn_Equipment.OnDeSelected();
@@ -187,7 +204,6 @@ namespace ArmasCreator.UI
 
         public void SetUpOption()
         {
-            optionPanelController.ShowOptionPanel();
             top_btn_Option.OnSelected();
         }
     }

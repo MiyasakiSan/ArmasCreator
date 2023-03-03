@@ -11,9 +11,11 @@ namespace ArmasCreator.UI
     public class OptionPanelController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject mainContent;
-        [SerializeField]
         private Button btn_ToTitle;
+        [SerializeField]
+        private Button btn_Setting;
+        [SerializeField]
+        private ProfilePanelController profilePanelController;
 
         private GameplayController gameplayController;
 
@@ -27,21 +29,16 @@ namespace ArmasCreator.UI
             {
                 gameplayController.ReturnToMainmenu();
             });
+            btn_Setting.onClick.AddListener(() =>
+            {
+                profilePanelController.ActiveSettingDetailAnim();
+            });
         }
 
         public void RemoveListener()
         {
             btn_ToTitle.onClick.RemoveAllListeners();
-        }
-
-        public void ShowOptionPanel()
-        {
-            mainContent.SetActive(true);
-        }
-
-        public void DeactivateOptionPanel()
-        {
-            mainContent.SetActive(false);
+            btn_Setting.onClick.RemoveAllListeners();
         }
     }
 }
