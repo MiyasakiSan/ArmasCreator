@@ -35,6 +35,15 @@ public class MoveToAttackPos : ActionNode
 
         if (blackboard.CurrentAttackPattern != null && !blackboard.IsRunToAttackPos)
         {
+            if (blackboard.CurrentAttackPattern.AttackDistance == 0)
+            {
+                context.agent.isStopped = true;
+                blackboard.IsRunToAttackPos = false;
+                animController.SetMoving(false);
+
+                return State.Success;
+            }
+
             context.agent.isStopped = false;
 
             context.agent.stoppingDistance = blackboard.CurrentAttackPattern.AttackDistance;

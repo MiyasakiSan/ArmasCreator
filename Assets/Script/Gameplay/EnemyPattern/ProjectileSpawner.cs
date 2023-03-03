@@ -21,7 +21,7 @@ public class ProjectileSpawner : MonoBehaviour
     {
 
         Vector3 lockPos = new Vector3(target.transform.position.x + (rb.velocity.x * 0.8f),
-                                      target.transform.position.y -1.2f,
+                                      target.transform.position.y -0.5f,
                                       target.transform.position.z + (rb.velocity.z * 0.8f));
 
         this.transform.LookAt(lockPos);

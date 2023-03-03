@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1a269385a780694d98ec4363175b10c, type: 3}
-  m_Name: test1
+  m_Name: TailCombo
   m_EditorClassIdentifier: 
-  maxActiveCount: 2
-  activeDistance: 16.74
+  maxActiveCount: 1
+  activeDistance: 14.6
   minActiveDistance: 0
-  attackDistance: 5
-  activeDirection: {x: 0, y: 0, z: 1}
-  activeAngleoffset: 180
-  damage: 10
+  attackDistance: 0
+  activeDirection: {x: 0, y: 0, z: -1}
+  activeAngleoffset: 316.56
+  damage: 5
   attackCooldown: 3
-  isFollow: 0
-  attackAnimaiton: {fileID: 1827226128182048838, guid: b0f7a6ce17320604c97f1aea63d5d6c5,
+  isFollow: 1
+  isEnrageFinishMove: 0
+  hurtBoxName: tail
+  attackAnimaiton: {fileID: 1827226128182048838, guid: b00757995a76d1b468ea0bcfeda4d443,
     type: 3}
+  attackDuration: 10

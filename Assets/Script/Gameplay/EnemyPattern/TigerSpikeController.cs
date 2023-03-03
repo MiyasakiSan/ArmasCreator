@@ -36,6 +36,8 @@ namespace ArmasCreator.Gameplay
             {
                 other.gameObject.GetComponent<AttackTarget>().receiveAttack(Damage);
 
+                Debug.Log("Hit player");
+
                 isHit = true;
             }
 
