@@ -128,6 +128,17 @@ public class EnemyCombatManager : NetworkBehaviour
         Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
 
         col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage);
+
+        if (currentAttackPattern.IsKnockback)
+        {
+            col.gameObject.GetComponent<PlayerRpgMovement>().GetKnockback();
+        }
+        else
+        {
+            col.gameObject.GetComponent<PlayerRpgMovement>().GetHit();
+        }
+
+        uIPlayerController.ShowHurt();
     }
 
     private void OnDestroy()

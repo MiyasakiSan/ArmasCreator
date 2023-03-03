@@ -49,6 +49,10 @@ namespace ArmasCreator.Behavior
         public bool IsEnrageFinishMove => isEnrageFinishMove;
 
         [SerializeField]
+        private bool isKnockback;
+        public bool IsKnockback => isKnockback;
+
+        [SerializeField]
         private string hurtBoxName;
         public string HurtBoxName => hurtBoxName;
 
