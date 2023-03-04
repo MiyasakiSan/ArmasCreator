@@ -179,14 +179,14 @@ namespace ArmasCreator.UI
 
         public void ShowQuestHeader()
         {
-            questPanelAnimator.SetTrigger("showQuestHeader");
+            questPanelAnimator.SetTrigger("showHeaderQuest");
         }
 
         public void HideQuestHeader()
         {
             questPanelAnimator.SetTrigger("hideQuestDetail");
             questPanelAnimator.SetTrigger("hideQuestView");
-            questPanelAnimator.SetTrigger("hideQuestHeader");
+            questPanelAnimator.SetTrigger("hideHeaderQuest");
         }
 
         public void ShowQuestView()
@@ -218,7 +218,7 @@ namespace ArmasCreator.UI
         {
             questPanelAnimator.ResetTrigger("hideQuestDetail");
             questPanelAnimator.ResetTrigger("hideQuestView");
-            questPanelAnimator.ResetTrigger("hideQuestHeader");
+            questPanelAnimator.ResetTrigger("hideHeaderQuest");
             questPanelAnimator.ResetTrigger("showQuestDetail");
             questPanelAnimator.ResetTrigger("showQuestView");
             questPanelAnimator.ResetTrigger("showQuestHeader");
