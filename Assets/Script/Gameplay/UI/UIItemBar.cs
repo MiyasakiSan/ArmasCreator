@@ -74,6 +74,11 @@ namespace ArmasCreator.Gameplay.UI
 
         private void SetIndex()
         {
+            if(allConsumableItemIds.Count <= 0)
+            {
+                return;
+            }
+
             currentIndex %= allConsumableItemIds.Count;
 
             previousIndex = currentIndex - 1;

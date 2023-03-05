@@ -41,10 +41,7 @@ namespace ArmasCreator.UI
 
         void Start()
         {
-            ClearAllItemShop();
-            PopulateBuyItemNode();
-            ClearAllItemBag();
-            PopulatePlayerItemBag();
+
         }
 
         public void PopulateBuyItemNode()
@@ -115,6 +112,8 @@ namespace ArmasCreator.UI
 
         public void UpdateItemBag()
         {
+            ClearAllItemShop();
+            PopulateBuyItemNode();
             ClearAllItemBag();
             PopulatePlayerItemBag();
         }

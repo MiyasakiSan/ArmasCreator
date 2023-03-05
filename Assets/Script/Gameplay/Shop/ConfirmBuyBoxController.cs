@@ -57,14 +57,14 @@ namespace ArmasCreator.UI
             });
             arrowUpButton.onClick.AddListener(() =>
             {
-                if (userDataManager.UserData.UserDataInventory.ConsumableItems.TryGetValue(itemId,out int itemAmount))
+                var exist = userDataManager.UserData.UserDataInventory.ConsumableItems.TryGetValue(itemId, out int itemAmount);
+                if (exist)
                 {
                     if (float.Parse(buyAmountText.text) < 99 - itemAmount)
                     {
                         buyAmountText.text = (float.Parse(buyAmountText.text) + 1).ToString();
                     }
-                }
-                else
+                }else
                 {
                     if (float.Parse(buyAmountText.text) < 99)
                     {
