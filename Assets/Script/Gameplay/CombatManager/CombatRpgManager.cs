@@ -217,6 +217,7 @@ public class CombatRpgManager : NetworkBehaviour
         isUsingItem = false;
         useItemCoroutine = null;
         UseItemByInfo(itemId);
+        gameplayController.UpdatePlayerItemUsed(1);
     }
 
     public void CancelUseItem()

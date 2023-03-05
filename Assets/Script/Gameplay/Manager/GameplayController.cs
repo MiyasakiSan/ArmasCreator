@@ -32,6 +32,8 @@ namespace ArmasCreator.Gameplay
 
         private float currentDamageTaken = 0;
 
+        private int currentItemUsed = 0;
+
         [SerializeField]
         private ProfilePanelController profilePanelController;
 
@@ -53,7 +55,7 @@ namespace ArmasCreator.Gameplay
         public delegate void OnStatePlayCallBack();
         public OnStatePlayCallBack OnStatePlay;
 
-        public delegate void OnStateResultCallback();
+        public delegate void OnStateResultCallback(ResultContainer resultContainer);
         public OnStateResultCallback OnStateResult;
 
         public delegate void OnPlayerDealDamageCallback();
@@ -69,6 +71,7 @@ namespace ArmasCreator.Gameplay
         private UIPlayerController uiPlayerController;
 
         private QuestInfo currentQuestInfo;
+        public QuestInfo CurrentQuestInfo => currentQuestInfo;
 
         [SerializeField]
         private Canvas profileCanvas;
@@ -78,6 +81,7 @@ namespace ArmasCreator.Gameplay
         public bool Interacable;
 
         private bool isPreGameFinished;
+        private bool isStageFinished;
         private Coroutine PreGameCoroutine;
 
         private void Awake()
@@ -97,6 +101,11 @@ namespace ArmasCreator.Gameplay
 
         void Update()
         {
+            if (isPreGameFinished && !isStageFinished)
+            {
+                currentStageTime += Time.deltaTime;
+            }
+
             if (Input.GetKeyUp(KeyCode.LeftShift) && Input.GetKeyUp(KeyCode.Q) && CurrentGameplays == Gameplays.Challenge)
             {
                 EnterGameplayResult();
@@ -145,6 +154,7 @@ namespace ArmasCreator.Gameplay
         {
             CurrentGameplays = Gameplays.PreGame;
             isPreGameFinished = false;
+            isStageFinished = false;
 
             uiPlayerController = SharedContext.Instance.Get<UIPlayerController>();
 
@@ -183,6 +193,7 @@ namespace ArmasCreator.Gameplay
         {
             //TODO : Add something to player
             CurrentGameplays = Gameplays.Result;
+            isStageFinished = true;
             Debug.Log("Show Result");
             uiPlayerController.Hide();
 
@@ -191,7 +202,8 @@ namespace ArmasCreator.Gameplay
 
         private IEnumerator ShowGameResultCoroutine()
         {
-            OnStateResult?.Invoke();
+            ResultContainer result = new ResultContainer(currentStageTime, 2500, (int)currentDamageDelt, (int)currentDamageTaken, currentItemUsed);
+            OnStateResult?.Invoke(result);
             yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
 
             Dispose();
@@ -212,6 +224,20 @@ namespace ArmasCreator.Gameplay
             OnPlayerDealDamage?.Invoke();
         }
 
+        public void UpdatePlayerDamageTaken(float damage)
+        {
+            currentDamageTaken += damage;
+
+            //TODO : invoke needed ?
+        }
+
+        public void UpdatePlayerItemUsed(int amount)
+        {
+            currentItemUsed += amount;
+
+            //TODO : invoke needed ?
+        }
+
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
@@ -219,6 +245,24 @@ namespace ArmasCreator.Gameplay
             optionPanelController.RemoveListener();
             Interacable = true;
             Destroy(this.gameObject);
+        }
+    }
+
+    public class ResultContainer
+    {
+        public float timeAmount;
+        public int rewardAmount;
+        public int damageDelt;
+        public int damageTaken;
+        public int itemUsed;
+
+        public ResultContainer(float timeAmount, int rewardAmount, int damageDelt, int damageTaken, int itemUsed)
+        {
+            this.timeAmount = timeAmount;
+            this.rewardAmount = rewardAmount;
+            this.damageDelt = damageDelt;
+            this.damageTaken = damageTaken;
+            this.itemUsed = itemUsed;
         }
     }
 }

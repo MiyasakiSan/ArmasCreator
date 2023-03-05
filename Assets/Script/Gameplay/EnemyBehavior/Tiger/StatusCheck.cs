@@ -45,6 +45,7 @@ public class StatusCheck : ActionNode
         if (healthRatio <= 0.40f && !blackboard.IsUseEnrageMode)
         {
             blackboard.IsUseEnrageMode = true;
+            blackboard.canUseRoar = true;
 
             coroutineHelper.StartCoroutine(EnrageMode(EnrageDuration));
         }

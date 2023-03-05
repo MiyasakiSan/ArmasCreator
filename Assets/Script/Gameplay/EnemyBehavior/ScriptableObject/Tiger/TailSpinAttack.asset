@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1a269385a780694d98ec4363175b10c, type: 3}
-  m_Name: bite
+  m_Name: TailSpinAttack
   m_EditorClassIdentifier: 
   maxActiveCount: 2
-  activeDistance: 6.9
-  minActiveDistance: 0
-  attackDistance: 4
-  activeDirection: {x: 0, y: 0, z: 1}
-  activeAngleoffset: 38.17
+  activeDistance: 22.84
+  minActiveDistance: 7.2
+  attackDistance: 0
+  activeDirection: {x: 0, y: 0, z: -1}
+  activeAngleoffset: 318.4
   damage: 5
-  attackCooldown: 0
-  isFollow: 0
+  attackCooldown: 1
+  isFollow: 1
   isEnrageFinishMove: 0
   isSpamable: 1
   isKnockback: 0
-  hurtBoxName: head
-  attackAnimaiton: {fileID: 1827226128182048838, guid: c01eff8895989154b8a2f04476eae433,
+  hurtBoxName: tail
+  attackAnimaiton: {fileID: 1827226128182048838, guid: 56e1f4b85999dab43a6eb63918dc26c9,
     type: 3}
-  attackDuration: 1
+  attackDuration: 1.5

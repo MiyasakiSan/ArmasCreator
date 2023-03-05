@@ -49,6 +49,10 @@ namespace ArmasCreator.Behavior
         public bool IsEnrageFinishMove => isEnrageFinishMove;
 
         [SerializeField]
+        private bool isSpamable;
+        public bool IsSpamable => isSpamable;
+
+        [SerializeField]
         private bool isKnockback;
         public bool IsKnockback => isKnockback;
 

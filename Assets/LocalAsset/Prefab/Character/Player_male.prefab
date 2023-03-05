@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 7298463663340378696}
   - component: {fileID: 8693530892397269496}
   - component: {fileID: 824227908398592843}
-  - component: {fileID: 6521533222809669456}
   - component: {fileID: 2093020980}
   m_Layer: 8
   m_Name: Player_male
@@ -148,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5fbbeb3312b714b9b927645b4741de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 300
   maxStamina: 100
   currentHealth: 0
   currentStamina: 0
@@ -171,10 +170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animController: {fileID: 7298463663340378696}
-  movementSpeed: 2.25
+  movementSpeed: 3.01
   speedMultiplier: 500
   movementSpeed_Run: 6
-  dodgestaminaUse: 10
+  dodgestaminaUse: 5
   dodgeCurve:
     serializedVersion: 2
     m_Curve:
@@ -209,7 +208,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isDodging: 0
-  dodgeForce: 350
+  dodgeForce: 367
   turnSmoothTime: 0.109
   deadCam: {fileID: 4673036919886191994}
   isBattle: 0
@@ -301,22 +300,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &6521533222809669456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2566431370824309925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!136 &2093020980
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1104,7 +1087,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7933062395172462873, guid: df323df1a7159114db3bc7bacb31a269, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df323df1a7159114db3bc7bacb31a269, type: 3}
 --- !u!4 &2051837953579626619 stripped
 Transform:
@@ -1118,7 +1102,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 90735272570965209}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5919450262395621031}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d0e33d97c899b46942900f853f2cd7, type: 3}
@@ -1130,6 +1114,28 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 90735272570965209}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5919450262395621031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6009006526375641726, guid: df323df1a7159114db3bc7bacb31a269,
+    type: 3}
+  m_PrefabInstance: {fileID: 90735272570965209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2329257415568548412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919450262395621031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!4 &6444030985982923805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6354463856809449668, guid: df323df1a7159114db3bc7bacb31a269,

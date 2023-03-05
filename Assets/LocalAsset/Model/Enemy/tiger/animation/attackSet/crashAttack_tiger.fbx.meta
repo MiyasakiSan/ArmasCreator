@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 56e1f4b85999dab43a6eb63918dc26c9
+guid: 2e7cbc6517a2c6b4eb8438680e455523
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: tailSpinAttack
+    second: CrashAttack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: tailSpinAttack
+      name: CrashAttack
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 35
+      lastFrame: 130
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,21 +59,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.38593367
-        functionName: SpawnSpike
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.61491627
-        functionName: SpawnSpike
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

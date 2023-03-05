@@ -452,17 +452,17 @@ public class PlayerRpgMovement : NetworkBehaviour
         canMove = true;
     }
 
-    public void GetKnockback()
+    public void GetKnockback(Vector3 enemyPos)
     {
         if (knockbackCoroutine != null)
         {
             return;
         }
 
-        knockbackCoroutine = StartCoroutine(GetKnockbackCoroutine());
+        knockbackCoroutine = StartCoroutine(GetKnockbackCoroutine(enemyPos));
     }
 
-    IEnumerator GetKnockbackCoroutine()
+    IEnumerator GetKnockbackCoroutine(Vector3 enemyPos)
     {
         canMove = false;
         animController.playerAnim.ResetTrigger("Fall");
@@ -475,13 +475,13 @@ public class PlayerRpgMovement : NetworkBehaviour
             combatManager.CancelUseItem();
         }
 
-        while (timer < 2f)
+        while (timer < 2.67f)
         {
             StopMoveForwardNotResetVelo();
 
-            rb.AddForce(-1 * transform.forward * KnockbackSpeed * Time.deltaTime);
+            Vector3 dir = transform.position - enemyPos;
+            rb.AddForce(dir.normalized * KnockbackSpeed * Time.deltaTime);
             timer += Time.deltaTime;
-            animController.playerAnim.SetTrigger("Fall");
             yield return null;
         }
 

@@ -69,13 +69,37 @@ namespace ArmasCreator.Behavior
         {
             currentAttackPattern = new AttackPattern();
             GetAvaliableAttackPattern(out List<AttackPattern> avaliableAttackPAttern);
+            var distance = Vector3.Distance(blackboard.Target.transform.position, context.gameObject.transform.position);
 
             int randNum = 0;
 
+            if (blackboard.PrevioustAttackPattern != null)
+            {
+                var previousAttackContainer = allAttackPatternContainer.Find(x => x.AttackPattern == blackboard.PrevioustAttackPattern);
+
+                if (blackboard.PrevioustAttackPattern.IsSpamable &&
+                    distance > blackboard.PrevioustAttackPattern.ActiveDistance &&
+                    distance < blackboard.PrevioustAttackPattern.MinActiveDistance &&
+                    previousAttackContainer.UseCount == blackboard.PrevioustAttackPattern.MaxActiveCount)
+                {
+                    currentAttackPattern = blackboard.PrevioustAttackPattern;
+                    AttackPattern attackPattern = currentAttackPattern;
+
+                    previousAttackContainer.Use();
+                }
+            }
+           
             if (avaliableAttackPAttern.Count > 0)
             {
                 randNum = Random.Range(0, avaliableAttackPAttern.Count - 1);
-                currentAttackPattern = avaliableAttackPAttern[randNum];
+                var rand = 0;
+
+                if (randNum != 0)
+                {
+                    rand = Random.Range(0, randNum);
+                }
+
+                currentAttackPattern = avaliableAttackPAttern[rand];
 
                 AttackPattern attackPattern = currentAttackPattern;
                 allAttackPatternContainer.Find(x => x.AttackPattern == attackPattern).Use();
@@ -88,6 +112,12 @@ namespace ArmasCreator.Behavior
             if (blackboard.canUseEnrageFinishMove)
             {
                 currentAttackPattern = allAttackPatternContainer.Find(x => x.AttackPattern.IsEnrageFinishMove).AttackPattern;
+            }
+
+            if (blackboard.canUseRoar)
+            {
+                currentAttackPattern = allAttackPatternContainer.Find(x => x.AttackPattern.name == "roar").AttackPattern;
+                blackboard.canUseRoar = false;
             }
         }
 

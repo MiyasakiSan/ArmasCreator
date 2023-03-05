@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Swipetail
   m_EditorClassIdentifier: 
   maxActiveCount: 2
-  activeDistance: 14.4
-  minActiveDistance: 3.56
+  activeDistance: 7.2
+  minActiveDistance: 2.87
   attackDistance: 5
   activeDirection: {x: 0, y: 0, z: 1}
   activeAngleoffset: 360
-  damage: 5
-  attackCooldown: 0
+  damage: 10
+  attackCooldown: 1
   isFollow: 1
-  isEnrageFinishMove: 1
+  isEnrageFinishMove: 0
+  isSpamable: 0
+  isKnockback: 1
   hurtBoxName: tail
   attackAnimaiton: {fileID: 1827226128182048838, guid: 9ad16099e8dcb1149bc43d7c8147b850,
     type: 3}
-  attackDuration: 4
+  attackDuration: 3

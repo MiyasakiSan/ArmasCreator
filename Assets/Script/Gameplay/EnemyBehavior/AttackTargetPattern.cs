@@ -34,7 +34,7 @@ public class AttackTargetPattern : ActionNode
             blackboard.IsAttacking = true;
             enemyCombatManager.IsAttacking = true;
             enemyCombatManager.currentAttackPattern = blackboard.CurrentAttackPattern;
-            context.transform.LookAt(blackboard.Target.transform);
+            animController.isFollwPlayer = blackboard.CurrentAttackPattern.IsFollow;
 
             if (attackCoroutine == null)
             {
@@ -58,15 +58,13 @@ public class AttackTargetPattern : ActionNode
         }
         else
         {
-            if (blackboard.CurrentAttackPattern.IsFollow)
+            if (animController.isFollwPlayer)
             {
                 var lookPos = blackboard.Target.transform.position - context.transform.position;
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
 
                 context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 20);
-
-                //context.transform.LookAt(blackboard.Target.transform);
             }
 
             return State.Running;
@@ -83,6 +81,8 @@ public class AttackTargetPattern : ActionNode
         animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
 
         yield return new WaitForSeconds(length);
+
+        blackboard.PrevioustAttackPattern = blackboard.CurrentAttackPattern;
 
         if (blackboard.CurrentAttackPattern.IsEnrageFinishMove)
         {
