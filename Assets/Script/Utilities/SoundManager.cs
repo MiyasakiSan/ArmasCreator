@@ -29,6 +29,8 @@ public class SoundManager : MonoBehaviour
         eventEmitters = new List<StudioEventEmitter>();
 
         isInitlize = true;
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void PlayOneShot(EventReference sound,Vector3 position)
@@ -74,16 +76,6 @@ public class SoundManager : MonoBehaviour
         {
             emitter.Stop();
         }
-    }
-
-    public void PlayExtendSFX()
-    {
-        PlayOneShot(fModEvent.ExtendSFX,transform.position);
-    }
-
-    public void PlayShrinkSFX()
-    {
-        PlayOneShot(fModEvent.ShrinkSFX,transform.position);
     }
 
     public void OnDestroy()

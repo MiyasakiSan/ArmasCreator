@@ -7,6 +7,7 @@ using Unity.Netcode;
 using Cinemachine;
 using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
+using FMOD.Studio;
 
 public class PlayerRpgMovement : NetworkBehaviour
 {
@@ -67,6 +68,13 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     public bool CanRotate;
 
+    [Header("Sound")]
+
+    SoundManager soundManager;
+
+    EventInstance playerWalkSFX;
+    EventInstance playerRunSFX;
+
     public enum movementState
     {
         idle,walk,run,roll
@@ -89,6 +97,10 @@ public class PlayerRpgMovement : NetworkBehaviour
     private void Awake()
     {
         gameModeController = SharedContext.Instance.Get<GameModeController>();
+        soundManager = SharedContext.Instance.Get<SoundManager>();
+
+        playerWalkSFX = soundManager.CreateInstance(soundManager.fModEvent.PlayerWalkSFX);
+        playerRunSFX = soundManager.CreateInstance(soundManager.fModEvent.PlayerRunSFX);
     }
 
     void Start()
@@ -247,10 +259,18 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             case movementState.walk:
                 walkToDirection(direction);
+
+                walkSFX();
+                playerRunSFX.stop(STOP_MODE.ALLOWFADEOUT);
+
                 break;
 
             case movementState.run:
                 runToDirection(direction);
+
+                runSFX();
+                playerWalkSFX.stop(STOP_MODE.ALLOWFADEOUT);
+
                 break;
 
             case movementState.roll:
@@ -267,6 +287,9 @@ public class PlayerRpgMovement : NetworkBehaviour
                 {
                     animController.AnimationStateServerRpc(currentMovementState.ToString());
                 }
+
+                playerWalkSFX.stop(STOP_MODE.ALLOWFADEOUT);
+                playerRunSFX.stop(STOP_MODE.ALLOWFADEOUT);
 
                 break;
         }
@@ -532,5 +555,23 @@ public class PlayerRpgMovement : NetworkBehaviour
         canMove = true;
         this.gameObject.GetComponent<CombatRpgManager>().respawnState();
         this.gameObject.GetComponent<PlayerStat>().respawnResetHealth();
+    }
+
+    void walkSFX()
+    {
+        soundManager.AttachInstanceToGameObject(playerWalkSFX, transform, rb);
+
+        playerWalkSFX.getPlaybackState(out var playBackState);
+        if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+            playerWalkSFX.start();
+    }
+
+    void runSFX()
+    {
+        soundManager.AttachInstanceToGameObject(playerRunSFX, transform, rb);
+
+        playerRunSFX.getPlaybackState(out var playBackState);
+        if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+            playerRunSFX.start();
     }
 }
