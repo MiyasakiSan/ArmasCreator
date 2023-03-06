@@ -42,6 +42,9 @@ namespace ArmasCreator.Gameplay.UI
         private GameplayController gameplayController;
 
         [SerializeField]
+        private Animator hurtAnim;
+
+        [SerializeField]
         private Camera cam;
 
         [SerializeField]
@@ -97,6 +100,11 @@ namespace ArmasCreator.Gameplay.UI
 
             damageDealtText.gameObject.SetActive(false);
             damageDealtCoroutine = null;
+        }
+
+        public void ShowHurt()
+        {
+            hurtAnim.SetTrigger("Hurt");
         }
 
         public void Show()

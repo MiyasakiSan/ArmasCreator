@@ -78,6 +78,12 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     private GameModeController gameModeController;
 
+    private Coroutine hitCoroutine;
+
+    public float KnockbackSpeed;
+
+    private Coroutine knockbackCoroutine;
+
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
     private void Awake()
@@ -417,6 +423,70 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         PlayerStat playerStat = GetComponent<PlayerStat>();
         playerStat.reduceStaminaAmountOverTime(1f);
+    }
+
+    public void GetHit()
+    {
+        if (hitCoroutine != null)
+        {
+            return;
+        }
+
+        hitCoroutine = StartCoroutine(GetHitCoroutine());
+    }
+
+    IEnumerator GetHitCoroutine()
+    {
+        canMove = false;
+        animController.playerAnim.ResetTrigger("Hit");
+        animController.playerAnim.SetTrigger("Hit");
+
+        if (combatManager.isUsingItem)
+        {
+            combatManager.CancelUseItem();
+        }
+
+        yield return new WaitForSeconds(0.75f);
+
+        hitCoroutine = null;
+        canMove = true;
+    }
+
+    public void GetKnockback(Vector3 enemyPos)
+    {
+        if (knockbackCoroutine != null)
+        {
+            return;
+        }
+
+        knockbackCoroutine = StartCoroutine(GetKnockbackCoroutine(enemyPos));
+    }
+
+    IEnumerator GetKnockbackCoroutine(Vector3 enemyPos)
+    {
+        canMove = false;
+        animController.playerAnim.ResetTrigger("Fall");
+        animController.playerAnim.SetTrigger("Fall");
+
+        float timer = 0;
+
+        if (combatManager.isUsingItem)
+        {
+            combatManager.CancelUseItem();
+        }
+
+        while (timer < 2.67f)
+        {
+            StopMoveForwardNotResetVelo();
+
+            Vector3 dir = transform.position - enemyPos;
+            rb.AddForce(dir.normalized * KnockbackSpeed * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        knockbackCoroutine = null;
+        canMove = true;
     }
 
     private void floatCollider()

@@ -22,14 +22,16 @@ namespace TheKiwiCoder {
         public bool IsUseEnrageMode;
         public bool IsPlayerEnterStage;
         public bool canUseEnrageFinishMove;
+        public bool canUseRoar;
         public bool IsRunToAttackPos;
         public bool IsAttacking;
 
         public float HpPercentage; // Max : 1  ||  Min : 0
         public bool IsMapAttackAvaliable;
 
-        [Header("Attack Pattenr")]
+        [Header("Attack Pattern")]
         public AttackPattern CurrentAttackPattern;
 
+        public AttackPattern PrevioustAttackPattern;
     }
 }

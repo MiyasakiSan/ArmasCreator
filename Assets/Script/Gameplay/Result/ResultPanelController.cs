@@ -101,7 +101,7 @@ namespace ArmasCreator.Gameplay.UI
            
         }
 
-        public void StartResultSequence()
+        public void StartResultSequence(ResultContainer resultContainer)
         {
             IsResultSequenceFinished = false;
             IsMilliSequenceFinished = false;
@@ -111,9 +111,15 @@ namespace ArmasCreator.Gameplay.UI
             IsItemUsedSequenceFinished = false;
             IsRewardSequenceFinished = false;
 
-            SetCompletionTime(10, 30, 99);
-            SetRewardAmount(2500);
-            SetResultData(5000, 3000, 10);
+            var intTime = (int)resultContainer.timeAmount;
+            var minutes = intTime / 60;
+            var seconds = intTime % 60;
+            var fraction = resultContainer.timeAmount * 1000;
+            fraction = fraction % 1000;
+
+            SetCompletionTime(minutes, seconds, (int)fraction/10);
+            SetRewardAmount(resultContainer.rewardAmount);
+            SetResultData(resultContainer.damageDelt, resultContainer.damageTaken, resultContainer.itemUsed);
             SetRank("A", "A", "A", "A");
 
             resultPanelAnimator.SetTrigger("show");

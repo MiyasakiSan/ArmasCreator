@@ -24,9 +24,13 @@ public class enemyAnimController : NetworkBehaviour
     [SerializeField]
     private ProjectileSpawner spikeSpawner;
 
+    public bool isFollwPlayer;
+
     void Start()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed);
     }
     public bool currentAnimatorStateBaseIsName(string paramName)
     {
@@ -119,6 +123,17 @@ public class enemyAnimController : NetworkBehaviour
     {
         anim.applyRootMotion = isApply;
     }
+    
+    public void EnableFollowPlayer()
+    {
+        isFollwPlayer = true;
+    }
+
+    public void DisableFollowPlayer()
+    {
+        isFollwPlayer = false;
+    }
+
 
     [ClientRpc]
     public void DeadClientRpc()

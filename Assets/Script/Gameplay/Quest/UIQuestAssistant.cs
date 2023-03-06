@@ -64,11 +64,13 @@ public class UIQuestAssistant : MonoBehaviour
             ShowQuestAssistantCanvas();
             other.GetComponent<PlayerRpgMovement>().canMove = false;
             other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
+            questVcam.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && questVcam.activeSelf)
         {
             HideQuestAssistantCanvas();
             other.GetComponent<PlayerRpgMovement>().canMove = true;
+            questVcam.SetActive(false);
         }
 
         //Test Quest

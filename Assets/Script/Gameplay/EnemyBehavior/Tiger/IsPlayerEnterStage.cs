@@ -37,6 +37,7 @@ public class IsPlayerEnterStage : ActionNode
         if (blackboard.IsPlayerEnterStage) { return; }
 
         blackboard.IsPlayerEnterStage = true;
+        blackboard.canUseRoar = true;
 
         Debug.Log("Enter Stage");
 
