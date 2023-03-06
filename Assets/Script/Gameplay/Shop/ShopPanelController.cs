@@ -21,6 +21,8 @@ namespace ArmasCreator.UI
         [Header("SubControllerScript")]
         [SerializeField]
         private BuyShopPanelController buyShopPanelController;
+        [SerializeField]
+        private SellShopPanelController sellShopPanelController;
 
         [Header("Animator")]
         [SerializeField]
@@ -92,11 +94,13 @@ namespace ArmasCreator.UI
         {
             ResetAllTrigger();
             buyShopPanelAnimator.SetTrigger("showBuyShop");
+            buyShopPanelController.UpdateItemBag();
         }
         public void ShowSellShopPanel()
         {
             ResetAllTrigger();
             buyShopPanelAnimator.SetTrigger("showSellShop");
+            sellShopPanelController.UpdateItemBag();
         }
         public void ShowConfirmBuyShop()
         {
