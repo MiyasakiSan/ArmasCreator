@@ -65,7 +65,6 @@ namespace ArmasCreator.Gameplay
             anim.SetTrigger("hideAdjust");
             anim.SetTrigger("hide");
 
-
             StartCoroutine(HideUIQuest());
         }
 
@@ -115,6 +114,7 @@ namespace ArmasCreator.Gameplay
                 ShowQuestCanvas();
                 other.GetComponent<PlayerRpgMovement>().canMove = false;
                 other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
+                other.GetComponent<PlayerRpgMovement>().StopSFX();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && questVcam.activeSelf)
             {

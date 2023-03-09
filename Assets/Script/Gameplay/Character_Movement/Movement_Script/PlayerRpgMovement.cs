@@ -574,4 +574,10 @@ public class PlayerRpgMovement : NetworkBehaviour
         if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
             playerRunSFX.start();
     }
+
+    public void StopSFX()
+    {
+        playerWalkSFX.stop(STOP_MODE.ALLOWFADEOUT);
+        playerRunSFX.stop(STOP_MODE.ALLOWFADEOUT);
+    }
 }
