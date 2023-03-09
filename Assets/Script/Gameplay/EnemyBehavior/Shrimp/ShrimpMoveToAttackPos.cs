@@ -15,6 +15,8 @@ public class ShrimpMoveToAttackPos : ActionNode
 
     public float radius;
 
+    private enemyAnimController animController;
+
     protected override void OnStart() {
 
         if (blackboard.Target != null)
@@ -23,7 +25,11 @@ public class ShrimpMoveToAttackPos : ActionNode
         }
 
         center = GameObject.Find("Center").GetComponent<Transform>();
-     
+
+        animController = context.gameObject.GetComponent<enemyAnimController>();
+
+        animController.ResetAllLookAt();
+
     }
 
     protected override void OnStop() {
@@ -35,6 +41,15 @@ public class ShrimpMoveToAttackPos : ActionNode
 
         if (blackboard.CurrentAttackPattern != null && !blackboard.IsRunToAttackPos)
         {
+            if (blackboard.CurrentAttackPattern.AttackDistance == 0)
+            {
+                blackboard.IsRunToAttackPos = false;
+
+                Debug.Log("Dont have attack distance");
+
+                return State.Success;
+            }
+
             blackboard.IsRunToAttackPos = true;
             return State.Running;
         }
@@ -52,7 +67,17 @@ public class ShrimpMoveToAttackPos : ActionNode
             return State.Running;
         }
 
-        return State.Running;
+        if (blackboard.CurrentAttackPattern == null)
+        {
+            Debug.Log(blackboard.CurrentAttackPattern);
+
+            animController.SetMoving(false);
+            return State.Success;
+        }
+        else
+        {
+            return State.Running;
+        }
     }
 
     private void CalculateProjection()
