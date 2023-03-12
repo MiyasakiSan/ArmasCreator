@@ -127,8 +127,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
         Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
 
-        col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage);
-        gameplayController.UpdatePlayerDamageTaken(damage);
+        col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+        gameplayController.UpdatePlayerDamageTaken(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
 
         if (currentAttackPattern.IsKnockback)
         {

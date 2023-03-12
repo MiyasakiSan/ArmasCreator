@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine.Events;
 using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
+using ArmasCreator.Gameplay;
 
 public class EnemyStat : AttackTarget, IDamagable<float>
 {
@@ -17,6 +18,7 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     public UnityAction<float> onHealthUpDate;
 
     private GameModeController gameModeController;
+    private GameplayController gameplayController;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -73,13 +75,14 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     private void Awake()
     {
         gameModeController = SharedContext.Instance.Get<GameModeController>();
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
     }
 
     void Start()
     {
         if (isSinglePlayer)
         {
-            currentHealth = maxHealth;
+            currentHealth = maxHealth * gameplayController.CurrentQuestInfo.InitHp;
         }
         else
         {

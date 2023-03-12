@@ -16,6 +16,7 @@ namespace DitzelGames.FastIK
 
         private Coroutine resetWeightCoroutine;
         private Coroutine setWeightCoroutine;
+        private Vector3 latestAngle;
 
         /// <summary>
         /// Initial direction
@@ -78,6 +79,7 @@ namespace DitzelGames.FastIK
 
             if (dot < Mathf.Cos(80))
             {
+                transform.eulerAngles = latestAngle;
                 return;
             }
 
@@ -91,6 +93,7 @@ namespace DitzelGames.FastIK
 
                 var angle = rotation.eulerAngles;
                 transform.eulerAngles = angle;
+                latestAngle = angle;
             }
         }
 

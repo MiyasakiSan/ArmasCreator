@@ -9,10 +9,14 @@ public class IsPlayerEnterStage : ActionNode
     private OnTriggerEvent stageCollider;
 
     protected override void OnStart() {
+        if (blackboard.isInit) { return; }
 
         stageCollider = GameObject.FindGameObjectWithTag("StageCollider").GetComponent<OnTriggerEvent>();
 
         stageCollider.onTriggerEnter.AddListener(OnPlayerEnter);
+        stageCollider.OnPlayerDieCallback += ResetEnterStage;
+
+        blackboard.isInit = true;
     }
 
     protected override void OnStop() 
@@ -42,5 +46,10 @@ public class IsPlayerEnterStage : ActionNode
         Debug.Log("Enter Stage");
 
         stageCollider.SetBoxCollider(true);
+    }
+
+    private void ResetEnterStage()
+    {
+        blackboard.IsPlayerEnterStage = false;
     }
 }

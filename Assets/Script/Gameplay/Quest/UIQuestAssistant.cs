@@ -84,12 +84,14 @@ public class UIQuestAssistant : MonoBehaviour
     public void ShowQuestAssistantCanvas()
     {
         gameplayController.Interacable = false;
+        gameplayController.SetCursorLock(false);
         nPCQuestController.ShowQuestHeader();
     }
 
     public void HideQuestAssistantCanvas()
     {
         gameplayController.Interacable = true;
+        gameplayController.SetCursorLock(true);
         nPCQuestController.HideQuestHeader();
     }
 }

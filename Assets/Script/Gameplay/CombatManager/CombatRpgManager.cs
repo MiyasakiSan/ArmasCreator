@@ -382,6 +382,13 @@ public class CombatRpgManager : NetworkBehaviour
         }
     }
 
+    public void ResetCombatBool()
+    {
+        isSheathing = false;
+        isWithdrawing = false;
+        isUsingItem = false;
+    }
+
     public void Melee_IsComboOutOfTime()
     {
         if (Time.time - lastClickedTime > maxComboDelay)

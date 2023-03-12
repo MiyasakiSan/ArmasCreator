@@ -99,7 +99,7 @@ namespace ArmasCreator.Behavior
                     rand = Random.Range(0, randNum);
                 }
 
-                currentAttackPattern = avaliableAttackPAttern[rand];
+                currentAttackPattern = avaliableAttackPAttern[randNum];
 
                 AttackPattern attackPattern = currentAttackPattern;
                 allAttackPatternContainer.Find(x => x.AttackPattern == attackPattern).Use();

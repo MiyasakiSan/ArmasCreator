@@ -14,6 +14,7 @@ namespace TheKiwiCoder {
         public Vector3 moveToPosition;
 
         public GameObject Target;
+        public bool isInit;
 
         [Header("Boss Status")]
         public bool IsDead;

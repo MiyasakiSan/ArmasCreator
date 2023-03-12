@@ -111,6 +111,8 @@ namespace ArmasCreator.Gameplay
                 EnterGameplayResult();
             }
 
+            if (CurrentGameplays == Gameplays.Challenge) { return; }
+
             if (!Interacable) { return; }
 
             if (Input.GetKeyUp(KeyCode.Escape))
@@ -130,11 +132,13 @@ namespace ArmasCreator.Gameplay
                 if (profilePanelController.Profile.activeSelf)
                 {
                     profilePanelController.CloseProfilePanel();
+                    SetCursorLock(true);
                     Time.timeScale = 1f;
                 }
                 else if (!profilePanelController.Profile.activeSelf)
                 {
                     profilePanelController.OpenProfilePanel();
+                    SetCursorLock(false);
                     Time.timeScale = 0f;
                 }
             }
@@ -155,6 +159,7 @@ namespace ArmasCreator.Gameplay
             CurrentGameplays = Gameplays.PreGame;
             isPreGameFinished = false;
             isStageFinished = false;
+            SetCursorLock(true);
 
             uiPlayerController = SharedContext.Instance.Get<UIPlayerController>();
 
@@ -196,6 +201,8 @@ namespace ArmasCreator.Gameplay
             isStageFinished = true;
             Debug.Log("Show Result");
             uiPlayerController.Hide();
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRpgMovement>();
+            player.canMove = false;
 
             StartCoroutine(ShowGameResultCoroutine());
         }
@@ -208,6 +215,7 @@ namespace ArmasCreator.Gameplay
 
             Dispose();
             loadingPopup.LoadSceneAsync("Town");
+            SetCursorLock(true);
         }
 
         public void ReturnToMainmenu()
@@ -215,6 +223,7 @@ namespace ArmasCreator.Gameplay
             Dispose();
             loadingPopup.LoadSceneAsync("Mainmenu");
             Time.timeScale = 1f;
+            SetCursorLock(false);
         }
 
         public void UpdatePlayerDamageDelt(float damage)
@@ -236,6 +245,19 @@ namespace ArmasCreator.Gameplay
             currentItemUsed += amount;
 
             //TODO : invoke needed ?
+        }
+
+        public void SetCursorLock(bool isLock)
+        {
+            if (isLock)
+            {
+                Cursor.lockState =  CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                //Cursor.visible = isLock;
+            }
         }
 
         private void Dispose()

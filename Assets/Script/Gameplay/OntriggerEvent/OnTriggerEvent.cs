@@ -11,6 +11,9 @@ namespace ArmasCreator.Gameplay
 
         public UnityEvent<Collider> onTriggerEnter;
 
+        public delegate void onPlayerDie();
+        public onPlayerDie OnPlayerDieCallback;
+
         [SerializeField]
         private GameObject boxCollider;
 
@@ -27,6 +30,13 @@ namespace ArmasCreator.Gameplay
         public void SetBoxCollider(bool active)
         {
             boxCollider.SetActive(active);
+        }
+
+        public void playerDieInvoke()
+        {
+            OnPlayerDieCallback?.Invoke();
+            boxCollider.SetActive(false);
+            Debug.Log("invoke die");
         }
     }
 }

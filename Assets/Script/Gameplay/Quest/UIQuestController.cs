@@ -75,6 +75,7 @@ namespace ArmasCreator.Gameplay
             playerCanvas.SetActive(false);
 
             gameplayController.Interacable = false;
+            gameplayController.SetCursorLock(false);
         }
 
         IEnumerator HideUIQuest()
@@ -85,6 +86,7 @@ namespace ArmasCreator.Gameplay
             questCanvas.SetActive(false);
 
             gameplayController.Interacable = true;
+            gameplayController.SetCursorLock(true);
         }
 
         private void OnTriggerEnter(Collider other)

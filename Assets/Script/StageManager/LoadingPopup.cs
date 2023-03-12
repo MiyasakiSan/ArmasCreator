@@ -20,6 +20,9 @@ namespace ArmasCreator.UI
         private GameObject loadingCanvas;
 
         [SerializeField]
+        private GameObject content;
+
+        [SerializeField]
         private Slider loadingSlider;
 
         [SerializeField]
@@ -50,6 +53,8 @@ namespace ArmasCreator.UI
 
         public void LoadSceneAsync(string sceneName)
         {
+            loadingCanvas.SetActive(true);
+            content.SetActive(true);
             StartCoroutine(LoadScene(sceneName));
         }
 
@@ -62,10 +67,13 @@ namespace ArmasCreator.UI
         IEnumerator LoadScene(string sceneName)
         {
             yield return null;
+
+            yield return new WaitUntil(() => loadingCanvas.activeSelf);
+
+            yield return new WaitUntil(() => content.activeSelf);
             LPBG.Reset();
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
             asyncOperation.allowSceneActivation = false;
-            loadingCanvas.SetActive(true);
             loadingSlider.value = 0;
             targetValue = 0;
             currentValue = 0;
@@ -140,9 +148,15 @@ namespace ArmasCreator.UI
             loadingCanvas.SetActive(false);
         }
 
-        public void FadeBlack()
+        public void FadeBlack(bool isShowContent = true)
         {
             //TODO : Fade black in and out
+            if (!isShowContent)
+            {
+                content.SetActive(false);
+            }
+
+            loadingCanvas.SetActive(true);
             isFadingBlack = true;
             StartCoroutine(FadeBlackCoroutine());
             Debug.Log("Fade Black");
@@ -169,6 +183,7 @@ namespace ArmasCreator.UI
             }
 
             isFadingBlack = false;
+            content.SetActive(false);
         }
     }
 }

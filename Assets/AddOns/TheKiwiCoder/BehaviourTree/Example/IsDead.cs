@@ -38,7 +38,14 @@ public class IsDead : ActionNode
         }
         else
         {
-            return false;
+            if (blackboard.IsDead)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
