@@ -51,7 +51,6 @@ namespace ArmasCreator.Gameplay
         public void ShowQuestCanvas()
         {
             questVcam.SetActive(true);
-            questCanvas.SetActive(true);
             anim.SetTrigger("show");
 
             StartCoroutine(ShowUIQuest());
@@ -83,7 +82,6 @@ namespace ArmasCreator.Gameplay
             yield return new WaitForSeconds(2.7f);
 
             playerCanvas.SetActive(true);
-            questCanvas.SetActive(false);
 
             gameplayController.Interacable = true;
             gameplayController.SetCursorLock(true);
