@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
         if (!string.IsNullOrEmpty(userDataManager.UserData.UserID))
         {
             loadingPopup.LoadSceneAsync("Town");
+            Cursor.lockState = CursorLockMode.Locked;
             return;
         }
 
@@ -42,6 +43,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetString("PName", Name.text);
         userDataManager.UserData.SetUserID(Name.text);
         loadingPopup.LoadSceneAsync("Town");
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void OnClickEncyclopedia()
     {

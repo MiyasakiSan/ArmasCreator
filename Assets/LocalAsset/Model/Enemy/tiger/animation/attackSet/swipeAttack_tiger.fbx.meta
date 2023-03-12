@@ -66,12 +66,12 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: OnUseVFX
+      - time: 0.69440573
+        functionName: DisableFollowPlayer
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 2
+        intParameter: 0
         messageOptions: 0
       transformMask: []
       maskType: 3
@@ -102,19 +102,12 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.34639853
-        functionName: OnUsePS
+      - time: 0.023493402
+        functionName: DisableFollowPlayer
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 2
-        messageOptions: 0
-      - time: 0.7669858
-        functionName: OnStopPS
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 2
+        intParameter: 0
         messageOptions: 0
       transformMask: []
       maskType: 3

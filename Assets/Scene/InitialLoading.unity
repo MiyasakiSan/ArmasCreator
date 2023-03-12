@@ -154,7 +154,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1480183968}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCanvas: {fileID: 1480183964}
+  content: {fileID: 887920758}
   loadingSlider: {fileID: 1163256603}
   FadeBlackImage: {fileID: 5316686}
   bgList:
@@ -502,6 +503,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &887920758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 634395076362387464, guid: e766d72fe3ef62d4689474e850768b54,
+    type: 3}
+  m_PrefabInstance: {fileID: 6812654018128121989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1032215140
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,10 +901,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 887532257}
     m_Modifications:
+    - target: {fileID: 103916648405335656, guid: e766d72fe3ef62d4689474e850768b54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 570001294515181553, guid: e766d72fe3ef62d4689474e850768b54,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 570001294515181553, guid: e766d72fe3ef62d4689474e850768b54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1080310096183706760, guid: e766d72fe3ef62d4689474e850768b54,
         type: 3}

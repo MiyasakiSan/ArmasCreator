@@ -39,6 +39,7 @@ public class UIBlacksmithController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         gameplayController.Interacable = false;
+        gameplayController.SetCursorLock(false);
     }
 
     IEnumerator HideUIBlacksmith()
@@ -49,6 +50,7 @@ public class UIBlacksmithController : MonoBehaviour
 
         playerCanvas.SetActive(true);
         gameplayController.Interacable = true;
+        gameplayController.SetCursorLock(true);
     }
 
     private void OnTriggerStay(Collider other)

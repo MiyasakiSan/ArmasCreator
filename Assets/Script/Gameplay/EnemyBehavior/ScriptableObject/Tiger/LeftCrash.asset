@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1a269385a780694d98ec4363175b10c, type: 3}
-  m_Name: biteCombo
+  m_Name: LeftCrash
   m_EditorClassIdentifier: 
   maxActiveCount: 2
-  activeDistance: 28.46
-  minActiveDistance: 7.74
-  attackDistance: 5
-  activeDirection: {x: 0, y: 0, z: 1}
-  activeAngleoffset: 360
-  damage: 5
+  activeDistance: 7.2
+  minActiveDistance: 0
+  attackDistance: 0
+  activeDirection: {x: -1, y: 0, z: 0}
+  activeAngleoffset: 114.1
+  damage: 10
   attackCooldown: 0
-  isFollow: 0
+  isFollow: 1
   isEnrageFinishMove: 0
-  isSpamable: 0
-  isKnockback: 0
-  hurtBoxName: head
-  attackAnimaiton: {fileID: 1827226128182048838, guid: b0f7a6ce17320604c97f1aea63d5d6c5,
+  isSpamable: 1
+  isKnockback: 1
+  hurtBoxName: body
+  attackAnimaiton: {fileID: 1827226128182048838, guid: a8370ae8d8419424aaa8ebcd98ca9dd6,
     type: 3}
-  attackDuration: 3.67
+  attackDuration: 2.91

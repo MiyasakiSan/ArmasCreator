@@ -33,7 +33,7 @@ public class PreGameCameraEvent : MonoBehaviour
         {
             currentDirector.time = timeToSkipTo;
 
-            loadingPopup.FadeBlack();
+            loadingPopup.FadeBlack(false);
         }
     }
 

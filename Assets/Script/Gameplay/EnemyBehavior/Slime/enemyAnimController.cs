@@ -24,6 +24,9 @@ public class enemyAnimController : NetworkBehaviour
     [SerializeField]
     private ProjectileSpawner spikeSpawner;
 
+    [SerializeField]
+    private GameObject DeadCamCart;
+
     public bool isFollwPlayer;
 
     void Start()
@@ -108,9 +111,10 @@ public class enemyAnimController : NetworkBehaviour
         }
         else
         {
-            anim?.SetTrigger("isDead");
+            anim?.SetBool("isDead",true);
             gameplayController.EnterGameplayResult();
-            StartCoroutine(despawn());
+            DeadCamCart.SetActive(true);
+            //StartCoroutine(despawn());
         }
     }
 

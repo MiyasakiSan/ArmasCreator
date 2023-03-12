@@ -8,6 +8,9 @@ using Cinemachine;
 using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
 using FMOD.Studio;
+using ArmasCreator.Gameplay;
+using TheKiwiCoder;
+using ArmasCreator.UI;
 
 public class PlayerRpgMovement : NetworkBehaviour
 {
@@ -55,6 +58,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     public bool canMove;
     public bool canWalk;
     public bool canRun;
+    private bool isDead;
 
     private Rigidbody rb;
 
@@ -461,8 +465,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     IEnumerator GetHitCoroutine()
     {
         canMove = false;
-        animController.playerAnim.ResetTrigger("Hit");
-        animController.playerAnim.SetTrigger("Hit");
+        animController.playerAnim.SetBool("Hit",true);
 
         if (combatManager.isUsingItem)
         {
@@ -470,8 +473,11 @@ public class PlayerRpgMovement : NetworkBehaviour
         }
 
         yield return new WaitForSeconds(0.75f);
+        animController.playerAnim.SetBool("Hit", false);
 
         hitCoroutine = null;
+        combatManager.ResetAnimBoolean();
+        combatManager.ResetCombatBool();
         canMove = true;
     }
 
@@ -488,8 +494,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     IEnumerator GetKnockbackCoroutine(Vector3 enemyPos)
     {
         canMove = false;
-        animController.playerAnim.ResetTrigger("Fall");
-        animController.playerAnim.SetTrigger("Fall");
+        animController.playerAnim.SetBool("Fall", true);
 
         float timer = 0;
 
@@ -502,12 +507,25 @@ public class PlayerRpgMovement : NetworkBehaviour
         {
             StopMoveForwardNotResetVelo();
 
+            if (timer >= 1.07f)
+            {
+                animController.playerAnim.SetBool("Fall", false);
+            }
+
             Vector3 dir = transform.position - enemyPos;
             rb.AddForce(dir.normalized * KnockbackSpeed * Time.deltaTime);
+
+            var lookPos = enemyPos - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20);
             timer += Time.deltaTime;
             yield return null;
         }
 
+        combatManager.ResetAnimBoolean();
+        combatManager.ResetCombatBool();
         knockbackCoroutine = null;
         canMove = true;
     }
@@ -526,6 +544,9 @@ public class PlayerRpgMovement : NetworkBehaviour
     public void PlayerDie()
     {
         if (animController.currentAnimatorStateBaseIsName("Die")) { return; }
+
+        if (isDead) { return; }
+
         canMove = false;
         StartCoroutine(dieThenRespawn());
     }
@@ -533,7 +554,10 @@ public class PlayerRpgMovement : NetworkBehaviour
     private IEnumerator dieThenRespawn()
     {
         this.gameObject.GetComponent<CombatRpgManager>().dieState();
+        isDead = true;
         deadCam.SetActive(true);
+        var stageCollider = GameObject.FindGameObjectWithTag("StageCollider").GetComponent<OnTriggerEvent>();
+        stageCollider.playerDieInvoke();
 
         if (isSinglePlayer)
         {
@@ -544,7 +568,7 @@ public class PlayerRpgMovement : NetworkBehaviour
             animController.dieAnimaitonServerRpc();
         }
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3f);
         Respawn();
     }
     public void Respawn()
@@ -555,6 +579,10 @@ public class PlayerRpgMovement : NetworkBehaviour
         canMove = true;
         this.gameObject.GetComponent<CombatRpgManager>().respawnState();
         this.gameObject.GetComponent<PlayerStat>().respawnResetHealth();
+
+        var loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
+        loadingPopup.FadeBlack(false);
+        isDead = false;
     }
 
     void walkSFX()
