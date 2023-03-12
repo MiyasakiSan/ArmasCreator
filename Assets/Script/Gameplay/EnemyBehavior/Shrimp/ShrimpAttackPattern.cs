@@ -11,11 +11,25 @@ public class ShrimpAttackPattern : ActionNode
     private enemyAnimController animController;
     private EnemyCombatManager enemyCombatManager;
 
+    private Transform center;
+
+    private Transform playerPos;
+
+    private float playerSlope;
+
+    public float radius;
+
     protected override void OnStart()
     {
+        if (blackboard.Target != null)
+        {
+            playerPos = blackboard.Target.transform;
+        }
 
         animController = context.gameObject.GetComponent<enemyAnimController>();
         enemyCombatManager = context.gameObject.GetComponent<EnemyCombatManager>();
+
+        center = GameObject.Find("Center").GetComponent<Transform>();
 
         if (blackboard.CurrentAttackPattern != null)
         {
@@ -35,11 +49,11 @@ public class ShrimpAttackPattern : ActionNode
             blackboard.IsAttacking = true;
             enemyCombatManager.IsAttacking = true;
             enemyCombatManager.currentAttackPattern = blackboard.CurrentAttackPattern;
-            context.transform.LookAt(blackboard.Target.transform);
+            animController.isFollwPlayer = blackboard.CurrentAttackPattern.IsFollow;
 
             if (attackCoroutine == null)
             {
-                attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackAnimaiton.length));
+                attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackDuration));
             }
         }
         else
@@ -61,15 +75,18 @@ public class ShrimpAttackPattern : ActionNode
         }
         else
         {
-            if (blackboard.CurrentAttackPattern.IsFollow)
+            if (animController.isFollwPlayer)
             {
-                context.transform.LookAt(blackboard.Target.transform);
+                var lookPos = blackboard.Target.transform.position - context.transform.position;
+                lookPos.y = 0;
+                var rotation = Quaternion.LookRotation(lookPos);
+
+                context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 20);
             }
 
             return State.Running;
         }
     }
-
     private IEnumerator attackingCoroutine(float length)
     {
         animController.SetMoving(false);
@@ -80,6 +97,13 @@ public class ShrimpAttackPattern : ActionNode
         animController.RunAnimation(blackboard.CurrentAttackPattern.AttackAnimaiton);
 
         yield return new WaitForSeconds(length);
+
+        blackboard.PrevioustAttackPattern = blackboard.CurrentAttackPattern;
+
+        if (blackboard.CurrentAttackPattern.IsEnrageFinishMove)
+        {
+            blackboard.canUseEnrageFinishMove = false;
+        }
 
         blackboard.IsAttacking = false;
         enemyCombatManager.IsAttacking = false;
