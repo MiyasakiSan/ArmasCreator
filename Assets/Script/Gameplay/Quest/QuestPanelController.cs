@@ -331,6 +331,15 @@ namespace ArmasCreator.Gameplay.UI
             gameObject.SetActive(false);
         }
 
+        public void ResetAllTrigger()
+        {
+            questPanelAnimator.ResetTrigger("show");
+            questPanelAnimator.ResetTrigger("hide");
+            questPanelAnimator.ResetTrigger("showAdjust");
+            questPanelAnimator.ResetTrigger("hideAdjust");
+            questPanelAnimator.ResetTrigger("showPreset");
+            questPanelAnimator.ResetTrigger("hidePreset");
+        }
     }
 }
 

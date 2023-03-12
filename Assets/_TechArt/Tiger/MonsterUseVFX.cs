@@ -28,7 +28,8 @@ public class MonsterUseVFX : MonoBehaviour
     IEnumerator Duration(int VFXNumber)
     {
         visualEffects[VFXNumber].Play();
-        yield return new WaitForSeconds(visualEffects[VFXNumber].GetFloat(99));
+        //yield return new WaitForSeconds(visualEffects[VFXNumber].GetFloat(99));
+        yield return new WaitForSeconds(1f);
         visualEffects[VFXNumber].Stop();
     }
 
