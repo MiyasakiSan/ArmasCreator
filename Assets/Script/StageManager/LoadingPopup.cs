@@ -66,9 +66,9 @@ namespace ArmasCreator.UI
 
         IEnumerator LoadScene(string sceneName)
         {
-            yield return new WaitUntil(() => loadingCanvas.activeSelf);
+            //yield return new WaitUntil(() => loadingCanvas.activeSelf);
 
-            yield return new WaitUntil(() => content.activeSelf);
+            //yield return new WaitUntil(() => content.activeSelf);
             LPBG.Reset();
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
             asyncOperation.allowSceneActivation = false;
@@ -142,8 +142,6 @@ namespace ArmasCreator.UI
 
             LPBG.Reset();
             FadeBlack();
-            yield return new WaitForSeconds(1f);
-            loadingCanvas.SetActive(false);
         }
 
         public void FadeBlack(bool isShowContent = true)
@@ -154,7 +152,12 @@ namespace ArmasCreator.UI
                 content.SetActive(false);
             }
 
-            loadingCanvas.SetActive(true);
+            if (!loadingCanvas.activeSelf)
+            {
+                loadingCanvas.SetActive(true);
+            }
+
+            content.SetActive(true);
             isFadingBlack = true;
             StartCoroutine(FadeBlackCoroutine());
             Debug.Log("Fade Black");
@@ -170,6 +173,7 @@ namespace ArmasCreator.UI
                 yield return new WaitForSeconds(0.025f);
             }
 
+            content.SetActive(false);
             yield return new WaitForSeconds(0.5f);
 
             while (FadeBlackImage.color.a > 0)
@@ -181,7 +185,7 @@ namespace ArmasCreator.UI
             }
 
             isFadingBlack = false;
-            content.SetActive(false);
+            loadingCanvas.SetActive(false);
         }
     }
 }
