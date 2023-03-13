@@ -66,8 +66,6 @@ namespace ArmasCreator.UI
 
         IEnumerator LoadScene(string sceneName)
         {
-            yield return null;
-
             yield return new WaitUntil(() => loadingCanvas.activeSelf);
 
             yield return new WaitUntil(() => content.activeSelf);
@@ -108,7 +106,7 @@ namespace ArmasCreator.UI
             while (!asyncOperation.isDone)
             {
                 targetValue = asyncOperation.progress / 0.9f;
-                currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.25f * Time.deltaTime);
+                currentValue = Mathf.MoveTowards(currentValue, targetValue, 0.5f * Time.deltaTime);
                 loadingSlider.value = currentValue;
 
                 if (Mathf.Approximately(currentValue, 1))
