@@ -18,6 +18,9 @@ namespace DitzelGames.FastIK
         private Coroutine setWeightCoroutine;
         private Vector3 latestAngle;
 
+        public bool isNPC;
+        public float NPCrange;
+
         /// <summary>
         /// Initial direction
         /// </summary>
@@ -72,7 +75,12 @@ namespace DitzelGames.FastIK
 
             var dot = Vector3.Dot(dir, Parent.forward);
 
-            if(Vector3.Distance(Target.position,Parent.position) < 4)
+            if(Vector3.Distance(Target.position,Parent.position) < 4 && !isNPC)
+            {
+                return;
+            }
+
+            if (Vector3.Distance(Target.position, Parent.position) > NPCrange && isNPC)
             {
                 return;
             }
