@@ -5,18 +5,34 @@ using UnityEngine.VFX;
 using Unity.Netcode;
 
 public class MonsterUseVFX : MonoBehaviour
-{
+{   
+    [Header("NormalMode")]
     [SerializeField]
     private VisualEffect[] visualEffects;
 
     [SerializeField]
     private ParticleSystem[] particleSystems;
 
+    [Header("RageMode")]
+    [SerializeField]
+    private VisualEffect[] visualEffectsRage;
 
+    [SerializeField]
+    private ParticleSystem[] particleSystemsRage;
+
+    [SerializeField]
+    private bool isRage;
 
     public void OnUseVFX(int VFXNumber)
     {
-        visualEffects[VFXNumber].Play();
+        if(!isRage)
+        {
+            visualEffects[VFXNumber].Play();
+        }
+        else
+        {
+            visualEffectsRage[VFXNumber].Play();
+        }
     }
 
 
@@ -27,27 +43,43 @@ public class MonsterUseVFX : MonoBehaviour
 
     IEnumerator Duration(int VFXNumber)
     {
-        visualEffects[VFXNumber].Play();
-        //yield return new WaitForSeconds(visualEffects[VFXNumber].GetFloat(99));
-        yield return new WaitForSeconds(1f);
-        visualEffects[VFXNumber].Stop();
+        if (!isRage)
+        {
+            visualEffects[VFXNumber].Play();
+            //yield return new WaitForSeconds(visualEffects[VFXNumber].GetFloat(99));
+            yield return new WaitForSeconds(1f);
+            visualEffects[VFXNumber].Stop();
+        }
+        else
+        {
+            visualEffectsRage[VFXNumber].Play();
+            //yield return new WaitForSeconds(visualEffects[VFXNumber].GetFloat(99));
+            yield return new WaitForSeconds(1f);
+            visualEffectsRage[VFXNumber].Stop();
+        }
     }
 
     public void OnUsePS(int VFXNumber)
     {
-        ParticleSystem[] particleSystemArray = particleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem particleSystem in particleSystemArray)
+        if (!isRage)
         {
-            particleSystem.gameObject.SetActive(true);
+            particleSystems[VFXNumber].gameObject.SetActive(true);
+        }
+        else
+        {
+            particleSystemsRage[VFXNumber].gameObject.SetActive(true);
         }
     }
 
     public void OnStopPS(int VFXNumber)
     {
-        ParticleSystem[] particleSystemArray = particleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem particleSystem in particleSystemArray)
+        if (!isRage)
         {
-            particleSystem.gameObject.SetActive(false);
+            particleSystems[VFXNumber].gameObject.SetActive(false);
+        }
+        else
+        {
+            particleSystemsRage[VFXNumber].gameObject.SetActive(false);
         }
     }
 
@@ -55,11 +87,17 @@ public class MonsterUseVFX : MonoBehaviour
     {
         for (int VFXNumber = 0; VFXNumber < particleSystems.Length; VFXNumber++)
         {
-            ParticleSystem[] particleSystemArray = particleSystems[VFXNumber].GetComponentsInChildren<ParticleSystem>();
-            foreach (ParticleSystem particleSystem in particleSystemArray)
-            {
-                particleSystem.gameObject.SetActive(false);
-            }
+            particleSystems[VFXNumber].gameObject.SetActive(false);
         }
+
+        for (int VFXNumber = 0; VFXNumber < particleSystemsRage.Length; VFXNumber++)
+        {
+            particleSystemsRage[VFXNumber].gameObject.SetActive(false);
+        }
+    }
+
+    public void IsRage(bool isRaged)
+    {
+        isRage = isRaged;
     }
 }
