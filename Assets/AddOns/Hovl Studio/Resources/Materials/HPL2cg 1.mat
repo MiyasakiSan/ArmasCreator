@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Circle18cg
+  m_Name: HPL2cg 1
   m_Shader: {fileID: 4800000, guid: bd6af5d577c618947b73aa60db554e51, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: aaab2c059dc876441ab6a1b07f6f8d21, type: 3}
+        m_Texture: {fileID: 2800000, guid: e1f5daa4611af4844a03ec5a45012456, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -75,18 +75,21 @@ Material:
     m_Floats:
     - _Blend2: 1
     - _BumpScale: 1
-    - _CullMode: 0
+    - _CullMode: 1
     - _Cutoff: 0.5
     - _Depthpower: 0.15
     - _DetailNormalMapScale: 1
     - _DstBlend: 1
-    - _Emission: 2
+    - _Emission: 4
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _InvFade: 3
+    - _MainTexUspeed: 0
+    - _MainTexVspeed: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NoiseUspeed: 0
+    - _NoiseVspeed: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -97,7 +100,7 @@ Material:
     - _Usecustomrandom: 0
     - _Usedepth: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.1830188, g: 0.9176685, b: 1, a: 1}
     - _DistortionSpeedXYPowerZ: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpeedMainTexUVNoiseUV: {r: 0, g: 0, b: 0, a: 0}
