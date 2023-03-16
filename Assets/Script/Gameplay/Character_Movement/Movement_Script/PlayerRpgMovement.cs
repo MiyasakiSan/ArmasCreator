@@ -519,7 +519,7 @@ public class PlayerRpgMovement : NetworkBehaviour
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 17f);
             timer += Time.deltaTime;
             yield return null;
         }
