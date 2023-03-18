@@ -36,7 +36,6 @@ public class TestMoveAround : MonoBehaviour
         {
             playerSlope = 0;
         }
-        
 
         float c = playerPos.position.z - (playerSlope * playerPos.position.x);
 
