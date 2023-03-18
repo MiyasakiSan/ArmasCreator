@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 5206984244274357086}
   - component: {fileID: 5206984244274357087}
   - component: {fileID: 5206984244274357084}
+  - component: {fileID: 4171037666234847184}
   m_Layer: 5
   m_Name: SellButton
   m_TagString: Untagged
@@ -334,6 +335,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4171037666234847184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206984244274357090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee76970fbf9f240bb1355b2f36c11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!1 &5206984244616263095
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +566,7 @@ GameObject:
   - component: {fileID: 5206984245104428944}
   - component: {fileID: 5206984245104428945}
   - component: {fileID: 5206984245104428950}
+  - component: {fileID: 3405959387635780508}
   m_Layer: 5
   m_Name: ArrowUp
   m_TagString: Untagged
@@ -661,6 +676,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3405959387635780508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206984245104428948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee76970fbf9f240bb1355b2f36c11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!1 &5206984245379943358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1483,7 @@ GameObject:
   - component: {fileID: 5206984245835486016}
   - component: {fileID: 5206984245835486017}
   - component: {fileID: 5206984245835486022}
+  - component: {fileID: 4918876378810159544}
   m_Layer: 5
   m_Name: ArrowDown
   m_TagString: Untagged
@@ -1564,6 +1593,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4918876378810159544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206984245835486020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee76970fbf9f240bb1355b2f36c11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!1 &5206984245865602839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abd7f3fd107dfb4abbea6e5030a228f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShopPanelController: {fileID: 0}
+  shopPanelController: {fileID: 0}
   sellShopPanelController: {fileID: 0}
   arrowUpButton: {fileID: 5206984245104428950}
   arrowDownButton: {fileID: 5206984245835486022}
@@ -1704,6 +1746,7 @@ GameObject:
   - component: {fileID: 5206984245984450897}
   - component: {fileID: 5206984245984450902}
   - component: {fileID: 5206984245984450903}
+  - component: {fileID: 701283363068671675}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -1814,6 +1857,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &701283363068671675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206984245984450901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee76970fbf9f240bb1355b2f36c11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!1 &5206984246026806168
 GameObject:
   m_ObjectHideFlags: 0

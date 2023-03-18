@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2952595138532625550}
   - component: {fileID: 2952595138532625551}
   - component: {fileID: 2952595138532625544}
+  - component: {fileID: 8597095968577123603}
   m_Layer: 5
   m_Name: SellButton
   m_TagString: Untagged
@@ -135,6 +136,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8597095968577123603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952595138532625546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee76970fbf9f240bb1355b2f36c11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!1 &2952595138703250222
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +162,7 @@ GameObject:
   - component: {fileID: 2952595138703248594}
   - component: {fileID: 2952595138703248595}
   - component: {fileID: 2952595138703250220}
+  - component: {fileID: 4444830197484611751}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -270,6 +285,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &4444830197484611751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952595138703250222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee76970fbf9f240bb1355b2f36c11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!1 &2952595139177324326
 GameObject:
   m_ObjectHideFlags: 0
