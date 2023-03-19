@@ -17,7 +17,9 @@ public class CombatRpgManager : NetworkBehaviour
     [Header("EMT")]
 
     [SerializeField]
-    private Slider EMT_Gauge;
+    private Image EMT_Gauge;
+
+    private float EMT_MaxAmount;
 
     private float EMT_Amount;
 
@@ -94,8 +96,8 @@ public class CombatRpgManager : NetworkBehaviour
 
         if(EMT_Gauge != null)
         {
-            EMT_Gauge.maxValue = 20; //TODO : Check is we need to make a gameData for this
-            EMT_Gauge.value = 0;
+            EMT_MaxAmount = 20; //TODO : Check is we need to make a gameData for this
+            EMT_Gauge.fillAmount = 0;
         }
 
         gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -272,10 +274,10 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (isEMTState) { return; }
 
-        if (EMT_Amount == EMT_Gauge.maxValue) { return; }
+        if (convertEMTAmountToEMTPercent(EMT_Amount) == EMT_Gauge.fillAmount) { return; }
 
         EMT_Amount++;
-        EMT_Gauge.value = EMT_Amount;
+        EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
     }
 
     private void UseEMT()
@@ -289,7 +291,7 @@ public class CombatRpgManager : NetworkBehaviour
             decreaseEMTgaugeCoroutine = null;
             isEMTState = false;
         }
-        else if (!isEMTState && EMT_Amount == 20)
+        else if (!isEMTState && EMT_Amount == EMT_MaxAmount)
         {
             isEMTState = true;
 
@@ -302,15 +304,20 @@ public class CombatRpgManager : NetworkBehaviour
         while (EMT_Amount > 0)
         {
             EMT_Amount -= 0.01f;
-            EMT_Gauge.value = EMT_Amount;
+            EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
 
             yield return new WaitForSeconds(0.01f / decreaseRate);
         }
 
         EMT_Amount = 0;
-        EMT_Gauge.value = 0;
+        EMT_Gauge.fillAmount = 0;
         isEMTState = false;
     } 
+
+    private float convertEMTAmountToEMTPercent(float EMT_Amount)
+    {
+        return EMT_Amount / EMT_MaxAmount;
+    }
     #endregion
 
     #region Melee Combat
