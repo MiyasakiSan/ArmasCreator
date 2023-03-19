@@ -182,7 +182,6 @@ namespace ArmasCreator.Gameplay
             yield return new WaitUntil(() => isPreGameFinished);
 
             CurrentGameplays = Gameplays.Challenge;
-            loadingPopup.FadeBlack();
         }
 
         public void PreGameFinish()

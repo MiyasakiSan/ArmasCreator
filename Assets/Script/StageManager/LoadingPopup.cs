@@ -98,7 +98,7 @@ namespace ArmasCreator.UI
                 loadingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
             }
 
-            var bgIndex = UnityEngine.Random.Range(0, bgList.Count - 1);
+            var bgIndex = UnityEngine.Random.Range(0, bgList.Count);
             bgImage.sprite = bgList[bgIndex];
 
             LPBG.Fade();
@@ -146,25 +146,27 @@ namespace ArmasCreator.UI
 
         public void FadeBlack(bool isShowContent = true)
         {
-            //TODO : Fade black in and out
-            if (!isShowContent)
-            {
-                content.SetActive(false);
-            }
+            isFadingBlack = true;
+            StartCoroutine(FadeBlackCoroutine(isShowContent));
+        }
 
+        IEnumerator FadeBlackCoroutine(bool isShowContent)
+        {
             if (!loadingCanvas.activeSelf)
             {
                 loadingCanvas.SetActive(true);
             }
 
-            content.SetActive(true);
-            isFadingBlack = true;
-            StartCoroutine(FadeBlackCoroutine());
-            Debug.Log("Fade Black");
-        }
+            if (!isShowContent)
+            {
+                content.SetActive(false);
+                Debug.Log("Fade Black false");
+            }
+            else
+            {
+                content.SetActive(true);
+            }
 
-        IEnumerator FadeBlackCoroutine()
-        {
             while (FadeBlackImage.color.a < 1)
             {
                 var tempColor = FadeBlackImage.color;
@@ -185,6 +187,7 @@ namespace ArmasCreator.UI
             }
 
             isFadingBlack = false;
+            content.SetActive(false);
             loadingCanvas.SetActive(false);
         }
     }

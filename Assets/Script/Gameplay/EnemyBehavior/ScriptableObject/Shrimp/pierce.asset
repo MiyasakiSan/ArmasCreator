@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1a269385a780694d98ec4363175b10c, type: 3}
-  m_Name: test1
+  m_Name: pierce
   m_EditorClassIdentifier: 
   maxActiveCount: 2
-  activeDistance: 23.67
-  minActiveDistance: 5.9
+  activeDistance: 40
+  minActiveDistance: 20
   attackDistance: 0
   activeDirection: {x: 0, y: 0, z: 1}
   activeAngleoffset: 360
-  damage: 10
-  attackCooldown: 1
-  isFollow: 1
+  damage: 5
+  attackCooldown: 0
+  isFollow: 0
   isEnrageFinishMove: 0
-  isSpamable: 0
+  isSpamable: 1
   isKnockback: 0
-  hurtBoxName: head
-  attackAnimaiton: {fileID: 1827226128182048838, guid: a42adba05769ac54d89dc3d4ab7c00ec,
+  hurtBoxName: leftHand
+  attackAnimaiton: {fileID: 1827226128182048838, guid: 9c36fc5823871204f8208fdcaa763277,
     type: 3}
-  attackDuration: 5
+  attackDuration: 4

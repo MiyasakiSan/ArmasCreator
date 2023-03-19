@@ -141,11 +141,11 @@ public class ShrimpMoveToAttackPos : ActionNode
 
         Vector3 offsetVector = (playerPos.position - center.transform.position).normalized * 20;
 
-        context.transform.position = lerpVector + new Vector3(offsetVector.x, 0, offsetVector.z); ;
+        context.transform.position = lerpVector;
 
         var lookPos = playerPos.position - context.transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
-        context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 10);
+        context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 17);
     }
 }

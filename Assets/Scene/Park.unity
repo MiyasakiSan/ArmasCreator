@@ -5603,7 +5603,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288303076}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 895f686662519d549b8a0fb1a7d8b6dc, type: 3}
   m_Name: 
@@ -5655,7 +5655,16 @@ MonoBehaviour:
   hurtBoxColliderList:
   - {fileID: 1321311836}
   AllAttackPattern:
+  - {fileID: 11400000, guid: eaf2149ef9a8fd049a7ef7417514c236, type: 2}
+  - {fileID: 11400000, guid: 0483b04edbc862144ab4da21f15a3dbc, type: 2}
+  - {fileID: 11400000, guid: 313c30957878304468428293afa58641, type: 2}
+  - {fileID: 11400000, guid: 37e328b00ae5f334f97d58d6e1a1951a, type: 2}
   - {fileID: 11400000, guid: 5b00c2e2c854e63418d50292294877c1, type: 2}
+  - {fileID: 11400000, guid: a4f5929484cdd1f47a3c8de9991554ff, type: 2}
+  - {fileID: 11400000, guid: 46d38703e68df42418d7104c4f917fd5, type: 2}
+  - {fileID: 11400000, guid: 0e6768026a74d734cbae7ab56a8d8533, type: 2}
+  - {fileID: 11400000, guid: 677c6a4ce34bddb438344dc2d3473a73, type: 2}
+  - {fileID: 11400000, guid: 85d4154209a853848925c21648279d02, type: 2}
   IsAttacking: 0
   currentAttackPattern: {fileID: 0}
 --- !u!136 &1288303081
@@ -5681,7 +5690,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288303076}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3e3d8aa68d121294591bf1f46aa704c3, type: 3}
   m_Controller: {fileID: 9100000, guid: ff82156e4660f6844a0618c5f76003a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -6636,6 +6645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1534832673981084538, guid: 960103404a3e4d2419e5f7efbfde2667,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31.07196
       objectReference: {fileID: 0}
     - target: {fileID: 1580324032630434314, guid: 960103404a3e4d2419e5f7efbfde2667,
         type: 3}
