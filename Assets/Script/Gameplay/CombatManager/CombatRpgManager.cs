@@ -54,6 +54,11 @@ public class CombatRpgManager : NetworkBehaviour
     public bool isSheathing;
     public bool isWithdrawing;
     public bool isUsingItem;
+    public bool onCombo;
+
+    private bool firstSound;
+    private bool secondSound;
+    private bool thirdSound;
 
     private bool canSwitchStance;
 
@@ -68,6 +73,7 @@ public class CombatRpgManager : NetworkBehaviour
     private GameplayController gameplayController;
     private GameDataManager gameDataManager;
     private UserDataManager userDataManager;
+    private SoundManager soundManager;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -76,6 +82,7 @@ public class CombatRpgManager : NetworkBehaviour
         gameModeController = SharedContext.Instance.Get<GameModeController>();
         gameDataManager = SharedContext.Instance.Get<GameDataManager>();
         userDataManager = SharedContext.Instance.Get<UserDataManager>();
+        soundManager = SharedContext.Instance.Get<SoundManager>();
     }
 
     void Start()
@@ -330,6 +337,7 @@ public class CombatRpgManager : NetworkBehaviour
             if (isSinglePlayer)
             {
                 animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", false);
+                firstSound = false;
             }
             else
             {
@@ -405,6 +413,16 @@ public class CombatRpgManager : NetworkBehaviour
         setComboBoolDependOn(noOfClicks);
         playerMovement.canWalk = false;
         playerMovement.canRun= false;
+
+        if (noOfClicks > 0)
+        {
+            playerMovement.StopSFX();
+            onCombo = true;
+        }
+        else
+        {
+            onCombo = false;
+        }
     }
 
     public void setComboBoolDependOn(int num)
@@ -414,6 +432,14 @@ public class CombatRpgManager : NetworkBehaviour
             if (isSinglePlayer)
             {
                 animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", true);
+
+                if (!firstSound)
+                {
+                    soundManager.PlayOneShot(soundManager.fModEvent.PlayerFirstComboSFX, this.gameObject);
+                    firstSound = true;
+                    thirdSound = false;
+                    secondSound = false;
+                }
             }
             else
             {
@@ -428,6 +454,13 @@ public class CombatRpgManager : NetworkBehaviour
             if (isSinglePlayer)
             {
                 animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", true);
+
+                if (!secondSound) 
+                {
+                    soundManager.PlayOneShot(soundManager.fModEvent.PlayerSecondComboSFX, this.gameObject);
+                    secondSound = true;
+                    firstSound = false;
+                }
             }
             else
             {
@@ -442,6 +475,13 @@ public class CombatRpgManager : NetworkBehaviour
             if (isSinglePlayer)
             {
                 animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", true);
+
+                if (!thirdSound) 
+                {
+                    soundManager.PlayOneShot(soundManager.fModEvent.PlayerThirdComboSFX, this.gameObject);
+                    thirdSound = true;
+                    secondSound = false;
+                }
             }
             else
             {
