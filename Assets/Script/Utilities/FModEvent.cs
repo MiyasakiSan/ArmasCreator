@@ -9,7 +9,7 @@ public class FModEvent : MonoBehaviour
     [field : Header("Player")]
     [field : SerializeField] public EventReference PlayerWalkSFX {get; private set;}
     [field : SerializeField] public EventReference PlayerRunSFX {get; private set;}
-    [field: SerializeField] public EventReference PlayerRollFX { get; private set; }
+    [field: SerializeField] public EventReference PlayerRollSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerFirstComboSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerSecondComboSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerThirdComboSFX { get; private set; }

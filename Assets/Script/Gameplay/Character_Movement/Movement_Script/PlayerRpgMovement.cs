@@ -341,6 +341,10 @@ public class PlayerRpgMovement : NetworkBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+        soundManager.PlayOneShot(soundManager.fModEvent.PlayerRollSFX, this.transform.position);
+        playerWalkSFX.stop(STOP_MODE.ALLOWFADEOUT);
+        playerRunSFX.stop(STOP_MODE.ALLOWFADEOUT);
+
         while (timer < dodgeTimer)
         {
             StopMoveForwardNotResetVelo();
@@ -587,6 +591,8 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     void walkSFX()
     {
+        if (combatManager.onCombo) { return; }
+
         soundManager.AttachInstanceToGameObject(playerWalkSFX, transform, rb);
 
         playerWalkSFX.getPlaybackState(out var playBackState);
@@ -596,6 +602,8 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     void runSFX()
     {
+        if (combatManager.onCombo) { return; }
+
         soundManager.AttachInstanceToGameObject(playerRunSFX, transform, rb);
 
         playerRunSFX.getPlaybackState(out var playBackState);
