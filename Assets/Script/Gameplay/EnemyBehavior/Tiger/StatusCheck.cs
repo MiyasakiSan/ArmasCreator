@@ -9,8 +9,11 @@ public class StatusCheck : ActionNode
     private CoroutineHelper coroutineHelper;
 
     public float EnrageDuration;
+
+    private MonsterUseVFX monsterVFX;
     protected override void OnStart() {
         coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
+        monsterVFX = context.gameObject.GetComponent<MonsterUseVFX>();
     }
 
     protected override void OnStop() {
@@ -56,10 +59,10 @@ public class StatusCheck : ActionNode
     IEnumerator EnrageMode(float sec)
     {
         blackboard.IsEnrage = true;
+        monsterVFX.IsEnterRageMode(true);
 
         yield return new WaitForSeconds(sec);
 
-        blackboard.IsEnrage = false;
         blackboard.canUseEnrageFinishMove = true;
     }
 }

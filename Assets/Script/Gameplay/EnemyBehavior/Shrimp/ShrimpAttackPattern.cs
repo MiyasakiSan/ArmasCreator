@@ -10,6 +10,7 @@ public class ShrimpAttackPattern : ActionNode
     private CoroutineHelper coroutineHelper;
     private enemyAnimController animController;
     private EnemyCombatManager enemyCombatManager;
+    private MonsterUseVFX monsterVFX;
 
     private Transform center;
 
@@ -28,6 +29,7 @@ public class ShrimpAttackPattern : ActionNode
 
         animController = context.gameObject.GetComponent<enemyAnimController>();
         enemyCombatManager = context.gameObject.GetComponent<EnemyCombatManager>();
+        monsterVFX = context.gameObject.GetComponent<MonsterUseVFX>();
 
         center = GameObject.Find("Center").GetComponent<Transform>();
 
@@ -103,6 +105,8 @@ public class ShrimpAttackPattern : ActionNode
         if (blackboard.CurrentAttackPattern.IsEnrageFinishMove)
         {
             blackboard.canUseEnrageFinishMove = false;
+            blackboard.IsEnrage = false;
+            monsterVFX.IsEnterRageMode(false);
         }
 
         blackboard.IsAttacking = false;

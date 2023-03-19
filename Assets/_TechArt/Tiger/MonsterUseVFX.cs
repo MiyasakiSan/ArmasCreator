@@ -21,7 +21,15 @@ public class MonsterUseVFX : MonoBehaviour
     private ParticleSystem[] particleSystemsRage;
 
     [SerializeField]
+    private GameObject[] rageEffect;
+
+    [SerializeField]
     private bool isRage;
+
+    private void Start()
+    {
+        IsEnterRageMode(false);
+    }
 
     public void OnUseVFX(int VFXNumber)
     {
@@ -99,5 +107,15 @@ public class MonsterUseVFX : MonoBehaviour
     public void IsRage(bool isRaged)
     {
         isRage = isRaged;
+    }
+
+    public void IsEnterRageMode(bool status)
+    {
+        IsRage(status);
+
+        foreach(var effect in rageEffect)
+        {
+            effect.SetActive(status);
+        }
     }
 }
