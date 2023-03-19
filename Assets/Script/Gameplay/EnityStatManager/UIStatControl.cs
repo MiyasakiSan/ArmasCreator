@@ -7,13 +7,15 @@ using Unity.Netcode;
 
 public class UIStatControl : MonoBehaviour
 {
-    public Slider healthSlider;
-    public Slider staminaSlider;
-
     [SerializeField]
     private Image staminaBarImage;
+    [SerializeField]
+    private Image healthBarImage;
 
     private Color defaultStaminaColor;
+
+    private float maxHP;
+    private float maxStamina;
 
     private void Awake()
     {
@@ -22,25 +24,26 @@ public class UIStatControl : MonoBehaviour
     void Start()
     {
         defaultStaminaColor = staminaBarImage.color;
+
     }
 
     public void SetHealthUI(float value)
     {
-        healthSlider.maxValue = value;
-        healthSlider.value = value;
+        maxHP = value;
+        healthBarImage.fillAmount = value / maxHP;
     }
     public void SetStaminaUI(float value)
     {
-        staminaSlider.maxValue = value;
-        staminaSlider.value = value;
+        maxStamina = value;
+        staminaBarImage.fillAmount = value / maxStamina;
     }
     public void UpdateHealthUI(float value)
     {
-        healthSlider.value = value;
+        healthBarImage.fillAmount = value / maxHP;
     }
     public void UpdateStaminaUI(float value)
     {
-        staminaSlider.value = value;
+        staminaBarImage.fillAmount = value / maxStamina;
     }
 
     public void IncreaseStaminaRateState()
@@ -52,5 +55,4 @@ public class UIStatControl : MonoBehaviour
     {
         staminaBarImage.color = defaultStaminaColor;
     }
-
 }

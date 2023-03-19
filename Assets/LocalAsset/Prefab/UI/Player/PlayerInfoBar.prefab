@@ -538,7 +538,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8622331492529860893}
   - component: {fileID: 7501610020144381835}
-  - component: {fileID: 8412574672184602990}
   m_Layer: 5
   m_Name: PlayerInfoBar
   m_TagString: Untagged
@@ -584,22 +583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d963800f13fca2744ad5dc72247f7da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
-  staminaSlider: {fileID: 0}
   staminaBarImage: {fileID: 0}
---- !u!114 &8412574672184602990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5228636843260112595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea10bcd5987436449c5cb77997d77ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  healthBarImage: {fileID: 7256173144581744464}
 --- !u!1 &5987324997697110251
 GameObject:
   m_ObjectHideFlags: 0
