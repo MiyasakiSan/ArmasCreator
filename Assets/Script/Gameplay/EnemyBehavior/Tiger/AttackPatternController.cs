@@ -91,7 +91,7 @@ namespace ArmasCreator.Behavior
            
             if (avaliableAttackPAttern.Count > 0)
             {
-                randNum = Random.Range(0, avaliableAttackPAttern.Count - 1);
+                randNum = Random.Range(0, avaliableAttackPAttern.Count);
                 var rand = 0;
 
                 if (randNum != 0)
