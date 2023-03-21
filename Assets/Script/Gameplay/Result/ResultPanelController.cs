@@ -267,6 +267,10 @@ namespace ArmasCreator.Gameplay.UI
             rewardText.text = "0 s";
             int countReward = 0;
             int increaseAmount = Mathf.CeilToInt(Mathf.Pow(10, Mathf.CeilToInt(Mathf.Log10(rewardAmount/25))));
+            if (increaseAmount <= 0)
+            {
+                increaseAmount = 1;
+            }
             while (rewardAmount > countReward)
             {
                 countReward += increaseAmount;
@@ -282,6 +286,10 @@ namespace ArmasCreator.Gameplay.UI
             damageDealtText.text = "0";
             int countDamageDealt = 0;
             int increaseAmount = Mathf.CeilToInt(Mathf.Pow(10, Mathf.CeilToInt(Mathf.Log10(damageDealtAmount / 50))));
+            if (increaseAmount <= 0)
+            {
+                increaseAmount = 1;
+            }
             while (damageDealtAmount > countDamageDealt)
             {
                 countDamageDealt += increaseAmount;
@@ -297,6 +305,10 @@ namespace ArmasCreator.Gameplay.UI
             damageTakenText.text = "0";
             int countDamageTaken = 0;
             int increaseAmount = Mathf.CeilToInt(Mathf.Pow(10, Mathf.CeilToInt(Mathf.Log10(damagetakenAmount / 50))));
+            if(increaseAmount <= 0)
+            {
+                increaseAmount = 1;
+            }
             while (damagetakenAmount > countDamageTaken)
             {
                 countDamageTaken += increaseAmount;
