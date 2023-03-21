@@ -67,6 +67,7 @@ namespace ArmasCreator.Gameplay
 
         private GameModeController gameModeController;
         private GameDataManager gameDataManager;
+        private UserDataManager userDataManager;
         private LoadingPopup loadingPopup;
         private UIPlayerController uiPlayerController;
 
@@ -83,6 +84,7 @@ namespace ArmasCreator.Gameplay
         private bool isPreGameFinished;
         private bool isStageFinished;
         private Coroutine PreGameCoroutine;
+        private SubType questEnemyType;
 
         private void Awake()
         {
@@ -94,6 +96,7 @@ namespace ArmasCreator.Gameplay
             gameModeController = SharedContext.Instance.Get<GameModeController>();
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
             loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
+            userDataManager = SharedContext.Instance.Get<UserDataManager>();
             Interacable = true;
 
             CurrentGameplays = Gameplays.Town;
@@ -152,6 +155,15 @@ namespace ArmasCreator.Gameplay
 
             loadingPopup.LoadSceneAsync(questInfo.SceneName);
             loadingPopup.OnLoadingSceneFinished += EnterPreGameStage;
+
+            if (questInfo.SceneName == "ConstructionSite")
+            {
+                questEnemyType = SubType.Lion;
+            }
+            else
+            {
+                questEnemyType = SubType.Shrimp;
+            }
         }
 
         private void EnterPreGameStage()
@@ -212,9 +224,29 @@ namespace ArmasCreator.Gameplay
             OnStateResult?.Invoke(result);
             yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
 
+            AddRewardToPlayer(2500);
+
             Dispose();
             loadingPopup.LoadSceneAsync("Town");
             SetCursorLock(true);
+        }
+
+        private void AddRewardToPlayer(float rewardAmount)
+        {
+            userDataManager.UserData.UpdateCoin(rewardAmount);
+
+            bool exist = gameDataManager.TryGetAllMonsterPart(questEnemyType, out List<ItemInfoModel> monsterPartInfoList);
+
+            if(!exist) 
+            {
+                Debug.LogError("WTF is Happening");
+                return; 
+            }
+
+            foreach(var monsterPartInfo in monsterPartInfoList)
+            {
+                userDataManager.UserData.UserDataInventory.AddCraftItem(monsterPartInfo.ID, Random.Range(1, 3));
+            }
         }
 
         public void ReturnToMainmenu()
@@ -263,6 +295,7 @@ namespace ArmasCreator.Gameplay
         {
             SharedContext.Instance.Remove(this);
             currentQuestInfo = null;
+            questEnemyType = SubType.None;
             optionPanelController.RemoveListener();
             Interacable = true;
             Destroy(this.gameObject);

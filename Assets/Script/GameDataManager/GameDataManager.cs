@@ -268,6 +268,27 @@ namespace ArmasCreator.GameData
             return true;
         }
 
+        public bool TryGetAllMonsterPart(SubType subtype, out List<ItemInfoModel> monsterPartInfoList)
+        {
+            bool exist = monsterPartInfos != null;
+            monsterPartInfoList = new List<ItemInfoModel>();
+
+            if (!exist)
+            {
+                Debug.LogError($"monsterPartInfos is null");
+                return false;
+            }
+
+            foreach (var monsterPartInfo in monsterPartInfos)
+            {
+                if (monsterPartInfo.Value.SubType != subtype) { continue; }
+
+                monsterPartInfoList.Add(monsterPartInfo.Value);
+            }
+
+            return exist;
+        }
+
         public bool TryGetRecipeInfo(string id, out RecipeModel recipeInfo)
         {
             bool exist = recipeInfos.TryGetValue(id, out RecipeModel itemInfo);
