@@ -19,6 +19,7 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - DepthOnly
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -39,7 +40,7 @@ Material:
     - _AlphaClip: 1
     - _AngleOffsetMultiplier: 2
     - _Blend: 2
-    - _CastShadows: 1
+    - _CastShadows: 0
     - _Cull: 0
     - _DistrotionStrength: 0.4
     - _DstBlend: 1
@@ -52,7 +53,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.6311467, b: 0.8313726, a: 0}
+    - _Color: {r: 0, g: 0.15686275, b: 0.20392157, a: 0}
     - _SmoothStep: {r: 0, g: 4, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5037660637217105470
