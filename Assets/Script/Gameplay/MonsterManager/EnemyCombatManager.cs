@@ -160,6 +160,7 @@ public class EnemyCombatManager : NetworkBehaviour
         StopBTH();
         enemyAnim.anim.Play("idleToStun");
         enemyAnim.anim.SetBool("isStun", true);
+        enemyAnim.SetAnimationRootNode(true);
 
         yield return new WaitForSeconds(5f);
 
@@ -169,6 +170,7 @@ public class EnemyCombatManager : NetworkBehaviour
         yield return new WaitForSeconds(2f);
 
         StartBTH();
+        enemyAnim.SetAnimationRootNode(false);
         stunCoroutine = null;
     }
 

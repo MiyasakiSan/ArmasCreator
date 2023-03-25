@@ -498,6 +498,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     IEnumerator GetKnockbackCoroutine(Vector3 enemyPos)
     {
         canMove = false;
+        CanRotate = false;
         animController.playerAnim.SetBool("Fall", true);
 
         float timer = 0;
@@ -507,7 +508,7 @@ public class PlayerRpgMovement : NetworkBehaviour
             combatManager.CancelUseItem();
         }
 
-        while (timer < 2.67f)
+        while (timer < 2.07f)
         {
             StopMoveForwardNotResetVelo();
 
@@ -532,6 +533,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         combatManager.ResetCombatBool();
         knockbackCoroutine = null;
         canMove = true;
+        CanRotate = true;
     }
 
     private void floatCollider()
