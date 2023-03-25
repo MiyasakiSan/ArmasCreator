@@ -29,6 +29,9 @@ public class EnemyCombatManager : NetworkBehaviour
 
     public List<AttackPattern> AllAttackPattern;
 
+    [SerializeField]
+    private BehaviourTreeRunner BHT;
+
     private GameplayController gameplayController;
 
     private UIPlayerController uIPlayerController;
@@ -36,6 +39,8 @@ public class EnemyCombatManager : NetworkBehaviour
     public bool IsAttacking;
 
     public AttackPattern currentAttackPattern;
+
+    private Coroutine stunCoroutine;
 
     void Start()
     {
@@ -141,6 +146,47 @@ public class EnemyCombatManager : NetworkBehaviour
         }
 
         uIPlayerController.ShowHurt();
+    }
+
+    public void Stun()
+    {
+        if (stunCoroutine != null) { return; }
+
+        stunCoroutine = StartCoroutine(EnemyStun());
+    }
+
+    IEnumerator EnemyStun()
+    {
+        StopBTH();
+        enemyAnim.anim.Play("idleToStun");
+        enemyAnim.anim.SetBool("isStun", true);
+
+        yield return new WaitForSeconds(5f);
+
+        enemyAnim.anim.SetBool("isStun", false);
+        yield return new WaitForSeconds(0.5f);
+        enemyAnim.anim.Play("jumpBack");
+        yield return new WaitForSeconds(2f);
+
+        StartBTH();
+        stunCoroutine = null;
+    }
+
+    public void StopBTH()
+    {
+        BHT.enabled = false;
+    }
+
+    public void StartBTH()
+    {
+        BHT.enabled = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Bubble")) { return; }
+
+        Stun();
     }
 
     private void OnDestroy()

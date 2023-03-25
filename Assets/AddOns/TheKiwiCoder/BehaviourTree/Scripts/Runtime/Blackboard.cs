@@ -26,6 +26,7 @@ namespace TheKiwiCoder {
         public bool canUseRoar;
         public bool IsRunToAttackPos;
         public bool IsAttacking;
+        public bool IsFinishRun;
 
         public float HpPercentage; // Max : 1  ||  Min : 0
         public bool IsMapAttackAvaliable;

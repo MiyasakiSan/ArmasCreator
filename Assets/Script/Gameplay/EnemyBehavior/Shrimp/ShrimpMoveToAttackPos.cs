@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
+using ArmasCreator.Utilities;
 
 public class ShrimpMoveToAttackPos : ActionNode
 {
@@ -16,6 +17,9 @@ public class ShrimpMoveToAttackPos : ActionNode
     public float radius;
 
     private enemyAnimController animController;
+    private CoroutineHelper coroutineHelper;
+
+    private Coroutine runToAttackPosCoroutine;
 
     protected override void OnStart() {
 
@@ -27,9 +31,10 @@ public class ShrimpMoveToAttackPos : ActionNode
         center = GameObject.Find("Center").GetComponent<Transform>();
 
         animController = context.gameObject.GetComponent<enemyAnimController>();
+        coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();
 
         animController.ResetAllLookAt();
-
+        blackboard.IsFinishRun = false;
     }
 
     protected override void OnStop() {
@@ -38,6 +43,8 @@ public class ShrimpMoveToAttackPos : ActionNode
     protected override State OnUpdate() 
     {
         if (disable) { return State.Success; }
+
+        if (blackboard.IsFinishRun) { return State.Success; }
 
         if (blackboard.CurrentAttackPattern != null && !blackboard.IsRunToAttackPos)
         {
@@ -50,19 +57,17 @@ public class ShrimpMoveToAttackPos : ActionNode
                 return State.Success;
             }
 
-            blackboard.IsRunToAttackPos = true;
+            if (runToAttackPosCoroutine == null)
+            {
+                runToAttackPosCoroutine = coroutineHelper.Play(RunToAttackPos());
+            }
+
             return State.Running;
         }
 
         if (blackboard.IsRunToAttackPos)
         {
             CalculateProjection();
-
-            if (Vector3.Distance(context.transform.position,blackboard.Target.transform.position) <= blackboard.CurrentAttackPattern.AttackDistance)
-            {
-                blackboard.IsRunToAttackPos = false;
-                return State.Success;
-            }
 
             return State.Running;
         }
@@ -78,6 +83,15 @@ public class ShrimpMoveToAttackPos : ActionNode
         {
             return State.Running;
         }
+    }
+
+    IEnumerator RunToAttackPos()
+    {
+        blackboard.IsRunToAttackPos = true;
+        yield return new WaitForSeconds(3f);
+        blackboard.IsRunToAttackPos = false;
+        blackboard.IsFinishRun = true;
+        runToAttackPosCoroutine = null;
     }
 
     private void CalculateProjection()
@@ -137,15 +151,11 @@ public class ShrimpMoveToAttackPos : ActionNode
 
         yPos = playerSlope * xPos + c;
 
-        Vector3 lerpVector = Vector3.Lerp(context.transform.position, new Vector3(xPos, context.transform.position.y, yPos), Time.deltaTime);
-
-        Vector3 offsetVector = (playerPos.position - center.transform.position).normalized * 20;
-
-        context.transform.position = lerpVector;
+        context.transform.position = Vector3.Lerp(context.transform.position, new Vector3(xPos, context.transform.position.y, yPos), Time.deltaTime * 0.25f);
 
         var lookPos = playerPos.position - context.transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
-        context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 17);
+        context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime);
     }
 }

@@ -18,8 +18,6 @@ public class ShrimpAttackPattern : ActionNode
 
     private float playerSlope;
 
-    public float radius;
-
     protected override void OnStart()
     {
         if (blackboard.Target != null)
@@ -83,7 +81,7 @@ public class ShrimpAttackPattern : ActionNode
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
 
-                context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 20);
+                context.transform.rotation = Quaternion.Slerp(context.transform.rotation, rotation, Time.deltaTime * 20f);
             }
 
             return State.Running;

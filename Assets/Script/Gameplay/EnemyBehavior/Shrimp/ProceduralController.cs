@@ -25,6 +25,16 @@ public class ProceduralController : MonoBehaviour
     public GameObject[] legCubes;
 
     [Space(10)]
+    [Header("Float Collider")]
+    [SerializeField]
+    private LayerMask groundLayer;
+    public float distanceToGround;
+    private Rigidbody rb;
+    [SerializeField]
+    private GameObject raycastPoint;
+    [Space(10)]
+
+    [Space(10)]
     [Header("Rotation of Body and Movment of leg")]
     [Space(10)]
 
@@ -48,6 +58,7 @@ public class ProceduralController : MonoBehaviour
     void Start()
     {
         lastBodyUp = transform.up;
+        rb = mainObject.GetComponent<Rigidbody>();
 
         legPositions = new Vector3[legTargets.Length];
         legOriginalPositions = new Vector3[legTargets.Length];
@@ -74,10 +85,23 @@ public class ProceduralController : MonoBehaviour
 
         moveLegs();
         rotateBody();
+        //floatCollider();
 
 
         lastSpiderPosition = mainObject.transform.position;
         lastVelocity = velocity;
+    }
+
+    private void floatCollider()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(raycastPoint.transform.position, Vector3.down, out hit, groundLayer))
+        {
+            Vector3 targetPosition = mainObject.transform.position;
+            targetPosition.y = hit.point.y + distanceToGround;
+            mainObject.transform.position = Vector3.Lerp(mainObject.transform.position, targetPosition, Time.deltaTime / 0.2f);
+            rb.useGravity = false;
+        }
     }
 
     void moveLegs()
