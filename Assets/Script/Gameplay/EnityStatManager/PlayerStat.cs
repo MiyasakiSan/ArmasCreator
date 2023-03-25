@@ -9,6 +9,9 @@ using UnityEngine.UI;
 using ArmasCreator.GameMode;
 using ArmasCreator.Utilities;
 using ArmasCreator.Gameplay.UI;
+using ArmasCreator.UserData;
+using ArmasCreator.GameData;
+using ArmasCreator.Gameplay;
 
 public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 {
@@ -48,6 +51,45 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private bool isValnurable;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
+
+    private UserDataManager userDataManager;
+    private GameDataManager gameDataManager;
+    private GameplayController gameplayController;
+
+    [Space(10)]
+    [Header("Equipment")]
+    [SerializeField]
+    private GameObject CiladaeHelmet;
+    [SerializeField]
+    private GameObject CiladaeShirt;
+    [SerializeField]
+    private GameObject CiladaeGlove;
+    [SerializeField]
+    private GameObject CiladaeLegging;
+    [SerializeField]
+    private GameObject CiladaeShoes;
+    [SerializeField]
+    private GameObject CiladaeWeapon;
+    [Space(10)]
+    [SerializeField]
+    private GameObject GotenaHelmet;
+    [SerializeField]
+    private GameObject GotenaShirt;
+    [SerializeField]
+    private GameObject GotenaGlove;
+    [SerializeField]
+    private GameObject GotenaLegging;
+    [SerializeField]
+    private GameObject GotenaShoes;
+    [SerializeField]
+    private GameObject GotenaWeapon;
+
+    private float def = 0;
+    public float Def => def;
+    private float vit = 0;
+    public float Vit => vit;
+    private float atk = 0;
+    public float Atk => atk;
 
     public float CurrentHealth
     {
@@ -189,6 +231,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
             if (isValnurable) { return; }
 
+            damage -= (def * damage) / 100;
             currentHealth -= damage;
             uiStat.UpdateHealthUI(currentHealth);
 
@@ -302,7 +345,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         if (isSinglePlayer)
         {
             CurrentHealth = maxHealth;
-            uiStat.SetHealthUI(maxHealth);
+            uiStat.SetHealthUI(maxHealth + vit);
         }
         else
         {
@@ -329,10 +372,10 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
         if (isSinglePlayer)
         {
-            CurrentHealth = maxHealth;
+            CurrentHealth = maxHealth + vit;
             CurrentStamina = maxStamina;
 
-            uiStat.SetHealthUI(maxHealth);
+            uiStat.SetHealthUI(maxHealth + vit);
             uiStat.SetStaminaUI(maxStamina);
         }
         else
@@ -360,10 +403,21 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private void Awake()
     {
         gameModeController = SharedContext.Instance.Get<GameModeController>();
+        userDataManager = SharedContext.Instance.Get<UserDataManager>();
+        gameDataManager = SharedContext.Instance.Get<GameDataManager>();
     }
 
     void Start()
     {
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        if (gameplayController.CurrentGameplays == GameplayController.Gameplays.Normal ||
+            gameplayController.CurrentGameplays == GameplayController.Gameplays.Town)
+        {
+            SetupStat();
+            SetupEquipmentAsset();
+        }
+
         if (isSinglePlayer)
         {
             SetupVariable();
@@ -378,6 +432,116 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             setupClientCanvas();
         }
+    }
+
+    private void SetupStat()
+    {
+        atk = 0;
+        def = 0;
+        vit = 0;
+
+        var allEquipmentId = userDataManager.UserData.UserDataInventory.GetAllEquipItemIds();
+
+        foreach(var id in allEquipmentId)
+        {
+            bool exist = gameDataManager.TryGetEquipItemInfoById(id, out EquipableItemModel equipItemInfo);
+
+            if (!exist) { return; }
+
+            atk += equipItemInfo.ATK;
+            def += equipItemInfo.DEF;
+            vit += equipItemInfo.VIT;
+        }
+    }
+
+    #region HardCode
+    private void SetupEquipmentAsset()
+    {
+        var allEquipmentId = userDataManager.UserData.UserDataInventory.GetAllEquipItemIds();
+
+        foreach (var id in allEquipmentId)
+        {
+            var subType = gameDataManager.GetEquipInfoSubType(id, out string asset);
+
+            if (asset != "ciladae" || asset != "gotenna") { continue; }
+
+            switch (subType)
+            {
+                case (SubType.Helmet):
+                    {
+                        if (asset == "ciladae")
+                        {
+                            CiladaeHelmet.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaHelmet.SetActive(true);
+                        }
+                        break;
+                    }
+                case (SubType.Shirt):
+                    {
+                        if (asset == "ciladae")
+                        {
+                            CiladaeShirt.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaShirt.SetActive(true);
+                        }
+                        break;
+                    }
+                case (SubType.Glove):
+                    {
+                        if (asset == "ciladae")
+                        {
+                            CiladaeGlove.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaGlove.SetActive(true);
+                        }
+                        break;
+                    }
+                case (SubType.Pant):
+                    {
+                        if (asset == "ciladae")
+                        {
+                            CiladaeLegging.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaLegging.SetActive(true);
+                        }
+                        break;
+                    }
+                case (SubType.Shoes):
+                    {
+                        if (asset == "ciladae")
+                        {
+                            CiladaeShoes.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaShoes.SetActive(true);
+                        }
+                        break;
+                    }
+                case (SubType.Weapon):
+                    {
+                        if (asset == "ciladae")
+                        {
+                            CiladaeWeapon.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaWeapon.SetActive(true);
+                        }
+                        break;
+                    }
+            }
+        } 
+        #endregion
     }
 
     private void Update()

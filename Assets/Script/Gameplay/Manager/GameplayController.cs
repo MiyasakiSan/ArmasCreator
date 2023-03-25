@@ -20,6 +20,7 @@ namespace ArmasCreator.Gameplay
             Town,
             Story,
             Challenge,
+            Normal,
             PreGame,
             Result
         }
@@ -114,7 +115,11 @@ namespace ArmasCreator.Gameplay
                 EnterGameplayResult();
             }
 
-            if (CurrentGameplays == Gameplays.Challenge) { return; }
+            if (CurrentGameplays == Gameplays.Challenge ||
+                CurrentGameplays == Gameplays.Normal) 
+            {
+                return; 
+            }
 
             if (!Interacable) { return; }
 
@@ -149,7 +154,19 @@ namespace ArmasCreator.Gameplay
 
         public void EnterChallengeStage(QuestInfo questInfo)
         {
-            CurrentGameplays = Gameplays.Challenge;
+            if (questInfo.PresetId == "cs-cm-n" &&
+                questInfo.PresetId == "cs-cm-01" &&
+                questInfo.PresetId == "cs-cm-02" &&
+                questInfo.PresetId == "pk-cm-n" &&
+                questInfo.PresetId == "pk-cm-01" &&
+                questInfo.PresetId == "pk-cm-02")
+            {
+                CurrentGameplays = Gameplays.Challenge;
+            }
+            else
+            {
+                CurrentGameplays = Gameplays.Normal;
+            }
 
             currentQuestInfo = questInfo;
 

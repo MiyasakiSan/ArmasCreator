@@ -234,6 +234,21 @@ namespace ArmasCreator.GameData
             return true;
         }
 
+        public SubType GetEquipInfoSubType(string id, out string asset)
+        {
+            bool exist = equipableitemInfos.TryGetValue(id, out EquipableItemModel itemInfo);
+
+            if (!exist)
+            {
+                Debug.LogError($"{id} doesn't exist in equipable items");
+                asset = "";
+                return SubType.None;
+            }
+
+            asset = itemInfo.Asset;
+            return itemInfo.SubType;
+        }
+
         public bool TryGetConsumeItemInfo(string id, out ConsumeableItemModel consumeItemInfo)
         {
             bool exist = consumeableitemInfos.TryGetValue(id, out ConsumeableItemModel itemInfo);

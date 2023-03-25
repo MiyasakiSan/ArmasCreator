@@ -100,7 +100,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
         float damage = col.GetComponent<Weapon>().weaponDamage;
 
-        enemyStat.receiveAttack(damage);
+        var playerStat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStat>();
+        enemyStat.receiveAttack(damage + ((playerStat.Atk * damage) /100));
 
         //var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
 
