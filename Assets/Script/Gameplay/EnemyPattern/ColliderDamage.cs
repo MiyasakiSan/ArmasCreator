@@ -16,6 +16,12 @@ public class ColliderDamage : MonoBehaviour
     [SerializeField]
     private List<VisualEffect> VFXList;
 
+    [SerializeField]
+    private List<ParticleSystem> particleSystemList;
+
+    [SerializeField]
+    private bool isLoop;
+
     private float damage;
     private bool isHit;
     private bool isInit;
@@ -27,16 +33,33 @@ public class ColliderDamage : MonoBehaviour
         gameplayController = SharedContext.Instance.Get<GameplayController>();
     }
 
-    private void RunVFX()
+    public void RunVFX()
     {
         Debug.Log("Show VFX");
 
         if (VFXList.Count == 0) { return; }
 
-        foreach(var VFX in VFXList)
+        if (particleSystemList.Count == 0) { return; }
+
+        foreach (var VFX in VFXList)
         {
             VFX.Play();
         }
+
+        foreach(var ps in particleSystemList)
+        {
+            ps.gameObject.SetActive(true);
+            if (isLoop == false)
+            {
+                StartCoroutine(waitUntilEffectFinish(ps));
+            }
+        }
+    }
+
+    public IEnumerator waitUntilEffectFinish(ParticleSystem ps)
+    {
+        yield return new WaitForSeconds(ps.main.duration);
+        ps.gameObject.SetActive(false);
     }
 
     public void SetupAttackPattern(float damage)
@@ -61,5 +84,6 @@ public class ColliderDamage : MonoBehaviour
 
         Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
         playerMovement.GetKnockback(this.transform.position);
+       
     }
 }

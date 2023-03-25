@@ -609,6 +609,11 @@ MonoBehaviour:
   - {fileID: 8011179894635169752}
   - {fileID: 6124254975521007711}
   - {fileID: 7856094751315052587}
+  rageEffect:
+  - {fileID: 8054272586463471016}
+  - {fileID: 3211550690081419427}
+  - {fileID: 5267141350670697134}
+  - {fileID: 8457341380423825871}
   isRage: 0
 --- !u!1 &3972024903038014625
 GameObject:
@@ -1048,6 +1053,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a806f95a6ba372942b5d4204e61049f2, type: 3}
+--- !u!1 &8457341380423825871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8273438538237017088, guid: a806f95a6ba372942b5d4204e61049f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 544842822859834831}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2096336267313060264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1117,6 +1128,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a806f95a6ba372942b5d4204e61049f2, type: 3}
+--- !u!1 &8054272586463471016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8273438538237017088, guid: a806f95a6ba372942b5d4204e61049f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2096336267313060264}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4308130249555279534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1186,6 +1203,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a806f95a6ba372942b5d4204e61049f2, type: 3}
+--- !u!1 &5267141350670697134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8273438538237017088, guid: a806f95a6ba372942b5d4204e61049f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4308130249555279534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6010259341959138989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3554,6 +3577,8 @@ MonoBehaviour:
   Target: {fileID: 0}
   Parent: {fileID: 1372823439680260185}
   weight: 1
+  isNPC: 0
+  NPCrange: 0
 --- !u!4 &861413198827564335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6385226563192988546, guid: a59cbae3a88a3324ea91b1e26fece982,
@@ -3749,6 +3774,8 @@ MonoBehaviour:
   Target: {fileID: 0}
   Parent: {fileID: 1372823439680260185}
   weight: 1
+  isNPC: 0
+  NPCrange: 0
 --- !u!4 &4117580076546063419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1563824098433142122, guid: a59cbae3a88a3324ea91b1e26fece982,
@@ -4413,3 +4440,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a806f95a6ba372942b5d4204e61049f2, type: 3}
+--- !u!1 &3211550690081419427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8273438538237017088, guid: a806f95a6ba372942b5d4204e61049f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6791587471215971491}
+  m_PrefabAsset: {fileID: 0}

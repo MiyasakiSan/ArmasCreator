@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using ArmasCreator.UI;
 using ArmasCreator.Gameplay.UI;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Events;
 
 namespace ArmasCreator.Gameplay
 {
@@ -86,6 +87,9 @@ namespace ArmasCreator.Gameplay
         private bool isStageFinished;
         private Coroutine PreGameCoroutine;
         private SubType questEnemyType;
+
+        public UnityAction<string, int> OnReceivedItem;
+        public UnityAction OnReceivedAllItem;
 
         private void Awake()
         {
@@ -237,11 +241,10 @@ namespace ArmasCreator.Gameplay
 
         private IEnumerator ShowGameResultCoroutine()
         {
+            AddRewardToPlayer(2500);
             ResultContainer result = new ResultContainer(currentStageTime, 2500, (int)currentDamageDelt, (int)currentDamageTaken, currentItemUsed);
             OnStateResult?.Invoke(result);
             yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
-
-            AddRewardToPlayer(2500);
 
             Dispose();
             loadingPopup.LoadSceneAsync("Town");
@@ -262,8 +265,12 @@ namespace ArmasCreator.Gameplay
 
             foreach(var monsterPartInfo in monsterPartInfoList)
             {
-                userDataManager.UserData.UserDataInventory.AddCraftItem(monsterPartInfo.ID, Random.Range(1, 3));
+                int amount = UnityEngine.Random.Range(1, 3);
+                userDataManager.UserData.UserDataInventory.AddCraftItem(monsterPartInfo.ID, amount);
+                OnReceivedItem.Invoke(monsterPartInfo.ID, amount);
             }
+
+            OnReceivedAllItem.Invoke();
         }
 
         public void ReturnToMainmenu()
