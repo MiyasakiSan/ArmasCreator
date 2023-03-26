@@ -65,8 +65,15 @@ public class ColliderDamage : MonoBehaviour
     public void SetupAttackPattern(float damage)
     {
         this.damage = damage;
-        anim.SetBool("init",true);
-        RunVFX();
+        isHit = false;
+        attackCollider.enabled = true;
+
+        if (anim != null)
+        {
+            anim.SetBool("init", true);
+            RunVFX();
+        }
+
         isInit = true;
     }
 

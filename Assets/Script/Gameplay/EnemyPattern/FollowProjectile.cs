@@ -25,6 +25,8 @@ public class FollowProjectile : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if( _target == null) { return; }
+
         _rb.velocity = transform.forward * _speed;
 
         var leadTimePercentage = Mathf.InverseLerp(_minDistancePredict, _maxDistancePredict, Vector3.Distance(transform.position, _target.transform.position));
@@ -34,6 +36,11 @@ public class FollowProjectile : MonoBehaviour
         AddDeviation(leadTimePercentage);
 
         RotateRocket();
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
     }
 
     private void PredictMovement(float leadTimePercentage)

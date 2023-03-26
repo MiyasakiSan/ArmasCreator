@@ -151,7 +151,7 @@ public class ShrimpMoveToAttackPos : ActionNode
 
         yPos = playerSlope * xPos + c;
 
-        context.transform.position = Vector3.Lerp(context.transform.position, new Vector3(xPos, context.transform.position.y, yPos), Time.deltaTime * 0.25f);
+        context.transform.position = Vector3.Lerp(context.transform.position, new Vector3(xPos, context.transform.position.y, yPos), Time.deltaTime * 0.5f);
 
         var lookPos = playerPos.position - context.transform.position;
         lookPos.y = 0;

@@ -188,6 +188,20 @@ public class EnemyCombatManager : NetworkBehaviour
     {
         if (!collision.gameObject.CompareTag("Bubble")) { return; }
 
+        if (!collision.gameObject.GetComponent<Bubble>().reached) { return; }
+
+        Stun();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (IsAttacking) { return; }
+
+        if (!other.gameObject.CompareTag("Bubble")) { return; }
+
+        if (!other.gameObject.GetComponent<Bubble>().reached) { return; }
+
+        Destroy(other.gameObject);
         Stun();
     }
 
