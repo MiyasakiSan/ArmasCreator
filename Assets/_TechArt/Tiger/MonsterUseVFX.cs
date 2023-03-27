@@ -153,6 +153,8 @@ public class MonsterUseVFX : MonoBehaviour
             var bubble = Instantiate(BubblePrefab, BubbleSpawnPos.transform.position, Quaternion.identity);
             bubble.GetComponent<Bubble>().Target = BubbleTargetPos[i];
             bubble.GetComponent<ColliderDamage>().SetupAttackPattern(enemyCombat.currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+            bubble.GetComponent<ParticleSystem>().trigger.AddCollider(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>());
+            bubble.GetComponent<ParticleSystem>().trigger.AddCollider(GetComponent<Collider>());
         }
     }
 
