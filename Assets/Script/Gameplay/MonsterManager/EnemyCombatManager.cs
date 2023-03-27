@@ -45,6 +45,7 @@ public class EnemyCombatManager : NetworkBehaviour
 
     private Coroutine stunCoroutine;
     private bool isStun;
+    private bool isUltimate;
 
     void Start()
     {
@@ -156,6 +157,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
     public void GroundWater()
     {
+        if (isUltimate) { return; }
+
         waterGroundController.InitGroundWater(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
         waterGroundController.onGroundWaterFinishedCallback += GroundWaterFinish;
 
@@ -168,17 +171,44 @@ public class EnemyCombatManager : NetworkBehaviour
         waterGroundController.onGroundWaterFinishedCallback -= GroundWaterFinish;
     }
 
+    void GroundThunderFinish()
+    {
+        isUltimate = false;
+        Stun();
+        waterGroundController.onGroundWaterFinishedCallback -= GroundThunderFinish;
+    }
+
     public void GroundThunder()
     {
         if (!GetComponent<MonsterUseVFX>().IsRageStatus) { return; }
+
+        if (isUltimate) { return; }
 
         waterGroundController.InitGroundThunder(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
     }
 
     public void GroundThunderUltimate()
     {
+        StartCoroutine(InitGroundThunderUltimate());
+    }
+
+    IEnumerator InitGroundThunderUltimate()
+    {
+        var center = GameObject.Find("Center");
+        enemyAnim.anim.enabled = false;
+        isUltimate = true;
+
+        while(Vector3.Distance(transform.position,center.transform.position) > 0.5f)
+        {
+            transform.position = Vector3.Lerp(transform.position, center.transform.position, Time.deltaTime);
+            yield return null;
+        }
+
+        enemyAnim.anim.enabled = true;
+        enemyAnim.anim.Play("ultimateToGround");
+
         waterGroundController.InitUltimateGround(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
-        waterGroundController.onGroundWaterFinishedCallback -= GroundWaterFinish;
+        waterGroundController.onGroundWaterFinishedCallback += GroundThunderFinish;
     }
 
     public void Stun()

@@ -40,12 +40,21 @@ public class MonsterUseVFX : MonoBehaviour
     [Space(10)]
     [SerializeField] private GameObject PlasmaBallPrefab;
 
+    [SerializeField] private Material eyeMat;
+    private Color eyeDefaultColor;
+
     private EnemyCombatManager enemyCombat;
     private GameplayController gameplayController;
 
     private void Start()
     {
         IsEnterRageMode(false);
+
+        if (eyeMat != null)
+        {
+            eyeDefaultColor = eyeMat.GetColor("_EmissionColor");
+        }
+
         enemyCombat = GetComponent<EnemyCombatManager>();
         gameplayController = SharedContext.Instance.Get<GameplayController>();
     }
@@ -186,13 +195,18 @@ public class MonsterUseVFX : MonoBehaviour
         waterParticle.SetActive(false);
     }
 
-    public void SpawnGroundWater(int patternIndex)
+    public void EyeBlack()
     {
-
+        eyeMat.SetColor("_EmissionColor", Color.black);
     }
 
-    public void SpawnLightning(int patternIndex)
+    public void ResetEye()
     {
+        eyeMat.SetColor("_EmissionColor", eyeDefaultColor);
+    }
 
+    public void EyeRed()
+    {
+        eyeMat.SetColor("_EmissionColor", Color.red);
     }
 }

@@ -158,7 +158,7 @@ public class WaterGroundController : MonoBehaviour
             groundThunder.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3.5f);
 
         foreach (var groundThunder in InnerThunderGroundList)
         {
