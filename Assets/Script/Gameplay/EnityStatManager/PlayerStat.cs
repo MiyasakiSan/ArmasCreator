@@ -229,6 +229,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             if (this.GetComponent<PlayerRpgMovement>().isDodging) { Debug.Log("Dodge"); return; }
 
+            if (this.GetComponent<PlayerRpgMovement>().isKnockBack) { return; }
+
             if (isValnurable) { return; }
 
             damage -= (def * damage) / 100;

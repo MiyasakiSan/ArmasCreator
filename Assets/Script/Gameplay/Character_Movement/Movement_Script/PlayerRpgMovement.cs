@@ -11,6 +11,7 @@ using FMOD.Studio;
 using ArmasCreator.Gameplay;
 using TheKiwiCoder;
 using ArmasCreator.UI;
+using ArmasCreator.Gameplay.UI;
 
 public class PlayerRpgMovement : NetworkBehaviour
 {
@@ -59,6 +60,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     public bool canWalk;
     public bool canRun;
     private bool isDead;
+    public bool isKnockBack;
 
     private Rigidbody rb;
 
@@ -98,6 +100,8 @@ public class PlayerRpgMovement : NetworkBehaviour
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
+    private UIPlayerController uIPlayerController;
+
     private void Awake()
     {
         gameModeController = SharedContext.Instance.Get<GameModeController>();
@@ -122,6 +126,8 @@ public class PlayerRpgMovement : NetworkBehaviour
 
             Keyframe dodge_LastFrame = dodgeCurve[dodgeCurve.length - 1];
             dodgeTimer = dodge_LastFrame.time;
+
+            uIPlayerController = SharedContext.Instance.Get<UIPlayerController>();
 
             return;
         }
@@ -470,6 +476,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     {
         canMove = false;
         animController.playerAnim.SetBool("Hit",true);
+        uIPlayerController.ShowHurt();
 
         if (combatManager.isUsingItem)
         {
@@ -500,6 +507,8 @@ public class PlayerRpgMovement : NetworkBehaviour
         canMove = false;
         CanRotate = false;
         animController.playerAnim.SetBool("Fall", true);
+        uIPlayerController.ShowHurt();
+        isKnockBack = true;
 
         float timer = 0;
 
@@ -533,6 +542,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         combatManager.ResetCombatBool();
         knockbackCoroutine = null;
         canMove = true;
+        isKnockBack = false;
         CanRotate = true;
     }
 

@@ -67,6 +67,8 @@ public class ShrimpMoveToAttackPos : ActionNode
 
         if (blackboard.IsRunToAttackPos)
         {
+            playerPos = blackboard.Target.transform;
+
             CalculateProjection();
 
             return State.Running;

@@ -14,6 +14,7 @@ public class Bubble : MonoBehaviour
 
     void Start()
     {
+        reached = false;
         bubbleParticle.Pause();
     }
 
@@ -28,6 +29,8 @@ public class Bubble : MonoBehaviour
         {
             reached = true;
             bubbleParticle.Play();
+
+            Destroy(this.gameObject, 10f);
         }
     }
 }

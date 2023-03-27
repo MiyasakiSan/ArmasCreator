@@ -32,6 +32,9 @@ public class EnemyCombatManager : NetworkBehaviour
     [SerializeField]
     private BehaviourTreeRunner BHT;
 
+    [SerializeField]
+    private WaterGroundController waterGroundController;
+
     private GameplayController gameplayController;
 
     private UIPlayerController uIPlayerController;
@@ -41,6 +44,7 @@ public class EnemyCombatManager : NetworkBehaviour
     public AttackPattern currentAttackPattern;
 
     private Coroutine stunCoroutine;
+    private bool isStun;
 
     void Start()
     {
@@ -131,6 +135,10 @@ public class EnemyCombatManager : NetworkBehaviour
 
         if (currentAttackPattern.HurtBoxName != gameObject.name) { return; }
 
+        var playerMovement = col.gameObject.GetComponent<PlayerRpgMovement>();
+
+        if (playerMovement.isDodging) { return; }
+
         Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
 
         col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
@@ -138,19 +146,46 @@ public class EnemyCombatManager : NetworkBehaviour
 
         if (currentAttackPattern.IsKnockback)
         {
-            col.gameObject.GetComponent<PlayerRpgMovement>().GetKnockback(transform.position);
+            playerMovement.GetKnockback(transform.position);
         }
         else
         {
-            col.gameObject.GetComponent<PlayerRpgMovement>().GetHit();
+            playerMovement.GetHit();
         }
+    }
 
-        uIPlayerController.ShowHurt();
+    public void GroundWater()
+    {
+        waterGroundController.InitGroundWater(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+        waterGroundController.onGroundWaterFinishedCallback += GroundWaterFinish;
+
+        enemyAnim.anim.SetBool("isGroundWater", true);
+    }
+
+    void GroundWaterFinish()
+    {
+        enemyAnim.anim.SetBool("isGroundWater", false);
+        waterGroundController.onGroundWaterFinishedCallback -= GroundWaterFinish;
+    }
+
+    public void GroundThunder()
+    {
+        if (!GetComponent<MonsterUseVFX>().IsRageStatus) { return; }
+
+        waterGroundController.InitGroundThunder(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+    }
+
+    public void GroundThunderUltimate()
+    {
+        waterGroundController.InitUltimateGround(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+        waterGroundController.onGroundWaterFinishedCallback -= GroundWaterFinish;
     }
 
     public void Stun()
     {
         if (stunCoroutine != null) { return; }
+
+        if (isStun) { return; }
 
         stunCoroutine = StartCoroutine(EnemyStun());
     }
@@ -158,6 +193,7 @@ public class EnemyCombatManager : NetworkBehaviour
     IEnumerator EnemyStun()
     {
         StopBTH();
+        isStun = true;
         enemyAnim.anim.Play("idleToStun");
         enemyAnim.anim.SetBool("isStun", true);
         enemyAnim.SetAnimationRootNode(true);
@@ -167,11 +203,12 @@ public class EnemyCombatManager : NetworkBehaviour
         enemyAnim.anim.SetBool("isStun", false);
         yield return new WaitForSeconds(0.5f);
         enemyAnim.anim.Play("jumpBack");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         StartBTH();
         enemyAnim.SetAnimationRootNode(false);
         stunCoroutine = null;
+        isStun = false;
     }
 
     public void StopBTH()
@@ -184,24 +221,24 @@ public class EnemyCombatManager : NetworkBehaviour
         BHT.enabled = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.gameObject.CompareTag("Bubble")) { return; }
-
-        if (!collision.gameObject.GetComponent<Bubble>().reached) { return; }
-
-        Stun();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (IsAttacking) { return; }
+        //if (IsAttacking) { return; }
 
         if (!other.gameObject.CompareTag("Bubble")) { return; }
 
         if (!other.gameObject.GetComponent<Bubble>().reached) { return; }
 
-        Destroy(other.gameObject);
+        if (isStun) { return; }
+
+        GameObject[] allBubble = null;
+        allBubble = GameObject.FindGameObjectsWithTag("Bubble");
+
+        foreach (var bubble in allBubble)
+        {
+            Destroy(bubble);
+        }
+
         Stun();
     }
 

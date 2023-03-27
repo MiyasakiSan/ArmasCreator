@@ -28,6 +28,8 @@ public class MonsterUseVFX : MonoBehaviour
     [SerializeField]
     private bool isRage;
 
+    public bool IsRageStatus => isRage;
+
     [Header("Shrimp")]
     [SerializeField] private VisualEffect beamVFX;
     [SerializeField] private GameObject waterParticle;
@@ -161,6 +163,8 @@ public class MonsterUseVFX : MonoBehaviour
         var plasmaBall = Instantiate(PlasmaBallPrefab, BubbleSpawnPos.transform.position, Quaternion.identity);
         plasmaBall.GetComponent<FollowProjectile>().SetTarget(GameObject.FindGameObjectWithTag("Player"));
         plasmaBall.GetComponent<ColliderDamage>().SetupAttackPattern(enemyCombat.currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+
+        Destroy(plasmaBall, 10f);
     }
 
     public void OpenBeam(float lifeTime)

@@ -89,8 +89,10 @@ public class ColliderDamage : MonoBehaviour
         var playerMovement = other.GetComponent<PlayerRpgMovement>();
         var Target = other.GetComponent<AttackTarget>();
 
-        Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
-        playerMovement.GetKnockback(this.transform.position);
-       
+        if (!playerMovement.isDodging)
+        {
+            Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
+            playerMovement.GetKnockback(this.transform.position);
+        } 
     }
 }
