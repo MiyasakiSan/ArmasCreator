@@ -343,6 +343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43fc4e756c352e489516397b378d8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterVolume: 1
+  MusicVolume: 1
+  AmbienceVolume: 1
+  SFXVolume: 1
   fModEvent: {fileID: 1283185010}
 --- !u!4 &379865906
 Transform:
@@ -762,26 +766,61 @@ MonoBehaviour:
     Path: event:/SFX/button/ButtonHover
   <TownBGM>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1005759598
+      Data2: 1113791590
+      Data3: -1555642956
+      Data4: -1436500579
+    Path: event:/BGM/TownBGM
   <MainmenuBGM>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 158842301
+      Data2: 1124503130
+      Data3: -755524216
+      Data4: 1959946547
+    Path: event:/BGM/MainmenuBGM
   <ConstructionSiteBGM>k__BackingField:
+    Guid:
+      Data1: 1974667938
+      Data2: 1290447983
+      Data3: 1352365483
+      Data4: 782625652
+    Path: event:/BGM/TigerBGM
+  <ParkBGM>k__BackingField:
+    Guid:
+      Data1: 1326322570
+      Data2: 1106037051
+      Data3: 1948222399
+      Data4: -755274559
+    Path: event:/BGM/ShrimpBGM
+  <WinBGM>k__BackingField:
+    Guid:
+      Data1: -208023911
+      Data2: 1317413574
+      Data3: -496902267
+      Data4: 845138783
+    Path: event:/BGM/WinBGM
+  <TownAMBIENCE>k__BackingField:
     Guid:
       Data1: 0
       Data2: 0
       Data3: 0
       Data4: 0
     Path: 
-  <ParkBGM>k__BackingField:
+  <MainmenuAMBIENCE>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <ConstructionSiteAMBIENCE>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <ParkAMBIENCE>k__BackingField:
     Guid:
       Data1: 0
       Data2: 0

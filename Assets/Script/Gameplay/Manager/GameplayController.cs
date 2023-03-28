@@ -10,6 +10,7 @@ using ArmasCreator.UI;
 using ArmasCreator.Gameplay.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Events;
+using FMOD.Studio;
 
 namespace ArmasCreator.Gameplay
 {
@@ -72,6 +73,7 @@ namespace ArmasCreator.Gameplay
         private UserDataManager userDataManager;
         private LoadingPopup loadingPopup;
         private UIPlayerController uiPlayerController;
+        private SoundManager soundManager;
 
         private QuestInfo currentQuestInfo;
         public QuestInfo CurrentQuestInfo => currentQuestInfo;
@@ -91,6 +93,11 @@ namespace ArmasCreator.Gameplay
         public UnityAction<string, int> OnReceivedItem;
         public UnityAction OnReceivedAllItem;
 
+        EventInstance townBGM;
+        EventInstance tigerBGM;
+        EventInstance shrimpBGM;
+        EventInstance winBGM;
+
         private void Awake()
         {
             SharedContext.Instance.Add(this);
@@ -102,9 +109,16 @@ namespace ArmasCreator.Gameplay
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
             loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
+            soundManager = SharedContext.Instance.Get<SoundManager>();
             Interacable = true;
 
+            tigerBGM = soundManager.CreateInstance(soundManager.fModEvent.ConstructionSiteBGM);
+            shrimpBGM = soundManager.CreateInstance(soundManager.fModEvent.ParkBGM);
+            townBGM = soundManager.CreateInstance(soundManager.fModEvent.TownBGM);
+            winBGM = soundManager.CreateInstance(soundManager.fModEvent.WinBGM);
+
             CurrentGameplays = Gameplays.Town;
+            PlayTownBGM();
         }
 
         void Update()
@@ -158,6 +172,8 @@ namespace ArmasCreator.Gameplay
 
         public void EnterChallengeStage(QuestInfo questInfo)
         {
+            StopTownBGM();
+
             if (questInfo.PresetId == "cs-cm-n" &&
                 questInfo.PresetId == "cs-cm-01" &&
                 questInfo.PresetId == "cs-cm-02" &&
@@ -193,6 +209,7 @@ namespace ArmasCreator.Gameplay
             isPreGameFinished = false;
             isStageFinished = false;
             SetCursorLock(true);
+            PlayMonsterBGM();
 
             uiPlayerController = SharedContext.Instance.Get<UIPlayerController>();
 
@@ -235,6 +252,9 @@ namespace ArmasCreator.Gameplay
             uiPlayerController.Hide();
             var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRpgMovement>();
             player.canMove = false;
+            StopMonsterBGM();
+
+            PlayWinBGM();
 
             StartCoroutine(ShowGameResultCoroutine());
         }
@@ -315,9 +335,107 @@ namespace ArmasCreator.Gameplay
             }
         }
 
+        private void PlayMonsterBGM()
+        {
+            Debug.Log("=============== PLAY BGM ==============");
+
+            if(questEnemyType == SubType.Lion)
+            {
+                PlayTigerBGM();
+            }
+            else
+            {
+                PlayShrimpBGM();
+            }
+        }
+
+        private void StopMonsterBGM()
+        {
+            Debug.Log("=============== PLAY BGM ==============");
+
+            if (questEnemyType == SubType.Lion)
+            {
+                StopTigerBGM();
+            }
+            else
+            {
+                StopShrimpBGM();
+            }
+        }
+
+        public void PlayWinBGM()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            soundManager.AttachInstanceToGameObject(winBGM, player.transform, player.GetComponent<Rigidbody>());
+
+            winBGM.getPlaybackState(out var playBackState);
+            if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+                winBGM.start();
+        }
+
+        public void StopWinBGM()
+        {
+            winBGM.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        public void PlayTownBGM()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            soundManager.AttachInstanceToGameObject(townBGM, player.transform, player.GetComponent<Rigidbody>());
+
+            townBGM.getPlaybackState(out var playBackState);
+            if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+                townBGM.start();
+        }
+
+        public void StopTownBGM()
+        {
+            townBGM.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        public void PlayTigerBGM()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            soundManager.AttachInstanceToGameObject(tigerBGM, player.transform, player.GetComponent<Rigidbody>());
+
+            tigerBGM.getPlaybackState(out var playBackState);
+            if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+                tigerBGM.start();
+        }
+
+        public void StopTigerBGM()
+        {
+            tigerBGM.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        public void PlayShrimpBGM()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            soundManager.AttachInstanceToGameObject(shrimpBGM, player.transform, player.GetComponent<Rigidbody>());
+
+            shrimpBGM.getPlaybackState(out var playBackState);
+            if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+                shrimpBGM.start();
+        }
+
+        public void StopShrimpBGM()
+        {
+            shrimpBGM.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
         private void Dispose()
         {
             SharedContext.Instance.Remove(this);
+
+            StopTigerBGM();
+            StopShrimpBGM();
+            StopTownBGM();
+            StopWinBGM();
+
             currentQuestInfo = null;
             questEnemyType = SubType.None;
             optionPanelController.RemoveListener();

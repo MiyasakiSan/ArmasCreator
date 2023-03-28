@@ -25,4 +25,11 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference MainmenuBGM { get; private set; }
     [field: SerializeField] public EventReference ConstructionSiteBGM { get; private set; }
     [field: SerializeField] public EventReference ParkBGM { get; private set; }
+    [field: SerializeField] public EventReference WinBGM { get; private set; }
+
+    [field: Header("AMBIENCE")]
+    [field: SerializeField] public EventReference TownAMBIENCE { get; private set; }
+    [field: SerializeField] public EventReference MainmenuAMBIENCE { get; private set; }
+    [field: SerializeField] public EventReference ConstructionSiteAMBIENCE { get; private set; }
+    [field: SerializeField] public EventReference ParkAMBIENCE { get; private set; }
 }
