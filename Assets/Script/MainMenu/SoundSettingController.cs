@@ -32,15 +32,15 @@ namespace ArmasCreator.UI
         }
         public void SliderMusicVolume()
         {
-            soundManager.MasterVolume = soundSliderList[1].value;
+            soundManager.MusicVolume = soundSliderList[1].value;
         }
         public void SliderSFXVolume()
         {
-            soundManager.MasterVolume = soundSliderList[2].value;
+            soundManager.SFXVolume = soundSliderList[2].value;
         }
         public void SliderAmbienceVolume()
         {
-            soundManager.MasterVolume = soundSliderList[3].value;
+            soundManager.AmbienceVolume = soundSliderList[3].value;
         }
     }
 }

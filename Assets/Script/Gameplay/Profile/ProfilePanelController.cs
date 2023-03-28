@@ -151,9 +151,9 @@ namespace ArmasCreator.UI
             profileAnimator.SetTrigger("FadeOutSD");
         }
 
-        public void ResetFadeOutSDTrigger()
+        public void ResetTrigger(string TrigggerName)
         {
-            profileAnimator.ResetTrigger("FadeOutSD");
+            profileAnimator.ResetTrigger(TrigggerName);
         }
 
         public void DeActivateAllContent()
