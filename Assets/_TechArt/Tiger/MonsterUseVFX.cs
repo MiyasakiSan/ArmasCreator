@@ -71,6 +71,17 @@ public class MonsterUseVFX : MonoBehaviour
         }
     }
 
+    public void OnStopVFX(int VFXNumber)
+    {
+        if (!isRage)
+        {
+            visualEffects[VFXNumber].Stop();
+        }
+        else
+        {
+            visualEffectsRage[VFXNumber].Stop();
+        }
+    }
 
     public void OnPlayVFXDuration(int VFXNumber)
     {
