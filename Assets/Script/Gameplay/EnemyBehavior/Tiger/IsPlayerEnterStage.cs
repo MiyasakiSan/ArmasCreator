@@ -16,6 +16,9 @@ public class IsPlayerEnterStage : ActionNode
         stageCollider.onTriggerEnter.AddListener(OnPlayerEnter);
         stageCollider.OnPlayerDieCallback += ResetEnterStage;
 
+        var enemyCombatController = context.gameObject.GetComponent<EnemyCombatManager>();
+        enemyCombatController.OnEnemyStunCallback += UpdateStun;
+
         blackboard.isInit = true;
     }
 
@@ -51,5 +54,10 @@ public class IsPlayerEnterStage : ActionNode
     private void ResetEnterStage()
     {
         blackboard.IsPlayerEnterStage = false;
+    }
+
+    private void UpdateStun(bool status)
+    {
+        blackboard.IsStun = status;
     }
 }

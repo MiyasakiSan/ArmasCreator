@@ -6,6 +6,7 @@ using FMODUnity;
 public class FModEvent : MonoBehaviour
 {
     [field : Header("SFX")]
+
     [field : Header("Player")]
     [field : SerializeField] public EventReference PlayerWalkSFX {get; private set;}
     [field : SerializeField] public EventReference PlayerRunSFX {get; private set;}
@@ -14,6 +15,23 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference PlayerSecondComboSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerThirdComboSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerGunComboSFX { get; private set; }
+
+    [field: Header("Shrimp")]
+    [field: SerializeField] public EventReference LegSFX { get; private set; }
+    [field: SerializeField] public EventReference ShrimpRoar { get; private set; }
+    [field: SerializeField] public EventReference ShrimpLightning { get; private set; }
+    [field: SerializeField] public EventReference ShrimpSmash { get; private set; }
+    [field: SerializeField] public EventReference ShrimpThrash { get; private set; }
+    [field: SerializeField] public EventReference ShrimpPierce { get; private set; }
+    [field: SerializeField] public EventReference ShrimpDead { get; private set; }
+    [field: SerializeField] public EventReference BubbleShoot { get; private set; }
+    [field: SerializeField] public EventReference WaterBeam { get; private set; }
+    [field: SerializeField] public EventReference WaterGround { get; private set; }
+    [field: SerializeField] public EventReference ThunderGround { get; private set; }
+    [field: SerializeField] public EventReference UltimateGround { get; private set; }
+    [field: SerializeField] public EventReference ShrimpCrash { get; private set; }
+
+    [field: Header("Tiger")]
 
 
     [field : Header("UI")]

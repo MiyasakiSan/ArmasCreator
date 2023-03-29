@@ -100,6 +100,8 @@ public class ShrimpAttackPattern : ActionNode
 
         blackboard.PrevioustAttackPattern = blackboard.CurrentAttackPattern;
 
+        yield return new WaitUntil(()=>!enemyCombatManager.IsStun);
+
         if (blackboard.CurrentAttackPattern.IsEnrageFinishMove)
         {
             blackboard.canUseEnrageFinishMove = false;

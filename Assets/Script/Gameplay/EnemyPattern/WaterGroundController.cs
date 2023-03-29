@@ -19,9 +19,11 @@ public class WaterGroundController : MonoBehaviour
     public delegate void OnGroundWaterFinished();
     public OnGroundWaterFinished onGroundWaterFinishedCallback;
 
+    [SerializeField] private MonsterSFX monsterSFX;
+
     void Start()
     {
-        
+
     }
 
     public void InitGroundWater(float damage)
@@ -64,6 +66,7 @@ public class WaterGroundController : MonoBehaviour
         {
             groundWater.SetActive(true);
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
         }
 
         yield return new WaitForSeconds(2f);
@@ -72,6 +75,7 @@ public class WaterGroundController : MonoBehaviour
         {
             groundWater.SetActive(true);
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
         }
 
         yield return new WaitForSeconds(2f);
@@ -80,6 +84,7 @@ public class WaterGroundController : MonoBehaviour
         {
             groundWater.SetActive(true);
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
         }
 
         yield return new WaitForSeconds(2f);
@@ -94,6 +99,7 @@ public class WaterGroundController : MonoBehaviour
         {
             groundWater.SetActive(true);
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
         }
 
         yield return new WaitForSeconds(2f);
@@ -102,6 +108,7 @@ public class WaterGroundController : MonoBehaviour
         {
             groundWater.SetActive(true);
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
         }
 
         yield return new WaitForSeconds(2f);
@@ -110,6 +117,7 @@ public class WaterGroundController : MonoBehaviour
         {
             groundWater.SetActive(true);
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
         }
 
         yield return new WaitForSeconds(2f);
@@ -126,6 +134,7 @@ public class WaterGroundController : MonoBehaviour
 
             var groundWater = Instantiate(WaterGroundPrefab, new Vector3(player.x, player.y - 1f, player.z), Quaternion.Euler(0, 90 * i, 0));
             groundWater.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+            monsterSFX.PlayWaterGround(groundWater);
 
             yield return new WaitForSeconds(2f);
 
@@ -164,6 +173,9 @@ public class WaterGroundController : MonoBehaviour
         {
             groundThunder.SetActive(true);
             groundThunder.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+
+            var player = GameObject.FindGameObjectWithTag("Player");
+            monsterSFX.PlayUltimateGround(player);
         }
 
         yield return new WaitForSeconds(2f);

@@ -90,7 +90,11 @@ public class ShrimpMoveToAttackPos : ActionNode
     IEnumerator RunToAttackPos()
     {
         blackboard.IsRunToAttackPos = true;
+        context.gameObject.GetComponent<MonsterSFX>().PlayShrimpLegSFX();
+
         yield return new WaitForSeconds(3f);
+
+        context.gameObject.GetComponent<MonsterSFX>().StopShrimpLegSFX();
         blackboard.IsRunToAttackPos = false;
         blackboard.IsFinishRun = true;
         runToAttackPosCoroutine = null;

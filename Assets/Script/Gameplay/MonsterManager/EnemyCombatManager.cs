@@ -44,8 +44,14 @@ public class EnemyCombatManager : NetworkBehaviour
     public AttackPattern currentAttackPattern;
 
     private Coroutine stunCoroutine;
+
     private bool isStun;
+    public bool IsStun => isStun;
+
     private bool isUltimate;
+
+    public delegate void OnEnemyStun(bool status);
+    public OnEnemyStun OnEnemyStunCallback;
 
     void Start()
     {
@@ -197,13 +203,15 @@ public class EnemyCombatManager : NetworkBehaviour
         var center = GameObject.Find("Center");
         enemyAnim.anim.enabled = false;
         isUltimate = true;
+        gameObject.GetComponent<MonsterSFX>().PlayShrimpLegSFX();
 
-        while(Vector3.Distance(transform.position,center.transform.position) > 0.5f)
+        while (Vector3.Distance(transform.position,center.transform.position) > 0.5f)
         {
             transform.position = Vector3.Lerp(transform.position, center.transform.position, Time.deltaTime);
             yield return null;
         }
 
+        gameObject.GetComponent<MonsterSFX>().StopShrimpLegSFX();
         enemyAnim.anim.enabled = true;
         enemyAnim.anim.Play("ultimateToGround");
 
@@ -224,6 +232,8 @@ public class EnemyCombatManager : NetworkBehaviour
     {
         StopBTH();
         isStun = true;
+        OnEnemyStunCallback?.Invoke(isStun);
+
         enemyAnim.anim.Play("idleToStun");
         enemyAnim.anim.SetBool("isStun", true);
         enemyAnim.SetAnimationRootNode(true);
@@ -235,10 +245,11 @@ public class EnemyCombatManager : NetworkBehaviour
         enemyAnim.anim.Play("jumpBack");
         yield return new WaitForSeconds(3f);
 
-        StartBTH();
         enemyAnim.SetAnimationRootNode(false);
+        StartBTH();
         stunCoroutine = null;
         isStun = false;
+        OnEnemyStunCallback?.Invoke(isStun);
     }
 
     public void StopBTH()
