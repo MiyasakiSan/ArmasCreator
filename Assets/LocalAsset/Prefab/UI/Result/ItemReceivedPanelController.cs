@@ -20,9 +20,12 @@ namespace ArmasCreator.UI
 
         void Awake()
         {
-            gameplayController = SharedContext.Instance.Get<GameplayController>();
-            gameplayController.OnReceivedItem += addItemToItemReceivedDictionary;
-            gameplayController.OnReceivedAllItem += PopulateAllReceivedItem;
+            if (gameplayController == null)
+            {
+                gameplayController = SharedContext.Instance.Get<GameplayController>();
+                gameplayController.OnReceivedItem += addItemToItemReceivedDictionary;
+                gameplayController.OnReceivedAllItem += PopulateAllReceivedItem;
+            }
         }
 
         private void addItemToItemReceivedDictionary(string ID , int Amount)

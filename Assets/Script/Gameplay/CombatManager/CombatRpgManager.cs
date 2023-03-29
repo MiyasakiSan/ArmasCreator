@@ -18,6 +18,8 @@ public class CombatRpgManager : NetworkBehaviour
 
     [SerializeField]
     private Image EMT_Gauge;
+    [SerializeField]
+    private Image thunderFill;
 
     private float EMT_MaxAmount;
 
@@ -98,6 +100,7 @@ public class CombatRpgManager : NetworkBehaviour
         {
             EMT_MaxAmount = 20; //TODO : Check is we need to make a gameData for this
             EMT_Gauge.fillAmount = 0;
+            thunderFill.fillAmount = 0;
         }
 
         gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -278,6 +281,7 @@ public class CombatRpgManager : NetworkBehaviour
 
         EMT_Amount++;
         EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
+        thunderFill.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
     }
 
     private void UseEMT()
@@ -305,12 +309,14 @@ public class CombatRpgManager : NetworkBehaviour
         {
             EMT_Amount -= 0.01f;
             EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
+            thunderFill.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
 
             yield return new WaitForSeconds(0.01f / decreaseRate);
         }
 
         EMT_Amount = 0;
         EMT_Gauge.fillAmount = 0;
+        thunderFill.fillAmount = 0;
         isEMTState = false;
     } 
 
