@@ -18,6 +18,7 @@ public class FModEvent : MonoBehaviour
 
     [field: Header("Shrimp")]
     [field: SerializeField] public EventReference LegSFX { get; private set; }
+    [field: SerializeField] public EventReference MachineSFX { get; private set; }
     [field: SerializeField] public EventReference ShrimpRoar { get; private set; }
     [field: SerializeField] public EventReference ShrimpLightning { get; private set; }
     [field: SerializeField] public EventReference ShrimpSmash { get; private set; }
@@ -26,10 +27,12 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference ShrimpDead { get; private set; }
     [field: SerializeField] public EventReference BubbleShoot { get; private set; }
     [field: SerializeField] public EventReference WaterBeam { get; private set; }
+    [field: SerializeField] public EventReference PlasmaBall { get; private set; }
     [field: SerializeField] public EventReference WaterGround { get; private set; }
     [field: SerializeField] public EventReference ThunderGround { get; private set; }
     [field: SerializeField] public EventReference UltimateGround { get; private set; }
     [field: SerializeField] public EventReference ShrimpCrash { get; private set; }
+    [field: SerializeField] public EventReference ShrimpGetHit { get; private set; }
 
     [field: Header("Tiger")]
 

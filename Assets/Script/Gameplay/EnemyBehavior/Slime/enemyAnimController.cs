@@ -28,12 +28,23 @@ public class enemyAnimController : NetworkBehaviour
     private GameObject DeadCamCart;
 
     public bool isFollwPlayer;
+    private MonsterSFX monsterSFX;
 
     void Start()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+        monsterSFX = GetComponent<MonsterSFX>();
 
         anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed);
+        
+        if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+        {
+            monsterSFX.PlayMachineSFX();
+        }
+        else
+        {
+
+        }
     }
     public bool currentAnimatorStateBaseIsName(string paramName)
     {
@@ -114,6 +125,15 @@ public class enemyAnimController : NetworkBehaviour
             anim?.SetBool("isDead",true);
             gameplayController.EnterGameplayResult();
             DeadCamCart.SetActive(true);
+
+            if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+            {
+                monsterSFX.StopMachineSFX();
+            }
+            else
+            {
+
+            }
             //StartCoroutine(despawn());
         }
     }

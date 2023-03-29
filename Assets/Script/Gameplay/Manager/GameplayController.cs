@@ -81,14 +81,13 @@ namespace ArmasCreator.Gameplay
         [SerializeField]
         private Canvas profileCanvas;
 
-        //TODO : implement player interaction
-
         public bool Interacable;
 
         private bool isPreGameFinished;
         private bool isStageFinished;
         private Coroutine PreGameCoroutine;
         private SubType questEnemyType;
+        public SubType EnemyType => questEnemyType;
 
         public UnityAction<string, int> OnReceivedItem;
         public UnityAction OnReceivedAllItem;

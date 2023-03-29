@@ -165,6 +165,8 @@ public class WaterGroundController : MonoBehaviour
         {
             groundThunder.SetActive(true);
             groundThunder.GetComponentInChildren<ColliderDamage>().SetupAttackPattern(damage);
+
+            monsterSFX.PlayThunderGround(groundThunder);
         }
 
         yield return new WaitForSeconds(3.5f);
@@ -176,6 +178,7 @@ public class WaterGroundController : MonoBehaviour
 
             var player = GameObject.FindGameObjectWithTag("Player");
             monsterSFX.PlayUltimateGround(player);
+            monsterSFX.PlayThunderGround(player);
         }
 
         yield return new WaitForSeconds(2f);

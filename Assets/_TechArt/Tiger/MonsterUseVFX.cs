@@ -45,11 +45,10 @@ public class MonsterUseVFX : MonoBehaviour
 
     private EnemyCombatManager enemyCombat;
     private GameplayController gameplayController;
+    private MonsterSFX monsterSFX;
 
     private void Start()
     {
-        IsEnterRageMode(false);
-
         if (eyeMat != null)
         {
             eyeDefaultColor = eyeMat.GetColor("_EmissionColor");
@@ -57,6 +56,9 @@ public class MonsterUseVFX : MonoBehaviour
 
         enemyCombat = GetComponent<EnemyCombatManager>();
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+        monsterSFX = GetComponent<MonsterSFX>();
+
+        IsEnterRageMode(false);
     }
 
     public void OnUseVFX(int VFXNumber)
@@ -156,6 +158,31 @@ public class MonsterUseVFX : MonoBehaviour
         {
             effect.SetActive(status);
         }
+
+        if (status)
+        {
+            if(gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+            {
+                monsterSFX.PlayShrimpLightingSFX();
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+            {
+                monsterSFX.StopShrimpLightingSFX();
+            }
+            else
+            {
+
+            }
+        }
+
+        
     }
 
     public void SpawnBubble(int amount)
@@ -186,7 +213,15 @@ public class MonsterUseVFX : MonoBehaviour
         plasmaBall.GetComponent<FollowProjectile>().SetTarget(GameObject.FindGameObjectWithTag("Player"));
         plasmaBall.GetComponent<ColliderDamage>().SetupAttackPattern(enemyCombat.currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
 
+        monsterSFX.PlayPlasmaBall(plasmaBall,plasmaBall.GetComponent<Rigidbody>());
+
+        Invoke("StopPlasmaSound", 10f);
         Destroy(plasmaBall, 10f);
+    }
+
+    void StopPlasmaSound()
+    {
+        monsterSFX.StopPlasmaBall();
     }
 
     public void OpenBeam(float lifeTime)

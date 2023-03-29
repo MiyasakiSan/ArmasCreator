@@ -274,7 +274,7 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (isEMTState) { return; }
 
-        if (convertEMTAmountToEMTPercent(EMT_Amount) == EMT_Gauge.fillAmount) { return; }
+        if (convertEMTAmountToEMTPercent(EMT_Amount) == EMT_MaxAmount) { return; }
 
         EMT_Amount++;
         EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);

@@ -130,6 +130,15 @@ public class EnemyCombatManager : NetworkBehaviour
         uIPlayerController.ShowDamage(contactPoint, damage);
 
         gameplayController.UpdatePlayerDamageDelt(damage);
+
+        if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+        {
+            GetComponent<MonsterSFX>().PlayShrimpGetHit();
+        }
+        else
+        {
+
+        }
     }
 
     private void OnHurtBoxTriggerEnter(Collider col, GameObject gameObject)
@@ -201,7 +210,7 @@ public class EnemyCombatManager : NetworkBehaviour
     IEnumerator InitGroundThunderUltimate()
     {
         var center = GameObject.Find("Center");
-        enemyAnim.anim.enabled = false;
+        //enemyAnim.anim.enabled = false;
         isUltimate = true;
         gameObject.GetComponent<MonsterSFX>().PlayShrimpLegSFX();
 
@@ -212,7 +221,7 @@ public class EnemyCombatManager : NetworkBehaviour
         }
 
         gameObject.GetComponent<MonsterSFX>().StopShrimpLegSFX();
-        enemyAnim.anim.enabled = true;
+        //enemyAnim.anim.enabled = true;
         enemyAnim.anim.Play("ultimateToGround");
 
         waterGroundController.InitUltimateGround(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
@@ -230,9 +239,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
     IEnumerator EnemyStun()
     {
-        StopBTH();
         isStun = true;
-        OnEnemyStunCallback?.Invoke(isStun);
+        StopBTH();
 
         enemyAnim.anim.Play("idleToStun");
         enemyAnim.anim.SetBool("isStun", true);
@@ -249,7 +257,6 @@ public class EnemyCombatManager : NetworkBehaviour
         StartBTH();
         stunCoroutine = null;
         isStun = false;
-        OnEnemyStunCallback?.Invoke(isStun);
     }
 
     public void StopBTH()
@@ -264,7 +271,7 @@ public class EnemyCombatManager : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (IsAttacking) { return; }
+        if (IsAttacking) { return; }
 
         if (!other.gameObject.CompareTag("Bubble")) { return; }
 
