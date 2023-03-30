@@ -100,6 +100,8 @@ public class SoundManager : MonoBehaviour
         musicBus.setVolume(MusicVolume);
         ambienceBus.setVolume(AmbienceVolume);
         sfxBus.setVolume(SFXVolume);
+
+        
     }
 
     public void PlayOneShot(EventReference sound,Vector3 position)

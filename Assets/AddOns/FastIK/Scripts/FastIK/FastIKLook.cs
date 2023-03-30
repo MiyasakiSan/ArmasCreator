@@ -30,6 +30,7 @@ namespace DitzelGames.FastIK
         /// Initial Rotation
         /// </summary>
         protected Quaternion StartRotation;
+        private Vector3 startEuler;
 
         void Awake()
         {
@@ -38,6 +39,7 @@ namespace DitzelGames.FastIK
 
             StartDirection = Target.position - transform.position;
             StartRotation = transform.rotation;
+            startEuler = transform.eulerAngles;
         }
 
         private IEnumerator ResetWeightEnumurator()
@@ -82,6 +84,7 @@ namespace DitzelGames.FastIK
 
             if (Vector3.Distance(Target.position, Parent.position) > NPCrange && isNPC)
             {
+                transform.eulerAngles = startEuler;
                 return;
             }
 
