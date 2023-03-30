@@ -131,6 +131,29 @@ public class MovementAnim : NetworkBehaviour
         playerAnim.SetLayerWeight(useItemLayerIndex, 0);
     }
 
+    public void ShootAnimation()
+    {
+        playerAnim.SetLayerWeight(3, 1);
+
+        playerAnim.SetBool("shoot", true);
+
+        StartCoroutine(endShootAnim());
+    }
+
+    IEnumerator endShootAnim()
+    {
+        yield return new WaitForSeconds(1.45f);
+
+        playerAnim.SetBool("shoot", false);
+        playerAnim.SetLayerWeight(3, 0);
+    }
+
+    public void EndShootAnimation()
+    {
+        playerAnim.SetBool("shoot", false);
+        playerAnim.SetLayerWeight(3, 0);
+    }
+
     #region LayerWeight Animation
 
     public void changeCombatLayerWeight(float weight)

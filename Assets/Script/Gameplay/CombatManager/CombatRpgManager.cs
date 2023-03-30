@@ -335,7 +335,22 @@ public class CombatRpgManager : NetworkBehaviour
         {
             MeleeCombo_OnClick();
         }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            Shoot();
+        }
     }
+
+    public void Shoot()
+    {
+        animController.ShootAnimation();
+    }
+
+    public void EndShoot()
+    {
+        animController.EndShootAnimation();
+    }
+
     public void Melee_CurrentAnimOutOfTime()
     {
         if (animController.currentAnimatorCombatStateInfoIsName("Idle"))
