@@ -18,6 +18,9 @@ namespace ArmasCreator.UserData
 
         public List<string> Recipes = new List<string>();
 
+        public delegate void OnPlayerUpdateEquipItem();
+        public OnPlayerUpdateEquipItem OnPlayerUpdateEquipItemCallback;
+
         public void Init(UserDataManager userData)
         {
             this.userData = userData;
@@ -201,6 +204,8 @@ namespace ArmasCreator.UserData
             EquipableItems[subType].EquippedId = itemId;
 
             userData.UserData.UpdateSaveInventory(ConsumableItems, EquipableItems, Recipes, CraftableItems);
+
+            OnPlayerUpdateEquipItemCallback?.Invoke();
         }
 
         public List<string> GetAllEquipItemIds()

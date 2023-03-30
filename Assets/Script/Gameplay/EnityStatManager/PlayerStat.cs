@@ -419,6 +419,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         gameModeController = SharedContext.Instance.Get<GameModeController>();
         userDataManager = SharedContext.Instance.Get<UserDataManager>();
         gameDataManager = SharedContext.Instance.Get<GameDataManager>();
+
+        userDataManager.UserData.UserDataInventory.OnPlayerUpdateEquipItemCallback += UpdateStat;
     }
 
     void Start()
@@ -446,6 +448,13 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             setupClientCanvas();
         }
+    }
+
+    public void UpdateStat()
+    {
+        SetupStat();
+        SetupEquipmentAsset();
+        SetupVariable();
     }
 
     private void SetupStat()
@@ -477,8 +486,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
         {
             var subType = gameDataManager.GetEquipInfoSubType(id, out string asset);
 
-            if (asset != "ciladae" || asset != "gotenna") { continue; }
-
             switch (subType)
             {
                 case (SubType.Helmet):
@@ -487,10 +494,16 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                         {
                             CiladaeHelmet.SetActive(true);
                         }
-                        else
+                        else if(asset == "gotena")
                         {
                             GotenaHelmet.SetActive(true);
                         }
+                        else
+                        {
+                            GotenaHelmet.SetActive(false);
+                            CiladaeHelmet.SetActive(false);
+                        }
+
                         break;
                     }
                 case (SubType.Shirt):
@@ -499,10 +512,16 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                         {
                             CiladaeShirt.SetActive(true);
                         }
-                        else
+                        else if (asset == "gotena")
                         {
                             GotenaShirt.SetActive(true);
                         }
+                        else
+                        {
+                            CiladaeShirt.SetActive(false);
+                            GotenaShirt.SetActive(false);
+                        }
+
                         break;
                     }
                 case (SubType.Glove):
@@ -512,11 +531,20 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                             CiladaeGloveLFT.SetActive(true);
                             CiladaeGloveRGT.SetActive(true);
                         }
-                        else
+                        else if (asset == "gotena")
                         {
                             GotenaGloveLFT.SetActive(true);
                             GotenaGloveRGT.SetActive(true);
                         }
+                        else
+                        {
+                            CiladaeGloveLFT.SetActive(false);
+                            CiladaeGloveRGT.SetActive(false);
+
+                            GotenaGloveLFT.SetActive(false);
+                            GotenaGloveRGT.SetActive(false);
+                        }
+
                         break;
                     }
                 case (SubType.Pant):
@@ -526,11 +554,20 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                             CiladaeLeggingLFT.SetActive(true);
                             CiladaeLeggingRGT.SetActive(true);
                         }
-                        else
+                        else if (asset == "gotena")
                         {
                             GotenaLeggingLFT.SetActive(true);
                             GotenaLeggingRGT.SetActive(true);
                         }
+                        else
+                        {
+                            GotenaLeggingRGT.SetActive(false);
+                            GotenaLeggingRGT.SetActive(false);
+
+                            CiladaeLeggingLFT.SetActive(false);
+                            CiladaeLeggingRGT.SetActive(false);
+                        }
+
                         break;
                     }
                 case (SubType.Shoes):
@@ -540,11 +577,20 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                             CiladaeShoeLFT.SetActive(true);
                             CiladaeShoeRGT.SetActive(true);
                         }
-                        else
+                        else if (asset == "gotena")
                         {
                             GotenaShoeLFT.SetActive(true);
                             GotenaShoeRGT.SetActive(true);
                         }
+                        else
+                        {
+                            CiladaeShoeLFT.SetActive(false);
+                            CiladaeShoeRGT.SetActive(false);
+
+                            GotenaShoeLFT.SetActive(false);
+                            GotenaShoeRGT.SetActive(false);
+                        }
+
                         break;
                     }
                 case (SubType.Weapon):
@@ -553,9 +599,14 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                         {
                             CiladaeWeapon.SetActive(true);
                         }
-                        else
+                        else if (asset == "gotena")
                         {
                             GotenaWeapon.SetActive(true);
+                        }
+                        else
+                        {
+                            GotenaWeapon.SetActive(false);
+                            CiladaeWeapon.SetActive(false);
                         }
                         break;
                     }
@@ -586,6 +637,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     private void OnDestroy()
     {
-
+        userDataManager.UserData.UserDataInventory.OnPlayerUpdateEquipItemCallback -= UpdateStat;
     }
 }
