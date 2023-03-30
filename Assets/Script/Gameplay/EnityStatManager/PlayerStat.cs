@@ -63,11 +63,17 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [SerializeField]
     private GameObject CiladaeShirt;
     [SerializeField]
-    private GameObject CiladaeGlove;
+    private GameObject CiladaeGloveLFT;
     [SerializeField]
-    private GameObject CiladaeLegging;
+    private GameObject CiladaeGloveRGT;
     [SerializeField]
-    private GameObject CiladaeShoes;
+    private GameObject CiladaeLeggingLFT;
+    [SerializeField]
+    private GameObject CiladaeLeggingRGT;
+    [SerializeField]
+    private GameObject CiladaeShoeLFT;
+    [SerializeField]
+    private GameObject CiladaeShoeRGT;
     [SerializeField]
     private GameObject CiladaeWeapon;
     [Space(10)]
@@ -76,11 +82,17 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     [SerializeField]
     private GameObject GotenaShirt;
     [SerializeField]
-    private GameObject GotenaGlove;
+    private GameObject GotenaGloveLFT;
     [SerializeField]
-    private GameObject GotenaLegging;
+    private GameObject GotenaGloveRGT;
     [SerializeField]
-    private GameObject GotenaShoes;
+    private GameObject GotenaLeggingLFT;
+    [SerializeField]
+    private GameObject GotenaLeggingRGT;
+    [SerializeField]
+    private GameObject GotenaShoeLFT;
+    [SerializeField]
+    private GameObject GotenaShoeRGT;
     [SerializeField]
     private GameObject GotenaWeapon;
 
@@ -497,11 +509,13 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                     {
                         if (asset == "ciladae")
                         {
-                            CiladaeGlove.SetActive(true);
+                            CiladaeGloveLFT.SetActive(true);
+                            CiladaeGloveRGT.SetActive(true);
                         }
                         else
                         {
-                            GotenaGlove.SetActive(true);
+                            GotenaGloveLFT.SetActive(true);
+                            GotenaGloveRGT.SetActive(true);
                         }
                         break;
                     }
@@ -509,11 +523,13 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                     {
                         if (asset == "ciladae")
                         {
-                            CiladaeLegging.SetActive(true);
+                            CiladaeLeggingLFT.SetActive(true);
+                            CiladaeLeggingRGT.SetActive(true);
                         }
                         else
                         {
-                            GotenaLegging.SetActive(true);
+                            GotenaLeggingLFT.SetActive(true);
+                            GotenaLeggingRGT.SetActive(true);
                         }
                         break;
                     }
@@ -521,11 +537,13 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                     {
                         if (asset == "ciladae")
                         {
-                            CiladaeShoes.SetActive(true);
+                            CiladaeShoeLFT.SetActive(true);
+                            CiladaeShoeRGT.SetActive(true);
                         }
                         else
                         {
-                            GotenaShoes.SetActive(true);
+                            GotenaShoeLFT.SetActive(true);
+                            GotenaShoeRGT.SetActive(true);
                         }
                         break;
                     }
