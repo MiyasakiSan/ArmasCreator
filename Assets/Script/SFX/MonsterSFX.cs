@@ -15,6 +15,9 @@ public class MonsterSFX : MonoBehaviour
     EventInstance ShrimpMachineSFX;
     EventInstance ShrimpPlasmaBallSFX;
 
+    EventInstance TigerIdleSFX;
+    EventInstance TigerFireSFX;
+
     void Awake()
     {
         soundManager = SharedContext.Instance.Get<SoundManager>();
@@ -24,11 +27,15 @@ public class MonsterSFX : MonoBehaviour
         ShrimpLightningSFX = soundManager.CreateInstance(soundManager.fModEvent.ShrimpLightning);
         ShrimpMachineSFX = soundManager.CreateInstance(soundManager.fModEvent.MachineSFX);
         ShrimpPlasmaBallSFX = soundManager.CreateInstance(soundManager.fModEvent.PlasmaBall);
+
+        TigerIdleSFX = soundManager.CreateInstance(soundManager.fModEvent.TigerIdle);
+        TigerFireSFX = soundManager.CreateInstance(soundManager.fModEvent.TigerFireIdle);
     }
 
+    #region Shrimp SFX
     public void PlayShrimpLegSFX()
     {
-        soundManager.AttachInstanceToGameObject(ShrimpLegSFX,gameObject.transform, rb);
+        soundManager.AttachInstanceToGameObject(ShrimpLegSFX, gameObject.transform, rb);
 
         ShrimpLegSFX.getPlaybackState(out var playBackState);
         if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
@@ -145,5 +152,111 @@ public class MonsterSFX : MonoBehaviour
     {
         var player = GameObject.FindGameObjectWithTag("Player");
         soundManager.PlayOneShot(soundManager.fModEvent.ShrimpGetHit, player);
+    }
+    #endregion
+
+    public void TigerRoarFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerRoar, player);
+    }
+
+    public void TigerBiteSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerBite, gameObject);
+    }
+
+    public void TigerBiteComboSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerBiteCombo, gameObject);
+    }
+
+    public void TigerClawSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerBiteCombo, gameObject);
+    }
+
+    public void TigerCrashSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerBiteCombo, gameObject);
+    }
+
+    public void PlayTigerIdleSFX()
+    {
+        soundManager.AttachInstanceToGameObject(TigerIdleSFX, gameObject.transform, rb);
+
+        TigerIdleSFX.getPlaybackState(out var playBackState);
+        if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+            TigerIdleSFX.start();
+    }
+
+    public void StopTigerIdleSFX()
+    {
+        TigerIdleSFX.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void PlayTigerFireSFX()
+    {
+        soundManager.AttachInstanceToGameObject(TigerFireSFX, gameObject.transform, rb);
+
+        TigerFireSFX.getPlaybackState(out var playBackState);
+        if (playBackState.Equals(PLAYBACK_STATE.STOPPED))
+            TigerFireSFX.start();
+    }
+
+    public void StopTigerFireSFX()
+    {
+        TigerFireSFX.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void PlayTigerSpikeSpawnSFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerSpikeSpawn, player);
+    }
+
+    public void PlayTigerSpikeGroundFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerSpikeSpawn, player);
+    }
+
+    public void PlayTigerSpinSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerSpinAttack, gameObject);
+    }
+
+    public void PlayTigerSwipeSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerSwipettack, gameObject);
+    }
+
+    public void PlayTigerTailBumpSFX()
+    {
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerTailBump, gameObject);
+    }
+
+    public void PlayTigerTailAttackSFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerTailAttack, player);
+    }
+
+    public void PlayTigerUltimateSFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerUltimate, player);
+    }
+
+    public void PlayTigerDeadSFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerDead, player);
+    }
+
+    public void PlayTigerGetHitSFX()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        soundManager.PlayOneShot(soundManager.fModEvent.TigerGetHit, player);
     }
 }

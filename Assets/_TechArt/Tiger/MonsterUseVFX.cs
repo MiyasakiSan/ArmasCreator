@@ -167,7 +167,7 @@ public class MonsterUseVFX : MonoBehaviour
             }
             else
             {
-
+                monsterSFX.PlayTigerFireSFX();
             }
         }
         else
@@ -178,7 +178,7 @@ public class MonsterUseVFX : MonoBehaviour
             }
             else
             {
-
+                monsterSFX.StopTigerFireSFX();
             }
         }
 
@@ -196,7 +196,7 @@ public class MonsterUseVFX : MonoBehaviour
         }
 
         for(int i = 0; i< amount; i++)
-        {
+            {
             var bubble = Instantiate(BubblePrefab, BubbleSpawnPos.transform.position, Quaternion.identity);
             bubble.GetComponent<Bubble>().Target = BubbleTargetPos[i];
             bubble.GetComponent<ColliderDamage>().SetupAttackPattern(enemyCombat.currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);

@@ -1,3 +1,4 @@
+using ArmasCreator.Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class ProjectileSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject ProjectilePrefab;
+
+    [SerializeField]
+    private MonsterSFX monsterSFX;
 
     private Transform target;
     private Rigidbody rb;
@@ -29,6 +33,9 @@ public class ProjectileSpawner : MonoBehaviour
 
     public void SpawnProjectile()
     {
-        Instantiate(ProjectilePrefab, this.transform.position, this.transform.rotation);
+        var spike = Instantiate(ProjectilePrefab, this.transform.position, this.transform.rotation);
+        spike.GetComponent<TigerSpikeController>().monsterSFX = monsterSFX;
+
+        monsterSFX.PlayTigerSpikeSpawnSFX();
     }
 }

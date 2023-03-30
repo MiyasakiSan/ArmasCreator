@@ -43,7 +43,7 @@ public class enemyAnimController : NetworkBehaviour
         }
         else
         {
-
+            monsterSFX.PlayTigerIdleSFX();
         }
     }
     public bool currentAnimatorStateBaseIsName(string paramName)
@@ -132,7 +132,8 @@ public class enemyAnimController : NetworkBehaviour
             }
             else
             {
-
+                monsterSFX.StopTigerIdleSFX();
+                monsterSFX.PlayTigerDeadSFX();
             }
             //StartCoroutine(despawn());
         }

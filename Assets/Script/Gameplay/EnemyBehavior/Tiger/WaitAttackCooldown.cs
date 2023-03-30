@@ -54,7 +54,7 @@ public class WaitAttackCooldown : ActionNode
             }
         }
 
-        if (isOnCooldown)
+        if (blackboard.IsOnCooldown)
         {
             context.gameObject.GetComponent<enemyAnimController>().SetWalking(true);
 
@@ -77,11 +77,11 @@ public class WaitAttackCooldown : ActionNode
 
     IEnumerator AttackCooldown(float cooldown)
     {
-        isOnCooldown = true;
+        blackboard.IsOnCooldown = true;
 
         yield return new WaitForSeconds(cooldown + 0.25f);
 
-        isOnCooldown = false;
+        blackboard.IsOnCooldown = false;
 
         cooldownCoroutine = null;
     }

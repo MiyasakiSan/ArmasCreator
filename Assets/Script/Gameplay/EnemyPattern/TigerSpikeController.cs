@@ -16,6 +16,8 @@ namespace ArmasCreator.Gameplay
 
         private bool isHit;
 
+        public MonsterSFX monsterSFX;
+
         private void Awake()
         {
             rb = this.GetComponent<Rigidbody>();
@@ -50,14 +52,10 @@ namespace ArmasCreator.Gameplay
 
                 isHit = true;
 
-                StartCoroutine(autoDestroy());
-            }
-        }
-        IEnumerator autoDestroy()
-        {
-            yield return new WaitForSeconds(4f);
+                monsterSFX.PlayTigerSpikeGroundFX();
 
-            Destroy(this.gameObject);
+                Destroy(this.gameObject, 4f);
+            }
         }
     }
 }

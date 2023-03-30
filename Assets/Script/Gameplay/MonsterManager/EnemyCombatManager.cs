@@ -137,7 +137,7 @@ public class EnemyCombatManager : NetworkBehaviour
         }
         else
         {
-
+            GetComponent<MonsterSFX>().PlayTigerGetHitSFX();
         }
     }
 
