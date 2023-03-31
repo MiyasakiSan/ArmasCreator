@@ -4894,12 +4894,27 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 33fd4d8c698be5d46b376f8f50eb292d, type: 2}
+    - {fileID: 11400000, guid: 2f8949b2cf041cf488622813c2174ca2, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 957334239}
           m_TargetAssemblyTypeName: PreGameCameraEvent, Assembly-CSharp
           m_MethodName: PreGameFinishEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 957334239}
+          m_TargetAssemblyTypeName: PreGameCameraEvent, Assembly-CSharp
+          m_MethodName: ShowBossName
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4918,13 +4933,13 @@ PlayableDirector:
   m_GameObject: {fileID: 957334237}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 6ae9021e665929c449a3a97ce7363097, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 7d70783e12c0b2c4d91ccdfaa10c9a02, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -8468267597677953442, guid: 6ae9021e665929c449a3a97ce7363097, type: 2}
+  - key: {fileID: -8468267597677953442, guid: 7d70783e12c0b2c4d91ccdfaa10c9a02, type: 2}
     value: {fileID: 301478186}
   m_ExposedReferences:
     m_References: []
@@ -7258,10 +7273,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1218880847}
     m_Modifications:
+    - target: {fileID: 450047337840104063, guid: f8a19ae3789e5934c8375e447f37e119,
+        type: 3}
+      propertyPath: m_Name
+      value: BossName
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180560344979294742, guid: f8a19ae3789e5934c8375e447f37e119,
+        type: 3}
+      propertyPath: m_Name
+      value: BossFireFade
+      objectReference: {fileID: 0}
     - target: {fileID: 2866218938197188922, guid: f8a19ae3789e5934c8375e447f37e119,
         type: 3}
       propertyPath: bossType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107090611826542789, guid: f8a19ae3789e5934c8375e447f37e119,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107090611826542789, guid: f8a19ae3789e5934c8375e447f37e119,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5286378859447393009, guid: f8a19ae3789e5934c8375e447f37e119,
         type: 3}
