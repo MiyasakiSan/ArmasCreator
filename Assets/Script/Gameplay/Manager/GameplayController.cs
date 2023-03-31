@@ -74,6 +74,7 @@ namespace ArmasCreator.Gameplay
         private LoadingPopup loadingPopup;
         private UIPlayerController uiPlayerController;
         private SoundManager soundManager;
+        private TestAnalytics analyticManager;
 
         private QuestInfo currentQuestInfo;
         public QuestInfo CurrentQuestInfo => currentQuestInfo;
@@ -109,6 +110,7 @@ namespace ArmasCreator.Gameplay
             loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
             userDataManager = SharedContext.Instance.Get<UserDataManager>();
             soundManager = SharedContext.Instance.Get<SoundManager>();
+            analyticManager = SharedContext.Instance.Get<TestAnalytics>();
             Interacable = true;
 
             tigerBGM = soundManager.CreateInstance(soundManager.fModEvent.ConstructionSiteBGM);
@@ -262,12 +264,29 @@ namespace ArmasCreator.Gameplay
         {
             AddRewardToPlayer(2500);
             ResultContainer result = new ResultContainer(currentStageTime, 2500, (int)currentDamageDelt, (int)currentDamageTaken, currentItemUsed);
+
+            UpdateWincount();
             OnStateResult?.Invoke(result);
+
             yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
 
+            analyticManager.SendResultToAnalyze(EnemyType, currentQuestInfo.PresetId, result);
             Dispose();
             loadingPopup.LoadSceneAsync("Town");
             SetCursorLock(true);
+        }
+
+        private void UpdateWincount()
+        {
+            if(!PlayerPrefs.HasKey(currentQuestInfo.PresetId))
+            {
+                PlayerPrefs.SetInt(currentQuestInfo.PresetId, 1);
+            }
+            else
+            {
+                var winCount = PlayerPrefs.GetInt(currentQuestInfo.PresetId);
+                PlayerPrefs.SetInt(currentQuestInfo.PresetId, winCount + 1);
+            }
         }
 
         private void AddRewardToPlayer(float rewardAmount)

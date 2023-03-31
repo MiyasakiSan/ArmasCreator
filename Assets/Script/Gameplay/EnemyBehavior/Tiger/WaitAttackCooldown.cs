@@ -53,6 +53,10 @@ public class WaitAttackCooldown : ActionNode
                 return State.Success;
             }
         }
+        else
+        {
+            return State.Success;
+        }
 
         if (blackboard.IsOnCooldown)
         {

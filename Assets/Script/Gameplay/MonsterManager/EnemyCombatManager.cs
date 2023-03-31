@@ -117,7 +117,10 @@ public class EnemyCombatManager : NetworkBehaviour
         float damage = col.GetComponent<Weapon>().weaponDamage;
 
         var playerStat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStat>();
-        enemyStat.receiveAttack(damage + ((playerStat.Atk * damage) /100));
+
+        float emtDamage = GameObject.FindGameObjectWithTag("Player").GetComponent<CombatRpgManager>().IsEMTState ? 2 : 0;
+
+        enemyStat.receiveAttack(emtDamage + damage + ((playerStat.Atk * damage) /100));
 
         //var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
 

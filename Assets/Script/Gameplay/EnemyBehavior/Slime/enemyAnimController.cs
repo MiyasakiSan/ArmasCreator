@@ -135,6 +135,13 @@ public class enemyAnimController : NetworkBehaviour
                 monsterSFX.StopTigerIdleSFX();
                 monsterSFX.PlayTigerDeadSFX();
             }
+
+            GetComponent<MonsterUseVFX>().IsEnterRageMode(false);
+
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            player.GetComponent<CombatRpgManager>().canBattle = false;
+            player.GetComponent<PlayerRpgMovement>().canMove = false;
             //StartCoroutine(despawn());
         }
     }

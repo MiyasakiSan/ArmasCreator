@@ -258,12 +258,16 @@ MonoBehaviour:
   playerMovement: {fileID: 3443728320252205352}
   EMT_Gauge: {fileID: 0}
   thunderFill: {fileID: 0}
+  bulletBarController: {fileID: 0}
   canBattle: 1
   heldWeapon: {fileID: 8401013730907822839, guid: 6029889c2c77ce34086b941983d814d9,
     type: 3}
   currentGameState: 0
   gameStateSwitchButton: 9
   animController: {fileID: 7298463663340378696}
+  projectilePrefab: {fileID: 6471481027186703283, guid: 2d268f724d0d16c45a9185816f5dcd98,
+    type: 3}
+  weaponController: {fileID: 1177280688194022584}
   cooldownTime: 0.8
   nextFireTime: 0
   noOfClicks: 0
@@ -272,7 +276,9 @@ MonoBehaviour:
   isSheathing: 0
   isWithdrawing: 0
   isUsingItem: 0
+  isShooting: 0
   onCombo: 0
+  BulletAmount: 0
 --- !u!114 &7298463663340378696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,6 +1133,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 90735272570965209}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1177280688194022584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1230839167299854433, guid: df323df1a7159114db3bc7bacb31a269,
+    type: 3}
+  m_PrefabInstance: {fileID: 90735272570965209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919450262395621031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0faaaa2cdaa6a1a4c93552aa6c8f92c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1742281353882399096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1832833755061075361, guid: df323df1a7159114db3bc7bacb31a269,

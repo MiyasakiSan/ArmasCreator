@@ -2,14 +2,27 @@ using UnityEngine;
 using Unity.Services.Core;
 using Unity.Services.Analytics;
 using System.Collections.Generic;
+using Unity.Services.Core.Environments;
+using ArmasCreator.Utilities;
+using ArmasCreator.Gameplay;
+using ArmasCreator.GameData;
 
 public class TestAnalytics : MonoBehaviour
 {
+    private void Awake()
+    {
+        SharedContext.Instance.Add(this);
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private async void Start()
     {
         try
         {
-            await UnityServices.InitializeAsync();
+            var options = new InitializationOptions();
+            options.SetEnvironmentName("dev");
+            
+            await UnityServices.InitializeAsync(options);
             List<string> consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
         }
         catch (ConsentCheckException e)
@@ -48,6 +61,34 @@ public class TestAnalytics : MonoBehaviour
 
         AnalyticsService.Instance.Flush();
         Debug.Log("Do");
+    }
+
+    public void SendResultToAnalyze(SubType enemyType, string challengId , ResultContainer resultContainer)
+    {
+        var customParams = new Dictionary<string, object>();
+        customParams.Add("challengeId", challengId);
+        customParams.Add("winCount", PlayerPrefs.GetInt(challengId));
+        customParams.Add("timeAmount", resultContainer.timeAmount);
+        customParams.Add("damageDelt", resultContainer.damageDelt);
+        customParams.Add("damageTaken", resultContainer.damageTaken);
+        customParams.Add("itemUsed", resultContainer.itemUsed);
+
+        if (enemyType == SubType.Lion)
+        {
+            AnalyticsService.Instance.CustomData("CiladaeMap", customParams);
+        }
+        else
+        {
+            AnalyticsService.Instance.CustomData("GotenaMap", customParams);
+        }
+
+        AnalyticsService.Instance.Flush();
+        Debug.Log($"========== Send {challengId} result to analyze ==============");
+    }
+
+    public void OnDestroy()
+    {
+        SharedContext.Instance.Remove(this);
     }
 
 }

@@ -41,6 +41,9 @@ public class CombatRpgManager : NetworkBehaviour
     [SerializeField]
     private MovementAnim animController;
 
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private WeaponShealthDraw weaponController;
+
     [Header("Melee Combo")]
 
     [SerializeField]
@@ -358,6 +361,8 @@ public class CombatRpgManager : NetworkBehaviour
     public void Shoot()
     {
         animController.ShootAnimation();
+
+        var spike = Instantiate(projectilePrefab, weaponController.currentWeaponInHand.transform.position, this.transform.rotation);
 
         if (bulletCooldownCoroutine != null)
         {

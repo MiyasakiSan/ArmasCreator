@@ -57,7 +57,7 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     }
     public override void receiveAttack(float damage)
     {
-        if (isSinglePlayer)
+        if (isSinglePlayer && currentHealth > 0)
         {
             CurrentHealth -= damage;
         }

@@ -7,6 +7,7 @@ public class LongSword : IMeleeWeapon
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _staggerDamage;
     [SerializeField] private statusEffect _weaponStatus;
+    public Transform gunTransform;
     public float attackSpeed
     {
         get { return _attackSpeed; }
