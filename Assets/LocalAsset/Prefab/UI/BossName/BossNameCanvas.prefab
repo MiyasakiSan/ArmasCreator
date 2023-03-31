@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5286378859447393013}
   - component: {fileID: 5286378859447393012}
   - component: {fileID: 5286378859447393015}
+  - component: {fileID: 2866218938197188922}
   m_Layer: 0
   m_Name: BossNameCanvas
   m_TagString: Untagged
@@ -101,6 +102,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2866218938197188922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286378859447393009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c368c210cb2604f833c86948f37dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossType: 0
+  anim: {fileID: 5286378859357528928}
 --- !u!1001 &6843984329998111503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +260,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 186364ef45078ad48829a82f3fe0d201, type: 3}
+--- !u!95 &5286378859357528928 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1704131890132512879, guid: 186364ef45078ad48829a82f3fe0d201,
+    type: 3}
+  m_PrefabInstance: {fileID: 6843984329998111503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5286378859357528931 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1704131890132512876, guid: 186364ef45078ad48829a82f3fe0d201,

@@ -4878,6 +4878,7 @@ MonoBehaviour:
   currentDirector: {fileID: 957334241}
   loadingPopup: {fileID: 0}
   timeToSkipTo: 600
+  bossNameFadeController: {fileID: 1398932034}
 --- !u!114 &957334240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7257,6 +7258,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1218880847}
     m_Modifications:
+    - target: {fileID: 2866218938197188922, guid: f8a19ae3789e5934c8375e447f37e119,
+        type: 3}
+      propertyPath: bossType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5286378859447393009, guid: f8a19ae3789e5934c8375e447f37e119,
         type: 3}
       propertyPath: m_Name
@@ -7386,6 +7392,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1398932031}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1398932034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2866218938197188922, guid: f8a19ae3789e5934c8375e447f37e119,
+    type: 3}
+  m_PrefabInstance: {fileID: 1398932031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c368c210cb2604f833c86948f37dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1408291436
 GameObject:
   m_ObjectHideFlags: 0

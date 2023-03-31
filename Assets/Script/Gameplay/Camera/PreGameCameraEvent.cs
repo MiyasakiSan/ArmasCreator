@@ -20,6 +20,9 @@ public class PreGameCameraEvent : MonoBehaviour
     [SerializeField]
     private float timeToSkipTo;
 
+    [SerializeField]
+    private BossNameFadeController bossNameFadeController;
+
     private void Awake()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -41,5 +44,10 @@ public class PreGameCameraEvent : MonoBehaviour
     {
         Debug.Assert(gameplayController != null, "gameplayController is null");
         gameplayController.PreGameFinish();
+    }
+
+    public void ShowBossName()
+    {
+        bossNameFadeController.OnStartFade();
     }
 }
