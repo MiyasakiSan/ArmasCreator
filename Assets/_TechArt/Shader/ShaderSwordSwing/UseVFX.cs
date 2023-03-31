@@ -125,6 +125,24 @@ public class UseVFX : MonoBehaviour
         }
     }
 
+    public void OnActivePS(int VFXNumber)
+    {
+        if (isMagnetMode)
+        {
+            particleSystemsMagMode[VFXNumber].gameObject.SetActive(true);
+        }
+        else
+        {
+            particleSystems[VFXNumber].gameObject.SetActive(true);
+        }
+    }
+
+    public void OnDeActivePS(int VFXNumber)
+    {
+        particleSystemsMagMode[VFXNumber].gameObject.SetActive(false);
+        particleSystems[VFXNumber].gameObject.SetActive(false);
+    }
+
     //public void SetIsMagnetMode(bool isMagnetMode)
     //{
     //    this.isMagnetMode = isMagnetMode;
