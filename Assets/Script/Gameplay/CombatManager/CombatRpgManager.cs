@@ -8,6 +8,7 @@ using ArmasCreator.Gameplay;
 using UnityEngine.UI;
 using ArmasCreator.GameData;
 using ArmasCreator.UserData;
+using ArmasCreator.UI;
 
 public class CombatRpgManager : NetworkBehaviour 
 {
@@ -20,6 +21,8 @@ public class CombatRpgManager : NetworkBehaviour
     private Image EMT_Gauge;
     [SerializeField]
     private Image thunderFill;
+    [SerializeField]
+    private BulletBarController bulletBarController;
 
     private float EMT_MaxAmount;
 
@@ -111,6 +114,10 @@ public class CombatRpgManager : NetworkBehaviour
         gameplayController.OnPlayerDealDamage += IncreaseEMTgauge;
         canSwitchStance = true;
         BulletAmount = 3;
+        for(int bulletCount = 0;bulletCount < BulletAmount;bulletCount++)
+        {
+            bulletBarController.OnReload();
+        }
     }
     void Update()
     {
@@ -343,6 +350,7 @@ public class CombatRpgManager : NetworkBehaviour
         {
             Shoot();
             BulletAmount--;
+            bulletBarController.OnShoot();
             isShooting = true;
         }
     }
@@ -367,6 +375,7 @@ public class CombatRpgManager : NetworkBehaviour
         {
             yield return new WaitForSeconds(1f);
             BulletAmount++;
+            bulletBarController.OnReload();
         }
 
         BulletAmount = 3;
