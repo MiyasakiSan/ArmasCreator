@@ -141,8 +141,6 @@ namespace ArmasCreator.UI
 
             itemDetail = "recovery " + itemInfo.SubType.ToString().ToLower() + " " + itemInfo.ConsumePercent.ToString() + " %";
 
-            Debug.Log(itemDetail);
-
             displayItemImage.sprite = sprite;
 
             displayItemDetail.text = userDataManager.UserData.UserDataInventory.ConsumableItems[itemInfo.ID].ToString();
