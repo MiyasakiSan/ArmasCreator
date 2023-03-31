@@ -28,7 +28,7 @@ namespace ArmasCreator.UI
 
         public void OnReload()
         {
-            if (bulletNodes.Count < 4)
+            if (bulletNodes.Count < 3)
             {
                 bulletNodes.Add(Instantiate(bulletPrefab, Content));
             }
