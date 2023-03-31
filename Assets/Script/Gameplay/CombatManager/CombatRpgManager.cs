@@ -361,6 +361,7 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (bulletCooldownCoroutine != null)
         {
+            StopCoroutine(bulletCooldownCoroutine);
             bulletCooldownCoroutine = null;
         }
 
@@ -376,6 +377,7 @@ public class CombatRpgManager : NetworkBehaviour
             yield return new WaitForSeconds(1f);
             BulletAmount++;
             bulletBarController.OnReload();
+            soundManager.PlayOneShot(soundManager.fModEvent.PlayerGunReloadSFX, gameObject);
         }
 
         BulletAmount = 3;
@@ -384,7 +386,7 @@ public class CombatRpgManager : NetworkBehaviour
 
     public void EndShoot()
     {
-        animController.EndShootAnimation();
+        //animController.EndShootAnimation();
     }
 
     public void Melee_CurrentAnimOutOfTime()

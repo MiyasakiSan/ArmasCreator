@@ -15,6 +15,7 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference PlayerSecondComboSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerThirdComboSFX { get; private set; }
     [field: SerializeField] public EventReference PlayerGunComboSFX { get; private set; }
+    [field: SerializeField] public EventReference PlayerGunReloadSFX { get; private set; }
 
     [field: Header("Shrimp")]
     [field: SerializeField] public EventReference LegSFX { get; private set; }

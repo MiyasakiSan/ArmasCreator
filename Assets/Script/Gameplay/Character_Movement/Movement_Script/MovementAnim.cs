@@ -28,11 +28,14 @@ public class MovementAnim : NetworkBehaviour
     private Coroutine delayOverider;
     private Coroutine switchStance;
 
+    private SoundManager soundManager;
+
     public void Init(PlayerRpgMovement playerMovement)
     {
         this.playerMovement = playerMovement;
 
         animEvent.Init(playerMovement);
+        soundManager = SharedContext.Instance.Get<SoundManager>();
     }
 
     public float currentAnimatorStateInfoTime
@@ -136,17 +139,18 @@ public class MovementAnim : NetworkBehaviour
         playerAnim.SetLayerWeight(3, 1);
 
         playerAnim.SetBool("shoot", true);
+        soundManager.PlayOneShot(soundManager.fModEvent.PlayerGunComboSFX, gameObject);
 
         StartCoroutine(endShootAnim());
     }
 
     IEnumerator endShootAnim()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.45f);
 
         playerAnim.SetBool("shoot", false);
-        playerAnim.SetLayerWeight(3, 0);
         playerMovement.gameObject.GetComponent<CombatRpgManager>().isShooting = false;
+        playerAnim.SetLayerWeight(3, 0);
     }
 
     public void EndShootAnimation()
