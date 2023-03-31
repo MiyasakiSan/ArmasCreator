@@ -58,6 +58,7 @@ public class CombatRpgManager : NetworkBehaviour
     public bool isSheathing;
     public bool isWithdrawing;
     public bool isUsingItem;
+    public bool isShooting;
     public bool onCombo;
 
     private bool firstSound;
@@ -67,6 +68,8 @@ public class CombatRpgManager : NetworkBehaviour
     private bool canSwitchStance;
 
     private Coroutine useItemCoroutine;
+    private Coroutine bulletCooldownCoroutine;
+    public int BulletAmount;
 
     public enum gameState
     {
@@ -107,6 +110,7 @@ public class CombatRpgManager : NetworkBehaviour
 
         gameplayController.OnPlayerDealDamage += IncreaseEMTgauge;
         canSwitchStance = true;
+        BulletAmount = 3;
     }
     void Update()
     {
@@ -335,15 +339,38 @@ public class CombatRpgManager : NetworkBehaviour
         {
             MeleeCombo_OnClick();
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1) && BulletAmount > 0 && !isShooting)
         {
             Shoot();
+            BulletAmount--;
+            isShooting = true;
         }
     }
 
     public void Shoot()
     {
         animController.ShootAnimation();
+
+        if (bulletCooldownCoroutine != null)
+        {
+            bulletCooldownCoroutine = null;
+        }
+
+        bulletCooldownCoroutine = StartCoroutine(bulletCooldown());
+    }
+
+    IEnumerator bulletCooldown()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        while(BulletAmount < 3)
+        {
+            yield return new WaitForSeconds(1f);
+            BulletAmount++;
+        }
+
+        BulletAmount = 3;
+        bulletCooldownCoroutine = null;
     }
 
     public void EndShoot()

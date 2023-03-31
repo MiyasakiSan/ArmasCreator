@@ -142,10 +142,11 @@ public class MovementAnim : NetworkBehaviour
 
     IEnumerator endShootAnim()
     {
-        yield return new WaitForSeconds(1.45f);
+        yield return new WaitForSeconds(2f);
 
         playerAnim.SetBool("shoot", false);
         playerAnim.SetLayerWeight(3, 0);
+        playerMovement.gameObject.GetComponent<CombatRpgManager>().isShooting = false;
     }
 
     public void EndShootAnimation()
