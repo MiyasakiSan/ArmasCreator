@@ -29,6 +29,9 @@ namespace ArmasCreator.UI
         [SerializeField]
         private CraftButton craftButton;
 
+        [SerializeField]
+        private ItemPreviewCameraController itemPreviewCameraController;
+
         private List<EquipmentTypeNode> equipmentTypeNodes = new List<EquipmentTypeNode>();
 
         private SubType currentSubType;
@@ -81,6 +84,7 @@ namespace ArmasCreator.UI
                                 ClearAllItemRequireNode();
                                 ins_EquipmentTypeNode.OnSelectedEquipmentTypeNode();
                                 currentRecipeSelectedID = itemID;
+                                itemPreviewCameraController.OnChangeItemPreview(gameDataManager.GetItemSubType(itemID), equipmentType);
                             });
                             ins_EquipmentTypeNode.SetCraftShopPanelController(craftShopPanelController);
                             var userRecipes = userDataManager.UserData.UserDataInventory.Recipes;
