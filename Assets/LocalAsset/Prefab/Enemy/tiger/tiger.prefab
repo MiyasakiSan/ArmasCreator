@@ -332,6 +332,8 @@ MonoBehaviour:
   AllAttackPattern:
   - {fileID: 11400000, guid: 31bb31298f34ca64fbe2ff84694a37d3, type: 2}
   - {fileID: 11400000, guid: 7580027aa050a574e97fd604dd80aebe, type: 2}
+  BHT: {fileID: 0}
+  waterGroundController: {fileID: 0}
   IsAttacking: 0
   currentAttackPattern: {fileID: 0}
 --- !u!114 &1479299266428193981
@@ -615,6 +617,13 @@ MonoBehaviour:
   - {fileID: 5267141350670697134}
   - {fileID: 8457341380423825871}
   isRage: 0
+  beamVFX: {fileID: 0}
+  waterParticle: {fileID: 0}
+  BubblePrefab: {fileID: 0}
+  BubbleTargetPos: []
+  BubbleSpawnPos: {fileID: 0}
+  PlasmaBallPrefab: {fileID: 0}
+  eyeMat: {fileID: 0}
 --- !u!1 &3972024903038014625
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 8646141917350617401, guid: 134554b1f21a6674f8983ab678a0d62f,
     type: 3}
+  monsterSFX: {fileID: 0}
 --- !u!1 &6468677744877880730
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,8 +713,8 @@ VisualEffect:
   m_GameObject: {fileID: 6468677744877880730}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 73a0a361ef3632c49a1b5711a2511875, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: OnPlays
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1

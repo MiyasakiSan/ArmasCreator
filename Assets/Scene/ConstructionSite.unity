@@ -421,12 +421,27 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 33fd4d8c698be5d46b376f8f50eb292d, type: 2}
+    - {fileID: 11400000, guid: 2f8949b2cf041cf488622813c2174ca2, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 53118023}
           m_TargetAssemblyTypeName: PreGameCameraEvent, Assembly-CSharp
           m_MethodName: PreGameFinishEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 53118023}
+          m_TargetAssemblyTypeName: PreGameCameraEvent, Assembly-CSharp
+          m_MethodName: ShowBossName
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1642,7 +1657,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534203482}
-  m_LocalRotation: {x: -0.018050686, y: 0.02986854, z: -0.0039423755, w: 0.9993831}
+  m_LocalRotation: {x: -0.018055126, y: 0.029870808, z: -0.0039428095, w: 0.999383}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2030,6 +2045,8 @@ MonoBehaviour:
     roll: 0
   - position: {x: 1.0441451, y: -2.3114383, z: 29.721115}
     roll: 0
+  - position: {x: 1.044145, y: -2.311438, z: 29.72112}
+    roll: 0
 --- !u!4 &664599880
 Transform:
   m_ObjectHideFlags: 0
@@ -2242,7 +2259,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757924827}
-  m_LocalRotation: {x: 0.07452849, y: -0.03588203, z: 0.0026834393, w: 0.9965695}
+  m_LocalRotation: {x: 0.07453292, y: -0.035884317, z: 0.0026837706, w: 0.9965691}
   m_LocalPosition: {x: 6.97965, y: 31.23476, z: -113.99985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3265,7 +3282,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3523,7 +3540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163615559}
   m_LocalRotation: {x: 0.15254602, y: -1e-45, z: -0, w: 0.9882964}
-  m_LocalPosition: {x: -0.19000006, y: 0, z: 1.7900002}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11671,7 +11688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031915214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.99, y: 1.3199999, z: -1.1299999}
+  m_LocalPosition: {x: 2.8, y: 1.3199999, z: 0.6600003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19550,10 +19567,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossFireFade
       objectReference: {fileID: 0}
+    - target: {fileID: 2317252801023090129, guid: f8a19ae3789e5934c8375e447f37e119,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4107090611826542789, guid: f8a19ae3789e5934c8375e447f37e119,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 4107090611826542789, guid: f8a19ae3789e5934c8375e447f37e119,
         type: 3}
