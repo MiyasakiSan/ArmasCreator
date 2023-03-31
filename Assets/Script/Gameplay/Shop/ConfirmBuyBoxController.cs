@@ -86,6 +86,10 @@ namespace ArmasCreator.UI
                 {
                     buyComplete = false;
                 }
+                if(float.Parse(buyAmountText.text) <= 0)
+                {
+                    buyComplete = false;
+                }
                 if (buyComplete)
                 {
                     var newCoin = userDataManager.UserData.Coins - itemPrice * float.Parse(buyAmountText.text);

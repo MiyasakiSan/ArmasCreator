@@ -108,6 +108,10 @@ namespace ArmasCreator.UI
                         sellComplate = false;
                     }
                 }
+                if(int.Parse(sellAmountText.text) <= 0)
+                {
+                    sellComplate = false;
+                }
                 if (sellComplate)
                 {
                     var newCoin = userDataManager.UserData.Coins + itemPrice * float.Parse(sellAmountText.text);
