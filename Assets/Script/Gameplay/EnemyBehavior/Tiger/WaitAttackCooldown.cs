@@ -30,6 +30,8 @@ public class WaitAttackCooldown : ActionNode
             context.agent.acceleration = acceleration;
             context.agent.isStopped = false;
 
+            blackboard.IsOnCooldown = false;
+
             animController.SetAllLookAtWeight(1);
 
             coroutineHelper = SharedContext.Instance.Get<CoroutineHelper>();

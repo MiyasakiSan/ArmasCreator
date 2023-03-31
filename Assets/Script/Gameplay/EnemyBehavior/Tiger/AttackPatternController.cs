@@ -106,7 +106,7 @@ namespace ArmasCreator.Behavior
             }
             else
             {
-                currentAttackPattern = null;
+                currentAttackPattern = blackboard.PrevioustAttackPattern;
             }
 
             if (blackboard.canUseEnrageFinishMove)

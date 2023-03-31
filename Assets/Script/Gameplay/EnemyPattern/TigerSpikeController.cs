@@ -32,17 +32,6 @@ namespace ArmasCreator.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (isHit) { return; }
-
-            if (other.gameObject.CompareTag("Player"))
-            {
-                other.gameObject.GetComponent<AttackTarget>().receiveAttack(Damage);
-
-                Debug.Log("Hit player");
-
-                isHit = true;
-            }
-
             if (other.gameObject.CompareTag("Walkable"))
             {
                 isHittingGround = true;
@@ -55,6 +44,19 @@ namespace ArmasCreator.Gameplay
                 monsterSFX.PlayTigerSpikeGroundFX();
 
                 Destroy(this.gameObject, 4f);
+            }
+
+            if (isHit) { return; }
+
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<AttackTarget>().receiveAttack(Damage);
+
+                Debug.Log("Hit player");
+
+                Destroy(this.gameObject, 4f);
+
+                isHit = true;
             }
         }
     }

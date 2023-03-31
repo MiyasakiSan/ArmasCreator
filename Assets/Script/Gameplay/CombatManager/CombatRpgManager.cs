@@ -26,7 +26,7 @@ public class CombatRpgManager : NetworkBehaviour
 
     private float EMT_MaxAmount;
 
-    private float EMT_Amount;
+    public float EMT_Amount;
 
     private bool isEMTState;
     public bool IsEMTState => isEMTState;
@@ -309,7 +309,7 @@ public class CombatRpgManager : NetworkBehaviour
             decreaseEMTgaugeCoroutine = null;
             isEMTState = false;
         }
-        else if (!isEMTState && EMT_Amount == EMT_MaxAmount)
+        else if (!isEMTState && EMT_Amount >= EMT_MaxAmount)
         {
             isEMTState = true;
 
@@ -321,11 +321,11 @@ public class CombatRpgManager : NetworkBehaviour
     {
         while (EMT_Amount > 0)
         {
-            EMT_Amount -= 0.01f;
+            EMT_Amount -= 0.1f;
             EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
             thunderFill.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
 
-            yield return new WaitForSeconds(0.01f / decreaseRate);
+            yield return new WaitForSeconds(0.1f / decreaseRate);
         }
 
         EMT_Amount = 0;

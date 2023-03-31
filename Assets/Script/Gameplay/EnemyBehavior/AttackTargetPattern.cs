@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 using ArmasCreator.Utilities;
+using ArmasCreator.Gameplay;
 
 public class AttackTargetPattern : ActionNode
 {
@@ -11,11 +12,13 @@ public class AttackTargetPattern : ActionNode
     private enemyAnimController animController;
     private EnemyCombatManager enemyCombatManager;
     private MonsterUseVFX monsterVFX;
+    private GameplayController gameplayController;
 
     protected override void OnStart() {
 
         animController = context.gameObject.GetComponent<enemyAnimController>();
         enemyCombatManager = context.gameObject.GetComponent<EnemyCombatManager>();
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
         monsterVFX = context.gameObject.GetComponent<MonsterUseVFX>();
 
         if (blackboard.CurrentAttackPattern != null) 
@@ -40,7 +43,7 @@ public class AttackTargetPattern : ActionNode
 
             if (attackCoroutine == null)
             {
-                attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackDuration));
+                attackCoroutine = coroutineHelper.Play(attackingCoroutine(blackboard.CurrentAttackPattern.AttackDuration/gameplayController.CurrentQuestInfo.InitSpeed));
             }
         }
         else
