@@ -74,8 +74,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private GameObject CiladaeShoeLFT;
     [SerializeField]
     private GameObject CiladaeShoeRGT;
-    [SerializeField]
-    private GameObject CiladaeWeapon;
     [Space(10)]
     [SerializeField]
     private GameObject GotenaHelmet;
@@ -93,8 +91,6 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private GameObject GotenaShoeLFT;
     [SerializeField]
     private GameObject GotenaShoeRGT;
-    [SerializeField]
-    private GameObject GotenaWeapon;
 
     private float def = 0;
     public float Def => def;
@@ -592,24 +588,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
                         }
 
                         break;
-                    }
-                case (SubType.Weapon):
-                    {
-                        if (asset == "ciladae")
-                        {
-                            CiladaeWeapon.SetActive(true);
-                        }
-                        else if (asset == "gotena")
-                        {
-                            GotenaWeapon.SetActive(true);
-                        }
-                        else
-                        {
-                            GotenaWeapon.SetActive(false);
-                            CiladaeWeapon.SetActive(false);
-                        }
-                        break;
-                    }
+                    }               
             }
         } 
         #endregion

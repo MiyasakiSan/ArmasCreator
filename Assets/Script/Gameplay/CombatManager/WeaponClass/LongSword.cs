@@ -54,19 +54,17 @@ public class LongSword : IMeleeWeapon
 
     private void setUpgradeWeapon()
     {
-        Instantiate(CiladaeWeapon, this.gameObject.transform);
-        Instantiate(GotenaWeapon, this.gameObject.transform);
         var weaponId = userDataManager.UserData.UserDataInventory.GetEquipItemInfo(SubType.Weapon);
 
         gameDataManager.GetEquipInfoSubType(weaponId.ID, out string asset);
 
         if (asset == "ciladae")
         {
-            GotenaWeapon.SetActive(false);
+            CiladaeWeapon.SetActive(true);
         }
         else if (asset == "gotena")
         {
-            CiladaeWeapon.SetActive(false);
+            GotenaWeapon.SetActive(true);
         }
         else
         {
