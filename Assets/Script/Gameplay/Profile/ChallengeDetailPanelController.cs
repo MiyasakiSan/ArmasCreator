@@ -138,7 +138,7 @@ namespace ArmasCreator.UI
                     var sprite = atlas.GetSprite(itemInfo.IconName);
 
                     RewardNode ins_RewardNode = Instantiate(rewardNode, rewardContent);
-                    string rewardString = itemInfo.Name + " x " + achievementInfo.Rewards[rewardID].ToString(); ;
+                    string rewardString = itemInfo.Name + " Recipe" + " x " + achievementInfo.Rewards[rewardID].ToString(); ;
                     ins_RewardNode.SetReward(sprite, rewardString);
 
                     loadingSpriteCoroutine = null;

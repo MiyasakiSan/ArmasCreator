@@ -164,6 +164,10 @@ namespace ArmasCreator.UI
                     craftShopPanelController.HideCraftShopDetail();
                 }
             }
+            else
+            {
+                craftShopPanelController.HideCraftShopDetail();
+            }
         }
 
         public void SetIsOwned(bool isOwned)
