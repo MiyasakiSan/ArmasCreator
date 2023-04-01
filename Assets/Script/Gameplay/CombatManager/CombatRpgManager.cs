@@ -255,6 +255,8 @@ public class CombatRpgManager : NetworkBehaviour
             StopCoroutine(useItemCoroutine);
             playerMovement.ResetSpeedMultiplierOnUsingItem();
 
+            weaponController.cancelShealth();
+
             useItemCoroutine = null;
             playerMovement.canRun = true;
             canSwitchStance = true;

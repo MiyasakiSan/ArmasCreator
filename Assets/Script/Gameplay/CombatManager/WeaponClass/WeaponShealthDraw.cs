@@ -95,6 +95,26 @@ public class WeaponShealthDraw : NetworkBehaviour
         Destroy(currentWeaponInShealth.gameObject);
         currentWeaponInShealth = null;
     }
+
+    public void cancelShealth()
+    {
+        if (currentWeaponInShealth != null)
+        {
+            Destroy(currentWeaponInShealth.gameObject);
+        }
+
+        if (currentWeaponInHand != null)
+        {
+            Destroy(currentWeaponInHand.gameObject);
+        }
+
+        currentWeaponInHand = null;
+
+        currentWeaponInShealth = null;
+
+        currentWeaponInShealth = Instantiate(WeaponHeld, WeaponShealth.transform);
+    }
+
     public void ShealthWeaponEvent()
     {
         if (isSinglePlayer)
