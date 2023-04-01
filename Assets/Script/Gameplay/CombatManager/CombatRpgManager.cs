@@ -297,7 +297,6 @@ public class CombatRpgManager : NetworkBehaviour
 
         EMT_Amount++;
         EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
-        thunderFill.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
     }
 
     private void UseEMT()
@@ -314,6 +313,8 @@ public class CombatRpgManager : NetworkBehaviour
         else if (!isEMTState && EMT_Amount >= EMT_MaxAmount)
         {
             isEMTState = true;
+
+            thunderFill.fillAmount = 1;
 
             decreaseEMTgaugeCoroutine = StartCoroutine(DecreaseEMTgauge(2));
         }
