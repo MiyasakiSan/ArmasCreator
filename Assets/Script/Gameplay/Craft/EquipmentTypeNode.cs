@@ -38,6 +38,8 @@ namespace ArmasCreator.UI
 
         private TMP_Text moneyRequire;
 
+        private TMP_Text equipmentNameText;
+
         private GameDataManager gameDataManager;
 
         private UserDataManager userDataManager;
@@ -146,6 +148,7 @@ namespace ArmasCreator.UI
                     PopulateItemRequireNode();
                     selectedBorder.SetActive(true);
                     craftShopPanelController.ShowCraftDetail();
+                    equipmentNameText.text = itemInfo.Name;
                     if (userDataManager.UserData.Coins >= itemInfo.BuyPrice)
                     {
                         moneyRequire.text = string.Format("<color=white>{0} s</color>", itemInfo.BuyPrice.ToString());
@@ -206,6 +209,11 @@ namespace ArmasCreator.UI
         public void SetCraftShopPanelController(CraftShopPanelController newCraftShopPanelController)
         {
             craftShopPanelController = newCraftShopPanelController;
+        }
+
+        public void SetEquipmentNameText(TMP_Text tMP_Text)
+        {
+            equipmentNameText = tMP_Text;
         }
     }
 }

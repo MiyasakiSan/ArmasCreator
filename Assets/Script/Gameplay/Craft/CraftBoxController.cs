@@ -27,6 +27,9 @@ namespace ArmasCreator.UI
         private TMP_Text moneyRequire;
 
         [SerializeField]
+        private TMP_Text equipmentNameText;
+
+        [SerializeField]
         private CraftButton craftButton;
 
         [SerializeField]
@@ -106,6 +109,8 @@ namespace ArmasCreator.UI
                             var userEquipment = userDataManager.UserData.UserDataInventory.EquipableItems[subType];
 
                             ins_EquipmentTypeNode.SetIsOwned(false);
+
+                            ins_EquipmentTypeNode.SetEquipmentNameText(equipmentNameText);
 
                             foreach (var equipment in userEquipment.UnlockIds)
                             {
