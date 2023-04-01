@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using ArmasCreator.UserData;
 using ArmasCreator.GameData;
+using ArmasCreator.Utilities;
 
 public class LongSword : IMeleeWeapon
 {
@@ -14,8 +15,8 @@ public class LongSword : IMeleeWeapon
     [SerializeField] private GameObject GotenaWeapon;
     [SerializeField] private GameObject CiladaeWeapon;
 
-    private UserDataManager userDataManager;
-    private GameDataManager gameDataManager;
+    private UserDataManager userDataManager = SharedContext.Instance.Get<UserDataManager>();
+    private GameDataManager gameDataManager = SharedContext.Instance.Get<GameDataManager>();
 
     public Transform gunTransform;
     public float attackSpeed
@@ -35,6 +36,11 @@ public class LongSword : IMeleeWeapon
         set { _weaponStatus = value; }
     }
 
+    void Awake()
+    {
+        
+    }
+
     void Start()
     {
         setUpgradeWeapon();
@@ -43,7 +49,7 @@ public class LongSword : IMeleeWeapon
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void setUpgradeWeapon()
@@ -52,7 +58,7 @@ public class LongSword : IMeleeWeapon
         Instantiate(GotenaWeapon, this.gameObject.transform);
         var weaponId = userDataManager.UserData.UserDataInventory.GetEquipItemInfo(SubType.Weapon);
 
-        var subType = gameDataManager.GetEquipInfoSubType(weaponId.ID, out string asset);
+        gameDataManager.GetEquipInfoSubType(weaponId.ID, out string asset);
 
         if (asset == "ciladae")
         {
