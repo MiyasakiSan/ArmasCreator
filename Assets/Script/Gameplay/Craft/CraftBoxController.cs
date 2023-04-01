@@ -40,14 +40,13 @@ namespace ArmasCreator.UI
 
         private string[] equipmentTypes = { "gunblade", "helmet", "shirt", "glove", "pant", "shoes" };
 
-        private GameDataManager gameDataManager;
+        private GameDataManager gameDataManager = SharedContext.Instance.Get<GameDataManager>();
 
-        private UserDataManager userDataManager;
+        private UserDataManager userDataManager = SharedContext.Instance.Get<UserDataManager>();
 
         void Awake()
         {
-            gameDataManager = SharedContext.Instance.Get<GameDataManager>();
-            userDataManager = SharedContext.Instance.Get<UserDataManager>();
+
         }
 
         public void SetCurrentSubType(SubType subType)
@@ -89,12 +88,14 @@ namespace ArmasCreator.UI
                             ins_EquipmentTypeNode.SetCraftShopPanelController(craftShopPanelController);
                             var userRecipes = userDataManager.UserData.UserDataInventory.Recipes;
 
+                            ins_EquipmentTypeNode.SetIsUnlockEquipmentTypeNode(true);
+
                             foreach (string recipeID in userRecipes)
                             {
                                 if (recipeID == itemID)
                                 {
-                                    ins_EquipmentTypeNode.SetIsUnlockEquipmentTypeNode(true);
-                                    break;
+                                    ins_EquipmentTypeNode.SetIsUnlockEquipmentTypeNode(false);
+                                    continue;
                                 }
                             }
 
@@ -103,18 +104,18 @@ namespace ArmasCreator.UI
                             var subType = gameDataManager.GetItemSubType(recipeInfo.Craft_item_id);
 
                             var userEquipment = userDataManager.UserData.UserDataInventory.EquipableItems[subType];
-                            
 
-                            foreach(var equipment in userEquipment.UnlockIds)
+                            ins_EquipmentTypeNode.SetIsOwned(false);
+
+                            foreach (var equipment in userEquipment.UnlockIds)
                             {
                                 if(recipeInfo.Craft_item_id == equipment)
                                 {
                                     ins_EquipmentTypeNode.SetIsOwned(true);
                                     ins_EquipmentTypeNode.SetIsUnlockEquipmentTypeNode(false);
-                                    break;
+                                    continue;
                                 }
                             }
-                            break;
                         }
                     }
                 }

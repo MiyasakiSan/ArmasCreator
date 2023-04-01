@@ -323,7 +323,7 @@
             "sell_price": 0,
             "buy_value": 0,
             "asset": "ciladae",
-            "icon": "init_gunblade",
+            "icon": "init_gunblade_icon",
             "atlas_icon": "AtlasEquipableItemIcons",
             "atk": 0,
             "def": 0,
@@ -402,6 +402,101 @@
             "sell_price": 0,
             "buy_value": 0,
             "asset": "ciladae",
+            "icon": "init_shoes_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+	    "gotena_gunblade": 
+        {
+            "id": "gotena_gunblade",
+            "name" : "Gotena Gunblade",
+            "item_type": "Equipable",
+            "sub_type": "Weapon",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "gotena",
+            "icon": "init_gunblade_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 0,
+            "vit": 0,
+            "crit": 10.0
+        },"gotena_helmet": 
+        {
+            "id": "gotena_helmet",
+            "name" : "Gotena Helmet",
+            "item_type": "Equipable",
+            "sub_type": "Helmet",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "gotena",
+            "icon": "init_helmet_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "gotena_shirt": 
+        {
+            "id": "gotena_shirt",
+            "name" : "Gotena Shirt",
+            "item_type": "Equipable",
+            "sub_type": "Shirt",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "gotena",
+            "icon": "init_shirt_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 10.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "gotena_glove": 
+        {
+            "id": "gotena_glove",
+            "name" : "Gotena Gloves",
+            "item_type": "Equipable",
+            "sub_type": "Glove",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "gotena",
+            "icon": "init_glove_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 10.0,
+            "def": 2.0,
+            "vit": 20.0,
+            "crit": 5.0
+        },
+        "gotena_pant": 
+        {
+            "id": "gotena_pant",
+            "name" : "Gotena Pant",
+            "item_type": "Equipable",
+            "sub_type": "Pant",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "gotena",
+            "icon": "init_pant_icon",
+            "atlas_icon": "AtlasEquipableItemIcons",
+            "atk": 0,
+            "def": 5.0,
+            "vit": 20.0,
+            "crit": 0
+        },
+        "gotena_shoes": 
+        {
+            "id": "gotena_shoes",
+            "name" : "Gotena Boots",
+            "item_type": "Equipable",
+            "sub_type": "Shoes",
+            "sell_price": 0,
+            "buy_value": 0,
+            "asset": "gotena",
             "icon": "init_shoes_icon",
             "atlas_icon": "AtlasEquipableItemIcons",
             "atk": 0,
@@ -541,13 +636,16 @@
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
-            "buy_value": 1000,
+            "buy_value": 12500,
             "asset": "ciladae_gunblade_recipe",
             "icon": "ciladae_gunblade_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {
-                "spike_horn": 5
+                "tail":16,
+                "fang":8,
+                "scale":8,
+                "claw":8
             },
             "craft_item_id": "ciladae_gunblade"
         },
@@ -558,13 +656,16 @@
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
-            "buy_value": 500,
+            "buy_value": 9500,
             "asset": "ciladae_helmet_recipe",
             "icon": "ciladae_helmet_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {
-                "spike_horn": 5
+                "claw": 16,
+                "spike_horn":8,
+                "fang":8,
+                "tail":8
             },
             "craft_item_id": "ciladae_helmet"
         },
@@ -575,13 +676,15 @@
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
-            "buy_value": 500,
+            "buy_value": 9500,
             "asset": "ciladae_shirt_recipe",
             "icon": "ciladae_shirt_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {
-                "spike_horn": 5
+                "scale": 16,
+                "tail": 16,
+                "spike_horn":8
             },
             "craft_item_id": "ciladae_shirt"
         },
@@ -592,13 +695,16 @@
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
-            "buy_value": 500,
+            "buy_value": 9500,
             "asset": "ciladae_glove_recipe",
             "icon": "ciladae_glove_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {
-                "spike_horn": 5
+                "tail": 16,
+                "spike_horn": 16,
+                "scale":8,
+                "fang":8
             },
             "craft_item_id": "ciladae_glove"
         },
@@ -609,13 +715,15 @@
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
-            "buy_value": 500,
+            "buy_value": 9500,
             "asset": "ciladae_pant_recipe",
             "icon": "ciladae_pant_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {
-                "spike_horn": 5
+                "scale":16,
+                "claw":16,
+                "tail": 8
             },
             "craft_item_id": "ciladae_pant"
         },
@@ -626,15 +734,133 @@
             "item_type": "Recipe",
             "sub_type": "Lion",
             "sell_price": 0,
-            "buy_value": 500,
+            "buy_value": 9500,
             "asset": "ciladae_shoes_recipe",
             "icon": "ciladae_shoes_recipe_icon",
             "atlas_icon": "AtlasRecipeItemIcons",
             "recipe" : 
             {
-                "spike_horn": 5
+                "spike_horn":16,
+                "tail": 16,
+                "fang":16
             },
             "craft_item_id": "ciladae_shoes"
+        },"gotena_gunblade_recipe": 
+        {
+            "id": "gotena_gunblade_recipe",
+            "name" : "Gotena Gunblade Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Shrimp",
+            "sell_price": 0,
+            "buy_value": 12500,
+            "asset": "ciladae_gunblade_recipe",
+            "icon": "ciladae_gunblade_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "tail":16,
+                "fang":8,
+                "scale":8,
+                "claw":8
+            },
+            "craft_item_id": "gotena_gunblade"
+        },
+	    "gotena_helmet_recipe": 
+        {
+            "id": "gotena_helmet_recipe",
+            "name" : "Gotena Helmet Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Shrimp",
+            "sell_price": 0,
+            "buy_value": 9500,
+            "asset": "ciladae_helmet_recipe",
+            "icon": "ciladae_helmet_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "claw": 16,
+                "spike_horn":8,
+                "fang":8,
+                "tail":8
+            },
+            "craft_item_id": "gotena_helmet"
+        },
+	    "gotena_shirt_recipe": 
+        {
+            "id": "gotena_shirt_recipe",
+            "name" : "Gotena Shirt Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Shrimp",
+            "sell_price": 0,
+            "buy_value": 9500,
+            "asset": "ciladae_shirt_recipe",
+            "icon": "ciladae_shirt_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "scale": 16,
+                "tail": 16,
+                "spike_horn":8
+            },
+            "craft_item_id": "gotena_shirt"
+        },
+	    "gotena_glove_recipe": 
+        {
+            "id": "gotena_glove_recipe",
+            "name" : "Gotena Glove Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Shrimp",
+            "sell_price": 0,
+            "buy_value": 9500,
+            "asset": "ciladae_glove_recipe",
+            "icon": "ciladae_glove_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "tail": 16,
+                "spike_horn": 16,
+                "scale":8,
+                "fang":8
+            },
+            "craft_item_id": "gotena_glove"
+        },
+	    "gotena_pant_recipe": 
+        {
+            "id": "gotena_pant_recipe",
+            "name" : "Gotena Pant Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Shrimp",
+            "sell_price": 0,
+            "buy_value": 9500,
+            "asset": "ciladae_pant_recipe",
+            "icon": "ciladae_pant_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "scale":16,
+                "claw":16,
+                "tail": 8
+            },
+            "craft_item_id": "gotena_pant"
+        },
+	    "gotena_shoes_recipe": 
+        {
+            "id": "gotena_shoes_recipe",
+            "name" : "Gotena Shoes Recipe",
+            "item_type": "Recipe",
+            "sub_type": "Shrimp",
+            "sell_price": 0,
+            "buy_value": 9500,
+            "asset": "ciladae_shoes_recipe",
+            "icon": "ciladae_shoes_recipe_icon",
+            "atlas_icon": "AtlasRecipeItemIcons",
+            "recipe" : 
+            {
+                "spike_horn":16,
+                "tail": 16,
+                "fang":16
+            },
+            "craft_item_id": "gotena_shoes"
         }
     },
     "init_equip_items" : 

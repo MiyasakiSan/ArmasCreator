@@ -55,8 +55,6 @@ namespace ArmasCreator.UI
         private RecipeModel itemInfo; /*====>  put some item info here See in Game Data*/
         public RecipeModel ItemInfo => itemInfo;
 
-        private bool isUnlock = false;
-
         void Awake()
         {
             gameDataManager = SharedContext.Instance.Get<GameDataManager>();
