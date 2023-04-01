@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using ArmasCreator.UserData;
+using ArmasCreator.GameData;
+
 public class LongSword : IMeleeWeapon
 {
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _staggerDamage;
     [SerializeField] private statusEffect _weaponStatus;
+
+    [SerializeField] private GameObject GotenaWeapon;
+    [SerializeField] private GameObject CiladaeWeapon;
+
+    private UserDataManager userDataManager;
+    private GameDataManager gameDataManager;
+
     public Transform gunTransform;
     public float attackSpeed
     {
@@ -27,7 +37,7 @@ public class LongSword : IMeleeWeapon
 
     void Start()
     {
-
+        setUpgradeWeapon();
     }
 
     // Update is called once per frame
@@ -35,7 +45,31 @@ public class LongSword : IMeleeWeapon
     {
         
     }
-  
+
+    private void setUpgradeWeapon()
+    {
+        Instantiate(CiladaeWeapon, this.gameObject.transform);
+        Instantiate(GotenaWeapon, this.gameObject.transform);
+        var weaponId = userDataManager.UserData.UserDataInventory.GetEquipItemInfo(SubType.Weapon);
+
+        var subType = gameDataManager.GetEquipInfoSubType(weaponId.ID, out string asset);
+
+        if (asset == "ciladae")
+        {
+            GotenaWeapon.SetActive(false);
+        }
+        else if (asset == "gotena")
+        {
+            CiladaeWeapon.SetActive(false);
+        }
+        else
+        {
+            GotenaWeapon.SetActive(false);
+            CiladaeWeapon.SetActive(false);
+        }
+    }
+
+
     public override void Attack(AttackTarget target, float damage)
     {
         //base.Attack(target,damage);
