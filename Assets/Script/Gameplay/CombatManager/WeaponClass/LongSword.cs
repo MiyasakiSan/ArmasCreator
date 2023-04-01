@@ -54,6 +54,14 @@ public class LongSword : IMeleeWeapon
 
     private void setUpgradeWeapon()
     {
+        if(CiladaeWeapon == null)
+        {
+            return;
+        }
+        if (GotenaWeapon == null)
+        {
+            return;
+        }
         var weaponId = userDataManager.UserData.UserDataInventory.GetEquipItemInfo(SubType.Weapon);
 
         gameDataManager.GetEquipInfoSubType(weaponId.ID, out string asset);
