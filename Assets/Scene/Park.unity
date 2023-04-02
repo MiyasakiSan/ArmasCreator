@@ -3236,7 +3236,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676577847}
-  m_LocalRotation: {x: 0.13454418, y: -0.000000017049933, z: 0.0000000023150188, w: 0.9909076}
+  m_LocalRotation: {x: 0.13454418, y: 0.000000017049933, z: -0.0000000023150188, w: 0.9909076}
   m_LocalPosition: {x: -1.01, y: 0, z: 8.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11937,6 +11937,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1820557598214239104, guid: 77a7e5d8601028342a9d7a34c9e0610d,
         type: 3}
+      propertyPath: damage
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820557598214239104, guid: 77a7e5d8601028342a9d7a34c9e0610d,
+        type: 3}
       propertyPath: waterGroundController
       value: 
       objectReference: {fileID: 1842723888}
@@ -12162,6 +12167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000228074895751221, guid: 77a7e5d8601028342a9d7a34c9e0610d,
+        type: 3}
+      propertyPath: maxHealth
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2005824043505958281, guid: 77a7e5d8601028342a9d7a34c9e0610d,
         type: 3}
