@@ -564,14 +564,15 @@ public class PlayerRpgMovement : NetworkBehaviour
         if (isDead) { return; }
 
         canMove = false;
+        isDead = true;
         combatManager.canBattle = false;
         StartCoroutine(dieThenRespawn());
     }
 
     private IEnumerator dieThenRespawn()
     {
+        Debug.Log("===== Player Dead =====");
         this.gameObject.GetComponent<CombatRpgManager>().dieState();
-        isDead = true;
         deadCam.SetActive(true);
         var stageCollider = GameObject.FindGameObjectWithTag("StageCollider").GetComponent<OnTriggerEvent>();
         stageCollider.playerDieInvoke();
@@ -607,6 +608,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         combatManager.WeaponController.cancelShealth();
         combatManager.ResetComboBool();
         combatManager.currentGameState = CombatRpgManager.gameState.neutral;
+        animController.changeCombatLayerWeight(0f);
         combatManager.canBattle = true;
     }
 

@@ -64,6 +64,11 @@ public class WeaponShealthDraw : NetworkBehaviour
     {
         if (isSinglePlayer)
         {
+            if (currentWeaponInHand != null)
+            {
+                Destroy(currentWeaponInHand.gameObject);
+            }
+
             currentWeaponInHand = Instantiate(WeaponHeld, WeaponHolder.transform);
             //currentWeaponInHand.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
             if (currentWeaponInShealth != null)
@@ -119,6 +124,11 @@ public class WeaponShealthDraw : NetworkBehaviour
     {
         if (isSinglePlayer)
         {
+            if (currentWeaponInShealth != null)
+            {
+                Destroy(currentWeaponInShealth.gameObject);
+            }
+
             currentWeaponInShealth = Instantiate(WeaponHeld, WeaponShealth.transform);
             //currentWeaponInShealth.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
