@@ -59,7 +59,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     public bool canMove;
     public bool canWalk;
     public bool canRun;
-    private bool isDead;
+    public bool isDead;
     public bool isKnockBack;
 
     private Rigidbody rb;
@@ -564,6 +564,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         if (isDead) { return; }
 
         canMove = false;
+        combatManager.canBattle = false;
         StartCoroutine(dieThenRespawn());
     }
 
@@ -584,8 +585,10 @@ public class PlayerRpgMovement : NetworkBehaviour
             animController.dieAnimaitonServerRpc();
         }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         Respawn();
+        yield return new WaitForSeconds(2f);
+        isDead = false;
     }
     public void Respawn()
     {
@@ -598,7 +601,13 @@ public class PlayerRpgMovement : NetworkBehaviour
 
         var loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
         loadingPopup.FadeBlack(false);
-        isDead = false;
+
+        combatManager.ResetAnimBoolean();
+        combatManager.ResetCombatBool();
+        combatManager.WeaponController.cancelShealth();
+        combatManager.ResetComboBool();
+        combatManager.currentGameState = CombatRpgManager.gameState.neutral;
+        combatManager.canBattle = true;
     }
 
     void walkSFX()

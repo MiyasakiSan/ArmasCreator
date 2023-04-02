@@ -24,6 +24,8 @@ namespace ArmasCreator.Gameplay
 
         void OnTriggerEnter(Collider col)
         {
+            if (col.GetComponent<PlayerRpgMovement>().isDead) { return; }
+
             if (onTriggerEnter != null) onTriggerEnter.Invoke(col);
         }
 

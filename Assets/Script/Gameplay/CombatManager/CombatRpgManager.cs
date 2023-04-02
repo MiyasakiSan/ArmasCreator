@@ -43,6 +43,7 @@ public class CombatRpgManager : NetworkBehaviour
 
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private WeaponShealthDraw weaponController;
+    public WeaponShealthDraw WeaponController => weaponController;
 
     [Header("Melee Combo")]
 
@@ -244,6 +245,13 @@ public class CombatRpgManager : NetworkBehaviour
         useItemCoroutine = null;
         UseItemByInfo(itemId);
         gameplayController.UpdatePlayerItemUsed(1);
+    }
+
+    public void ResetComboBool()
+    {
+        animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", false);
+        animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", false);
+        animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", false);
     }
 
     public void CancelUseItem()
