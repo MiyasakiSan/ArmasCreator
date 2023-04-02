@@ -252,6 +252,8 @@ public class CombatRpgManager : NetworkBehaviour
         animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", false);
         animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", false);
         animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", false);
+
+        animController.playerAnim.SetBool("isCombat",false);
     }
 
     public void CancelUseItem()
