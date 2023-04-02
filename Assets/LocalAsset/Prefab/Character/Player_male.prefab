@@ -165,7 +165,6 @@ MonoBehaviour:
   CiladaeLeggingRGT: {fileID: 530666593270085511}
   CiladaeShoeLFT: {fileID: 7096932282586246734}
   CiladaeShoeRGT: {fileID: 7674863706431276680}
-  CiladaeWeapon: {fileID: 0}
   GotenaHelmet: {fileID: 8296829640059273398}
   GotenaShirt: {fileID: 8296829640059273398}
   GotenaGloveLFT: {fileID: 5347353380774194634}
@@ -174,7 +173,6 @@ MonoBehaviour:
   GotenaLeggingRGT: {fileID: 7234956153499133848}
   GotenaShoeLFT: {fileID: 8789698683844614943}
   GotenaShoeRGT: {fileID: 5207053698329361092}
-  GotenaWeapon: {fileID: 0}
 --- !u!114 &3443728320252205352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +233,7 @@ MonoBehaviour:
   canMove: 1
   canWalk: 1
   canRun: 1
+  isDead: 0
   isKnockBack: 0
   groundLayer:
     serializedVersion: 2
@@ -1153,27 +1152,27 @@ PrefabInstance:
     - target: {fileID: 8442079283937394762, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.18301266
+      value: 0.18301274
       objectReference: {fileID: 0}
     - target: {fileID: 8442079283937394762, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6830127
+      value: -0.6830127
       objectReference: {fileID: 0}
     - target: {fileID: 8442079283937394762, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.18301266
+      value: 0.18301274
       objectReference: {fileID: 0}
     - target: {fileID: 8442079283937394762, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -30
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8442079283937394762, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 8442079283937394762, guid: df323df1a7159114db3bc7bacb31a269,
         type: 3}
