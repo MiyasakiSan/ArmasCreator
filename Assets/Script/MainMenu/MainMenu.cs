@@ -44,7 +44,6 @@ public class MainMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             return;
         }
-
         EnterNameUI.SetActive(true);
     }
     public void OnClickEnter()
@@ -74,5 +73,10 @@ public class MainMenu : MonoBehaviour
     void StopMainmenuBGM()
     {
         mainmenuBGM.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void OnExitGame()
+    {
+        Application.Quit();
     }
 }
