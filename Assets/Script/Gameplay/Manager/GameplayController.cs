@@ -93,6 +93,8 @@ namespace ArmasCreator.Gameplay
         public UnityAction<string, int> OnReceivedItem;
         public UnityAction OnReceivedAllItem;
 
+        public UnityAction OnUseItem;
+
         EventInstance townBGM;
         EventInstance tigerBGM;
         EventInstance shrimpBGM;
@@ -338,6 +340,8 @@ namespace ArmasCreator.Gameplay
             currentItemUsed += amount;
 
             //TODO : invoke needed ?
+
+            OnUseItem.Invoke();
         }
 
         public void SetCursorLock(bool isLock)
