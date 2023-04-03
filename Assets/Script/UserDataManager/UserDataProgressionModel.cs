@@ -56,6 +56,11 @@ namespace ArmasCreator.UserData
 
             Achievements[achievementId] += progress;
 
+            if (Achievements[achievementId] == info.Progress)
+            {
+                ClaimAchievementReward(achievementId);
+            }
+
             userDataManager.UserData.UpdateSaveAchievement(achievementId, Achievements[achievementId]);
         }
 
