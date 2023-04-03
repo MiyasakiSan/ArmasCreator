@@ -323,7 +323,8 @@ namespace ArmasCreator.Gameplay
 
         private void AddRewardToPlayer(float rewardAmount)
         {
-            userDataManager.UserData.UpdateCoin(rewardAmount);
+            float coin = userDataManager.UserData.Coins + rewardAmount;
+            userDataManager.UserData.UpdateCoin(coin);
 
             bool exist = gameDataManager.TryGetAllMonsterPart(questEnemyType, out List<ItemInfoModel> monsterPartInfoList);
 
