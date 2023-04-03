@@ -7,7 +7,9 @@ using ArmasCreator.Gameplay;
 using ArmasCreator.Utilities;
 using TheKiwiCoder;
 using ArmasCreator.Gameplay.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class EnemyCombatManager : NetworkBehaviour
 {
@@ -82,7 +84,7 @@ public class EnemyCombatManager : NetworkBehaviour
             enemyBoxCollider.onTriggerEnter.AddListener(OnHurtBoxTriggerEnter);
         }
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         foreach (var attackPattern in AllAttackPattern)
@@ -107,6 +109,7 @@ public class EnemyCombatManager : NetworkBehaviour
             GizmosExtensions.DrawWireArc(pos, Quaternion.Euler(0, transform.eulerAngles.y, 0) * attackPattern.ActiveDirection, attackPattern.ActiveAngleOffset, attackPattern.MinActiveDistance);
         }
     }
+#endif
 
     private void OnHitBoxTriggerEnter(Collider col,GameObject gameObject)
     {
