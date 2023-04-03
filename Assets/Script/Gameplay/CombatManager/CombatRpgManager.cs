@@ -152,6 +152,8 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (!(animController.currentAnimatorCombatStateInfoIsName("Idle") || animController.currentAnimatorCombatStateInfoIsName("Walk"))) { return; }
 
+        if (isUsingItem) { return; }
+
         if (currentGameState == gameState.neutral && !isSheathing && !isWithdrawing && !animController.playerAnim.GetBool("isCombat"))
         {
             changeGameState(gameState.combat);
