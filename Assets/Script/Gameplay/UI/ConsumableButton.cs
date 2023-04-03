@@ -89,6 +89,13 @@ namespace ArmasCreator.UI
 
         public void SetDisplayItem(string itemId)
         {
+            if (userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds().Count <= 0)
+            {
+                displayItemImage.gameObject.SetActive(false);
+                displayItemDetail.gameObject.SetActive(false);
+                return;
+            }
+
             var exist = gameDataManager.TryGetConsumeItemInfo(itemId, out var itemInfo);
 
             if (!userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds().Contains(itemId))
