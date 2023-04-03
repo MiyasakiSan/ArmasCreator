@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ArmasCreator.GameData;
 using ArmasCreator.UserData;
+using ArmasCreator.Gameplay;
+using ArmasCreator.Utilities;
 using UnityEngine.UI;
 using ArmasCreator.UI;
 using TMPro;
@@ -38,6 +40,9 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private CombatRpgManager combatController;
 
+        private GameplayController gameplayController;
+
+
         private int currentIndex;
         private int previousIndex;
         private int prePreviousIndex;
@@ -58,6 +63,14 @@ namespace ArmasCreator.Gameplay.UI
             canUseItem = true;
 
             Populate(currentIndex);
+        }
+        private void Awake()
+        {
+            gameplayController = SharedContext.Instance.Get<GameplayController>();
+        }
+        public void Start()
+        {
+            gameplayController.OnUseItem += UpdateItem;
         }
 
         public void Hide()
@@ -138,6 +151,17 @@ namespace ArmasCreator.Gameplay.UI
             preNextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(preNextIndex)]);
 
             itemName.text = currentItem.ItemInfo.Name;
+        }
+
+        public void UpdateItem()
+        {
+            SetIndex();
+
+            previousItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(previousIndex)]);
+            nextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(nextIndex)]);
+            currentItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(currentIndex)]);
+            prePreviousItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(prePreviousIndex)]);
+            preNextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(preNextIndex)]);
         }
 
         private void Update()
