@@ -549,7 +549,7 @@ public class PlayerRpgMovement : NetworkBehaviour
     private void floatCollider()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 999f, groundLayer))
         {
             Vector3 targetPosition = transform.position;
             targetPosition.y = hit.point.y + distanceToGround;

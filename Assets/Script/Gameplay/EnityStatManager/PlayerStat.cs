@@ -219,13 +219,13 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     public void Heal(float percent)
     {
-        if(currentHealth + (percent/100)*maxHealth > maxHealth)
+        if(currentHealth + (percent/100)* (maxHealth + vit) > maxHealth + vit)
         {
-            currentHealth = maxHealth;
+            currentHealth = maxHealth + vit;
         }
         else
         {
-            currentHealth += (percent / 100) * maxHealth;
+            currentHealth += (percent / 100) * (maxHealth + vit);
         }
 
         uiStat.UpdateHealthUI(currentHealth);

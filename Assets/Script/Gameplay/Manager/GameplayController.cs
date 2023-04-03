@@ -268,6 +268,8 @@ namespace ArmasCreator.Gameplay
             ResultContainer result = new ResultContainer(currentStageTime, 2500, (int)currentDamageDelt, (int)currentDamageTaken, currentItemUsed);
 
             UpdateWincount();
+            UpdateAchievement();
+
             OnStateResult?.Invoke(result);
 
             yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
@@ -288,6 +290,34 @@ namespace ArmasCreator.Gameplay
             {
                 var winCount = PlayerPrefs.GetInt(currentQuestInfo.PresetId);
                 PlayerPrefs.SetInt(currentQuestInfo.PresetId, winCount + 1);
+            }
+        }
+
+        private void UpdateAchievement()
+        {
+            if (currentQuestInfo.PresetId == "cs-cm-n")
+            {
+                userDataManager.UserData.UserDataProgression.UpdateAchievementProgression("am_01", 1);
+            }
+            else if(currentQuestInfo.PresetId == "cs-cm-01")
+            {
+                userDataManager.UserData.UserDataProgression.UpdateAchievementProgression("am_02", 1);
+            }
+            else if (currentQuestInfo.PresetId == "cs-cm-02")
+            {
+                userDataManager.UserData.UserDataProgression.UpdateAchievementProgression("am_03", 1);
+            }
+            else if (currentQuestInfo.PresetId == "pk-cm-n")
+            {
+                userDataManager.UserData.UserDataProgression.UpdateAchievementProgression("am_04", 1);
+            }
+            else if (currentQuestInfo.PresetId == "pk-cm-01")
+            {
+                userDataManager.UserData.UserDataProgression.UpdateAchievementProgression("am_05", 1);
+            }
+            else if (currentQuestInfo.PresetId == "pk-cm-02")
+            {
+                userDataManager.UserData.UserDataProgression.UpdateAchievementProgression("am_06", 1);
             }
         }
 

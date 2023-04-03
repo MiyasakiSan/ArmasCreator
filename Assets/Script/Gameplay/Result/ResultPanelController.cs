@@ -120,9 +120,97 @@ namespace ArmasCreator.Gameplay.UI
             SetCompletionTime(minutes, seconds, (int)fraction/10);
             SetRewardAmount(resultContainer.rewardAmount);
             SetResultData(resultContainer.damageDelt, resultContainer.damageTaken, resultContainer.itemUsed);
-            SetRank("A", "A", "A", "A");
+            SetRank("A", GetDamageTakenRank(damagetakenAmount), GetItemUsedRank(itemUsedAmount), GetResultRank(itemUsedAmount,damagetakenAmount));
 
             resultPanelAnimator.SetTrigger("show");
+        }
+
+        private string GetDamageTakenRank(int damageTaken)
+        {
+            if (damageTaken < 200)
+            {
+                return "A";
+            }
+            else if (damageTaken < 400)
+            {
+                return "B";
+            }
+            else if (damageTaken < 800)
+            {
+                return "C";
+            }
+            else
+            {
+                return "D";
+            }
+        }
+
+        private string GetItemUsedRank(int itemUsed)
+        {
+            if (itemUsed <= 0)
+            {
+                return "A";
+            }
+            else if (itemUsed <= 2)
+            {
+                return "B";
+            }
+            else if (itemUsed <= 5)
+            {
+                return "C";
+            }
+            else
+            {
+                return "D";
+            }
+        }
+
+        private string GetResultRank(int itemUsed, int damageTaken)
+        {
+            string itemUsedRank = GetItemUsedRank(itemUsed);
+            string damageTakenRank = GetDamageTakenRank(damageTaken);
+
+            int itemUsedRankValue = GetRankValue(itemUsedRank);
+            int damageTakenRankValue = GetRankValue(damageTakenRank);
+
+            float sum = itemUsedRankValue + damageTakenRankValue;
+
+            if((sum / 2) < 4 && (sum / 2) >= 3.5)
+            {
+                return "A";
+            }
+            else if ((sum / 2) < 3.5 && (sum / 2) >= 3)
+            {
+                return "B";
+            }
+            else if ((sum / 2) < 3 && (sum / 2) >= 2)
+            {
+                return "C";
+            }
+            else
+            {
+                return "D";
+            }
+        }
+
+        private int GetRankValue(string rank)
+        {
+            if(rank == "A")
+            {
+                return 4;
+            }
+            else if(rank == "B")
+            {
+                return 3;
+            }
+            else if (rank == "C")
+            {
+                return 2;
+            }
+            else 
+            {
+                return 1;
+            }
         }
 
         public void Skip()
