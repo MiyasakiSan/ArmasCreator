@@ -40,7 +40,7 @@ namespace ArmasCreator.Gameplay.UI
         [SerializeField]
         private CombatRpgManager combatController;
 
-        private GameplayController gameplayController;
+        private GameplayController gameplayController = SharedContext.Instance.Get<GameplayController>();
 
 
         private int currentIndex;
@@ -64,13 +64,13 @@ namespace ArmasCreator.Gameplay.UI
 
             Populate(currentIndex);
         }
-        private void Awake()
-        {
-            gameplayController = SharedContext.Instance.Get<GameplayController>();
-        }
+
         public void Start()
         {
-            gameplayController.OnUseItem += UpdateItem;
+            if (gameplayController != null)
+            {
+                gameplayController.OnUseItem += UpdateItem;
+            }
         }
 
         public void Hide()
@@ -144,6 +144,16 @@ namespace ArmasCreator.Gameplay.UI
             currentIndex += plusIndex;
             SetIndex();
 
+            if(userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds().Count <= 0)
+            {
+                previousItem.SetDisplayItem("null");
+                nextItem.SetDisplayItem("null");
+                currentItem.SetDisplayItem("null");
+                prePreviousItem.SetDisplayItem("null");
+                preNextItem.SetDisplayItem("null");
+                return;
+            }
+
             previousItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(previousIndex)]);
             nextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(nextIndex)]);
             currentItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(currentIndex)]);
@@ -156,6 +166,16 @@ namespace ArmasCreator.Gameplay.UI
         public void UpdateItem()
         {
             SetIndex();
+
+            if (userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds().Count <= 0)
+            {
+                previousItem.SetDisplayItem("null");
+                nextItem.SetDisplayItem("null");
+                currentItem.SetDisplayItem("null");
+                prePreviousItem.SetDisplayItem("null");
+                preNextItem.SetDisplayItem("null");
+                return;
+            }
 
             previousItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(previousIndex)]);
             nextItem.SetDisplayItem(allConsumableItemIds[Mathf.Abs(nextIndex)]);

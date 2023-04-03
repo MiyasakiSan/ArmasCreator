@@ -91,6 +91,13 @@ namespace ArmasCreator.UI
         {
             var exist = gameDataManager.TryGetConsumeItemInfo(itemId, out var itemInfo);
 
+            if (!userDataManager.UserData.UserDataInventory.GetAllConsumableItemIds().Contains(itemId))
+            {
+                displayItemImage.gameObject.SetActive(false);
+                displayItemDetail.gameObject.SetActive(false);
+                return;
+            }
+
             if (!exist)
             {
                 Debug.LogError("Fail to find info for a itemId: " + itemId);
