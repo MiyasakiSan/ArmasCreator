@@ -13,6 +13,8 @@ public class enemyAnimController : NetworkBehaviour
 
     private GameplayController gameplayController;
 
+    public bool isTutorial;
+
     [SerializeField]
     private DynamicBone dynamicBone;
 
@@ -35,15 +37,18 @@ public class enemyAnimController : NetworkBehaviour
         gameplayController = SharedContext.Instance.Get<GameplayController>();
         monsterSFX = GetComponent<MonsterSFX>();
 
-        anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed);
-        
-        if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+        if (gameplayController != null)
         {
-            monsterSFX.PlayMachineSFX();
-        }
-        else
-        {
-            monsterSFX.PlayTigerIdleSFX();
+            anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed);
+
+            if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
+            {
+                monsterSFX.PlayMachineSFX();
+            }
+            else
+            {
+                monsterSFX.PlayTigerIdleSFX();
+            }
         }
     }
     public bool currentAnimatorStateBaseIsName(string paramName)
@@ -95,14 +100,7 @@ public class enemyAnimController : NetworkBehaviour
         anim.SetBool("isWalking", value);
     }
 
-    [ServerRpc]
-    public void AttackServerRpc()
-    {
-        AttackClientRpc();
-    }
-
-    [ClientRpc]
-    public void AttackClientRpc()
+    public void Attack()
     {
         anim.SetTrigger("Attack");
     }
@@ -123,6 +121,14 @@ public class enemyAnimController : NetworkBehaviour
         else
         {
             anim?.SetBool("isDead",true);
+
+            if (isTutorial)
+            {
+                Destroy(this.gameObject, 3.5f);
+            }
+
+            if (gameplayController == null) { return; }
+
             gameplayController.EnterGameplayResult();
             DeadCamCart.SetActive(true);
 

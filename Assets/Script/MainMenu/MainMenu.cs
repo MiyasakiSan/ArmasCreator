@@ -50,7 +50,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetString("PName", Name.text);
         userDataManager.UserData.SetUserID(Name.text);
-        loadingPopup.LoadSceneAsync("Town");
+        loadingPopup.LoadSceneAsync("Tutorial");
         StopMainmenuBGM();
         Cursor.lockState = CursorLockMode.Locked;
     }

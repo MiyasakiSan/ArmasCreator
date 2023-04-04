@@ -82,7 +82,14 @@ public class EnemyStat : AttackTarget, IDamagable<float>
     {
         if (isSinglePlayer)
         {
-            currentHealth = maxHealth * gameplayController.CurrentQuestInfo.InitHp;
+            if (gameplayController != null)
+            {
+                currentHealth = maxHealth * gameplayController.CurrentQuestInfo.InitHp;
+            }
+            else
+            {
+                currentHealth = maxHealth;
+            }
         }
         else
         {

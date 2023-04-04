@@ -127,15 +127,18 @@ public class EnemyCombatManager : NetworkBehaviour
 
         enemyStat.receiveAttack(receiveAttack);
 
-        //var contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
-
         Vector3 contactPoint;
-
-        //contactPoint = gameObject.GetComponent<CapsuleCollider>().ClosestPoint(col.gameObject.transform.position);
 
         contactPoint = gameObject.transform.position;
 
         uIPlayerController.ShowDamage(contactPoint, Mathf.Floor(receiveAttack));
+
+        if (enemyAnim.isTutorial)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CombatRpgManager>().TutorialIncreaseEMTguage();
+        }
+
+        if (gameplayController == null) { return; }
 
         gameplayController.UpdatePlayerDamageDelt(damage);
 

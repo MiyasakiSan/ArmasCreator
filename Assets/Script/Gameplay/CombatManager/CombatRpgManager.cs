@@ -115,7 +115,11 @@ public class CombatRpgManager : NetworkBehaviour
 
         gameplayController = SharedContext.Instance.Get<GameplayController>();
 
-        gameplayController.OnPlayerDealDamage += IncreaseEMTgauge;
+        if (gameplayController != null)
+        {
+            gameplayController.OnPlayerDealDamage += IncreaseEMTgauge;
+        }
+
         canSwitchStance = true;
         BulletAmount = 3;
         for(int bulletCount = 0;bulletCount < BulletAmount;bulletCount++)
@@ -246,7 +250,11 @@ public class CombatRpgManager : NetworkBehaviour
         isUsingItem = false;
         useItemCoroutine = null;
         UseItemByInfo(itemId);
-        gameplayController.UpdatePlayerItemUsed(1);
+
+        if (gameplayController != null)
+        {
+            gameplayController.UpdatePlayerItemUsed(1);
+        }
     }
 
     public void ResetComboBool()
@@ -297,10 +305,28 @@ public class CombatRpgManager : NetworkBehaviour
             playerStat.IncreaseStaminaRegenRate(1 + consumeItemInfo.ConsumePercent / 100);
         }
 
-        userDataManager.UserData.UserDataInventory.RemoveConsumeItem(itemId, 1);
+        if (!playerStat.isTutorial)
+        {
+            userDataManager.UserData.UserDataInventory.RemoveConsumeItem(itemId, 1);
+        }
     }
 
     #region EMT
+    public void TutorialIncreaseEMTguage()
+    {
+        if (isEMTState) { return; }
+
+        if (convertEMTAmountToEMTPercent(EMT_Amount) == EMT_MaxAmount) { return; }
+
+        EMT_Amount += 3f;
+        EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
+        if (EMT_Amount >= EMT_MaxAmount)
+        {
+            EMT_Amount = EMT_MaxAmount;
+            return;
+        }
+    }
+
     private void IncreaseEMTgauge()
     {
         if (isEMTState) { return; }
@@ -314,7 +340,6 @@ public class CombatRpgManager : NetworkBehaviour
             EMT_Amount = EMT_MaxAmount;
             return;
         }
-        
     }
 
     private void UseEMT()
@@ -594,6 +619,9 @@ public class CombatRpgManager : NetworkBehaviour
 
     private void OnDestroy()
     {
-        gameplayController.OnPlayerDealDamage -= IncreaseEMTgauge;
+        if (gameplayController != null)
+        {
+            gameplayController.OnPlayerDealDamage -= IncreaseEMTgauge;
+        }
     }
 }

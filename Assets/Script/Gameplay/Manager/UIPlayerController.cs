@@ -67,9 +67,12 @@ namespace ArmasCreator.Gameplay.UI
 
             gameplayController = SharedContext.Instance.Get<GameplayController>();
 
-            if (gameplayController.CurrentGameplays == GameplayController.Gameplays.Town)
+            if (gameplayController != null)
             {
-                itemBar.Hide();
+                if (gameplayController.CurrentGameplays == GameplayController.Gameplays.Town)
+                {
+                    itemBar.Hide();
+                }
             }
 
             damageDealtText.gameObject.SetActive(false);

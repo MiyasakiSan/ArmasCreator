@@ -22,6 +22,8 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     public float currentHealth;
     public float currentStamina;
 
+    public bool isTutorial;
+
     [SerializeField]
     NetworkVariable<float> NetworkcurrentHealth = new NetworkVariable<float>();
 
@@ -49,6 +51,7 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     private GameModeController gameModeController;
 
     private bool isValnurable;
+    public bool IsValnurable => isValnurable;
 
     private bool isSinglePlayer => gameModeController.IsSinglePlayerMode;
 
@@ -247,7 +250,19 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
             StartCoroutine(ValnurableStage());
 
-            if (CurrentHealth <= 0) { playerMovement.PlayerDie(); return; }
+            if (CurrentHealth <= 0) 
+            { 
+                if (isTutorial)
+                {
+                    currentHealth = maxHealth + vit;
+                    return;
+                }
+                else
+                {
+                    playerMovement.PlayerDie(); 
+                    return;
+                }
+            }
         }
         else
         {
@@ -423,12 +438,16 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
 
-        if (gameplayController.CurrentGameplays == GameplayController.Gameplays.Normal ||
-            gameplayController.CurrentGameplays == GameplayController.Gameplays.Town)
+        if (gameplayController != null)
         {
-            SetupStat();
-            SetupEquipmentAsset();
+            if (gameplayController.CurrentGameplays == GameplayController.Gameplays.Normal ||
+            gameplayController.CurrentGameplays == GameplayController.Gameplays.Town)
+            {
+                SetupStat();
+                SetupEquipmentAsset();
+            }
         }
+
 
         if (isSinglePlayer)
         {
@@ -612,6 +631,21 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
             uiStat.tag = "OtherPlayerBar";
             uiStat.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.8f);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!isTutorial) { return; }
+        if (!collision.gameObject.CompareTag("Enemy")) { return; }
+
+        if (!collision.gameObject.GetComponent<enemyAnimController>().anim.GetCurrentAnimatorStateInfo(0).IsName("attack")) { return; }
+
+        if (isValnurable) { return; }
+
+        if (playerMovement.isDodging) { return; }
+
+        receiveAttack(5f);
+        uiPlayerController.ShowHurt();
     }
 
     private void OnDestroy()
