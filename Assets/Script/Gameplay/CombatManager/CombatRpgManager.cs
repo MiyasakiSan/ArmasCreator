@@ -309,6 +309,12 @@ public class CombatRpgManager : NetworkBehaviour
 
         EMT_Amount++;
         EMT_Gauge.fillAmount = convertEMTAmountToEMTPercent(EMT_Amount);
+        if (EMT_Amount >= EMT_MaxAmount)
+        {
+            EMT_Amount = EMT_MaxAmount;
+            return;
+        }
+        
     }
 
     private void UseEMT()

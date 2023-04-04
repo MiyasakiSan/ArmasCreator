@@ -24,9 +24,9 @@ namespace ArmasCreator.Gameplay
 
         void OnTriggerEnter(Collider col)
         {
-            if (!col.CompareTag("Player")) { return; }
+            //if (!col.CompareTag("Player")) { return; }
 
-            if (col.GetComponent<PlayerRpgMovement>()) { return; }
+            //if (col.GetComponent<PlayerRpgMovement>()) { return; }
 
             if (onTriggerEnter != null) onTriggerEnter.Invoke(col);
         }

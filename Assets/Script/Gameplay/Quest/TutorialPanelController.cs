@@ -28,6 +28,8 @@ public class TutorialPanelController : MonoBehaviour
         {
             tutorialImage.gameObject.SetActive(false);
             backButton.gameObject.SetActive(false);
+            nextButton.gameObject.SetActive(false);
+            previousButton.gameObject.SetActive(false);
             return;
         }
         tutorialImage.sprite = tutorialSprite[currentPage];
@@ -37,6 +39,8 @@ public class TutorialPanelController : MonoBehaviour
         {
             tutorialImage.gameObject.SetActive(false);
             backButton.gameObject.SetActive(false);
+            nextButton.gameObject.SetActive(false);
+            previousButton.gameObject.SetActive(false);
             PlayerPrefs.SetInt("IsShowTutolial", 1);
         });
         nextButton.onClick.AddListener(() =>
