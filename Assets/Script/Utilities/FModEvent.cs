@@ -54,6 +54,13 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference TigerUltimate { get; private set; }
     [field: SerializeField] public EventReference TigerGetHit { get; private set; }
 
+    [field: Header("Cutscene")]
+
+    [field: SerializeField] public EventReference Meteor { get; private set; }
+    [field: SerializeField] public EventReference MeteorCrash { get; private set; }
+    [field: SerializeField] public EventReference MeteorWater { get; private set; }
+    [field: SerializeField] public EventReference MeteorCorrupt { get; private set; }
+
 
     [field : Header("UI")]
     [field : SerializeField] public EventReference ButtonSFX {get; private set;}
@@ -65,6 +72,7 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference ConstructionSiteBGM { get; private set; }
     [field: SerializeField] public EventReference ParkBGM { get; private set; }
     [field: SerializeField] public EventReference WinBGM { get; private set; }
+    [field: SerializeField] public EventReference CutsceneBGM { get; private set; }
 
     [field: Header("AMBIENCE")]
     [field: SerializeField] public EventReference TownAMBIENCE { get; private set; }
