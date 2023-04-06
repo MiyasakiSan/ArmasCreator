@@ -175,7 +175,7 @@ namespace ArmasCreator.Gameplay.UI
 
             float sum = itemUsedRankValue + damageTakenRankValue;
 
-            if((sum / 2) < 4 && (sum / 2) >= 3.5)
+            if((sum / 2) <= 4 && (sum / 2) >= 3.5)
             {
                 return "A";
             }

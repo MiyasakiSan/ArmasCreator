@@ -268,13 +268,13 @@ namespace ArmasCreator.Gameplay
             ResultContainer result = new ResultContainer(currentStageTime, 2500, (int)currentDamageDelt, (int)currentDamageTaken, currentItemUsed);
 
             UpdateWincount();
-            UpdateAchievement();
 
             OnStateResult?.Invoke(result);
+            analyticManager.SendResultToAnalyze(EnemyType, currentQuestInfo.PresetId, result);
 
             yield return new WaitUntil(() => ResultPanelController.IsResultSequenceFinished);
 
-            analyticManager.SendResultToAnalyze(EnemyType, currentQuestInfo.PresetId, result);
+            UpdateAchievement();
             Dispose();
             loadingPopup.LoadSceneAsync("Town");
             SetCursorLock(true);
