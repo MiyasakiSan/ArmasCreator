@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ArmasCreator.UI;
+using ArmasCreator.Utilities;
+using ArmasCreator.Gameplay;
 
 public class TutorialPanelController : MonoBehaviour
 {
@@ -22,6 +25,11 @@ public class TutorialPanelController : MonoBehaviour
 
     private int currentPage = 0;
 
+    private LoadingPopup loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
+
+    [SerializeField]
+    private GameplayController gameplayController;
+
     void Start()
     {
         if(PlayerPrefs.GetInt("IsShowTutolial") == 1)
@@ -30,18 +38,27 @@ public class TutorialPanelController : MonoBehaviour
             backButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(false);
             previousButton.gameObject.SetActive(false);
+            if (gameplayController != null)
+            {
+                gameplayController.OnTutorial.Invoke(false);
+            }
             return;
         }
         tutorialImage.sprite = tutorialSprite[currentPage];
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         backButton.onClick.AddListener(() => 
         {
             tutorialImage.gameObject.SetActive(false);
             backButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(false);
             previousButton.gameObject.SetActive(false);
+            if (gameplayController != null)
+            {
+                gameplayController.OnTutorial.Invoke(false);
+            }
             PlayerPrefs.SetInt("IsShowTutolial", 1);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
         });
         nextButton.onClick.AddListener(() =>
         {
@@ -51,6 +68,33 @@ public class TutorialPanelController : MonoBehaviour
         {
             OnToPreviousPage();
         });
+
+        StartCoroutine(waitForFadeBlack());
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        //GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = false;
+    }
+
+    void Update()
+    {
+        if(gameplayController == null)
+        {
+            gameplayController = SharedContext.Instance.Get<GameplayController>();
+        }
+    }
+
+    IEnumerator waitForFadeBlack()
+    {
+        yield return new WaitUntil(() => loadingPopup.IsFadingBlack);
+        yield return new WaitForSeconds(1.8f);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = false;
+        if (gameplayController != null)
+        {
+            gameplayController.OnTutorial.Invoke(true);
+        }
+
     }
 
     public void OnToNextPage()

@@ -3,11 +3,19 @@ using ArmasCreator.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class TutorialController : MonoBehaviour
 {
     [SerializeField]
     private GameObject EnemyPrefab;
+
+    [SerializeField]
+    private TMP_Text enemyAmountText;
+
+    [SerializeField]
+    private Animator anim;
 
     private LoadingPopup loadingPopup;
 
@@ -15,6 +23,8 @@ public class TutorialController : MonoBehaviour
     private bool isFinishTutorial;
 
     public Transform[] spawnPos;
+
+    private int maxEnemy = 0;
 
     private void Awake()
     {
@@ -26,9 +36,12 @@ public class TutorialController : MonoBehaviour
         foreach(var transform in spawnPos)
         {
             var enemy = Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+            maxEnemy++;
         }
 
         isInit = true;
+
+        StartCoroutine(waitForFadeBlack());
     }
 
     void Update()
@@ -37,15 +50,36 @@ public class TutorialController : MonoBehaviour
 
         var enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
+        enemyAmountText.text = "Kill Slime " + (maxEnemy - enemy.Length).ToString() + " / " + maxEnemy.ToString();
+
         if (enemy.Length == 0 && !isFinishTutorial)
         {
-            FinishTutorial();
+            StartCoroutine(waitUntilShowFinishEnd());
         }
+    }
+
+    IEnumerator waitForFadeBlack()
+    {
+        yield return new WaitUntil(() => loadingPopup.IsFadingBlack);
+        yield return new WaitForSeconds(1.8f);
+        anim.SetTrigger("ShowStart");
+    }
+    IEnumerator waitUntilShowFinishEnd()
+    {
+        anim.SetBool("ShowFinish", true);
+        isFinishTutorial = true;
+        yield return new WaitForSeconds(1.2f);
+        FinishTutorial();
     }
 
     public void FinishTutorial()
     {
-        isFinishTutorial = true;
         loadingPopup.LoadSceneAsync("Town");
+    }
+
+
+    public void StartTutorial()
+    {
+        anim.SetTrigger("ShowStart");
     }
 }

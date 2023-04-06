@@ -95,6 +95,10 @@ namespace ArmasCreator.Gameplay
 
         public UnityAction OnUseItem;
 
+        public UnityAction<bool> OnTutorial;
+
+        private bool onTutorial = true;
+
         EventInstance townBGM;
         EventInstance tigerBGM;
         EventInstance shrimpBGM;
@@ -119,6 +123,8 @@ namespace ArmasCreator.Gameplay
             shrimpBGM = soundManager.CreateInstance(soundManager.fModEvent.ParkBGM);
             townBGM = soundManager.CreateInstance(soundManager.fModEvent.TownBGM);
             winBGM = soundManager.CreateInstance(soundManager.fModEvent.WinBGM);
+
+            OnTutorial += tutorialIsShow;
 
             CurrentGameplays = Gameplays.Town;
             PlayTownBGM();
@@ -158,6 +164,10 @@ namespace ArmasCreator.Gameplay
                         profileCanvas.worldCamera = Camera.main;
                     }
                 }
+                if(onTutorial)
+                {
+                    return;
+                }
                 if (profilePanelController.Profile.activeSelf)
                 {
                     profilePanelController.CloseProfilePanel();
@@ -171,6 +181,11 @@ namespace ArmasCreator.Gameplay
                     Time.timeScale = 0f;
                 }
             }
+        }
+
+        private void tutorialIsShow(bool isShow)
+        {
+            onTutorial = isShow;
         }
 
         public void EnterChallengeStage(QuestInfo questInfo)

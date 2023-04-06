@@ -45,6 +45,8 @@ namespace ArmasCreator.UI
 
         private bool isFadingBlack = false;
 
+        public bool IsFadingBlack => isFadingBlack;
+
         private void Awake()
         {
             DontDestroyOnLoad(this);
