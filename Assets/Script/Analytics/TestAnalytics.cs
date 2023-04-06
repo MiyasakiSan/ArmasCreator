@@ -67,7 +67,8 @@ public class TestAnalytics : MonoBehaviour
     {
         var customParams = new Dictionary<string, object>();
         customParams.Add("challengeId", challengId);
-        customParams.Add("winCount", PlayerPrefs.GetInt(challengId));
+        customParams.Add("userName", PlayerPrefs.GetString("PName"));
+        customParams.Add("winNo", PlayerPrefs.GetInt(challengId).ToString());
         customParams.Add("timeAmount", resultContainer.timeAmount);
         customParams.Add("damageDelt", resultContainer.damageDelt);
         customParams.Add("damageTaken", resultContainer.damageTaken);
