@@ -21,6 +21,9 @@ public class CutsceneController : MonoBehaviour
         cutsceneBGM = soundManager.CreateInstance(soundManager.fModEvent.CutsceneBGM);
 
         playCutsceneBGM();
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     void Update()
@@ -34,6 +37,9 @@ public class CutsceneController : MonoBehaviour
     public void FinishCutscene()
     {
         cutsceneBGM.stop(STOP_MODE.ALLOWFADEOUT);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
 
         loadingPopup.LoadSceneAsync("Tutorial");
     }
