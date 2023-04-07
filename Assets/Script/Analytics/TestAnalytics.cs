@@ -9,6 +9,18 @@ using ArmasCreator.GameData;
 
 public class TestAnalytics : MonoBehaviour
 {
+    [Header("Test")]
+
+    public string userName;
+    public SubType subType;
+    public string challengId;
+    public string winNo;
+
+    public float timeAmount;
+    public int damageDelt;
+    public int damageTaken;
+    public int itemUsed;
+
     private void Awake()
     {
         SharedContext.Instance.Add(this);
@@ -61,6 +73,12 @@ public class TestAnalytics : MonoBehaviour
 
         AnalyticsService.Instance.Flush();
         Debug.Log("Do");
+    }
+
+    public void TestSend()
+    {
+        ResultContainer send = new ResultContainer(timeAmount, 2500, damageDelt, damageTaken, itemUsed);
+        SendResultToAnalyze(subType, challengId, send);
     }
 
     public void SendResultToAnalyze(SubType enemyType, string challengId , ResultContainer resultContainer)
