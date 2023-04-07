@@ -43,6 +43,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
     public bool IsAttacking;
 
+    public bool IsDisableHitBox;
+
     public AttackPattern currentAttackPattern;
 
     private Coroutine stunCoroutine;
@@ -83,6 +85,8 @@ public class EnemyCombatManager : NetworkBehaviour
         {
             enemyBoxCollider.onTriggerEnter.AddListener(OnHurtBoxTriggerEnter);
         }
+
+        IsDisableHitBox = true;
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -158,6 +162,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
         if (!IsAttacking) { return; }
 
+        if (IsDisableHitBox) { return; }
+
         if (currentAttackPattern == null) { return; }
 
         if (currentAttackPattern.HurtBoxName != gameObject.name) { return; }
@@ -216,6 +222,16 @@ public class EnemyCombatManager : NetworkBehaviour
     public void GroundThunderUltimate()
     {
         StartCoroutine(InitGroundThunderUltimate());
+    }
+
+    public void OpenHitBox()
+    {
+        IsDisableHitBox = false;
+    }
+
+    public void CloseHitBox()
+    {
+        IsDisableHitBox = true;
     }
 
     IEnumerator InitGroundThunderUltimate()

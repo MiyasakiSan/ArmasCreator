@@ -172,7 +172,6 @@ public class enemyAnimController : NetworkBehaviour
         isFollwPlayer = false;
     }
 
-
     [ClientRpc]
     public void DeadClientRpc()
     {
