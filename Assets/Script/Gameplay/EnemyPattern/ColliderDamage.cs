@@ -26,6 +26,8 @@ public class ColliderDamage : MonoBehaviour
     private bool isHit;
     private bool isInit;
 
+    public bool beam;
+
     private GameplayController gameplayController;
 
     private void Start()
@@ -86,6 +88,11 @@ public class ColliderDamage : MonoBehaviour
         isHit = true;
         attackCollider.enabled = false;
 
+        if (beam)
+        {
+            StartCoroutine(beamHit());
+        }
+
         var playerMovement = other.GetComponent<PlayerRpgMovement>();
         var Target = other.GetComponent<AttackTarget>();
 
@@ -94,5 +101,12 @@ public class ColliderDamage : MonoBehaviour
             Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
             playerMovement.GetKnockback(this.transform.position);
         } 
+    }
+
+    IEnumerator beamHit()
+    {
+        yield return new WaitForSeconds(2f);
+        isHit = false;
+        attackCollider.enabled = true;
     }
 }
