@@ -33,6 +33,8 @@ public class ColliderDamage : MonoBehaviour
     private void Start()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+
+        attackCollider.enabled = false;
     }
 
     public void RunVFX()
