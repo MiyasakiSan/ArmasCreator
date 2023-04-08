@@ -43,6 +43,8 @@ public class IsPlayerEnterStage : ActionNode
     {
         if (blackboard.IsPlayerEnterStage) { return; }
 
+        if (!col.gameObject.CompareTag("Player")) { return; }
+
         blackboard.IsPlayerEnterStage = true;
         blackboard.canUseRoar = true;
 
