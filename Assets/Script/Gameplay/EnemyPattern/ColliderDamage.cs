@@ -101,6 +101,7 @@ public class ColliderDamage : MonoBehaviour
 
             if (beam)
             {
+                Debug.Log("==== Beam Hit ====");
                 StartCoroutine(beamHit());
             }
 

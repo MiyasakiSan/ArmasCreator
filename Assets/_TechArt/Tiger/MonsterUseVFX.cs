@@ -231,6 +231,7 @@ public class MonsterUseVFX : MonoBehaviour
 
     IEnumerator OpenBeamFor(float lifeTime)
     {
+        beamVFX.gameObject.SetActive(true);
         beamVFX.SetFloat("Lifetime", lifeTime + 0.25f);
         beamVFX.Play();
         beamVFX.GetComponent<ColliderDamage>().enabled = true;
@@ -242,6 +243,7 @@ public class MonsterUseVFX : MonoBehaviour
         beamVFX.GetComponent<ColliderDamage>().DisableCollder();
         beamVFX.GetComponent<ColliderDamage>().enabled = false;
         waterParticle.SetActive(false);
+        beamVFX.gameObject.SetActive(false);
     }
 
     public void EyeBlack()
