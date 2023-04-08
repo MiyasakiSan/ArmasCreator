@@ -45,6 +45,8 @@ public class IsPlayerEnterStage : ActionNode
 
         if (!col.gameObject.CompareTag("Player")) { return; }
 
+        if (col.gameObject.GetComponent<PlayerRpgMovement>().isDead) { return; }
+
         blackboard.IsPlayerEnterStage = true;
         blackboard.canUseRoar = true;
 
