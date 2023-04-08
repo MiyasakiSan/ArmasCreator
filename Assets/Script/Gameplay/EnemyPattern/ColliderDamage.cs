@@ -33,8 +33,6 @@ public class ColliderDamage : MonoBehaviour
     private void Start()
     {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
-
-        attackCollider.enabled = false;
     }
 
     public void RunVFX()
@@ -62,11 +60,8 @@ public class ColliderDamage : MonoBehaviour
 
     public IEnumerator waitUntilEffectFinish(ParticleSystem ps)
     {
-        yield return new WaitForSeconds(ps.main.duration - 0.25f);
+        yield return new WaitForSeconds(ps.main.duration);
         isInit = false;
-        attackCollider.enabled = false;
-        yield return new WaitForSeconds(0.25f);
-        attackCollider.enabled = false;
         ps.gameObject.SetActive(false);
     }
 
