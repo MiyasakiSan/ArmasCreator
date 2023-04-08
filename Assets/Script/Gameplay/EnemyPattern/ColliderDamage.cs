@@ -60,7 +60,9 @@ public class ColliderDamage : MonoBehaviour
 
     public IEnumerator waitUntilEffectFinish(ParticleSystem ps)
     {
-        yield return new WaitForSeconds(ps.main.duration);
+        yield return new WaitForSeconds(ps.main.duration - 0.25f);
+        isInit = false;
+        yield return new WaitForSeconds(0.25f);
         ps.gameObject.SetActive(false);
     }
 
