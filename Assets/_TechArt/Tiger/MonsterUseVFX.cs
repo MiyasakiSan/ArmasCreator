@@ -238,6 +238,7 @@ public class MonsterUseVFX : MonoBehaviour
 
         yield return new WaitForSeconds(lifeTime);
 
+        beamVFX.GetComponent<ColliderDamage>().DisableCollder();
         waterParticle.SetActive(false);
     }
 
