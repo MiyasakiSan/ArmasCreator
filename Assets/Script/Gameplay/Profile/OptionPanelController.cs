@@ -15,6 +15,8 @@ namespace ArmasCreator.UI
         [SerializeField]
         private Button btn_Setting;
         [SerializeField]
+        private Button btn_Credit;
+        [SerializeField]
         private ProfilePanelController profilePanelController;
 
         private GameplayController gameplayController;
@@ -33,12 +35,17 @@ namespace ArmasCreator.UI
             {
                 profilePanelController.ActiveSettingDetailAnim();
             });
+            btn_Credit.onClick.AddListener(() =>
+            {
+                profilePanelController.ActiveCreditAnim();
+            });
         }
 
         public void RemoveListener()
         {
             btn_ToTitle.onClick.RemoveAllListeners();
             btn_Setting.onClick.RemoveAllListeners();
+            btn_Credit.onClick.RemoveAllListeners();
         }
     }
 }

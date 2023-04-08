@@ -65,6 +65,7 @@ namespace ArmasCreator.UI
             });
             btn_Item.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutC");
                 profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
@@ -76,6 +77,7 @@ namespace ArmasCreator.UI
 
             btn_Equipment.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutC");
                 profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
@@ -86,6 +88,8 @@ namespace ArmasCreator.UI
 
             btn_Quest.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutC");
+                profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOutCD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInQuest");
@@ -95,6 +99,7 @@ namespace ArmasCreator.UI
 
             btn_Challenges.onClick.AddListener(() =>
             {
+                profileAnimator.SetTrigger("FadeOutC");
                 profileAnimator.SetTrigger("FadeOutSD");
                 profileAnimator.SetTrigger("FadeOut");
                 profileAnimator.SetTrigger("FadeInChallenge");
@@ -124,6 +129,7 @@ namespace ArmasCreator.UI
 
         public void CloseProfilePanel()
         {
+            profileAnimator.SetTrigger("FadeOutC");
             profileAnimator.SetTrigger("FadeOutSD");
             profileAnimator.SetTrigger("FadeOutCD");
             profileAnimator.SetTrigger("FadeOut");
@@ -149,6 +155,11 @@ namespace ArmasCreator.UI
         public void DeactiveSettingDetailAnim()
         {
             profileAnimator.SetTrigger("FadeOutSD");
+        }
+
+        public void ActiveCreditAnim()
+        {
+            profileAnimator.SetTrigger("FadeInC");
         }
 
         public void ResetTrigger(string TrigggerName)

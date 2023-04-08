@@ -28,20 +28,20 @@ public class TutorialPanelController : MonoBehaviour
     private LoadingPopup loadingPopup = SharedContext.Instance.Get<LoadingPopup>();
 
     [SerializeField]
-    private GameplayController gameplayController;
+    private GameplayController gameplayController = SharedContext.Instance.Get<GameplayController>();
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("IsShowTutolial") == 1)
+        if(PlayerPrefs.GetInt("IsShowTutorial") == 1)
         {
             tutorialImage.gameObject.SetActive(false);
             backButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(false);
             previousButton.gameObject.SetActive(false);
-            if (gameplayController != null)
-            {
-                gameplayController.OnTutorial.Invoke(false);
-            }
+            gameplayController.OnTutorial.Invoke(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
             return;
         }
         tutorialImage.sprite = tutorialSprite[currentPage];
@@ -51,11 +51,8 @@ public class TutorialPanelController : MonoBehaviour
             backButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(false);
             previousButton.gameObject.SetActive(false);
-            if (gameplayController != null)
-            {
-                gameplayController.OnTutorial.Invoke(false);
-            }
-            PlayerPrefs.SetInt("IsShowTutolial", 1);
+            gameplayController.OnTutorial.Invoke(false);
+            PlayerPrefs.SetInt("IsShowTutorial", 1);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
             GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
@@ -77,10 +74,7 @@ public class TutorialPanelController : MonoBehaviour
 
     void Update()
     {
-        if(gameplayController == null)
-        {
-            gameplayController = SharedContext.Instance.Get<GameplayController>();
-        }
+
     }
 
     IEnumerator waitForFadeBlack()
