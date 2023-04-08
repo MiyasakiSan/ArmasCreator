@@ -169,8 +169,11 @@ public class EnemyCombatManager : NetworkBehaviour
         if (currentAttackPattern.HurtBoxName != gameObject.name) { return; }
 
         var playerMovement = col.gameObject.GetComponent<PlayerRpgMovement>();
+        var playerStat = col.gameObject.GetComponent<PlayerStat>();
 
         if (playerMovement.isDodging) { return; }
+
+        if (playerStat.IsValnurable) { return; }
 
         Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
 
