@@ -66,6 +66,7 @@ public class ColliderDamage : MonoBehaviour
         isInit = false;
         attackCollider.enabled = false;
         yield return new WaitForSeconds(0.25f);
+        attackCollider.enabled = false;
         ps.gameObject.SetActive(false);
     }
 
@@ -90,19 +91,19 @@ public class ColliderDamage : MonoBehaviour
         if (isHit) { return; }
         if (!isInit) { return; }
 
-        isHit = true;
-        attackCollider.enabled = false;
-
-        if (beam)
-        {
-            StartCoroutine(beamHit());
-        }
-
         var playerMovement = other.GetComponent<PlayerRpgMovement>();
         var Target = other.GetComponent<AttackTarget>();
 
         if (!playerMovement.isDodging)
         {
+            isHit = true;
+            attackCollider.enabled = false;
+
+            if (beam)
+            {
+                StartCoroutine(beamHit());
+            }
+
             Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
             playerMovement.GetKnockback(this.transform.position);
         } 
