@@ -62,6 +62,7 @@ public class ColliderDamage : MonoBehaviour
     {
         yield return new WaitForSeconds(ps.main.duration - 0.25f);
         isInit = false;
+        attackCollider.enabled = false;
         yield return new WaitForSeconds(0.25f);
         ps.gameObject.SetActive(false);
     }
