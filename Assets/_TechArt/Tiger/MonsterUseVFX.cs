@@ -233,12 +233,14 @@ public class MonsterUseVFX : MonoBehaviour
     {
         beamVFX.SetFloat("Lifetime", lifeTime + 0.25f);
         beamVFX.Play();
+        beamVFX.GetComponent<ColliderDamage>().enabled = true;
         beamVFX.GetComponent<ColliderDamage>().SetupAttackPattern(enemyCombat.currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
         waterParticle.SetActive(true);
 
         yield return new WaitForSeconds(lifeTime);
 
         beamVFX.GetComponent<ColliderDamage>().DisableCollder();
+        beamVFX.GetComponent<ColliderDamage>().enabled = false;
         waterParticle.SetActive(false);
     }
 
