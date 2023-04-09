@@ -981,17 +981,17 @@
                 {
                     "id" : "kotaro01",
                     "name" : "Kotaro",
-                    "sentence" : " W A S D "
+                    "sentence" : " hello my name is kotaro"
                 },
                 {
                     "id" : "kotaro02",
                     "name" : "Kotaro",
-                    "sentence" : "Press it   "
+                    "sentence" : "talk to oof to get free bandages"
                 },
                 {
                     "id" : "main01",
                     "name" : "main",
-                    "sentence" : "K K K  "
+                    "sentence" : "K K K"
                 }
             ]
         },
@@ -1004,12 +1004,12 @@
                 {
                     "id" : "kotaro01",
                     "name" : "Kotaro",
-                    "sentence" : " That right"
+                    "sentence" : " bandage can help you to restore some of your health"
                 },
                 {
                     "id" : "kotaro02",
                     "name" : "Kotaro",
-                    "sentence" : "yeah  "
+                    "sentence" : "it also can buy and sell it at shop"
                 },
                 {
                     "id" : "main01",
@@ -1027,12 +1027,12 @@
                 {
                     "id" : "kotaro01",
                     "name" : "Kotaro",
-                    "sentence" : " ESC "
+                    "sentence" : "it also have item that can help increase your stamina regen rate"
                 },
                 {
                     "id" : "kotaro02",
                     "name" : "Kotaro",
-                    "sentence" : "Press it   "
+                    "sentence" : "talk to joe he will give you some if it "
                 },
                 {
                     "id" : "main01",
@@ -1043,19 +1043,111 @@
         },
         "tr-01-end" :
         {
-            "id" : "tr-01-start",
+            "id" : "tr-01-end",
             "name" : "test quest",
             "dialogue_sequences" : 
             [
                 {
                     "id" : "kotaro01",
                     "name" : "Kotaro",
-                    "sentence" : " nice "
+                    "sentence" : " that cola drink can make you stamina regen rate increase for a amount of time"
                 },
                 {
                     "id" : "kotaro02",
                     "name" : "Kotaro",
-                    "sentence" : " good job  "
+                    "sentence" : "don't drink too much !!"
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-02-start" :
+        {
+            "id" : "tr-02-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : "what you want some better healing items ?"
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "talk to oof he will give you some if it "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-02-end" :
+        {
+            "id" : "tr-02-end",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " that thing is better than bandage"
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "don't eat it too much !!"
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-03-start" :
+        {
+            "id" : "tr-03-start",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : "what you want some better energy boost items ?"
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "talk to oof he will give you some if it "
+                },
+                {
+                    "id" : "main01",
+                    "name" : "main",
+                    "sentence" : "K K K  "
+                }
+            ]
+        },
+        "tr-03-end" :
+        {
+            "id" : "tr-03-end",
+            "name" : "test quest",
+            "dialogue_sequences" : 
+            [
+                {
+                    "id" : "kotaro01",
+                    "name" : "Kotaro",
+                    "sentence" : " that thing is better than cola drink"
+                },
+                {
+                    "id" : "kotaro02",
+                    "name" : "Kotaro",
+                    "sentence" : "don't drink it too much !!"
                 },
                 {
                     "id" : "main01",
@@ -1093,7 +1185,7 @@
             "sub_type" : "Conversation",
             "rewards" : 
             {
-                "bandage" : 5
+                "cola_drink" : 5
             },
             "previous_quest_id": [],
             "next_quest_id": "",
@@ -1110,13 +1202,13 @@
             "sub_type" : "Conversation",
             "rewards" : 
             {
-                "bandage" : 5
+                "medicine" : 5
             },
             "previous_quest_id": ["tr-01"],
             "next_quest_id": "",
-            "start_dialogue_id" : "tr-01-start",
-            "end_dialogue_id" : "tr-01-end",
-            "npc_id" : "joe"
+            "start_dialogue_id" : "tr-02-start",
+            "end_dialogue_id" : "tr-02-end",
+            "npc_id" : "oof"
         },
         "tr-03":
         {
@@ -1127,12 +1219,12 @@
             "sub_type" : "Conversation",
             "rewards" : 
             {
-                "medicine" : 5
+                "energy_drink" : 5
             },
-            "previous_quest_id": [],
+            "previous_quest_id": ["tr-02"],
             "next_quest_id": "",
-            "start_dialogue_id" : "tr-01-start",
-            "end_dialogue_id" : "tr-01-end",
+            "start_dialogue_id" : "tr-03-start",
+            "end_dialogue_id" : "tr-03-end",
             "npc_id" : "joe"
         }
     }
