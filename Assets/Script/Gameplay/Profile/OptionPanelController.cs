@@ -19,12 +19,9 @@ namespace ArmasCreator.UI
         [SerializeField]
         private ProfilePanelController profilePanelController;
 
+        [SerializeField]
         private GameplayController gameplayController;
 
-        private void Awake()
-        {
-            gameplayController = SharedContext.Instance.Get<GameplayController>();
-        }
         private void Start()
         {
             btn_ToTitle.onClick.AddListener(() =>
