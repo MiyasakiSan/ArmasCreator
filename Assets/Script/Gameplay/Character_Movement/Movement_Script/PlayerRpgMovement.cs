@@ -56,6 +56,9 @@ public class PlayerRpgMovement : NetworkBehaviour
     [SerializeField]
     private Transform mainCam;
 
+    [SerializeField]
+    private WeaponBoxcolliderControl weaponBoxColliderControl;
+
     public bool canMove;
     public bool canWalk;
     public bool canRun;
@@ -350,6 +353,8 @@ public class PlayerRpgMovement : NetworkBehaviour
         soundManager.PlayOneShot(soundManager.fModEvent.PlayerRollSFX, this.transform.position);
         playerWalkSFX.stop(STOP_MODE.ALLOWFADEOUT);
         playerRunSFX.stop(STOP_MODE.ALLOWFADEOUT);
+
+        weaponBoxColliderControl.hideHitbox();
 
         while (timer < dodgeTimer)
         {

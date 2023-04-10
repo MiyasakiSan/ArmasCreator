@@ -436,6 +436,11 @@ public class PlayerStat : AttackTarget,IDamagable<float>,IStaminaUsable<float>
 
     void Start()
     {
+        init();
+    }
+
+    public void init()
+    {
         gameplayController = SharedContext.Instance.Get<GameplayController>();
 
         if (gameplayController != null)

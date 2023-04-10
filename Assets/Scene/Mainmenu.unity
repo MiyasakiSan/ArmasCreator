@@ -2111,6 +2111,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1380409313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8283694726603808913, guid: 26d38b481cd6cfe4385f9fe1be2e705a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8283694727272460152}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283694727272460155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1414982690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11650,11 +11662,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1380409313}
     - target: {fileID: 8283694726603808915, guid: 26d38b481cd6cfe4385f9fe1be2e705a,
         type: 3}
       propertyPath: m_Navigation.m_Mode
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283694726603808915, guid: 26d38b481cd6cfe4385f9fe1be2e705a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 529219173}
+    - target: {fileID: 8283694726603808915, guid: 26d38b481cd6cfe4385f9fe1be2e705a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 8283694726706104742, guid: 26d38b481cd6cfe4385f9fe1be2e705a,
         type: 3}

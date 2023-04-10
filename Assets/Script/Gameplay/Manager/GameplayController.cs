@@ -192,20 +192,6 @@ namespace ArmasCreator.Gameplay
         {
             StopTownBGM();
 
-            if (questInfo.PresetId == "cs-cm-n" &&
-                questInfo.PresetId == "cs-cm-01" &&
-                questInfo.PresetId == "cs-cm-02" &&
-                questInfo.PresetId == "pk-cm-n" &&
-                questInfo.PresetId == "pk-cm-01" &&
-                questInfo.PresetId == "pk-cm-02")
-            {
-                CurrentGameplays = Gameplays.Challenge;
-            }
-            else
-            {
-                CurrentGameplays = Gameplays.Normal;
-            }
-
             currentQuestInfo = questInfo;
 
             loadingPopup.LoadSceneAsync(questInfo.SceneName);
@@ -248,8 +234,6 @@ namespace ArmasCreator.Gameplay
         private IEnumerator PreGameEnumerator()
         {
             yield return new WaitUntil(() => isPreGameFinished);
-
-            CurrentGameplays = Gameplays.Challenge;
         }
 
         public void PreGameFinish()
@@ -257,6 +241,20 @@ namespace ArmasCreator.Gameplay
             isPreGameFinished = true;
 
             uiPlayerController.Show();
+
+            if (currentQuestInfo.PresetId == "cs-cm-n" &&
+               currentQuestInfo.PresetId == "cs-cm-01" &&
+               currentQuestInfo.PresetId == "cs-cm-02" &&
+               currentQuestInfo.PresetId == "pk-cm-n" &&
+               currentQuestInfo.PresetId == "pk-cm-01" &&
+               currentQuestInfo.PresetId == "pk-cm-02")
+            {
+                CurrentGameplays = Gameplays.Challenge;
+            }
+            else
+            {
+                CurrentGameplays = Gameplays.Normal;
+            }
 
             Debug.Log("===================== Pre Game Finish ==========================");
         }
