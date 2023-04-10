@@ -1393,7 +1393,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2027,7 +2027,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2043,8 +2043,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489977884}
-  m_LocalRotation: {x: 0.15254602, y: -1e-45, z: -0, w: 0.9882964}
-  m_LocalPosition: {x: 2.1299999, y: -15.58, z: 45.35}
+  m_LocalRotation: {x: 0.152546, y: 0.000000032930046, z: -0.000000005082834, w: 0.9882964}
+  m_LocalPosition: {x: -1.01, y: 0, z: 8.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8178,12 +8178,12 @@ PrefabInstance:
     - target: {fileID: 2738980238942823854, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -280
+      value: -279.99997
       objectReference: {fileID: 0}
     - target: {fileID: 4562838206503693934, guid: f4ad43c64334c95448271e362f696600,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -145
+      value: -144.99998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ad43c64334c95448271e362f696600, type: 3}
@@ -11178,6 +11178,11 @@ PrefabInstance:
       propertyPath: DeadCamCart
       value: 
       objectReference: {fileID: 780474140}
+    - target: {fileID: 5888194270925189883, guid: 77a7e5d8601028342a9d7a34c9e0610d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50e95141151c84c49904cf8f5f57786f, type: 2}
     - target: {fileID: 6845407708182765896, guid: 77a7e5d8601028342a9d7a34c9e0610d,
         type: 3}
       propertyPath: center
@@ -11188,6 +11193,11 @@ PrefabInstance:
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 1960308518}
+    - target: {fileID: 7623772678124440691, guid: 77a7e5d8601028342a9d7a34c9e0610d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50e95141151c84c49904cf8f5f57786f, type: 2}
     - target: {fileID: 7716896043110063831, guid: 77a7e5d8601028342a9d7a34c9e0610d,
         type: 3}
       propertyPath: m_RootOrder
