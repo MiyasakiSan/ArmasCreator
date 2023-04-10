@@ -549,7 +549,7 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (num == 1)
         {
-            if (animController.currentAnimatorCombatStateInfoIsName("Idle"))
+            if (animController.currentAnimatorCombatStateInfoIsName("Idle") || animController.currentAnimatorCombatStateInfoIsName("Walk"))
             {
                 animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", true);
 
