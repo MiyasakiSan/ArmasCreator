@@ -32,8 +32,8 @@ public class TestAnalytics : MonoBehaviour
         try
         {
             var options = new InitializationOptions();
-            options.SetEnvironmentName("dev");
-            //options.SetEnvironmentName("production");
+            //options.SetEnvironmentName("dev");
+            options.SetEnvironmentName("production");
 
             await UnityServices.InitializeAsync(options);
             List<string> consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
