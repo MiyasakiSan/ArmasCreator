@@ -39,7 +39,7 @@ public class TutorialPanelController : MonoBehaviour
             nextButton.gameObject.SetActive(false);
             previousButton.gameObject.SetActive(false);
             gameplayController.OnTutorial.Invoke(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Confined;
             GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
             return;
         }
