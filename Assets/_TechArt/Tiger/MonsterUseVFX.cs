@@ -41,6 +41,7 @@ public class MonsterUseVFX : MonoBehaviour
     [SerializeField] private GameObject PlasmaBallPrefab;
 
     [SerializeField] private Material eyeMat;
+    [SerializeField] private Material antennaMat;
     private Color eyeDefaultColor;
 
     private EnemyCombatManager enemyCombat;
@@ -164,6 +165,7 @@ public class MonsterUseVFX : MonoBehaviour
             if(gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
             {
                 monsterSFX.PlayShrimpLightingSFX();
+                EyeRed();
             }
             else
             {
@@ -175,14 +177,13 @@ public class MonsterUseVFX : MonoBehaviour
             if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
             {
                 monsterSFX.StopShrimpLightingSFX();
+                ResetEye();
             }
             else
             {
                 monsterSFX.StopTigerFireSFX();
             }
         }
-
-        
     }
 
     public void SpawnBubble(int amount)
@@ -215,7 +216,7 @@ public class MonsterUseVFX : MonoBehaviour
 
         monsterSFX.PlayPlasmaBall(plasmaBall,plasmaBall.GetComponent<Rigidbody>());
 
-        Invoke("StopPlasmaSound", 10f);
+        Invoke("StopPlasmaSound", 8f);
         Destroy(plasmaBall, 10f);
     }
 

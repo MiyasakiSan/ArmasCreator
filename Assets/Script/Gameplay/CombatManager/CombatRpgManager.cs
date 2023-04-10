@@ -352,6 +352,7 @@ public class CombatRpgManager : NetworkBehaviour
 
             decreaseEMTgaugeCoroutine = null;
             isEMTState = false;
+            weaponController.SetEMTStatus(isEMTState);
         }
         else if (!isEMTState && EMT_Amount >= EMT_MaxAmount)
         {
@@ -360,6 +361,7 @@ public class CombatRpgManager : NetworkBehaviour
             thunderFill.fillAmount = 1;
 
             decreaseEMTgaugeCoroutine = StartCoroutine(DecreaseEMTgauge(2));
+            weaponController.SetEMTStatus(isEMTState);
         }
     }
 
@@ -378,6 +380,7 @@ public class CombatRpgManager : NetworkBehaviour
         EMT_Gauge.fillAmount = 0;
         thunderFill.fillAmount = 0;
         isEMTState = false;
+        weaponController.SetEMTStatus(isEMTState);
     } 
 
     private float convertEMTAmountToEMTPercent(float EMT_Amount)
@@ -546,21 +549,25 @@ public class CombatRpgManager : NetworkBehaviour
     {
         if (num == 1)
         {
-            if (isSinglePlayer)
+            if (animController.currentAnimatorCombatStateInfoIsName("Idle"))
             {
                 animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit1", true);
 
                 if (!firstSound)
                 {
-                    soundManager.PlayOneShot(soundManager.fModEvent.PlayerFirstComboSFX, this.gameObject);
+                    if (isEMTState)
+                    {
+                        soundManager.PlayOneShot(soundManager.fModEvent.EmtFirstComboSFX, this.gameObject);
+                    }
+                    else
+                    {
+                        soundManager.PlayOneShot(soundManager.fModEvent.PlayerFirstComboSFX, this.gameObject);
+                    }
+
                     firstSound = true;
                     thirdSound = false;
                     secondSound = false;
                 }
-            }
-            else
-            {
-                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit1", true);
             }
         }
 
@@ -568,20 +575,21 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (num > 0  && animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack1"))
         {
-            if (isSinglePlayer)
-            {
-                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", true);
+            animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit2", true);
 
-                if (!secondSound) 
+            if (!secondSound)
+            {
+                if (isEMTState)
+                {
+                    soundManager.PlayOneShot(soundManager.fModEvent.EmtSecondComboSFX, this.gameObject);
+                }
+                else
                 {
                     soundManager.PlayOneShot(soundManager.fModEvent.PlayerSecondComboSFX, this.gameObject);
-                    secondSound = true;
-                    firstSound = false;
                 }
-            }
-            else
-            {
-                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit2", true);
+
+                secondSound = true;
+                firstSound = false;
             }
         }
 
@@ -589,20 +597,21 @@ public class CombatRpgManager : NetworkBehaviour
 
         if (num > 1 && animController.currentAnimatorCombatStateInfoIsName($"{heldWeapon.comboParam}NormalAttack2"))
         {
-            if (isSinglePlayer)
-            {
-                animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", true);
+            animController.MeleeSetBool($"{heldWeapon.comboParam}Normal_hit3", true);
 
-                if (!thirdSound) 
+            if (!thirdSound)
+            {
+                if (isEMTState)
+                {
+                    soundManager.PlayOneShot(soundManager.fModEvent.EmtThirdComboSFX, this.gameObject);
+                }
+                else
                 {
                     soundManager.PlayOneShot(soundManager.fModEvent.PlayerThirdComboSFX, this.gameObject);
-                    thirdSound = true;
-                    secondSound = false;
                 }
-            }
-            else
-            {
-                animController.MeleeSetBoolServerRpc($"{heldWeapon.comboParam}Normal_hit3", true);
+
+                thirdSound = true;
+                secondSound = false;
             }
         }
     } 

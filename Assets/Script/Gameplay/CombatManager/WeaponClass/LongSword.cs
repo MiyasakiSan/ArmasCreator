@@ -14,6 +14,7 @@ public class LongSword : IMeleeWeapon
 
     [SerializeField] private GameObject GotenaWeapon;
     [SerializeField] private GameObject CiladaeWeapon;
+    [SerializeField] private GameObject EMT_object;
 
     private UserDataManager userDataManager = SharedContext.Instance.Get<UserDataManager>();
     private GameDataManager gameDataManager = SharedContext.Instance.Get<GameDataManager>();
@@ -79,6 +80,11 @@ public class LongSword : IMeleeWeapon
             GotenaWeapon.SetActive(false);
             CiladaeWeapon.SetActive(false);
         }
+    }
+
+    public void SetEmtObject(bool status)
+    {
+        EMT_object.SetActive(status);
     }
 
 

@@ -36,6 +36,7 @@ public class WeaponShealthDraw : NetworkBehaviour
         if (isSinglePlayer)
         {
             currentWeaponInShealth = Instantiate(WeaponHeld, WeaponShealth.transform);
+            currentWeaponInShealth.GetComponent<LongSword>().SetEmtObject(combatManager.IsEMTState);
         }
         else
         {
@@ -70,6 +71,7 @@ public class WeaponShealthDraw : NetworkBehaviour
             }
 
             currentWeaponInHand = Instantiate(WeaponHeld, WeaponHolder.transform);
+            currentWeaponInHand.GetComponent<LongSword>().SetEmtObject(combatManager.IsEMTState);
             //currentWeaponInHand.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
             if (currentWeaponInShealth != null)
             {
@@ -118,6 +120,7 @@ public class WeaponShealthDraw : NetworkBehaviour
         currentWeaponInShealth = null;
 
         currentWeaponInShealth = Instantiate(WeaponHeld, WeaponShealth.transform);
+        currentWeaponInShealth.GetComponent<LongSword>().SetEmtObject(combatManager.IsEMTState);
     }
 
     public void ShealthWeaponEvent()
@@ -130,6 +133,7 @@ public class WeaponShealthDraw : NetworkBehaviour
             }
 
             currentWeaponInShealth = Instantiate(WeaponHeld, WeaponShealth.transform);
+            currentWeaponInShealth.GetComponent<LongSword>().SetEmtObject(combatManager.IsEMTState);
             //currentWeaponInShealth.GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
             if (currentWeaponInHand != null)
@@ -159,5 +163,17 @@ public class WeaponShealthDraw : NetworkBehaviour
         currentWeaponInShealth.transform.parent = this.WeaponShealth.transform;
         Destroy(currentWeaponInHand.gameObject);
         currentWeaponInHand = null;
+    }
+
+    public void SetEMTStatus(bool status)
+    {
+        if (currentWeaponInHand != null)
+        {
+            currentWeaponInHand.GetComponent<LongSword>().SetEmtObject(status);
+        }
+        else if(currentWeaponInShealth != null)
+        {
+            currentWeaponInShealth.GetComponent<LongSword>().SetEmtObject(status);
+        }
     }
 }
