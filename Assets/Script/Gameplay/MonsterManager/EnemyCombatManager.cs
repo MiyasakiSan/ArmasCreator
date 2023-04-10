@@ -17,6 +17,8 @@ public class EnemyCombatManager : NetworkBehaviour
     [SerializeField] 
     private float damage;
 
+    public float rageDamageMultiplier;
+
     [SerializeField] 
     enemyAnimController enemyAnim;
 
@@ -87,6 +89,7 @@ public class EnemyCombatManager : NetworkBehaviour
         }
 
         IsDisableHitBox = true;
+        rageDamageMultiplier = 1f;
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -177,8 +180,8 @@ public class EnemyCombatManager : NetworkBehaviour
 
         Debug.Log($"{col.gameObject.name} โดนตี เพราะ โดน {gameObject}");
 
-        col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
-        gameplayController.UpdatePlayerDamageTaken(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK);
+        col.gameObject.GetComponent<AttackTarget>().receiveAttack(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK * rageDamageMultiplier);
+        gameplayController.UpdatePlayerDamageTaken(currentAttackPattern.Damage * gameplayController.CurrentQuestInfo.InitATK * rageDamageMultiplier);
 
         if (currentAttackPattern.IsKnockback)
         {

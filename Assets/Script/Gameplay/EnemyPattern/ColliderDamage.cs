@@ -27,8 +27,10 @@ public class ColliderDamage : MonoBehaviour
     private bool isInit;
 
     public bool beam;
+    public bool followProjectile;
 
     private GameplayController gameplayController;
+    private Coroutine selfDestroyCoroutine;
 
     private void Start()
     {
@@ -78,6 +80,18 @@ public class ColliderDamage : MonoBehaviour
         }
 
         isInit = true;
+
+        if (followProjectile)
+        {
+            selfDestroyCoroutine = StartCoroutine(selfDestroy());
+        }
+    }
+
+    IEnumerator selfDestroy()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(this.gameObject);
+        selfDestroyCoroutine = null;
     }
 
     public void DisableCollder()
@@ -107,6 +121,17 @@ public class ColliderDamage : MonoBehaviour
 
             Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
             playerMovement.GetKnockback(this.transform.position);
+
+            if (followProjectile)
+            {
+                if(selfDestroyCoroutine != null)
+                {
+                    StopCoroutine(selfDestroyCoroutine);
+                    selfDestroyCoroutine = null;
+
+                    Destroy(this.gameObject);
+                }
+            }
         } 
     }
 

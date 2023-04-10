@@ -51,6 +51,17 @@ public class enemyAnimController : NetworkBehaviour
             }
         }
     }
+
+    public void IncreaseSpeedMultiplier()
+    {
+        anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed * 1.25f);
+    }
+
+    public void ResetSpeedMultiplier()
+    {
+        anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed);
+    }
+
     public bool currentAnimatorStateBaseIsName(string paramName)
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName(paramName);

@@ -47,6 +47,7 @@ public class MonsterUseVFX : MonoBehaviour
     private EnemyCombatManager enemyCombat;
     private GameplayController gameplayController;
     private MonsterSFX monsterSFX;
+    private enemyAnimController animController;
 
     private void Start()
     {
@@ -57,6 +58,7 @@ public class MonsterUseVFX : MonoBehaviour
 
         enemyCombat = GetComponent<EnemyCombatManager>();
         gameplayController = SharedContext.Instance.Get<GameplayController>();
+        animController = GetComponent<enemyAnimController>();
         monsterSFX = GetComponent<MonsterSFX>();
 
         IsEnterRageMode(false);
@@ -165,11 +167,13 @@ public class MonsterUseVFX : MonoBehaviour
             if(gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
             {
                 monsterSFX.PlayShrimpLightingSFX();
+                enemyCombat.rageDamageMultiplier = 1.25f;
                 EyeRed();
             }
             else
             {
                 monsterSFX.PlayTigerFireSFX();
+                animController.IncreaseSpeedMultiplier();
             }
         }
         else
@@ -177,11 +181,13 @@ public class MonsterUseVFX : MonoBehaviour
             if (gameplayController.EnemyType == ArmasCreator.GameData.SubType.Shrimp)
             {
                 monsterSFX.StopShrimpLightingSFX();
+                enemyCombat.rageDamageMultiplier = 1f;
                 ResetEye();
             }
             else
             {
                 monsterSFX.StopTigerFireSFX();
+                animController.ResetSpeedMultiplier();
             }
         }
     }
@@ -217,7 +223,7 @@ public class MonsterUseVFX : MonoBehaviour
         monsterSFX.PlayPlasmaBall(plasmaBall,plasmaBall.GetComponent<Rigidbody>());
 
         Invoke("StopPlasmaSound", 8f);
-        Destroy(plasmaBall, 10f);
+        //Destroy(plasmaBall, 10f);
     }
 
     void StopPlasmaSound()
