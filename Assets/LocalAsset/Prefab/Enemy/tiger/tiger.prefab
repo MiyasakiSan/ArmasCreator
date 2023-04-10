@@ -335,6 +335,7 @@ MonoBehaviour:
   BHT: {fileID: 0}
   waterGroundController: {fileID: 0}
   IsAttacking: 0
+  IsDisableHitBox: 0
   currentAttackPattern: {fileID: 0}
 --- !u!114 &1479299266428193981
 MonoBehaviour:
@@ -349,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1372823441003939751}
+  isTutorial: 0
   dynamicBone: {fileID: 4563651104412490489}
   allLookAtIK:
   - {fileID: 8858716682897766456}
@@ -380,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5817daa085a9c04e861b7d3b30353e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 800
   NetworkcurrentHealth:
     m_InternalValue: 0
   currentHealth: 0
@@ -624,6 +626,7 @@ MonoBehaviour:
   BubbleSpawnPos: {fileID: 0}
   PlasmaBallPrefab: {fileID: 0}
   eyeMat: {fileID: 0}
+  antennaMat: {fileID: 0}
 --- !u!1 &3972024903038014625
 GameObject:
   m_ObjectHideFlags: 0
