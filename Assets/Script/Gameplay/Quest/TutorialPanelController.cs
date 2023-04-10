@@ -39,8 +39,7 @@ public class TutorialPanelController : MonoBehaviour
             nextButton.gameObject.SetActive(false);
             previousButton.gameObject.SetActive(false);
             gameplayController.OnTutorial.Invoke(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
             GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
             return;
         }
@@ -53,8 +52,7 @@ public class TutorialPanelController : MonoBehaviour
             previousButton.gameObject.SetActive(false);
             gameplayController.OnTutorial.Invoke(false);
             PlayerPrefs.SetInt("IsShowTutorial", 1);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
             GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
         });
         nextButton.onClick.AddListener(() =>
@@ -81,8 +79,7 @@ public class TutorialPanelController : MonoBehaviour
     {
         yield return new WaitUntil(() => loadingPopup.IsFadingBlack);
         yield return new WaitForSeconds(1.8f);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = false;
         if (gameplayController != null)
         {
