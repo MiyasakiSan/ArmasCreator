@@ -85,7 +85,16 @@ public class TutorialPanelController : MonoBehaviour
         {
             gameplayController.OnTutorial.Invoke(true);
         }
-
+        if (PlayerPrefs.GetInt("IsShowTutorial") == 1)
+        {
+            tutorialImage.gameObject.SetActive(false);
+            backButton.gameObject.SetActive(false);
+            nextButton.gameObject.SetActive(false);
+            previousButton.gameObject.SetActive(false);
+            gameplayController.OnTutorial.Invoke(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            GameObject.FindWithTag("Player").GetComponent<PlayerRpgMovement>().canMove = true;
+        }
     }
 
     public void OnToNextPage()
