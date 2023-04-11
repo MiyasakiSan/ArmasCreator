@@ -108351,6 +108351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1000
+  rageDamageMultiplier: 0
   enemyAnim: {fileID: 5591826508076366421}
   enemyStat: {fileID: 2000228074895751221}
   hitBoxColliderList:
@@ -108370,6 +108371,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46d38703e68df42418d7104c4f917fd5, type: 2}
   - {fileID: 11400000, guid: 0483b04edbc862144ab4da21f15a3dbc, type: 2}
   - {fileID: 11400000, guid: 37e328b00ae5f334f97d58d6e1a1951a, type: 2}
+  - {fileID: 11400000, guid: 313c30957878304468428293afa58641, type: 2}
   BHT: {fileID: 6016682584177022392}
   waterGroundController: {fileID: 0}
   IsAttacking: 0
@@ -161217,6 +161219,7 @@ MonoBehaviour:
   particleSystemList: []
   isLoop: 0
   beam: 1
+  followProjectile: 0
 --- !u!1 &8717112689419425553 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 301640762494502682, guid: 53e263c8a9a37b24bbaa7a6ebefc454b,

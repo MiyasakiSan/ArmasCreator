@@ -117,6 +117,7 @@ namespace ArmasCreator.Gameplay.UI
             var fraction = resultContainer.timeAmount * 1000;
             fraction = fraction % 1000;
 
+            SetChallengeText(gameplayController.CurrentQuestInfo.PresetId);
             SetCompletionTime(minutes, seconds, (int)fraction/10);
             SetRewardAmount(resultContainer.rewardAmount);
             SetResultData(resultContainer.damageDelt, resultContainer.damageTaken, resultContainer.itemUsed);
@@ -429,7 +430,30 @@ namespace ArmasCreator.Gameplay.UI
 
         public void SetChallengeText(string challengeName)
         {
-            challengeText.text = challengeName;
+            if (challengeName == "cs-cm-n")
+            {
+                challengeText.text = "Normal";
+            }
+            else if (challengeName == "cs-cm-01")
+            {
+                challengeText.text = "Challenge 1";
+            }
+            else if (challengeName == "cs-cm-02")
+            {
+                challengeText.text = "Challenge 2";
+            }
+            else if (challengeName == "pk-cm-n")
+            {
+                challengeText.text = "Normal";
+            }
+            else if (challengeName == "pk-cm-01")
+            {
+                challengeText.text = "Challenge 1";
+            }
+            else if (challengeName == "pk-cm-02")
+            {
+                challengeText.text = "Challenge 2";
+            }
         }
 
         public void SetBannerText(string bannerName)
