@@ -73,6 +73,10 @@ namespace ArmasCreator.Gameplay.UI
                 {
                     itemBar.Hide();
                 }
+                else
+                {
+                    itemBar.Show();
+                }
             }
 
             damageDealtText.gameObject.SetActive(false);

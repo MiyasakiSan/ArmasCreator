@@ -59,7 +59,7 @@ public class enemyAnimController : NetworkBehaviour
 
     public void ResetSpeedMultiplier()
     {
-        if (gameplayController.CurrentQuestInfo == null) { return; }
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
 
         anim.SetFloat("speedMultiplier", gameplayController.CurrentQuestInfo.InitSpeed);
     }

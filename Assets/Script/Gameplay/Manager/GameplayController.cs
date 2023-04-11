@@ -205,6 +205,8 @@ namespace ArmasCreator.Gameplay
             {
                 questEnemyType = SubType.Shrimp;
             }
+
+            CurrentGameplays = Gameplays.Challenge;
         }
 
         private void EnterPreGameStage()
@@ -234,13 +236,6 @@ namespace ArmasCreator.Gameplay
         private IEnumerator PreGameEnumerator()
         {
             yield return new WaitUntil(() => isPreGameFinished);
-        }
-
-        public void PreGameFinish()
-        {
-            isPreGameFinished = true;
-
-            uiPlayerController.Show();
 
             if (currentQuestInfo.PresetId == "cs-cm-n" &&
                currentQuestInfo.PresetId == "cs-cm-01" &&
@@ -255,6 +250,13 @@ namespace ArmasCreator.Gameplay
             {
                 CurrentGameplays = Gameplays.Normal;
             }
+        }
+
+        public void PreGameFinish()
+        {
+            isPreGameFinished = true;
+
+            uiPlayerController.Show();
 
             Debug.Log("===================== Pre Game Finish ==========================");
         }

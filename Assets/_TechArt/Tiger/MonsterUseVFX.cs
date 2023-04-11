@@ -48,6 +48,10 @@ public class MonsterUseVFX : MonoBehaviour
     private GameplayController gameplayController;
     private MonsterSFX monsterSFX;
     private enemyAnimController animController;
+    private void Awake()
+    {
+        gameplayController = SharedContext.Instance.Get<GameplayController>();
+    }
 
     private void Start()
     {
@@ -57,7 +61,6 @@ public class MonsterUseVFX : MonoBehaviour
         }
 
         enemyCombat = GetComponent<EnemyCombatManager>();
-        gameplayController = SharedContext.Instance.Get<GameplayController>();
         animController = GetComponent<enemyAnimController>();
         monsterSFX = GetComponent<MonsterSFX>();
 

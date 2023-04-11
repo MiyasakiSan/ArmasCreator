@@ -1,3 +1,4 @@
+using ArmasCreator.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,12 @@ namespace ArmasCreator.Gameplay
 
         public MonsterSFX monsterSFX;
 
+        private GameplayController gameplayController;
+
         private void Awake()
         {
             rb = this.GetComponent<Rigidbody>();
+            gameplayController = SharedContext.Instance.Get<GameplayController>();
         }
 
         void Update()
@@ -51,6 +55,7 @@ namespace ArmasCreator.Gameplay
             if (other.gameObject.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<AttackTarget>().receiveAttack(Damage);
+                gameplayController.UpdatePlayerDamageTaken(Damage);
 
                 Debug.Log("Hit player");
 

@@ -43,6 +43,7 @@ public class PreGameCameraEvent : MonoBehaviour
     public void PreGameFinishEvent()
     {
         Debug.Assert(gameplayController != null, "gameplayController is null");
+        Debug.Log("==== Pre game finish event ====");
         gameplayController.PreGameFinish();
     }
 

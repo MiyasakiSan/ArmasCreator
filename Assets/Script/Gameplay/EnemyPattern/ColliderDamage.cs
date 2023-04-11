@@ -121,6 +121,7 @@ public class ColliderDamage : MonoBehaviour
 
             Target.receiveAttack(damage * gameplayController.CurrentQuestInfo.InitATK);
             playerMovement.GetKnockback(this.transform.position);
+            gameplayController.UpdatePlayerDamageTaken(damage * gameplayController.CurrentQuestInfo.InitATK);
 
             if (followProjectile)
             {
