@@ -22,7 +22,6 @@ public class CutsceneController : MonoBehaviour
 
         playCutsceneBGM();
 
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
@@ -38,7 +37,6 @@ public class CutsceneController : MonoBehaviour
     {
         cutsceneBGM.stop(STOP_MODE.ALLOWFADEOUT);
 
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
         loadingPopup.LoadSceneAsync("Tutorial");
