@@ -12,10 +12,12 @@ public class WeaponBoxcolliderControl : MonoBehaviour
     }
     public void showHitbox()
     {
+        if (weaponCollector.currentWeaponInHand == null ) { return; }
         weaponCollector.currentWeaponInHand?.GetComponent<IMeleeWeapon>().showHitbox_OnAnim();
     }
     public void hideHitbox()
     {
+        if (weaponCollector.currentWeaponInHand == null) { return; }
         weaponCollector.currentWeaponInHand?.GetComponent<IMeleeWeapon>().hideHitbox_OnAnim();
     }
     // Update is called once per frame
