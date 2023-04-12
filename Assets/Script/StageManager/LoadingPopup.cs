@@ -152,6 +152,7 @@ namespace ArmasCreator.UI
             StartCoroutine(FadeBlackCoroutine(isShowContent));
         }
 
+
         IEnumerator FadeBlackCoroutine(bool isShowContent)
         {
             if (!loadingCanvas.activeSelf)
@@ -187,6 +188,10 @@ namespace ArmasCreator.UI
                 FadeBlackImage.color = tempColor;
                 yield return new WaitForSeconds(0.025f);
             }
+
+            var tempColors = FadeBlackImage.color;
+            tempColors.a = 0f;
+            FadeBlackImage.color = tempColors;
 
             isFadingBlack = false;
             content.SetActive(false);

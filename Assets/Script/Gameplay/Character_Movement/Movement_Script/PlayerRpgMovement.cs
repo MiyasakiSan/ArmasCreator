@@ -376,6 +376,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         animController.StopDodge();
         isDodging = false;
         dodgeCoroutine = null;
+        combatManager.ResetCombatBool();
     }
     private void reduceStaminaOnDodge(float amount)
     {
@@ -581,6 +582,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         deadCam.SetActive(true);
         var stageCollider = GameObject.FindGameObjectWithTag("StageCollider").GetComponent<OnTriggerEvent>();
         stageCollider.playerDieInvoke();
+        canMove = false;
 
         if (isSinglePlayer)
         {
@@ -615,6 +617,7 @@ public class PlayerRpgMovement : NetworkBehaviour
         combatManager.currentGameState = CombatRpgManager.gameState.neutral;
         animController.changeCombatLayerWeight(0f);
         combatManager.canBattle = true;
+        canMove = true;
     }
 
     void walkSFX()

@@ -222,6 +222,10 @@ namespace ArmasCreator.Gameplay
             Debug.Assert(uiPlayerController != null, "UIPlayerController is null");
             uiPlayerController.Hide();
 
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRpgMovement>();
+
+            player.canMove = false;
+
             loadingPopup.OnLoadingSceneFinished -= EnterPreGameStage;
 
             if(PreGameCoroutine != null)
@@ -257,6 +261,10 @@ namespace ArmasCreator.Gameplay
             isPreGameFinished = true;
 
             uiPlayerController.Show();
+
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRpgMovement>();
+
+            player.canMove = true;
 
             Debug.Log("===================== Pre Game Finish ==========================");
         }

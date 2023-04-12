@@ -64795,6 +64795,71 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &2107283997449034933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7689252431347356404}
+  - component: {fileID: 2814383725830448758}
+  - component: {fileID: 1730469263518117478}
+  m_Layer: 13
+  m_Name: body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7689252431347356404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107283997449034933}
+  m_LocalRotation: {x: 0.6609289, y: -0, z: -0, w: 0.7504485}
+  m_LocalPosition: {x: 0, y: 3.9338121, z: -0.50155556}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8699355341432475423}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2814383725830448758
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107283997449034933}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.6236819
+  m_Height: 7.659082
+  m_Direction: 1
+  m_Center: {x: -0.0000000011440944, y: 1.769542, z: 0.43631828}
+--- !u!114 &1730469263518117478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107283997449034933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96eb13543e2c864eb8b050dd4f6924d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2218674229631667303
 GameObject:
   m_ObjectHideFlags: 0
@@ -108247,7 +108312,7 @@ Transform:
   m_GameObject: {fileID: 5522086687127195068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.8137462, y: 5.0979147, z: 50.89364}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.92, y: 0.92, z: 0.92}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2597868899519529719}
@@ -108357,6 +108422,7 @@ MonoBehaviour:
   hitBoxColliderList:
   - {fileID: 1062986662}
   - {fileID: 1764823049}
+  - {fileID: 1730469263518117478}
   hurtBoxColliderList:
   - {fileID: 1321311836}
   - {fileID: 1162427432}
@@ -157457,7 +157523,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 25ffb4d4b01f9de47ab03c7ce8c93402, type: 2}
+      objectReference: {fileID: 2100000, guid: 50e95141151c84c49904cf8f5f57786f, type: 2}
     - target: {fileID: -3854435963456694687, guid: 3e3d8aa68d121294591bf1f46aa704c3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -159248,7 +159314,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 25ffb4d4b01f9de47ab03c7ce8c93402, type: 2}
+      objectReference: {fileID: 2100000, guid: 50e95141151c84c49904cf8f5f57786f, type: 2}
     - target: {fileID: 8596733084470706343, guid: 3e3d8aa68d121294591bf1f46aa704c3,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -160933,6 +160999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBeam
       objectReference: {fileID: 0}
+    - target: {fileID: 301640761292774437, guid: 53e263c8a9a37b24bbaa7a6ebefc454b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 301640761292774440, guid: 53e263c8a9a37b24bbaa7a6ebefc454b,
         type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.size
@@ -161196,11 +161267,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 8717112689270459438}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1
+  m_Enabled: 0
+  m_Radius: 0.7
   m_Height: 60
   m_Direction: 1
-  m_Center: {x: -0.0000020116568, y: 20.3, z: -0.0000038444996}
+  m_Center: {x: -0.0000020116568, y: 27.2, z: -0.0000038444996}
 --- !u!114 &481358266
 MonoBehaviour:
   m_ObjectHideFlags: 0
