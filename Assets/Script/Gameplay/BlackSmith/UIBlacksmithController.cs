@@ -34,11 +34,11 @@ public class UIBlacksmithController : MonoBehaviour
     IEnumerator ShowUIBlacksmith()
     {
         playerCanvas.SetActive(false);
+        gameplayController.Interacable = false;
         craftShopPanelController.ShowCraftShop();
 
         yield return new WaitForSeconds(1.5f);
 
-        gameplayController.Interacable = false;
         gameplayController.SetCursorLock(false);
     }
 
@@ -64,6 +64,9 @@ public class UIBlacksmithController : MonoBehaviour
             StartCoroutine(ShowUIBlacksmith());
 
             other.GetComponent<PlayerRpgMovement>().canMove = false;
+            other.GetComponent<CombatRpgManager>().canBattle = false;
+            other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
+            other.GetComponent<PlayerRpgMovement>().StopSFX();
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && blacksmithVcam.activeSelf)
         {
@@ -72,6 +75,7 @@ public class UIBlacksmithController : MonoBehaviour
             StartCoroutine(HideUIBlacksmith());
 
             other.GetComponent<PlayerRpgMovement>().canMove = true;
+            other.GetComponent<CombatRpgManager>().canBattle = true;
         }
     }
 

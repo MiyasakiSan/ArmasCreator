@@ -88,6 +88,12 @@ namespace DitzelGames.FastIK
                 return;
             }
 
+            if (dot < Mathf.Cos(80) && isNPC)
+            {
+                transform.eulerAngles = startEuler;
+                return;
+            }
+
             if (dot < Mathf.Cos(80))
             {
                 transform.eulerAngles = latestAngle;

@@ -40,11 +40,11 @@ namespace ArmasCreator.Gameplay
         IEnumerator ShowUIShop()
         {
             playerCanvas.SetActive(false);
+            gameplayController.Interacable = false;
             shopController.ShowMainShop();
 
             yield return new WaitForSeconds(1.5f);
 
-            gameplayController.Interacable = false;
             gameplayController.SetCursorLock(false);
         }
 
@@ -70,6 +70,9 @@ namespace ArmasCreator.Gameplay
                 StartCoroutine(ShowUIShop());
 
                 other.GetComponent<PlayerRpgMovement>().canMove = false;
+                other.GetComponent<CombatRpgManager>().canBattle = false;
+                other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
+                other.GetComponent<PlayerRpgMovement>().StopSFX();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && shopVcam.activeSelf)
             {
@@ -78,6 +81,7 @@ namespace ArmasCreator.Gameplay
                 StartCoroutine(HideUIShop());
 
                 other.GetComponent<PlayerRpgMovement>().canMove = true;
+                other.GetComponent<CombatRpgManager>().canBattle = true;
             }
         }
 

@@ -38,7 +38,6 @@ namespace ArmasCreator.Gameplay
 
         private GameDataManager gameDataManager;
 
-
         private void Awake()
         {
             gameplayController = SharedContext.Instance.Get<GameplayController>();
@@ -69,11 +68,11 @@ namespace ArmasCreator.Gameplay
 
         IEnumerator ShowUIQuest()
         {
+            gameplayController.Interacable = false;
             yield return new WaitForSeconds(1.5f);
 
             playerCanvas.SetActive(false);
 
-            gameplayController.Interacable = false;
             gameplayController.SetCursorLock(false);
         }
 
@@ -113,6 +112,7 @@ namespace ArmasCreator.Gameplay
             {
                 ShowQuestCanvas();
                 other.GetComponent<PlayerRpgMovement>().canMove = false;
+                other.GetComponent<CombatRpgManager>().canBattle = false;
                 other.GetComponent<PlayerRpgMovement>().ResetAnimBoolean();
                 other.GetComponent<PlayerRpgMovement>().StopSFX();
             }
@@ -120,6 +120,7 @@ namespace ArmasCreator.Gameplay
             {
                 HideQuestCanvas();
                 other.GetComponent<PlayerRpgMovement>().canMove = true;
+                other.GetComponent<CombatRpgManager>().canBattle = true;
             }
         }
     }
